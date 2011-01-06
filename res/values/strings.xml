@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GMarks</string>
+    <string name="labels_activity">GMarks Labels</string>
+    <string name="choose_label">Choose a GMarks Label</string>
+    <string name="bookmarks_activity">GMarks All bookmarks</string>
+    <string name="settings">GMarks Settings</string>
+    <string name="search_hint">Search Google Bookmarks</string>
+    
+    <string name="menu_insert">Add</string>
+    <string name="menu_sync">Sync</string>
+    <string name="menu_delete">Delete</string>
+
+		<!-- Preferences -->
+		
+    <string name="pref_browser_sync">Enable Browser Sync</string>
+    <string name="pref_browser_sync_summary">Sync your browser bookmarks with a chosen label</string>
+    <string name="pref_sync_label">Choose Browser Sync Label</string>
+    <string name="pref_sync_interval">Sync Interval</string>
+    <string name="pref_background_sync">Enable Background Sync</string>
+    <string name="pref_background_sync_summary">Service does not run when disabled</string>
+    
+    <!-- Preference options for sync duration -->
+    <string-array name="pref_duration_entries">
+      <item>5 minutes</item>
+      <item>20 minutes</item>
+      <item>1 hour</item>
+      <item>4 hour</item>
+      <item>12 hours</item>
+      <item>1 day</item>
+    </string-array>
+
+    <!-- Preference values for sync duration -->
+    <string-array name="pref_duration_values">
+      <item>5</item>
+      <item>20</item>
+      <item>60</item>
+      <item>240</item>
+      <item>720</item>
+      <item>1440</item>
+    </string-array>
+    
+</resources>

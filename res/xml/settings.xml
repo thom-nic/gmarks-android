@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/settings">
+    
+    <CheckBoxPreference
+        android:key="browser_sync_enabled"
+        android:title="@string/pref_browser_sync"
+        android:summary="@string/pref_browser_sync_summary" />
+    <org.thomnichols.android.gmarks.LabelPreference
+    		android:key='browser_sync_label'
+    		android:title='@string/pref_sync_label' 
+    		android:enabled="false"  />
+
+    <CheckBoxPreference
+        android:key="background_sync_enabled"
+        android:title="@string/pref_background_sync"
+        android:summary="@string/pref_background_sync_summary" />
+
+    <ListPreference
+        android:key="background_sync_interval"
+        android:title="@string/pref_sync_interval"
+        android:entries="@array/pref_duration_entries"
+        android:entryValues="@array/pref_duration_values"
+        android:defaultValue="20"
+        android:dialogTitle="@string/pref_sync_interval" 
+        android:enabled="false" />
+</PreferenceScreen>

@@ -1,0 +1,19 @@
+
+x Labels View
+x Label <-> Bookmark linking
+x Webview-based login
+x Live Folder
+x search
+
+* list refresh after sync
+* Kill Webview after login
+* Webview login needs to run twice...
+
+* Favicon support
+* sync to label to browser
+* List sub-headers
+* Sort by {date|alpha}
+* sync as a background service
+* Delete bookmark support
+* Update bookmark support
+* Add bookmark support

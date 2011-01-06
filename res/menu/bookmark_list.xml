@@ -1,0 +1,8 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<item android:titleCondensed="Add" 
+		android:title="Add Bookmark"
+		android:id="@+id/addItem" />
+	<item android:titleCondensed="Sync" 
+		android:title="Synchronize"
+		android:id="@+id/sync" />
+</menu>

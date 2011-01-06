@@ -1,0 +1,5 @@
+signer.jks
+target
+gen
+bin
+*.swp

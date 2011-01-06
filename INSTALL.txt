@@ -1,0 +1,25 @@
+Since I'm a Maven junkie, I found a plugin to build to Android.  Yeah. 
+
+1. Start with these instructions:
+   http://code.google.com/p/maven-android-plugin/wiki/GettingStarted
+
+   Namely, 
+   	(1) Download the Android SDK
+   	(2) Run the setup; download the latest device profiles (2.1/ version 7)
+   	(3) Create an Android Virtual Device (AVD)
+
+
+2. Start your emulators!
+
+   mvn android:emulator-start -Dandroid.emulator.avd=[Name of the AVD you created]
+
+
+3. Compile and deploy that shit!  
+
+   Any changes to .aidl files or anything under res/ require 'mvn process-resources' to generate 
+   the Java stubs.
+
+   mvn package android:deploy # Will package and deploy the app to your running emulator.
+
+
+4. Use 'adb logcat' to watch log messages on the emulator
