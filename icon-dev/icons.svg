@@ -272,6 +272,46 @@
        y1="244.93643"
        x2="571.28711"
        y2="47.41169" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3911"
+       id="linearGradient3186"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(115.06067,326.69084)"
+       x1="428.09006"
+       y1="244.93643"
+       x2="571.28711"
+       y2="47.41169" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3901"
+       id="linearGradient3188"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(350.70423,305.87896)"
+       x1="276.23761"
+       y1="184.04535"
+       x2="276.23761"
+       y2="37.510712" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3911"
+       id="linearGradient3992"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-183.53088,9.7894295)"
+       x1="428.09006"
+       y1="244.93643"
+       x2="571.28711"
+       y2="47.41169" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3901"
+       id="linearGradient3994"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(52.112676,-11.022452)"
+       x1="276.23761"
+       y1="184.04535"
+       x2="276.23761"
+       y2="37.510712" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -280,9 +320,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.71"
-     inkscape:cx="419.44613"
-     inkscape:cy="628.74359"
+     inkscape:zoom="0.5"
+     inkscape:cx="162.40486"
+     inkscape:cy="516.17904"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -308,64 +348,26 @@
      inkscape:groupmode="layer"
      id="layer1">
     <image
-       y="97.505035"
-       x="42.285728"
-       id="image3084"
-       height="133.30693"
+       sodipodi:absref="/Users/tnichols/dev/gmarks-android/icon-dev/bookmark.png"
+       xlink:href="bookmark.png"
        width="126.37624"
-       xlink:href="file:///Users/tnichols/dev/gmarks-sync/icon-dev/bookmark.png" />
+       height="133.30693"
+       id="image3084"
+       x="42.285728"
+       y="97.505035" />
     <g
-       id="g4348">
-      <path
-         style="fill:url(#linearGradient4346);fill-opacity:1;stroke:none;filter:url(#filter3935)"
-         d="m 253.10278,62.151612 1.9802,261.386158 70.29703,-66.33665 60.39604,59.40595 1.9802,-259.405953 -134.65347,4.950495 z"
-         id="path3909"
-         sodipodi:nodetypes="cccccc" />
-      <path
-         sodipodi:nodetypes="cccccc"
-         id="path3090"
-         d="m 262.01367,47.300128 0.9901,258.415852 64.35644,-67.32674 66.33663,66.33664 1.9802,-259.405951 -133.66337,1.980198 z"
-         style="fill:#fa1f1f;fill-opacity:1;stroke:#70000a;stroke-width:7.69999981;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <path
-         style="fill:url(#linearGradient4342);fill-opacity:1;stroke:#de1a2b;stroke-width:3.70000005;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-         d="m 271.91466,55.043003 -0.15402,226.890797 56.32565,-57.00034 57.84378,61.0398 -1.14412,-232.752341 -112.87129,1.822084 z"
-         id="path3899"
-         sodipodi:nodetypes="cccccc" />
-      <text
-         sodipodi:linespacing="100%"
-         id="text3939"
-         y="179.27187"
-         x="279.70111"
-         style="font-size:121.51649475px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#f6f6f6;fill-opacity:1;stroke:none;filter:url(#filter3959);font-family:Georgia;-inkscape-font-specification:Georgia"
-         xml:space="preserve"><tspan
-           y="179.27187"
-           x="279.70111"
-           id="tspan3941"
-           sodipodi:role="line">G</tspan></text>
-    </g>
-    <text
-       xml:space="preserve"
-       style="font-size:100px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Georgia;-inkscape-font-specification:Georgia"
-       x="411.51862"
-       y="173.04272"
-       id="text3963"
-       sodipodi:linespacing="100%"><tspan
-         sodipodi:role="line"
-         id="tspan3975"
-         x="411.51862"
-         y="173.04272">Marks</tspan></text>
-    <g
-       id="g4253">
+       id="g3136">
       <image
-         inkscape:export-ydpi="90"
-         inkscape:export-xdpi="90"
-         inkscape:export-filename="/Users/tnichols/dev/gmarks-sync/res/drawable-hdpi/ic_launcher_folder.png"
-         xlink:href="file:///Users/tnichols/dev/gmarks-sync/res/drawable-hdpi/ic_launcher_folder.png"
-         width="72"
-         height="72"
-         id="image4047"
+         sodipodi:absref="/Users/tnichols/dev/gmarks-android/icon-dev/drawable-hdpi/ic_launcher_folder.png"
+         xlink:href="drawable-hdpi/ic_launcher_folder.png"
+         y="391.01007"
          x="76.676064"
-         y="391.01007" />
+         id="image4047"
+         height="72"
+         width="72"
+         inkscape:export-filename="/Users/tnichols/dev/gmarks-sync/res/drawable-hdpi/ic_launcher_folder.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90" />
       <g
          inkscape:export-ydpi="90"
          inkscape:export-xdpi="90"
@@ -401,20 +403,18 @@
       </g>
     </g>
     <g
-       id="g4244"
-       inkscape:export-filename="/Users/tnichols/dev/gmarks-sync/res/drawable-mdpi/ic_launcher_folder.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
+       id="g3152">
       <image
-         inkscape:export-ydpi="90"
-         inkscape:export-xdpi="90"
-         inkscape:export-filename="/Users/tnichols/dev/gmarks-sync/icon-dev/drawable-mdpi/ic_launcher_folder.png"
-         xlink:href="file:///Users/tnichols/dev/gmarks-sync/res/drawable-mdpi/ic_launcher_folder.png"
-         width="48"
-         height="48"
-         id="image4139"
+         sodipodi:absref="/Users/tnichols/dev/gmarks-android/icon-dev/drawable-mdpi/ic_launcher_folder.png"
+         xlink:href="drawable-mdpi/ic_launcher_folder.png"
+         y="521.07397"
          x="88.282898"
-         y="521.07397" />
+         id="image4139"
+         height="48"
+         width="48"
+         inkscape:export-filename="/Users/tnichols/dev/gmarks-sync/icon-dev/drawable-mdpi/ic_launcher_folder.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90" />
       <g
          inkscape:export-ydpi="90"
          inkscape:export-xdpi="90"
@@ -636,31 +636,165 @@
              sodipodi:role="line">G</tspan></text>
       </g>
     </g>
-    <path
-       style="fill:url(#linearGradient4378);fill-opacity:1;stroke:none;filter:url(#filter3935)"
-       d="m 551.69433,379.05302 1.9802,261.38616 70.29703,-66.33665 60.39604,59.40595 1.9802,-259.40595 -134.65347,4.95049 z"
-       id="path4357"
-       sodipodi:nodetypes="cccccc" />
-    <path
-       sodipodi:nodetypes="cccccc"
-       id="path4359"
-       d="m 560.60522,364.20154 0.9901,258.41585 64.35644,-67.32674 66.33663,66.33664 1.9802,-259.40595 -133.66337,1.9802 z"
-       style="fill:#fa1f1f;fill-opacity:1;stroke:#70000a;stroke-width:7.69999981;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-    <path
-       style="fill:url(#linearGradient4374);fill-opacity:1;stroke:#de1a2b;stroke-width:3.70000005;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 570.50621,371.94441 -0.15402,226.8908 56.32565,-57.00034 57.84378,61.0398 -1.14412,-232.75234 -112.87129,1.82208 z"
-       id="path4361"
-       sodipodi:nodetypes="cccccc" />
+    <g
+       id="g3167">
+      <path
+         sodipodi:nodetypes="cccccc"
+         id="path4357"
+         d="m 551.69433,379.05302 1.9802,261.38616 70.29703,-66.33665 60.39604,59.40595 1.9802,-259.40595 -134.65347,4.95049 z"
+         style="fill:url(#linearGradient4378);fill-opacity:1;stroke:none;filter:url(#filter3935)" />
+      <path
+         style="fill:#fa1f1f;fill-opacity:1;stroke:#70000a;stroke-width:7.69999981;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="m 560.60522,364.20154 0.9901,258.41585 64.35644,-67.32674 66.33663,66.33664 1.9802,-259.40595 -133.66337,1.9802 z"
+         id="path4359"
+         sodipodi:nodetypes="cccccc" />
+      <path
+         sodipodi:nodetypes="cccccc"
+         id="path4361"
+         d="m 570.50621,371.94441 -0.15402,226.8908 56.32565,-57.00034 57.84378,61.0398 -1.14412,-232.75234 -112.87129,1.82208 z"
+         style="fill:url(#linearGradient4374);fill-opacity:1;stroke:#de1a2b;stroke-width:3.70000005;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <text
+         xml:space="preserve"
+         style="font-size:121.51649475px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#f6f6f6;fill-opacity:1;stroke:none;filter:url(#filter3959);font-family:Georgia;-inkscape-font-specification:Georgia"
+         x="580.29266"
+         y="496.17328"
+         id="text4363"
+         sodipodi:linespacing="100%"><tspan
+           sodipodi:role="line"
+           id="tspan4365"
+           x="580.29266"
+           y="496.17328">G</tspan></text>
+    </g>
+    <g
+       id="g3118"
+       inkscape:export-filename="/Users/tnichols/dev/gmarks-android/icon-dev/site-logo.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <g
+         id="g4348">
+        <path
+           sodipodi:nodetypes="cccccc"
+           id="path3909"
+           d="m 253.10278,62.151612 1.9802,261.386158 70.29703,-66.33665 60.39604,59.40595 1.9802,-259.405953 -134.65347,4.950495 z"
+           style="fill:url(#linearGradient4346);fill-opacity:1;stroke:none;filter:url(#filter3935)" />
+        <path
+           style="fill:#fa1f1f;fill-opacity:1;stroke:#70000a;stroke-width:7.69999981;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           d="m 262.01367,47.300128 0.9901,258.415852 64.35644,-67.32674 66.33663,66.33664 1.9802,-259.405951 -133.66337,1.980198 z"
+           id="path3090"
+           sodipodi:nodetypes="cccccc" />
+        <path
+           sodipodi:nodetypes="cccccc"
+           id="path3899"
+           d="m 271.91466,55.043003 -0.15402,226.890797 56.32565,-57.00034 57.84378,61.0398 -1.14412,-232.752341 -112.87129,1.822084 z"
+           style="fill:url(#linearGradient4342);fill-opacity:1;stroke:#de1a2b;stroke-width:3.70000005;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+        <text
+           xml:space="preserve"
+           style="font-size:121.51649475px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#f6f6f6;fill-opacity:1;stroke:none;filter:url(#filter3959);font-family:Georgia;-inkscape-font-specification:Georgia"
+           x="279.70111"
+           y="179.27187"
+           id="text3939"
+           sodipodi:linespacing="100%"><tspan
+             sodipodi:role="line"
+             id="tspan3941"
+             x="279.70111"
+             y="179.27187">G</tspan></text>
+      </g>
+      <text
+         sodipodi:linespacing="100%"
+         id="text3963"
+         y="173.04272"
+         x="411.51862"
+         style="font-size:100px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Georgia;-inkscape-font-specification:Georgia"
+         xml:space="preserve"><tspan
+           y="173.04272"
+           x="411.51862"
+           id="tspan3975"
+           sodipodi:role="line">Marks</tspan></text>
+      <rect
+         style="opacity:0;fill:none;stroke:none"
+         id="rect3089"
+         width="481.85916"
+         height="308.61972"
+         x="231.78644"
+         y="21.738117" />
+    </g>
     <text
        sodipodi:linespacing="100%"
-       id="text4363"
-       y="496.17328"
-       x="578.29266"
-       style="font-size:121.51649475px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#f6f6f6;fill-opacity:1;stroke:none;filter:url(#filter3959);font-family:Georgia;-inkscape-font-specification:Georgia"
+       id="text3161"
+       y="451.31592"
+       x="-384.07837"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans"
        xml:space="preserve"><tspan
-         y="496.17328"
-         x="578.29266"
-         id="tspan4365"
-         sodipodi:role="line">G</tspan></text>
+         sodipodi:role="line"
+         id="tspan3165"
+         x="-384.07837"
+         y="451.31592">512x512 market icon</tspan></text>
+    <g
+       id="g3996"
+       inkscape:export-filename="/Users/tnichols/dev/gmarks-android/icon-dev/market-app-icon.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         y="474.58002"
+         x="-538.47522"
+         height="512"
+         width="512"
+         id="rect3190"
+         style="fill:#8d8d8d;fill-opacity:0;stroke:none" />
+      <g
+         transform="translate(-764,554)"
+         id="g3972"
+         inkscape:export-filename="/Users/tnichols/dev/gmarks-android/icon-dev/site-logo.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90">
+        <g
+           id="g3974">
+          <path
+             sodipodi:nodetypes="cccccc"
+             id="path3976"
+             d="m 253.10278,62.151612 1.9802,261.386158 70.29703,-66.33665 60.39604,59.40595 1.9802,-259.405953 -134.65347,4.950495 z"
+             style="fill:url(#linearGradient3992);fill-opacity:1;stroke:none;filter:url(#filter3935)" />
+          <path
+             style="fill:#fa1f1f;fill-opacity:1;stroke:#70000a;stroke-width:7.69999981;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+             d="m 262.01367,47.300128 0.9901,258.415852 64.35644,-67.32674 66.33663,66.33664 1.9802,-259.405951 -133.66337,1.980198 z"
+             id="path3978"
+             sodipodi:nodetypes="cccccc" />
+          <path
+             sodipodi:nodetypes="cccccc"
+             id="path3980"
+             d="m 271.91466,55.043003 -0.15402,226.890797 56.32565,-57.00034 57.84378,61.0398 -1.14412,-232.752341 -112.87129,1.822084 z"
+             style="fill:url(#linearGradient3994);fill-opacity:1;stroke:#de1a2b;stroke-width:3.70000005;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+          <text
+             xml:space="preserve"
+             style="font-size:121.51649475px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#f6f6f6;fill-opacity:1;stroke:none;filter:url(#filter3959);font-family:Georgia;-inkscape-font-specification:Georgia"
+             x="279.70111"
+             y="179.27187"
+             id="text3982"
+             sodipodi:linespacing="100%"><tspan
+               sodipodi:role="line"
+               id="tspan3984"
+               x="279.70111"
+               y="179.27187">G</tspan></text>
+        </g>
+        <text
+           sodipodi:linespacing="100%"
+           id="text3986"
+           y="173.04272"
+           x="411.51862"
+           style="font-size:100px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Georgia;-inkscape-font-specification:Georgia"
+           xml:space="preserve"><tspan
+             y="173.04272"
+             x="411.51862"
+             id="tspan3988"
+             sodipodi:role="line">Marks</tspan></text>
+        <rect
+           style="opacity:0;fill:none;stroke:none"
+           id="rect3990"
+           width="481.85916"
+           height="308.61972"
+           x="231.78644"
+           y="21.738117" />
+      </g>
+    </g>
   </g>
 </svg>
