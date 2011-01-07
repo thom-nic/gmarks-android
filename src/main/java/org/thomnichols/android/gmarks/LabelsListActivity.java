@@ -15,12 +15,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
-public class LabelsListActivity extends ListActivity {
+public class LabelsListActivity extends ListActivity implements OnClickListener {
 	static final String TAG = "GMARKS LABELS";
 	
     private static final String[] PROJECTION = new String[] {
@@ -65,6 +66,8 @@ public class LabelsListActivity extends ListActivity {
                 new String[] { Label.Columns.TITLE, Label.Columns.COUNT }, 
                 new int[] { R.id.title, R.id.count });
         setListAdapter(adapter);
+        
+        ((Button)findViewById(R.id.syncBtn)).setOnClickListener(this);
     }
     
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -145,4 +148,12 @@ public class LabelsListActivity extends ListActivity {
 		}
         return super.onOptionsItemSelected(item);
     }
+
+	public void onClick(View v) {
+		if ( v.getId() == R.id.syncBtn ) {
+			Log.d(TAG, "Starting sync...");
+        	Toast.makeText(this, "Starting sync...", Toast.LENGTH_SHORT).show();
+        	new RemoteSyncTask(this).execute();
+		}
+	}
 }

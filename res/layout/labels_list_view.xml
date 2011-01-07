@@ -34,5 +34,18 @@
       android:layout_width="fill_parent"
       android:layout_height="fill_parent"
       android:layout_weight="1"
+      android:textFilterEnabled="true" 
       android:drawSelectorOnTop="false"/>
+      
+	<LinearLayout android:id='@id/android:empty'
+   	android:layout_width='fill_parent'
+   	android:layout_height='fill_parent'
+   	android:layout_weight='1'
+   	android:layout_gravity="bottom|center_horizontal">
+   	
+		<Button android:id="@+id/syncBtn"
+			android:text='@string/btn_first_sync'
+			android:layout_width='fill_parent'
+			android:layout_height='wrap_content' />
+	</LinearLayout>
 </LinearLayout>
