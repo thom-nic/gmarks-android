@@ -39,7 +39,7 @@
         </activity>
         
         <activity android:name=".BookmarksListActivity"
-        			android:label="bookmarks_activity"
+        			android:label="@string/bookmarks_activity"
         			android:launchMode="singleTop">
            <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
