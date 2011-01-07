@@ -1,4 +1,4 @@
-package org.thomnichols.android.gmarks;
+ package org.thomnichols.android.gmarks;
 
 import static org.thomnichols.android.gmarks.GmarksProvider.BOOKMARKS_TABLE_NAME;
 import static org.thomnichols.android.gmarks.GmarksProvider.BOOKMARK_LABELS_TABLE_NAME;
@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.text.TextUtils;
@@ -135,10 +136,13 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 
     			Long bookmarkRowID = null;
     			Cursor cursor = db.query( BOOKMARKS_TABLE_NAME, 
-    					new String[] { "_id" }, 
+    					new String[] { Bookmark.Columns._ID }, 
     					Bookmark.Columns.GOOGLEID+ "=?", 
     					new String[] { b.getGoogleId() }, 
     					null, null, null );
+    			
+    			// Insert or update the next bookmark.
+    			boolean bookmarkInserted = false;
     			try {
         			if ( ! cursor.moveToFirst() ) { // insert a new bookmark row
         				Log.d(TAG, "Inserting bookmark: " + b.getTitle() );
@@ -146,6 +150,8 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 		        		bookmarkRowID = db.insertWithOnConflict(
 		        				BOOKMARKS_TABLE_NAME, "", vals,
 		        				SQLiteDatabase.CONFLICT_ABORT );
+		        		
+		        		bookmarkInserted = true;
         			}
         			else { // update current bookmark:
         				bookmarkRowID = cursor.getLong(0);
@@ -194,8 +200,17 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
         		vals.put(Bookmark.Columns.HOST+"_fts", b.getHost());
         		vals.put(Bookmark.Columns.DESCRIPTION+"_fts", b.getDescription());
         		vals.put("labels_fts", TextUtils.join(" ", b.getLabels()));
-        		long result = db.insertWithOnConflict(BOOKMARKS_TABLE_NAME+"_FTS", "",
-        				vals, SQLiteDatabase.CONFLICT_FAIL );
+        		long result = -1;
+        		try {
+        			if ( bookmarkInserted )
+        				result = db.insertWithOnConflict(BOOKMARKS_TABLE_NAME+"_FTS", "",
+	        				vals, SQLiteDatabase.CONFLICT_IGNORE );
+        		}
+        		catch ( SQLiteConstraintException ex ) {
+        			// this keeps throwing an exception even though I am using 
+        			// a conflict strategy!??!!!
+        			Log.w(TAG, "FTS Update Error for ID: " + bookmarkRowID, ex);
+        		}
         		if ( result < 0 ) { // update, not insert:
         			vals.remove("docid");
         			result = db.updateWithOnConflict(BOOKMARKS_TABLE_NAME+"_FTS", vals, 
@@ -206,6 +221,7 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
         			}
         		}
         		
+        		// TODO different message if there were no new bookmarks.
         		if ( count % 10 == 0 ) this.publishProgress(count);
         	}
         	
@@ -236,7 +252,7 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 				((CursorAdapter)((ListActivity)this.ctx).getListAdapter()).notifyDataSetChanged();
 			}
 			// update shared 'last sync' state
-			this.syncPrefs.edit().putLong(PREF_LAST_SYNC, this.thisSyncTime);
+			this.syncPrefs.edit().putLong(PREF_LAST_SYNC, this.thisSyncTime).commit();
 		}
 		else if ( result == RESULT_FAILURE_AUTH ) {
 			this.ctx.startActivityForResult(new Intent("org.thomnichols.gmarks.action.LOGIN"), 
