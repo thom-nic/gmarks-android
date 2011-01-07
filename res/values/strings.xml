@@ -4,9 +4,16 @@
     <string name="labels_activity">GMarks Labels</string>
     <string name="choose_label">Choose a GMarks Label</string>
     <string name="bookmarks_activity">GMarks All bookmarks</string>
+    <string name="choose_bookmark">Choose a Bookmark</string>
+    <string name="edit_bookmark">Edit Bookmark</string>
     <string name="settings">GMarks Settings</string>
     <string name="search_hint">Search Google Bookmarks</string>
     
+    <string name="btn_save">Save</string>
+    <string name="btn_update">Update</string>
+    <string name="btn_delete">Delete</string>
+    <string name="btn_first_sync">Please Sync to begin</string>
+
     <string name="menu_insert">Add</string>
     <string name="menu_sync">Sync</string>
     <string name="menu_delete">Delete</string>
