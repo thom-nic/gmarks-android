@@ -19,6 +19,7 @@ import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
@@ -30,6 +31,9 @@ import android.widget.Toast;
 class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 	static final String TAG = "GMARKS SYNC";
 	
+	static final String SHARED_PREFS_NAME = "sync_prefs";
+	static final String PREF_LAST_SYNC = "last_sync";
+	
 	static final int RESULT_SUCCESS = 0;
 	static final int RESULT_FAILURE_AUTH = 1;
 	static final int RESULT_FAILURE_UNKNOWN = 500;
@@ -37,6 +41,9 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 	NotificationManager notificationManager;
 	Notification notification;
 	Activity ctx;
+	long lastSyncTime = 0;
+	final SharedPreferences syncPrefs;
+	long thisSyncTime = 0;
 	
 	RemoteSyncTask(Activity ctx) {
 		this.ctx = ctx;
@@ -44,15 +51,24 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 		notification = new Notification( R.drawable.ic_sync, 
 				"Gmarks sync in progress...", 
 				System.currentTimeMillis() );
+		
+		this.syncPrefs = ctx.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE);
+	}
+	
+	@Override protected void onPreExecute() {
+		super.onPreExecute();
+		this.lastSyncTime = syncPrefs.getLong(PREF_LAST_SYNC, 0);
+		Log.d(TAG,"Syncing bookmarks modified since: " + lastSyncTime);
+		this.thisSyncTime = System.currentTimeMillis();
 	}
 	
 	@Override protected Integer doInBackground(Void... arg0) {
     	GmarksProvider.DatabaseHelper dbHelper = 
     		new GmarksProvider.DatabaseHelper(this.ctx);
 
-    	BookmarksQueryService svc = BookmarksQueryService.getInstance();
-    	if ( ! svc.authInitialized ) 
-			svc.setAuthCookies( dbHelper.restoreCookies() );
+    	BookmarksQueryService remoteSvc = BookmarksQueryService.getInstance();
+    	if ( ! remoteSvc.authInitialized ) 
+			remoteSvc.setAuthCookies( dbHelper.restoreCookies() );
 
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
     	
@@ -61,7 +77,7 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
     		ContentValues vals = new ContentValues();
 			
     		// sync label list
-			List<Label> labels = svc.getLabels();
+			List<Label> labels = remoteSvc.getLabels();
     		Map<String,Long> labelIDs = new HashMap<String, Long>(labels.size());
 			
         	for ( Label l : labels ) {
@@ -97,13 +113,19 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
         	}
 			
 			// sync bookmarks:
-	    	Iterable<Bookmark> allBookmarks = svc.getAllBookmarks();
+	    	Iterable<Bookmark> allBookmarks = remoteSvc.getAllBookmarks();
     		int count = 0;
         	for ( Bookmark b : allBookmarks ) {
         		if ( this.isCancelled() ) break;
         		
+        		/* Bookmarks are returned in chrono order starting with the 
+        		 * most recently modified.  Keep iterating until we've reached 
+        		 * a bookmark whose 'modified' datetime is before the last sync time. */
+        		if ( b.getModifiedDate() < this.lastSyncTime ) break;
+        		
 //        		ContentValues vals = new ContentValues();
         		vals.clear();
+        		vals.put(Bookmark.Columns.THREAD_ID, b.getThreadId());
         		vals.put(Bookmark.Columns.TITLE, b.getTitle());
         		vals.put(Bookmark.Columns.HOST, b.getHost());
         		vals.put(Bookmark.Columns.URL, b.getUrl());
@@ -213,6 +235,8 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 				Log.d(TAG,"Refreshing listview...");
 				((CursorAdapter)((ListActivity)this.ctx).getListAdapter()).notifyDataSetChanged();
 			}
+			// update shared 'last sync' state
+			this.syncPrefs.edit().putLong(PREF_LAST_SYNC, this.thisSyncTime);
 		}
 		else if ( result == RESULT_FAILURE_AUTH ) {
 			this.ctx.startActivityForResult(new Intent("org.thomnichols.gmarks.action.LOGIN"), 
