@@ -4,12 +4,12 @@
 package org.thomnichols.android.gmarks;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import org.apache.http.Header;
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.CookieStore;
@@ -29,6 +29,7 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.thomnichols.android.gmarks.thirdparty.IOUtils;
 
+import android.net.Uri;
 import android.net.http.AndroidHttpClient;
 import android.util.Log;
 
@@ -51,6 +52,14 @@ public class BookmarksQueryService {
 		public AuthException( String msg, Throwable cause) { super(msg,cause); }
 	}
 	
+	public class NotFoundException extends IOException {
+		private static final long serialVersionUID = 1L;
+		public NotFoundException() { super(); }
+		public NotFoundException( String msg ) { super(msg); }
+		public NotFoundException( Throwable cause) { super(cause); }
+		public NotFoundException( String msg, Throwable cause) { super(msg,cause); }
+	}
+	
 	private static BookmarksQueryService instance = null;
 	
 //	protected DefaultHttpClient http;
@@ -60,6 +69,7 @@ public class BookmarksQueryService {
 	protected CookieStore cookieStore;
 	protected String TAG = "BOOKMARKS QUERY";
 	protected boolean authInitialized = false;
+	protected String xtParam = null;
 	
 	private BookmarksQueryService( String userAgent ) {
 		ctx = new BasicHttpContext();
@@ -164,87 +174,219 @@ public class BookmarksQueryService {
 	}
 
 	public Bookmark create( Bookmark b ) throws IOException {
-		String createURL = "https://www.google.com/bookmarks/api/thread?op=Star";
+		final String createURL = "https://www.google.com/bookmarks/api/thread?op=Star"
+			+ "&xt=" + URLEncoder.encode( getXtParam(), "UTF-8" );
+		
+//td {"results":[{"threadId":"BDQAAAAAQAA","elementId":0,"authorId":0,
+//                "title":"My Blog","timestamp":0,"formattedTimestamp":0,
+//                "url":"http://blog.thomnichols.org","signedUrl":"",
+//                "previewUrl":"","snippet":"___________","threadComments":[],
+//                "parentId":"BDQAAAAAQAA","labels":["mobile"]}]}
+		JSONObject requestObj = new JSONObject();
+		try {
+			JSONObject bookmarkObj = new JSONObject();
+			// TODO this is part of a bookmark but I've been ignoring it...
+//			bookmarkObj.put("threadId", "");
+			bookmarkObj.put( "elementId", b.getGoogleId());
+			bookmarkObj.put( "title", b.getTitle() );
+			bookmarkObj.put( "url", b.getUrl() );
+			bookmarkObj.put( "snippet", b.getDescription() );
+			JSONArray labels = new JSONArray();
+			for (String label : b.getLabels() ) labels.put(label);
+			bookmarkObj.put( "labels", labels );
+			
+			bookmarkObj.put( "authorId", 0 );
+			bookmarkObj.put( "timestamp", 0 );
+			bookmarkObj.put( "formattedTimestamp", 0 );
+			bookmarkObj.put( "signedUrl", "" );
+			bookmarkObj.put( "previewUrl", "" );
+			bookmarkObj.put( "threadComments", new JSONArray() );
+			// this is the same as threadId:
+			bookmarkObj.put( "parentId", "" );
 
-		List<NameValuePair> params = new ArrayList<NameValuePair>();
-		return createOrUpdate( createURL, new UrlEncodedFormEntity(params) );
+			JSONArray resultArray = new JSONArray();
+			resultArray.put(bookmarkObj);
+			requestObj.put("results", resultArray);			
+		}
+		catch ( JSONException ex ) {
+			throw new IOException( "Error creating request", ex );
+		}
+
+		return createOrUpdate( createURL, requestObj );
 	}
 	
 	public Bookmark update( Bookmark b ) throws IOException {
-		String updateURL = "https://www.google.com/bookmarks/api/thread?op=UpdateThreadElement";
+		String updateURL = "https://www.google.com/bookmarks/api/thread?op=UpdateThreadElement" 
+			+ "&xt=" + URLEncoder.encode( getXtParam(), "UTF-8" );
 		
 		JSONObject requestObj = new JSONObject();
 		try {
 			JSONObject bookmarkObj = new JSONObject();
 			// TODO this is part of a bookmark but I've been ignoring it...
-//			bookmarkObj.append("threadId", "");
-			bookmarkObj.append( "elementId", b.getGoogleId());
-			bookmarkObj.append( "title", b.getTitle() );
-			bookmarkObj.append( "url", b.getUrl() );
-			bookmarkObj.append( "snippet", b.getDescription() );
+			bookmarkObj.put("threadId", b.getThreadId());
+			bookmarkObj.put( "elementId", b.getGoogleId());
+			bookmarkObj.put( "title", b.getTitle() );
+			bookmarkObj.put( "url", b.getUrl() );
+			bookmarkObj.put( "snippet", b.getDescription() );
 			JSONArray labels = new JSONArray();
 			for (String label : b.getLabels() ) labels.put(label);
-			bookmarkObj.append( "labels", labels );
+			bookmarkObj.put( "labels", labels );
 			
 // these are in the request but empty... maybe we can ignore them???
 //			"authorId":0,"timestamp":0,"formattedTimestamp":0,"signedUrl":"",
 //			"previewUrl":"","threadComments":[],"parentId":"",
-			bookmarkObj.append( "authorId", 0 );
-			bookmarkObj.append( "timestamp", 0 );
-			bookmarkObj.append( "formattedTimestamp", 0 );
-			bookmarkObj.append( "signedUrl", "" );
-			bookmarkObj.append( "previewUrl", "" );
-			bookmarkObj.append( "threadComments", new JSONArray() );
-			bookmarkObj.append( "parentId", "" );
+			bookmarkObj.put( "authorId", 0 );
+			bookmarkObj.put( "timestamp", 0 );
+			bookmarkObj.put( "formattedTimestamp", 0 );
+			bookmarkObj.put( "signedUrl", "" );
+			bookmarkObj.put( "previewUrl", "" );
+			bookmarkObj.put( "threadComments", new JSONArray() );
+			bookmarkObj.put( "parentId", "" );
 
-			requestObj.append("threadResults", bookmarkObj);
+			JSONArray results = new JSONArray();
+			results.put(bookmarkObj);
+			requestObj.put("threadResults", results);
 			
 			// other unneeded params that are part of an update request:
 			JSONArray emptyArray = new JSONArray();
-			requestObj.append("threads", emptyArray);
-			requestObj.append("threadQueries", emptyArray);
-			requestObj.append("threadComments", emptyArray);
+			requestObj.put("threads", emptyArray);
+			requestObj.put("threadQueries", emptyArray);
+			requestObj.put("threadComments", emptyArray);
 			
 		}
 		catch ( JSONException ex ) {
 			throw new IOException( "Error creating request", ex );
 		}
-		List<NameValuePair> params = new ArrayList<NameValuePair>();
-		params.add( new BasicNameValuePair("xt", requestObj.toString()) );
-		return createOrUpdate( updateURL, new UrlEncodedFormEntity(params) );
+
+		return createOrUpdate( updateURL, requestObj );
 	}
-	
-	public Bookmark createOrUpdate( String url, HttpEntity postBody ) throws IOException {
-		HttpPost post = new HttpPost( url );
+
+	public void delete(String googleId) throws AuthException, IOException {
+		Uri requestURI = Uri.parse("https://www.google.com/bookmarks/api/thread").buildUpon()
+			.appendQueryParameter("xt", getXtParam() )
+			.appendQueryParameter("op", "DeleteItems").build();
+//		final String deleteURL = "https://www.google.com/bookmarks/api/thread?"
+//			+ "xt=" + URLEncoder.encode( getXtParam(), "UTF-8" )  
+//			+ "&op=DeleteItems";
+		//  td	{"deleteAllBookmarks":false,"deleteAllThreads":false,"urls":[],"ids":["____"]}
+
+		JSONObject requestObj = new JSONObject();
+		try {
+			requestObj.put("deleteAllBookmarks", false);
+			requestObj.put("deleteAllThreads", false);
+			requestObj.put("urls", new JSONArray());
+			JSONArray elementIDs = new JSONArray();
+			elementIDs.put( googleId );
+			requestObj.put("ids", elementIDs);
+		}
+		catch ( JSONException ex ) {
+			throw new IOException( "JSON error while creating request" );
+		}
 		
-		post.setEntity( postBody );
+		String postString = "{\"deleteAllBookmarks\":false,\"deleteAllThreads\":false,\"urls\":[],\"ids\":[\""
+			+ googleId + "\"]}";
+		
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+//		params.add( new BasicNameValuePair("td", requestObj.toString()) );
+		params.add( new BasicNameValuePair("td", postString) );
+
+//		Log.d(TAG,"DELETE: " + requestObj.toString());
+		Log.d(TAG,"DELETE: " + requestURI );
+		Log.d(TAG,"DELETE: " + postString);
+
+		HttpPost post = new HttpPost( requestURI.toString() );		
+//		HttpPost post = new HttpPost( deleteURL );		
+		post.setEntity( new UrlEncodedFormEntity(params) );
 		HttpResponse resp = http.execute( post, this.ctx );
 		
-		int respCode = resp.getStatusLine().getStatusCode(); 
+		int respCode = resp.getStatusLine().getStatusCode();
+		if ( respCode == 401 ) throw new AuthException();
 		if ( respCode > 299 ) 
 			throw new IOException( "Unexpected response code: " + respCode );
 
 		try { // always assume a single item is created or updated.
 			JSONObject respObj = parseJSON(resp);
-			respObj = respObj.getJSONArray("results").getJSONObject(0).getJSONObject("threadResult");
-			Bookmark b = new Bookmark( respObj.getString("elementId"),
-					respObj.getString("title"),
-					respObj.getString("url"),
-					respObj.getString("host"),
-					respObj.getString("snippet"),
-					respObj.getLong("timestamp"),
-					respObj.getLong("timestamp") );
+			int deletedCount = respObj.getInt("numDeletedBookmarks");
 			
-			JSONArray labelJSON = respObj.getJSONArray("labels");
-			
-			for ( int i=0; i< labelJSON.length(); i++ )
-				b.getLabels().add(labelJSON.getString(i));
-			
-			return b;
+			if ( deletedCount < 1 )
+				throw new IOException( "Bookmark could not be found" );
+			if ( deletedCount > 1 )
+				throw new IOException("Expected 1 deleted bookmark but got " + deletedCount );
 		} 
 		catch ( JSONException ex ) {
 			throw new IOException( "Response parse error", ex );
 		}
+	}
+	
+	protected Bookmark createOrUpdate( String url, JSONObject requestObj ) throws AuthException, IOException {
+		HttpPost post = new HttpPost( url );
+		
+		Log.d(TAG, "UPDATE: " + url);
+		Log.d(TAG, "UPDATE: " + requestObj);
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add( new BasicNameValuePair("td", requestObj.toString()) );
+		post.setEntity( new UrlEncodedFormEntity(params) );
+		HttpResponse resp = http.execute( post, this.ctx );
+		
+		int respCode = resp.getStatusLine().getStatusCode(); 
+		if ( respCode == 401 ) throw new AuthException();
+		if ( respCode > 299 ) 
+			throw new IOException( "Unexpected response code: " + respCode );
+
+		try { // always assume a single item is created or updated.
+			JSONObject respObj = parseJSON(resp);
+			if ( respObj.has("results") ) // create response:
+				respObj = respObj.getJSONArray("results").getJSONObject(0).getJSONObject("threadResult");
+			else respObj = respObj.getJSONArray("threadResults").getJSONObject(0);
+			Bookmark b = new Bookmark( respObj.getString("elementId"),
+					respObj.getString("threadId"),
+					respObj.getString("title"),
+					respObj.getString("url"),
+					respObj.getString("host"),
+					respObj.getString("snippet"),
+					-1, // no created date in response
+					respObj.getLong("timestamp") );
+			
+			Log.d(TAG, "RESPONSE: " + respObj );
+			if ( respObj.has("labels") ) {
+				JSONArray labelJSON = respObj.getJSONArray("labels");
+				
+				for ( int i=0; i< labelJSON.length(); i++ )
+					b.getLabels().add(labelJSON.getString(i));
+			}
+			
+			return b;
+		} 
+		catch ( JSONException ex ) {
+			Log.w(TAG, "Response parse error", ex );
+			throw new IOException( "Response parse error" );
+		}
+	}
+	
+	protected String getXtParam() throws IOException {
+		if ( this.xtParam != null ) return this.xtParam; // already init'd
+		
+		HttpGet get = new HttpGet("https://www.google.com/bookmarks/l");
+		
+		HttpResponse resp = http.execute(get, this.ctx);
+		
+		// TODO auth check
+		int responseCode = resp.getStatusLine().getStatusCode(); 
+		if (  responseCode != 200 ) 
+			throw new IOException( "Unexpected response code: " + responseCode );
+		
+		// TODO encoding
+		String respString = IOUtils.toString( resp.getEntity().getContent() );
+		String xtSearchString = ";SL.xt = '";
+		int xtStartIndex = respString.indexOf(xtSearchString);
+		if ( xtStartIndex < 0 ) throw new IOException("Could not find xtSearchString");
+		xtStartIndex += xtSearchString.length(); 
+		this.xtParam = respString.substring( xtStartIndex, 
+				respString.indexOf("'", xtStartIndex) );
+		Log.d(TAG, "XT context: " + respString.substring( xtStartIndex-10, 
+				respString.indexOf("'", xtStartIndex)+5 ) );
+		Log.d(TAG, "GOT XT PARAM: " + xtParam );
+		return this.xtParam;
 	}
 	
 	protected JSONObject queryJSON(String uri) throws AuthException, JSONException, IOException {
@@ -384,6 +526,7 @@ public class BookmarksQueryService {
 				JSONObject item = this.currentSection.getJSONObject(currentItemIndex++);
 				Bookmark bookmark = new Bookmark( 
 						item.getString("elementId"),
+						item.getString("threadId"),
 						item.getString("title"), 
 						item.getString("url"),
 						item.getString("host"),

@@ -18,6 +18,7 @@ public class Bookmark {
 	public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd.google.bookmark";
 
 	private String googleId;
+	private String threadId;
 	private String title;
 	private String url;
 	private String host;
@@ -30,9 +31,10 @@ public class Bookmark {
 	
 	public Bookmark() {}
 	
-	public Bookmark( String googleId, String title, String url, String host, 
+	public Bookmark( String googleId, String threadId, String title, String url, String host, 
 			String description, long created, long modified ) {
 		this.googleId = googleId;
+		this.threadId = threadId;
 		this.title = title;
 		this.url = url;
 		this.host = host;
@@ -51,6 +53,11 @@ public class Bookmark {
 	public void set_id(Long id) {
 		_id = id;
 	}
+
+	public String getThreadId() {
+		return threadId;
+	}
+	
 	public String getTitle() {
 		return title;
 	}
@@ -78,6 +85,8 @@ public class Bookmark {
 	public long getModifiedDate() {
 		return modifiedDate;
 	}
+	
+	public void setLabels(List<String> l) { this.labels = l; }
 
 	public List<String> getLabels() {
 		return labels;
@@ -86,6 +95,7 @@ public class Bookmark {
 	public static final class Columns implements BaseColumns {
 		public static final String DEFAULT_SORT_ORDER = "modified DESC";
 		public static final String GOOGLEID = "google_id";
+		public static final String THREAD_ID = "thread_id";
 		public static final String TITLE = "title";
 		public static final String URL = "url";
 		public static final String HOST = "host";

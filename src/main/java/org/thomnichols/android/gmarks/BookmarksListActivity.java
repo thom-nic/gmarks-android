@@ -1,4 +1,4 @@
-package org.thomnichols.android.gmarks;
+	package org.thomnichols.android.gmarks;
 
 import org.thomnichols.android.gmarks.R;
 
@@ -50,12 +50,17 @@ public class BookmarksListActivity extends ListActivity {
 
         // bind an action for long-press (not a context menu)
         getListView().setOnItemLongClickListener(this.longClickListener);
+        getListView().setTextFilterEnabled(true);
         
         // If no data was given in the intent (because we were started
         // as a MAIN activity), then use our default content provider.
         Intent intent = getIntent();
         Cursor cursor = getCursorFromIntent(intent);
         Uri uri = intent.getData();
+        
+        if ( Intent.ACTION_PICK.equals(intent.getAction()) ) {
+        	setTitle(R.string.choose_bookmark);
+        }
         
         String labelName = uri.getQueryParameter("label");
         if ( labelName != null ) this.setTitle("Bookmarks for label '" + labelName + "'");
@@ -161,6 +166,7 @@ public class BookmarksListActivity extends ListActivity {
             // The caller is waiting for us to return a note selected by
             // the user.  The have clicked on one, so return it now.
             setResult(RESULT_OK, new Intent().setData(uri));
+            finish();
         } else {
         	String bookmarkURL = ((CursorWrapper)l.getItemAtPosition(position))
         		.getString(COLUMN_INDEX_URL);
@@ -174,5 +180,8 @@ public class BookmarksListActivity extends ListActivity {
             startActivity(new Intent(Intent.ACTION_EDIT, uri));
 			return false;
 		}    	
+        
+        //TODO after starting the activity, if the item was updated or deleted, this 
+        // view will need to be refreshed!
 	};
 }

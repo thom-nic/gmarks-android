@@ -182,7 +182,8 @@ public class GmarksProvider extends ContentProvider {
             count = db.delete(BOOKMARKS_TABLE_NAME, Bookmark.Columns._ID + "=" + noteId
                     + (!TextUtils.isEmpty(where) ? " AND (" + where + ')' : ""), whereArgs);
             break;
-
+            // TODO delete item from text search!
+            
         default:
             throw new IllegalArgumentException("Unknown URI " + uri);
         }
@@ -243,6 +244,7 @@ public class GmarksProvider extends ContentProvider {
         bookmarksProjectionMap = new HashMap<String, String>();
         bookmarksProjectionMap.put(Bookmark.Columns._ID, Bookmark.Columns._ID);
         bookmarksProjectionMap.put(Bookmark.Columns.GOOGLEID, Bookmark.Columns.GOOGLEID);
+        bookmarksProjectionMap.put(Bookmark.Columns.THREAD_ID, Bookmark.Columns.THREAD_ID);
         bookmarksProjectionMap.put(Bookmark.Columns.TITLE, Bookmark.Columns.TITLE);
         bookmarksProjectionMap.put(Bookmark.Columns.HOST, Bookmark.Columns.HOST);
         bookmarksProjectionMap.put(Bookmark.Columns.URL, Bookmark.Columns.URL);
@@ -262,6 +264,14 @@ public class GmarksProvider extends ContentProvider {
         sLiveFolderProjectionMap.put(LiveFolders.NAME, Bookmark.Columns.TITLE + " AS " +
                 LiveFolders.NAME);
         // Add more columns here for more robust Live Folders.
+    }
+    
+    public static class DBException extends Exception {
+		private static final long serialVersionUID = 1L;
+		public DBException() { super(); }
+		public DBException(String arg0, Throwable arg1) { super(arg0, arg1); }
+		public DBException(String arg0) { super(arg0); }
+		public DBException(Throwable arg0) { super(arg0); }
     }
     
 	public static class DatabaseHelper extends SQLiteOpenHelper {
@@ -288,6 +298,7 @@ public class GmarksProvider extends ContentProvider {
 			db.execSQL("create table " + BOOKMARKS_TABLE_NAME + " ( "
 					+ "_id integer primary key,"
 					+ "google_id varchar(50) not null unique,"
+					+ "thread_id varchar(20) not null,"
 					+ "title varchar(50) not null,"
 					+ "url varchar(200) not null,"
 					+ "host varchar(50) not null,"
@@ -324,10 +335,17 @@ public class GmarksProvider extends ContentProvider {
 		
 	    private static final String[] bookmarksIDColumns = new String[] {
 	    	Bookmark.Columns.GOOGLEID, 
+	    	Bookmark.Columns.THREAD_ID, 
 	    	Bookmark.Columns.TITLE, 
 	    	Bookmark.Columns._ID };
 	    
-	    
+	    /**
+	     * Note that this does not return the full bookmark object, just a
+	     * shell with the _id, elementID, title and URL filled in.
+	     * @param url
+	     * @param db
+	     * @return
+	     */
 	    public Bookmark findByURL(String url, SQLiteDatabase db ) {
 	    	// Get the database and run the query
 	    	boolean closeDB = false;
@@ -341,8 +359,8 @@ public class GmarksProvider extends ContentProvider {
 
 		        try { // lazy for now, only looking @ first row...
 		        	if ( ! c.moveToFirst() ) return null;
-		        	Bookmark b = new Bookmark(c.getString(0),c.getString(1),url,null,null,-1,-1);
-		        	b.set_id(c.getLong(2));
+		        	Bookmark b = new Bookmark(c.getString(0),c.getString(1),c.getString(2),url,null,null,-1,-1);
+		        	b.set_id(c.getLong(3));
 		        	return b;
 		        }
 		        finally { c.close(); }
@@ -351,47 +369,105 @@ public class GmarksProvider extends ContentProvider {
 	    }
 	    
 	    
-	    public long insert( Bookmark b, SQLiteDatabase db ) {
+	    public Bookmark insert( Bookmark b, SQLiteDatabase db ) throws DBException {
 	    	boolean closeDB = false;
 	    	if ( db == null ) {
 	    		db = getWritableDatabase();
 	    		closeDB = true;
+	    		db.beginTransaction();
 	    	}
 	        try {
 	        	ContentValues vals = new ContentValues();
 	        	vals.put(Bookmark.Columns.GOOGLEID, b.getGoogleId());
+	        	vals.put(Bookmark.Columns.THREAD_ID, b.getThreadId());
 	        	vals.put(Bookmark.Columns.TITLE, b.getTitle());
 	        	vals.put(Bookmark.Columns.URL, b.getUrl());
 	        	vals.put(Bookmark.Columns.DESCRIPTION, b.getDescription());
 	        	vals.put(Bookmark.Columns.HOST, b.getHost());
 	        	vals.put(Bookmark.Columns.CREATED_DATE, b.getCreatedDate());
 	        	vals.put(Bookmark.Columns.MODIFIED_DATE, b.getModifiedDate());
-	        	return db.insertWithOnConflict( BOOKMARKS_TABLE_NAME, "", vals, 
+
+	        	long rowID = db.insertWithOnConflict( BOOKMARKS_TABLE_NAME, "", vals, 
 	        			SQLiteDatabase.CONFLICT_IGNORE );
+	        	if ( rowID < 0 ) throw new DBException( "Insert conflict: " + rowID );
+	        	b.set_id(rowID);
+
+	        	// TODO add labels
+	        	
+	        	if ( closeDB ) {
+	        		Log.d(TAG, "COmmitting changes: " + b.getTitle() );
+	        		db.setTransactionSuccessful();
+	        	}
+
+	        	return b;
 	        }
-	        finally { if ( closeDB ) db.close(); }
+	        finally { 
+	        	if ( closeDB ) {
+	        		db.endTransaction();
+	        		db.close();
+	        	}
+	        }
 	    }
 
-	    public long update( Bookmark b, SQLiteDatabase db ) {
+	    public void update( Bookmark b, SQLiteDatabase db ) throws DBException {
+	    	boolean closeDB = false;
+	    	if ( db == null ) {
+	    		db = getWritableDatabase();
+	    		closeDB = true;
+	    		db.beginTransaction();
+	    	}
+	        try {
+	        	ContentValues vals = new ContentValues();
+	        	if ( b.getGoogleId() != null )
+	        		vals.put(Bookmark.Columns.GOOGLEID, b.getGoogleId());
+	        	if ( b.getThreadId() != null )
+	        		vals.put(Bookmark.Columns.THREAD_ID, b.getThreadId());
+	        	vals.put(Bookmark.Columns.TITLE, b.getTitle());
+	        	vals.put(Bookmark.Columns.URL, b.getUrl());
+	        	vals.put(Bookmark.Columns.DESCRIPTION, b.getDescription());
+	        	if ( b.getHost() != null ) 
+	        		vals.put(Bookmark.Columns.HOST, b.getHost());
+	        	if ( b.getCreatedDate() > 0 ) 
+	        		vals.put(Bookmark.Columns.CREATED_DATE, b.getCreatedDate());
+	        	if ( b.getModifiedDate() > 0 ) 
+	        		vals.put(Bookmark.Columns.MODIFIED_DATE, b.getModifiedDate());
+	        	
+	        	Log.v(TAG,"Updating bookmark ID: " + b.get_id() );
+	        	int result = db.updateWithOnConflict( BOOKMARKS_TABLE_NAME, vals,
+	        			Bookmark.Columns._ID + "=?", new String[] {""+b.get_id()},
+	        			SQLiteDatabase.CONFLICT_IGNORE );
+	        	
+	        	if ( result < 1 ) throw new DBException( "Update conflict: " + result );
+
+	        	// TODO update labels
+	        	if ( closeDB ) {
+	        		Log.d(TAG, "COmmitting changes: " + b.getTitle() );
+	        		db.setTransactionSuccessful();
+	        	}
+	        }
+	        finally {
+	        	if ( closeDB ) {
+	        		db.endTransaction();
+	        		db.close();
+	        	}
+	        }
+	    }
+	    
+	    /** Delete the bookmark with the given ID */
+	    public boolean deleteBookmark( long id, SQLiteDatabase db ) {
+	    	// TODO label count will be out of sync
 	    	boolean closeDB = false;
 	    	if ( db == null ) {
 	    		db = getWritableDatabase();
 	    		closeDB = true;
 	    	}
-	        try {
-	        	ContentValues vals = new ContentValues();
-	        	vals.put(Bookmark.Columns.GOOGLEID, b.getGoogleId());
-	        	vals.put(Bookmark.Columns.TITLE, b.getTitle());
-	        	vals.put(Bookmark.Columns.URL, b.getUrl());
-	        	vals.put(Bookmark.Columns.DESCRIPTION, b.getDescription());
-	        	vals.put(Bookmark.Columns.HOST, b.getHost());
-	        	vals.put(Bookmark.Columns.CREATED_DATE, b.getCreatedDate());
-	        	vals.put(Bookmark.Columns.MODIFIED_DATE, b.getModifiedDate());
-	        	return db.updateWithOnConflict( BOOKMARKS_TABLE_NAME, vals,
-	        			Bookmark.Columns._ID + "=?", new String[] {""+b.get_id()},
-	        			SQLiteDatabase.CONFLICT_IGNORE );
-	        }
-	        finally { if ( closeDB ) db.close(); }
+	    	try {
+	    		int result = db.delete( BOOKMARKS_TABLE_NAME, 
+	    				Bookmark.Columns._ID + "=?", new String[] { ""+id } );
+	    		return result == 1;
+	            // TODO delete item from text search!
+	    	}
+	    	finally { if ( closeDB ) db.close(); }
 	    }
 		
 	    public void persistCookies( List<Cookie> cookies ) {
