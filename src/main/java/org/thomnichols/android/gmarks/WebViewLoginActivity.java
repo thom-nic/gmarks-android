@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.http.cookie.Cookie;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.webkit.CookieSyncManager;
@@ -15,10 +16,12 @@ import android.widget.Toast;
 public class WebViewLoginActivity extends Activity {
 	static final String TAG = "GMARKS WEBVIEW LOGIN";
 	
-	static final String loginURL = "https://www.google.com/bookmarks/";
+	static final String loginURL = "https://www.google.com/accounts/ServiceLogin";
+	static final String targetURL = "https://www.google.com/bookmarks/";
 	WebView webView = null;
 	boolean loggedIn = false;
 	CookieSyncManager cookieSyncManager;
+	ProgressDialog waitDialog;
 //	CookieManager cookieManager;
 	
     @Override
@@ -32,7 +35,7 @@ public class WebViewLoginActivity extends Activity {
         this.webView = (WebView)findViewById(R.id.loginWebView);
         this.webView.setWebViewClient(this.webClient);
         this.webView.getSettings().setJavaScriptEnabled(true);
-        this.webView.loadUrl(loginURL);
+        this.webView.loadUrl(targetURL);
     }
     
     protected void onResume() {
@@ -55,6 +58,13 @@ public class WebViewLoginActivity extends Activity {
 //    		}
     		
     		if ( url.startsWith(loginURL) ) {
+    			if ( WebViewLoginActivity.this.waitDialog != null ) {
+    				waitDialog.dismiss(); // let the user log in.
+    				waitDialog = null;
+    			}
+    		}
+    		
+    		if ( url.startsWith(targetURL) ) {
     			// This prints out all of the cookies as one long string.  Big pain in my ass.
 //    			Log.d(TAG,"Cookie: " + cookieManager.getCookie("https://www.google.com") );
     			cookieSyncManager.stopSync(); // let it close the DB.
@@ -76,8 +86,10 @@ public class WebViewLoginActivity extends Activity {
     				new GmarksProvider.DatabaseHelper(WebViewLoginActivity.this)
     					.persistCookies( cookies );
     				BookmarksQueryService.getInstance().setAuthCookies( cookies );
+    				
 	    			Log.d(TAG,"Restored " + cookies.size() + " cookies");
 	    			Log.d(TAG,"Logged in!");
+	    			
 	    			Toast.makeText(WebViewLoginActivity.this, "Logged in!", Toast.LENGTH_LONG).show();
 	    			WebViewLoginActivity.this.finishActivity(RESULT_OK);
 	    			WebViewLoginActivity.this.finish();
@@ -86,16 +98,22 @@ public class WebViewLoginActivity extends Activity {
     		}
     		else if ( ! url.startsWith("https://www.google.com/") ) {
     			Log.w(TAG, "Somehow we got redirected to a different domain! " + url);
-    			view.loadUrl(loginURL);
+    			view.loadUrl(targetURL);
     		}
     	}
+    	
+    	public void onPageStarted(WebView view, String url, android.graphics.Bitmap favicon) {
+    		if ( WebViewLoginActivity.this.waitDialog != null ) return; 
+    		WebViewLoginActivity.this.waitDialog = ProgressDialog.show(
+    				WebViewLoginActivity.this, "", "please wait...", true );
+    	};
     	
     	public void onReceivedError(WebView view, int errorCode, 
     			String description, String failingUrl) {
     		Toast.makeText(WebViewLoginActivity.this, "Login failed: " + description, 
     				Toast.LENGTH_SHORT).show();
     		
-    		view.loadUrl(loginURL);
+    		view.loadUrl(targetURL);
     	}
     };
 
