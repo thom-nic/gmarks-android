@@ -156,9 +156,9 @@ public class GmarksProvider extends ContentProvider {
         if (values.containsKey(Bookmark.Columns.DESCRIPTION) == false) {
             values.put(Bookmark.Columns.DESCRIPTION, "");
         }
-
+        
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        long rowId = db.insert(BOOKMARKS_TABLE_NAME, Bookmark.Columns.DESCRIPTION, values);
+        long rowId = db.insert(BOOKMARKS_TABLE_NAME, "", values);
         if (rowId > 0) {
             Uri noteUri = ContentUris.withAppendedId(Bookmark.CONTENT_URI, rowId);
             getContext().getContentResolver().notifyChange(noteUri, null);
@@ -249,6 +249,7 @@ public class GmarksProvider extends ContentProvider {
         bookmarksProjectionMap.put(Bookmark.Columns.HOST, Bookmark.Columns.HOST);
         bookmarksProjectionMap.put(Bookmark.Columns.URL, Bookmark.Columns.URL);
         bookmarksProjectionMap.put(Bookmark.Columns.DESCRIPTION, Bookmark.Columns.DESCRIPTION);
+        bookmarksProjectionMap.put(Bookmark.Columns.LABELS, Bookmark.Columns.LABELS);
         bookmarksProjectionMap.put(Bookmark.Columns.CREATED_DATE, Bookmark.Columns.CREATED_DATE);
         bookmarksProjectionMap.put(Bookmark.Columns.MODIFIED_DATE, Bookmark.Columns.MODIFIED_DATE);
         
@@ -303,6 +304,7 @@ public class GmarksProvider extends ContentProvider {
 					+ "url varchar(200) not null,"
 					+ "host varchar(50) not null,"
 					+ "description varchar(150) not null default ''," 
+					+ "labels varchar(150) not null default '',"
 					+ "created long not null,"
 					+ "modified long not null )" );
 
@@ -386,6 +388,7 @@ public class GmarksProvider extends ContentProvider {
 	        	vals.put(Bookmark.Columns.HOST, b.getHost());
 	        	vals.put(Bookmark.Columns.CREATED_DATE, b.getCreatedDate());
 	        	vals.put(Bookmark.Columns.MODIFIED_DATE, b.getModifiedDate());
+	        	vals.put(Bookmark.Columns.LABELS, b.getAllLabels());
 
 	        	long rowID = db.insertWithOnConflict( BOOKMARKS_TABLE_NAME, "", vals, 
 	        			SQLiteDatabase.CONFLICT_IGNORE );
@@ -431,6 +434,7 @@ public class GmarksProvider extends ContentProvider {
 	        		vals.put(Bookmark.Columns.CREATED_DATE, b.getCreatedDate());
 	        	if ( b.getModifiedDate() > 0 ) 
 	        		vals.put(Bookmark.Columns.MODIFIED_DATE, b.getModifiedDate());
+	        	vals.put(Bookmark.Columns.LABELS, b.getAllLabels());
 	        	
 	        	Log.v(TAG,"Updating bookmark ID: " + b.get_id() );
 	        	int result = db.updateWithOnConflict( BOOKMARKS_TABLE_NAME, vals,

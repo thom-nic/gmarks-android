@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.net.Uri;
 import android.provider.BaseColumns;
+import android.text.TextUtils;
 
 public class Bookmark {
 
@@ -42,6 +43,16 @@ public class Bookmark {
 		this.createdDate = created;
 		this.modifiedDate = modified;
 		this.labels = new ArrayList<String>();
+	}
+	
+	public void parseLabels( String labelString ) {
+		String[] labels = labelString.split(",");
+		for ( String label : labels )
+			this.getLabels().add(label.trim());
+	}
+	
+	public String getAllLabels() {
+		return TextUtils.join( ", ", this.getLabels() );
 	}
 	
 	public String getGoogleId() { return this.googleId; }
@@ -102,5 +113,6 @@ public class Bookmark {
 		public static final String DESCRIPTION = "description";
 		public static final String CREATED_DATE = "created";
 		public static final String MODIFIED_DATE = "modified";
+		public static final String LABELS = "labels";
 	}
 }

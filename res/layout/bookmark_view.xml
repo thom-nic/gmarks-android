@@ -36,6 +36,15 @@
     android:minLines='2'
     android:layout_marginTop="2dip" />
     
+	<TextView android:text="Labels" 
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"/>
+	<EditText android:id="@+id/labels" 
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:singleLine="true"
+    android:layout_marginTop="2dip" />
+
 	<LinearLayout
 	    android:orientation="horizontal"
 	    android:layout_width="fill_parent"

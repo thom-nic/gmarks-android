@@ -70,8 +70,11 @@ public class BookmarksQueryService {
 	protected String TAG = "BOOKMARKS QUERY";
 	protected boolean authInitialized = false;
 	protected String xtParam = null;
+	protected String mainThreadId = null;
 	
 	private BookmarksQueryService( String userAgent ) {
+//		java.util.logging.Logger.getLogger("httpclient.wire.header").setLevel(java.util.logging.Level.FINEST);
+//		java.util.logging.Logger.getLogger("httpclient.wire.content").setLevel(java.util.logging.Level.FINEST);
 		ctx = new BasicHttpContext();
 		cookieStore = new BasicCookieStore();
 		ctx.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
@@ -186,8 +189,8 @@ public class BookmarksQueryService {
 		try {
 			JSONObject bookmarkObj = new JSONObject();
 			// TODO this is part of a bookmark but I've been ignoring it...
-//			bookmarkObj.put("threadId", "");
-			bookmarkObj.put( "elementId", b.getGoogleId());
+			bookmarkObj.put("threadId", this.mainThreadId);
+			bookmarkObj.put( "elementId", 0);
 			bookmarkObj.put( "title", b.getTitle() );
 			bookmarkObj.put( "url", b.getUrl() );
 			bookmarkObj.put( "snippet", b.getDescription() );
@@ -195,14 +198,14 @@ public class BookmarksQueryService {
 			for (String label : b.getLabels() ) labels.put(label);
 			bookmarkObj.put( "labels", labels );
 			
-			bookmarkObj.put( "authorId", 0 );
 			bookmarkObj.put( "timestamp", 0 );
 			bookmarkObj.put( "formattedTimestamp", 0 );
+			bookmarkObj.put( "authorId", 0 );
 			bookmarkObj.put( "signedUrl", "" );
 			bookmarkObj.put( "previewUrl", "" );
 			bookmarkObj.put( "threadComments", new JSONArray() );
-			// this is the same as threadId:
-			bookmarkObj.put( "parentId", "" );
+			// this is the same as threadId...  Do I need to know the value for this??
+			bookmarkObj.put( "parentId", this.mainThreadId );
 
 			JSONArray resultArray = new JSONArray();
 			resultArray.put(bookmarkObj);
@@ -336,7 +339,7 @@ public class BookmarksQueryService {
 		try { // always assume a single item is created or updated.
 			JSONObject respObj = parseJSON(resp);
 			if ( respObj.has("results") ) // create response:
-				respObj = respObj.getJSONArray("results").getJSONObject(0).getJSONObject("threadResult");
+				respObj = respObj.getJSONArray("results").getJSONObject(0).getJSONObject("threadresult");
 			else respObj = respObj.getJSONArray("threadResults").getJSONObject(0);
 			Bookmark b = new Bookmark( respObj.getString("elementId"),
 					respObj.getString("threadId"),
@@ -371,21 +374,32 @@ public class BookmarksQueryService {
 		HttpResponse resp = http.execute(get, this.ctx);
 		
 		// TODO auth check
-		int responseCode = resp.getStatusLine().getStatusCode(); 
+		final int responseCode = resp.getStatusLine().getStatusCode(); 
 		if (  responseCode != 200 ) 
 			throw new IOException( "Unexpected response code: " + responseCode );
 		
 		// TODO encoding
-		String respString = IOUtils.toString( resp.getEntity().getContent() );
-		String xtSearchString = ";SL.xt = '";
-		int xtStartIndex = respString.indexOf(xtSearchString);
-		if ( xtStartIndex < 0 ) throw new IOException("Could not find xtSearchString");
-		xtStartIndex += xtSearchString.length(); 
-		this.xtParam = respString.substring( xtStartIndex, 
-				respString.indexOf("'", xtStartIndex) );
-		Log.d(TAG, "XT context: " + respString.substring( xtStartIndex-10, 
-				respString.indexOf("'", xtStartIndex)+5 ) );
+		final String respString = IOUtils.toString( resp.getEntity().getContent() );
+		
+		final String xtSearchString = ";SL.xt = '";
+		int startIndex = respString.indexOf(xtSearchString);
+		if ( startIndex < 0 ) throw new IOException("Could not find xtSearchString");
+		startIndex += xtSearchString.length(); 
+		this.xtParam = respString.substring( startIndex, 
+				respString.indexOf("'", startIndex) );
+//		Log.d(TAG, "XT context: " + respString.substring( startIndex-10, 
+//				respString.indexOf("'", startIndex)+5 ) );
 		Log.d(TAG, "GOT XT PARAM: " + xtParam );
+		
+		// Get main thread ID:
+		final String mainThreadSearchString = "(a.threadID):\"";
+		startIndex = respString.indexOf(mainThreadSearchString);
+		if ( startIndex < 0 ) throw new IOException("Could not find xtSearchString");
+		startIndex += mainThreadSearchString.length(); 
+		this.mainThreadId = respString.substring( startIndex, 
+				respString.indexOf("\"", startIndex) );
+		Log.d(TAG, "GOT THREAD ID: " + xtParam );
+		
 		return this.xtParam;
 	}
 	

@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.thomnichols.android.gmarks.BookmarksQueryService.AllBookmarksIterator;
+import org.thomnichols.android.gmarks.GmarksProvider.DBException;
 import org.thomnichols.android.gmarks.GmarksProvider.DatabaseHelper;
 
 import android.content.ContentResolver;
@@ -13,8 +13,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.Browser;
 import android.provider.Browser.BookmarkColumns;
+import android.util.Log;
 
 public class BrowserSync {
+	private static final String TAG = "GMARKS BROWSER SYNC";
 	
 	Context ctx;
 	
@@ -74,13 +76,11 @@ public class BrowserSync {
 			finally { cursor.close(); }
 			
 			// update the local cache:
-			for (Bookmark b : inserts ) {
-				bookmarksDB.insert(b, db);
-			}
-			
-			for ( Bookmark b : updates ) {
-				bookmarksDB.update(b, db);
-			}
+			for (Bookmark b : inserts ) bookmarksDB.insert(b, db);			
+			for ( Bookmark b : updates ) bookmarksDB.update(b, db);
+		}
+		catch ( DBException ex ) {
+			Log.w(TAG,"Error syncing browser bookmarks", ex );
 		}
 		finally { 
 			db.close();

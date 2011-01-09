@@ -133,6 +133,7 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
         		vals.put(Bookmark.Columns.DESCRIPTION, b.getDescription());
         		vals.put(Bookmark.Columns.CREATED_DATE, b.getCreatedDate());
         		vals.put(Bookmark.Columns.MODIFIED_DATE, b.getModifiedDate());
+        		vals.put(Bookmark.Columns.LABELS, b.getAllLabels());
 
     			Long bookmarkRowID = null;
     			Cursor cursor = db.query( BOOKMARKS_TABLE_NAME, 

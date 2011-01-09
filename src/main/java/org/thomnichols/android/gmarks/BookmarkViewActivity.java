@@ -25,7 +25,8 @@ public class BookmarkViewActivity extends Activity implements OnClickListener {
 	        Bookmark.Columns.THREAD_ID, // 1
 	        Bookmark.Columns.TITLE, // 2
 	        Bookmark.Columns.URL, // 3
-	        Bookmark.Columns.DESCRIPTION  // 4
+	        Bookmark.Columns.DESCRIPTION,  // 4
+	        Bookmark.Columns.LABELS  // 4
 	};
     private static final int COLUMN_INDEX_ID = 0;
     private static final int COLUMN_INDEX_GOOGLEID = 1;
@@ -33,6 +34,7 @@ public class BookmarkViewActivity extends Activity implements OnClickListener {
     private static final int COLUMN_INDEX_TITLE = 3;
     private static final int COLUMN_INDEX_URL = 4;
     private static final int COLUMN_INDEX_DESCRIPTION = 5;
+    private static final int COLUMN_INDEX_LABELS = 6;
     
 	private Uri mUri;
 	private Cursor cursor;
@@ -42,6 +44,7 @@ public class BookmarkViewActivity extends Activity implements OnClickListener {
 	private EditText titleField;
 	private EditText urlField;
 	private EditText descriptionField;
+	private EditText labelsField;
 	
 	ProgressDialog waitDialog;
 	 
@@ -70,10 +73,12 @@ public class BookmarkViewActivity extends Activity implements OnClickListener {
         	startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(bookmarkURL)));
         	finish();
         }
-        else if (Intent.ACTION_EDIT.equals(action)) {
+        else if (Intent.ACTION_EDIT.equals(action) || 
+        		Intent.ACTION_PICK.equals(action) ) {
+        	this.cursor = managedQuery(mUri, PROJECTION, null, null, null);
+        	
             // Requested to edit: set that state, and the data being edited.
         	((Button)findViewById(R.id.saveBtn)).setText(R.string.btn_update);
-        	
         }
         else if (Intent.ACTION_INSERT.equals(action)) {
         	findViewById(R.id.deleteBtn).setVisibility(View.GONE);
@@ -88,9 +93,10 @@ public class BookmarkViewActivity extends Activity implements OnClickListener {
         this.titleField = (EditText) findViewById(R.id.title);
         this.urlField = (EditText) findViewById(R.id.url);
         this.descriptionField = (EditText) findViewById(R.id.description);
+        this.labelsField = (EditText) findViewById(R.id.labels);
         
         // Get the bookmark
-        this.cursor = managedQuery(mUri, PROJECTION, null, null, null);
+        Log.d(TAG, "Getting data for: " + mUri);        
         
 		((Button)findViewById(R.id.saveBtn)).setOnClickListener( this );
 		((Button)findViewById(R.id.deleteBtn)).setOnClickListener( this );
@@ -116,6 +122,8 @@ public class BookmarkViewActivity extends Activity implements OnClickListener {
             		cursor.getString(COLUMN_INDEX_DESCRIPTION),
             		0, 0 );
             b.set_id(cursor.getLong(COLUMN_INDEX_ID));
+            String labels = cursor.getString(COLUMN_INDEX_LABELS);
+            b.parseLabels(labels);
 
             // This is a little tricky: we may be resumed after previously being
             // paused/stopped.  We want to put the new text in the text view,
@@ -124,12 +132,12 @@ public class BookmarkViewActivity extends Activity implements OnClickListener {
             this.titleField.setTextKeepState( b.getTitle() );
             this.urlField.setTextKeepState( b.getUrl() );
             this.descriptionField.setTextKeepState( b.getDescription() );
+            this.labelsField.setTextKeepState( labels );
             
             this.bookmark = b;
         }
         else {
-            setTitle("Error");
-            this.titleField.setText("Cursor was null!");
+        	this.bookmark = new Bookmark();
         }
     }
         
@@ -146,8 +154,7 @@ public class BookmarkViewActivity extends Activity implements OnClickListener {
 				this.descriptionField.getText().toString(),
 				0, 0 );
 		newBookmark.set_id(this.bookmark.get_id());
-		
-		// TODO labels
+		newBookmark.parseLabels(this.labelsField.getText().toString());
 		
 		if ( v.getId() == R.id.saveBtn ) {
 			Log.d(TAG, "Saving bookmark ID: " + mUri + " ...");
@@ -158,6 +165,9 @@ public class BookmarkViewActivity extends Activity implements OnClickListener {
 			Log.d(TAG, "Deleting bookmark ID: " + mUri + " ...");
 			action = UpdateBookmarkTask.ACTION_DELETE;
 		}
+		
+		// TODO determine which labels were added or removed in order to 
+		// accurately update labels count
 		
         new UpdateBookmarkTask(action, newBookmark, this, true) {
     		@Override protected void onPostExecute(Integer resultCode) {
