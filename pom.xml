@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.thomnichols.gmarks</groupId>
 		<artifactId>gmarks-android</artifactId>
-		<version>0.1-SNAPSHOT</version>
+		<version>0.2</version>
     <packaging>apk</packaging>
 		<name>Google Bookmarks for Android</name>
 		<!-- See http://code.google.com/p/maven-android-plugin/wiki/GettingStarted 
@@ -140,7 +140,7 @@
                                     <keystore>signer.jks</keystore>
                                     <alias>org.thomnichols</alias>
                                     <storepass>${keystore_pass}</storepass>
-                                    <keypass>${key_pass}</keypass>
+                                    <!-- <keypass>${key_pass}</keypass>-->
                                 </configuration>
                             </execution>
                         </executions>
