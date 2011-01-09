@@ -250,7 +250,8 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 			Toast.makeText(this.ctx, "GMarks Sync complete", Toast.LENGTH_LONG).show();
 			if ( this.ctx instanceof ListActivity ) {
 				Log.d(TAG,"Refreshing listview...");
-				((CursorAdapter)((ListActivity)this.ctx).getListAdapter()).notifyDataSetChanged();
+				((CursorAdapter)((ListActivity)this.ctx).getListAdapter()).getCursor().requery();
+//				((CursorAdapter)((ListActivity)this.ctx).getListAdapter()).notifyDataSetChanged();
 			}
 			// update shared 'last sync' state
 			this.syncPrefs.edit().putLong(PREF_LAST_SYNC, this.thisSyncTime).commit();
