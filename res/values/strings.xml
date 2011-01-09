@@ -8,6 +8,7 @@
     <string name="edit_bookmark">Edit Bookmark</string>
     <string name="settings">GMarks Settings</string>
     <string name="search_hint">Search Google Bookmarks</string>
+    <string name="coming_soon">Coming soon!</string>
     
     <string name="btn_save">Save</string>
     <string name="btn_update">Update</string>
