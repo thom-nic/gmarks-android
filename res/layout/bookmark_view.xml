@@ -48,8 +48,8 @@
 	<LinearLayout
 	    android:orientation="horizontal"
 	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:gravity="bottom">
+	    android:layout_height="fill_parent"
+	    android:gravity="bottom|center_horizontal">
 	 	<Button android:id="@+id/saveBtn"
 			android:text="@string/btn_save" 
 			style="@style/TestStyle.Btn"/>
