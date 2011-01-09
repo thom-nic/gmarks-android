@@ -1,7 +1,7 @@
 package org.thomnichols.android.gmarks;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import android.net.Uri;
 import android.provider.BaseColumns;
@@ -28,7 +28,7 @@ public class Bookmark {
 	private long modifiedDate;
 	private Long _id = null;
 	
-	private List<String> labels;
+	private Set<String> labels;
 	
 	public Bookmark() {}
 	
@@ -42,7 +42,7 @@ public class Bookmark {
 		this.description = description;
 		this.createdDate = created;
 		this.modifiedDate = modified;
-		this.labels = new ArrayList<String>();
+		this.labels = new HashSet<String>();
 	}
 	
 	public void parseLabels( String labelString ) {
@@ -100,9 +100,9 @@ public class Bookmark {
 		return modifiedDate;
 	}
 	
-	public void setLabels(List<String> l) { this.labels = l; }
+	public void setLabels(Set<String> l) { this.labels = l; }
 
-	public List<String> getLabels() {
+	public Set<String> getLabels() {
 		return labels;
 	}
 
