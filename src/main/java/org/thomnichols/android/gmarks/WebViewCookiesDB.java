@@ -50,6 +50,10 @@ public class WebViewCookiesDB extends SQLiteOpenHelper {
 	
 	List<Cookie> getCookies() {
 		SQLiteDatabase db = this.getReadableDatabase();
+		while ( db.isDbLockedByOtherThreads() ) {
+			Log.w(TAG, "Waiting for other thread to flush DB");
+			try { Thread.sleep(500); } catch ( InterruptedException ex ) {} 
+		}
 		
 		try {
 			List<Cookie> cookies = new ArrayList<Cookie>();

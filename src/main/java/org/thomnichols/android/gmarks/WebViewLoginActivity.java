@@ -40,12 +40,12 @@ public class WebViewLoginActivity extends Activity {
     
     protected void onResume() {
     	super.onResume();
-    	cookieSyncManager.startSync();
+//    	cookieSyncManager.startSync();
     };
     
     protected void onPause() {
     	super.onPause();
-    	cookieSyncManager.stopSync();
+//    	cookieSyncManager.stopSync();
     };
     
     WebViewClient webClient = new WebViewClient() {
@@ -67,7 +67,7 @@ public class WebViewLoginActivity extends Activity {
     		if ( url.startsWith(targetURL) ) {
     			// This prints out all of the cookies as one long string.  Big pain in my ass.
 //    			Log.d(TAG,"Cookie: " + cookieManager.getCookie("https://www.google.com") );
-    			cookieSyncManager.stopSync(); // let it close the DB.
+//    			cookieSyncManager.stopSync(); // let it close the DB.
     			try { Thread.sleep(1000); } catch ( InterruptedException ex ) {}
     			WebViewCookiesDB cookieDB = new WebViewCookiesDB(WebViewLoginActivity.this);
     			try {
