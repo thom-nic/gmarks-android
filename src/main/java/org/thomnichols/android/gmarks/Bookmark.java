@@ -47,8 +47,11 @@ public class Bookmark {
 	
 	public void parseLabels( String labelString ) {
 		String[] labels = labelString.split(",");
-		for ( String label : labels )
+		for ( String label : labels ) {
+			label = label.trim();
+			if ( label.length() < 1 ) continue; 
 			this.getLabels().add(label.trim());
+		}
 	}
 	
 	public String getAllLabels() {
