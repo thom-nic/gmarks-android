@@ -1,6 +1,7 @@
 package org.thomnichols.android.gmarks;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +19,7 @@ import android.content.UriMatcher;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.SQLException;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
@@ -61,6 +63,9 @@ public class GmarksProvider extends ContentProvider {
     		String[] selectionArgs, String sortOrder) {
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 
+        String groupBy = null;
+        String orderBy = null;
+//        String limit = null;
         switch (sUriMatcher.match(uri)) {
         case BOOKMARKS_URI:
             qb.setTables(BOOKMARKS_TABLE_NAME);
@@ -92,7 +97,8 @@ public class GmarksProvider extends ContentProvider {
             break;
 
         case LABELS_URI:
-            qb.setTables(LABELS_TABLE_NAME);
+            qb.setTables("labels join bookmark_labels on labels._id = bookmark_labels.label_id" );
+            groupBy = "label";
             qb.setProjectionMap(labelsProjectionMap);
             break;
 
@@ -107,7 +113,6 @@ public class GmarksProvider extends ContentProvider {
         }
 
         // If no sort order is specified use the default
-        String orderBy;
         if (TextUtils.isEmpty(sortOrder)) {
             orderBy = Bookmark.Columns.DEFAULT_SORT_ORDER;
         } else {
@@ -116,7 +121,7 @@ public class GmarksProvider extends ContentProvider {
 
         // Get the database and run the query
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor c = qb.query(db, projection, selection, selectionArgs, null, null, orderBy);
+        Cursor c = qb.query(db, projection, selection, selectionArgs, groupBy, null, orderBy);
 
         // Tell the cursor what uri to watch, so it knows when its source data changes
         c.setNotificationUri(getContext().getContentResolver(), uri);
@@ -256,7 +261,8 @@ public class GmarksProvider extends ContentProvider {
         labelsProjectionMap = new HashMap<String, String>();
         labelsProjectionMap.put(Label.Columns._ID, Label.Columns._ID);
         labelsProjectionMap.put(Label.Columns.TITLE, Label.Columns.TITLE);
-        labelsProjectionMap.put(Label.Columns.COUNT, Label.Columns.COUNT);
+        labelsProjectionMap.put("_count", "count(label_id)");
+//        labelsProjectionMap.put(Label.Columns.COUNT, Label.Columns.COUNT);
         
         // Support for Live Folders.
         sLiveFolderProjectionMap = new HashMap<String, String>();
@@ -395,7 +401,27 @@ public class GmarksProvider extends ContentProvider {
 	        	if ( rowID < 0 ) throw new DBException( "Insert conflict: " + rowID );
 	        	b.set_id(rowID);
 
-	        	// TODO add labels
+	        	this.updateLabels(db, b, null);
+	        	
+	        	// update FTS table
+        		vals.clear();
+        		vals.put("docid", b.get_id());
+        		vals.put(Bookmark.Columns.TITLE+"_fts", b.getTitle());
+        		vals.put(Bookmark.Columns.HOST+"_fts", b.getHost());
+        		vals.put(Bookmark.Columns.DESCRIPTION+"_fts", b.getDescription());
+        		vals.put("labels_fts", b.getAllLabels());
+        		try {
+    				rowID = db.insertWithOnConflict(BOOKMARKS_TABLE_NAME+"_FTS", "",
+        				vals, SQLiteDatabase.CONFLICT_IGNORE );
+    				if ( rowID < 0 )
+    					Log.w(TAG, "Row result error during FTS insert: "+ rowID);
+        		}
+        		catch ( SQLiteConstraintException ex ) {
+        			// this keeps throwing an exception even though I am using 
+        			// a conflict strategy!??!!!
+        			Log.w(TAG, "FTS Update Error for ID: " + b.get_id(), ex);
+        		}
+
 	        	
 	        	if ( closeDB ) {
 	        		Log.d(TAG, "COmmitting changes: " + b.getTitle() );
@@ -443,7 +469,29 @@ public class GmarksProvider extends ContentProvider {
 	        	
 	        	if ( result < 1 ) throw new DBException( "Update conflict: " + result );
 
-	        	// TODO update labels
+	        	// TODO handle removed bookmarks
+	        	this.updateLabels(db, b, null);
+
+	        	// update FTS table
+        		vals.clear();
+        		vals.put(Bookmark.Columns.TITLE+"_fts", b.getTitle());
+        		vals.put(Bookmark.Columns.HOST+"_fts", b.getHost());
+        		vals.put(Bookmark.Columns.DESCRIPTION+"_fts", b.getDescription());
+        		vals.put("labels_fts", b.getAllLabels());
+        		try {
+    				long rowID = db.updateWithOnConflict(BOOKMARKS_TABLE_NAME+"_FTS", vals,
+    						"docid=?", new String[] { ""+b.get_id() },
+    						SQLiteDatabase.CONFLICT_IGNORE );
+    				if ( rowID < 0 )
+    					Log.w(TAG, "Row result error during FTS update: "+ rowID);
+        		}
+        		catch ( SQLiteConstraintException ex ) {
+        			// this keeps throwing an exception even though I am using 
+        			// a conflict strategy!??!!!
+        			Log.w(TAG, "FTS Update Error for ID: " + b.get_id(), ex);
+        		}
+
+	        	
 	        	if ( closeDB ) {
 	        		Log.d(TAG, "COmmitting changes: " + b.getTitle() );
 	        		db.setTransactionSuccessful();
@@ -457,19 +505,92 @@ public class GmarksProvider extends ContentProvider {
 	        }
 	    }
 	    
+	    protected void updateLabels( SQLiteDatabase db, Bookmark b, Collection<String> removedBookmarks ) {
+        	// add label relationships
+        	if ( b.getLabels().size() < 1 ) { // hack to create relation to "^none" label:
+        		b.getLabels().add("^none");
+        	}
+        	ContentValues vals = new ContentValues();
+        	for (String label : b.getLabels() ) {
+        		Cursor c = db.query(LABELS_TABLE_NAME, new String[] {"_id", "_count"}, 
+        				Label.Columns.TITLE + "=?", new String[] {label.toLowerCase()}, 
+        				null, null, null);
+        		
+        		long labelID;
+        		try {
+//	        		int labelCount;
+	        		if ( ! c.moveToFirst() ) { // insert a new label
+	        			vals.clear();
+	        			vals.put(Label.Columns.TITLE, label);
+//	        			vals.put(Label.Columns.COUNT, 1);
+	        			labelID = db.insertWithOnConflict(LABELS_TABLE_NAME, "", vals, 
+	        					SQLiteDatabase.CONFLICT_IGNORE);
+//	        			labelCount = 1;
+	        		}
+	        		else { // get label ID
+	        			labelID = c.getLong(0);
+//	        			labelCount = c.getInt(1);
+	        		}
+        		} finally { c.close(); }
+        		
+        		if ( labelID < 0 ) {
+        			Log.w(TAG, "Couldn't get ROW ID for label " + label);
+        		}
+        		else { // insert label relation; ignore if one already exists.
+        			vals.clear();
+        			vals.put("label_id", labelID);
+        			vals.put("bookmark_id", b.get_id());
+        			long rowID = db.insertWithOnConflict(BOOKMARK_LABELS_TABLE_NAME, 
+        					"", vals, SQLiteDatabase.CONFLICT_IGNORE);
+        			
+/*	        			if ( rowID > 0 ) { // increment count for that label ID
+        				vals.clear();
+        				vals.put("_count", labelCount+1);
+        				int result = db.updateWithOnConflict(LABELS_TABLE_NAME, vals, 
+        						Label.Columns._ID + "=?", 
+        						new String[] {""+labelID}, 
+        						SQLiteDatabase.CONFLICT_IGNORE);
+        				
+        				if ( result != 1 ) {
+        					Log.w(TAG, "Couldn't update label count for label ID: " + labelID);
+        				}
+        				else Log.d(TAG, "Updated count for label ID: " + labelID);
+        			}
+*/	        		}
+        	}
+        	// remove "^none" hack label if it's there.
+        	b.getLabels().remove("^none");
+	    }
+	    
 	    /** Delete the bookmark with the given ID */
-	    public boolean deleteBookmark( long id, SQLiteDatabase db ) {
+	    public boolean deleteBookmark( long id, SQLiteDatabase db ) throws DBException {
 	    	// TODO label count will be out of sync
 	    	boolean closeDB = false;
 	    	if ( db == null ) {
 	    		db = getWritableDatabase();
 	    		closeDB = true;
+	    		db.beginTransaction();
 	    	}
 	    	try {
 	    		int result = db.delete( BOOKMARKS_TABLE_NAME, 
 	    				Bookmark.Columns._ID + "=?", new String[] { ""+id } );
-	    		return result == 1;
-	            // TODO delete item from text search!
+	    		
+	    		if ( result != 1 )
+	    			throw new DBException("Return result " + result 
+	    					+ " while deleting bookmark ID: " + id );
+
+	    		// Delete FTS row
+				long count = db.delete(BOOKMARKS_TABLE_NAME+"_FTS", 
+						"docid=?", new String[] { ""+id } );
+				if ( count != 1 )
+					Log.w(TAG, "Row result error during FTS delete: "+ count);
+	    		
+	        	if ( closeDB ) {
+	        		Log.d(TAG, "COmmitting delete for bookmark ID: " + id );
+	        		db.setTransactionSuccessful();
+	        	}
+	    		
+	    		return true;
 	    	}
 	    	finally { if ( closeDB ) db.close(); }
 	    }

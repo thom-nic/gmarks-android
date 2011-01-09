@@ -63,7 +63,7 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
         // Used to map labels from the database to views
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(
         		this, R.layout.labels_list_item, cursor,
-                new String[] { Label.Columns.TITLE, Label.Columns.COUNT }, 
+                new String[] { Label.Columns.TITLE, "count(label_id)" }, 
                 new int[] { R.id.title, R.id.count });
         setListAdapter(adapter);
         
