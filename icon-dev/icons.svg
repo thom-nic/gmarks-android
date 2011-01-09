@@ -292,6 +292,106 @@
        y1="184.04535"
        x2="276.23761"
        y2="37.510712" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3911"
+       id="linearGradient4094"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-183.53088,9.7894295)"
+       x1="428.09006"
+       y1="244.93643"
+       x2="571.28711"
+       y2="47.41169" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3901"
+       id="linearGradient4096"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(52.112676,-11.022452)"
+       x1="276.23761"
+       y1="184.04535"
+       x2="276.23761"
+       y2="37.510712" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3911"
+       id="linearGradient4130"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-183.53088,9.7894295)"
+       x1="428.09006"
+       y1="244.93643"
+       x2="571.28711"
+       y2="47.41169" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3901"
+       id="linearGradient4132"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(52.112676,-11.022452)"
+       x1="276.23761"
+       y1="184.04535"
+       x2="276.23761"
+       y2="37.510712" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3911"
+       id="linearGradient4147"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-183.53088,9.7894295)"
+       x1="428.09006"
+       y1="244.93643"
+       x2="571.28711"
+       y2="47.41169" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3901"
+       id="linearGradient4149"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(52.112676,-11.022452)"
+       x1="276.23761"
+       y1="184.04535"
+       x2="276.23761"
+       y2="37.510712" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3911"
+       id="linearGradient4163"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-183.53088,9.7894295)"
+       x1="428.09006"
+       y1="244.93643"
+       x2="571.28711"
+       y2="47.41169" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3901"
+       id="linearGradient4165"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(52.112676,-11.022452)"
+       x1="276.23761"
+       y1="184.04535"
+       x2="276.23761"
+       y2="37.510712" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3911"
+       id="linearGradient4187"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-183.53088,9.7894295)"
+       x1="428.09006"
+       y1="244.93643"
+       x2="571.28711"
+       y2="47.41169" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3901"
+       id="linearGradient4190"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(52.112676,-11.022452)"
+       x1="276.23761"
+       y1="184.04535"
+       x2="276.23761"
+       y2="37.510712" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -300,9 +400,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.54"
-     inkscape:cx="383.43976"
-     inkscape:cy="596.88365"
+     inkscape:zoom="0.62"
+     inkscape:cx="163.05972"
+     inkscape:cy="639.33312"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -796,5 +896,70 @@
          d="m 130.27379,533.91253 0.0787,-2.4252 -1.37818,-1.2604 -16.82035,-0.11862 2.34014,3.04623 14.42542,0.18936 1.35427,0.56863 z"
          style="opacity:0.90573772;fill:#d91521;fill-opacity:1;stroke:#de1a2b;stroke-width:0;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
     </g>
+    <g
+       id="g4201"
+       inkscape:export-filename="/Users/tnichols/dev/gmarks-android/icon-dev/promo-graphic-180x120.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         y="684.49371"
+         x="-403.82886"
+         height="120"
+         width="180"
+         id="rect4098"
+         style="opacity:1;fill:#ffffff;stroke:none;fill-opacity:1" />
+      <g
+         transform="matrix(0.37355313,0,0,0.37355313,-490.30258,679.21353)"
+         id="g4076">
+        <path
+           style="fill:url(#linearGradient4187);fill-opacity:1;stroke:none;filter:url(#filter3935)"
+           d="m 253.10278,62.151612 1.9802,261.386158 70.29703,-66.33665 60.39604,59.40595 1.9802,-259.405953 -134.65347,4.950495 z"
+           id="path4078"
+           sodipodi:nodetypes="cccccc" />
+        <path
+           sodipodi:nodetypes="cccccc"
+           id="path4080"
+           d="m 262.01367,47.300128 0.9901,258.415852 64.35644,-67.32674 66.33663,66.33664 1.9802,-259.405951 -133.66337,1.980198 z"
+           style="fill:#fa1f1f;fill-opacity:1;stroke:#70000a;stroke-width:7.69999981;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+        <path
+           style="fill:url(#linearGradient4190);fill-opacity:1;stroke:#de1a2b;stroke-width:3.70000005;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           d="m 271.91466,55.043003 -0.15402,226.890797 56.32565,-57.00034 57.84378,61.0398 -1.14412,-232.752341 -112.87129,1.822084 z"
+           id="path4082"
+           sodipodi:nodetypes="cccccc" />
+        <text
+           sodipodi:linespacing="100%"
+           id="text4084"
+           y="179.27187"
+           x="279.70111"
+           style="font-size:121.51649475px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#f6f6f6;fill-opacity:1;stroke:none;filter:url(#filter3959);font-family:Georgia;-inkscape-font-specification:Georgia"
+           xml:space="preserve"><tspan
+             y="179.27187"
+             x="279.70111"
+             id="tspan4086"
+             sodipodi:role="line">G</tspan></text>
+      </g>
+      <text
+         xml:space="preserve"
+         style="font-size:37.35531235px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Georgia;-inkscape-font-specification:Georgia"
+         x="-336.57852"
+         y="743.85419"
+         id="text4088"
+         sodipodi:linespacing="100%"><tspan
+           sodipodi:role="line"
+           id="tspan4090"
+           x="-336.57852"
+           y="743.85419">Marks</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans"
+       x="-427.78845"
+       y="652.65692"
+       id="text4113"
+       sodipodi:linespacing="100%"><tspan
+         sodipodi:role="line"
+         id="tspan4117"
+         x="-427.78845"
+         y="652.65692">180x120 promo market graphic</tspan></text>
   </g>
 </svg>
