@@ -147,8 +147,12 @@ public class BookmarksListActivity extends ListActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
         case R.id.menu_add:
+        	Intent intent = new Intent(Intent.ACTION_INSERT);
+        	intent.setType(Bookmark.CONTENT_ITEM_TYPE);
+        	String label = getIntent().getData().getQueryParameter("label");
+        	if ( label != null ) intent.putExtra("label", label);
             // Launch activity to insert a new item
-            startActivity(new Intent(Intent.ACTION_INSERT, getIntent().getData()));
+            startActivity(intent);
             return true;
         case R.id.menu_sync:
         	Log.d(TAG, "Starting sync...");
