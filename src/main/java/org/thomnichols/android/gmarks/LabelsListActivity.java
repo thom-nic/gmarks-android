@@ -128,6 +128,9 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+        case R.id.menu_add:
+        	startActivity(new Intent(Intent.ACTION_INSERT).setType(Bookmark.CONTENT_ITEM_TYPE));
+        	break;
         case R.id.menu_sync:
         	Log.d(TAG, "Starting sync...");
         	Toast.makeText(this, "Starting sync...", Toast.LENGTH_SHORT).show();

@@ -1,8 +1,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-	<item android:titleCondensed="Add" 
-		android:title="Add Bookmark"
-		android:id="@+id/addItem" />
+	<item android:title="Add"
+		android:id="@+id/menu_add" 
+		android:icon="@android:drawable/ic_menu_add" />
 	<item android:titleCondensed="Sync" 
 		android:title="Synchronize"
-		android:id="@+id/sync" />
+		android:id="@+id/menu_sync" 
+		android:icon='@drawable/ic_menu_sync' />
+		<!-- android:icon='@android:drawable/ic_menu_upload' />  -->
+	<item android:titleCondensed="Search" 
+		android:title="Search Bookmarks"
+		android:id="@+id/menu_search" 
+		android:visible='false'
+		android:icon='@android:drawable/ic_menu_search' />
 </menu>

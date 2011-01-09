@@ -5,10 +5,15 @@
 	<item android:titleCondensed="Sync" 
 		android:title="Synchronize"
 		android:id="@+id/menu_sync" 
-		android:icon='@android:drawable/ic_menu_upload' />
+		android:icon='@drawable/ic_menu_sync' />
 	<item android:title="Settings"
 		android:id="@+id/menu_settings" 
 		android:icon="@android:drawable/ic_menu_preferences" />
+	<item android:titleCondensed="Search" 
+		android:title="Search Bookmarks"
+		android:id="@+id/menu_search" 
+		android:visible='false'
+		android:icon='@android:drawable/ic_menu_search' />
 	<item android:title="Log In"
 		android:id="@+id/menu_login" 
 		android:visible='false'/>

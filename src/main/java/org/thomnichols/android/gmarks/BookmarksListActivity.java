@@ -146,11 +146,11 @@ public class BookmarksListActivity extends ListActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-        case R.id.addItem:
+        case R.id.menu_add:
             // Launch activity to insert a new item
             startActivity(new Intent(Intent.ACTION_INSERT, getIntent().getData()));
             return true;
-        case R.id.sync:
+        case R.id.menu_sync:
         	Log.d(TAG, "Starting sync...");
         	Toast.makeText(this, "Starting sync...", Toast.LENGTH_SHORT);
         	new RemoteSyncTask(this).execute();
