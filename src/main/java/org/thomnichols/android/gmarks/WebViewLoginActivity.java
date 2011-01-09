@@ -3,12 +3,10 @@ package org.thomnichols.android.gmarks;
 import java.util.List;
 
 import org.apache.http.cookie.Cookie;
-import org.thomnichols.android.gmarks.R;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
-import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
