@@ -4,12 +4,14 @@
 
  See `INSTALL.txt` for instructions to build the app from source.
 
+ Binary downloads, documentation and issue tracker can be found at the [http://code.google.com/p/gmarks-android Project home page].
+
 
 ## PRIVACY POLICY
 
  This application contains no advertisements or user tracking, and as such, it *only* sends requests to the `https://www.google.com` domain.  No requests are made to to any third-party site from this application.
  
- Your login information is sent straight to Google, it is not stored by this app.  
+ Your login information is only input into the Google.com login page, and it is not accessed or stored by this app.  
 
 
 ## LICENSE
