@@ -463,6 +463,14 @@ public class BookmarksQueryService {
 		return new AllBookmarksIterator();
 	}
 	
+	static class IteratorException extends RuntimeException {
+		private static final long serialVersionUID = -5283100944881775242L;
+		public IteratorException() { super(); }
+		public IteratorException(String arg0, Throwable arg1) { super(arg0, arg1); }
+		public IteratorException(String arg0) { super(arg0); }
+		public IteratorException(Throwable arg0) { super(arg0); }
+	}
+	
 	class AllBookmarksIterator implements Iterator<Bookmark>, Iterable<Bookmark> {
 		
 		JSONObject currentBatch = null;
@@ -501,7 +509,7 @@ public class BookmarksQueryService {
 			return false;
 		}
 		
-		private boolean queryNext() {
+		private boolean queryNext() throws IteratorException {
 			try {
 				this.currentBatch = BookmarksQueryService.this.queryJSON(
 						uriBase + currentQueryIndex + this.filter );
@@ -521,16 +529,18 @@ public class BookmarksQueryService {
 				return this.currentSection.length() > 0;
 			}
 			catch ( IOException ex ) {
-				Log.w(TAG,"IO error in query all bookmarks", ex ); 
-				return false;
+				Log.w(TAG,"IO error in query all bookmarks", ex );
+				throw new IteratorException(ex);
+//				return false;
 			}
 			catch ( JSONException ex ) {
 				Log.w(TAG,"JSON error in query all bookmarks", ex ); 
-				return false;
+				throw new IteratorException(ex);
+//				return false;
 			}
 		}
 		
-		public boolean hasNext() {
+		public boolean hasNext() throws IteratorException {
 			return this.currentSection != null && this.currentItemIndex < this.currentSection.length()
 				|| getNextSection() || queryNext();
 		}
