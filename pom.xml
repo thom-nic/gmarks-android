@@ -157,7 +157,7 @@
                         <executions>
 											  <execution>
 												    <id>alignApk</id>
-												    <phase>install</phase>
+												    <phase>package</phase>
 												    <goals>
 												      <goal>zipalign</goal>
 												    </goals>
