@@ -104,6 +104,7 @@ public class UpdateBookmarkTask extends AsyncTask<Void,Void,Integer> {
 		}
 		else if ( resultCode == RESULT_NOT_FOUND ) {
 			// if deleting, that's OK, we're just deleting a stale local bookmark.
+			Log.w(TAG,"Remote bookmark not found.");
 			if ( this.action != ACTION_DELETE ) {
 				Toast.makeText(this.ctx, "Error: Bookmark not found", Toast.LENGTH_LONG).show();				
 				return;

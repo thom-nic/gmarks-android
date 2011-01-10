@@ -264,7 +264,7 @@ public class BookmarksQueryService {
 		return createOrUpdate( updateURL, requestObj );
 	}
 
-	public void delete(String googleId) throws AuthException, IOException {
+	public void delete(String googleId) throws AuthException, NotFoundException, IOException {
 		Uri requestURI = Uri.parse("https://www.google.com/bookmarks/api/thread").buildUpon()
 			.appendQueryParameter("xt", getXtParam() )
 			.appendQueryParameter("op", "DeleteItems").build();
@@ -312,7 +312,7 @@ public class BookmarksQueryService {
 			int deletedCount = respObj.getInt("numDeletedBookmarks");
 			
 			if ( deletedCount < 1 )
-				throw new IOException( "Bookmark could not be found" );
+				throw new NotFoundException( "Bookmark could not be found; " + googleId );
 			if ( deletedCount > 1 )
 				throw new IOException("Expected 1 deleted bookmark but got " + deletedCount );
 		} 

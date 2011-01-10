@@ -592,7 +592,12 @@ public class GmarksProvider extends ContentProvider {
 	    		
 	    		return true;
 	    	}
-	    	finally { if ( closeDB ) db.close(); }
+	    	finally { 
+	    		if ( closeDB ) {
+	    			db.endTransaction();
+	    			db.close();
+	    		}
+	    	}
 	    }
 		
 	    public void persistCookies( List<Cookie> cookies ) {
