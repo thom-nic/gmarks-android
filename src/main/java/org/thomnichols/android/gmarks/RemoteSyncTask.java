@@ -1,7 +1,6 @@
  package org.thomnichols.android.gmarks;
 
 import static org.thomnichols.android.gmarks.GmarksProvider.BOOKMARKS_TABLE_NAME;
-import static org.thomnichols.android.gmarks.GmarksProvider.BOOKMARK_LABELS_TABLE_NAME;
 import static org.thomnichols.android.gmarks.GmarksProvider.LABELS_TABLE_NAME;
 
 import java.util.HashMap;
@@ -9,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.thomnichols.android.gmarks.BookmarksQueryService.AuthException;
-import org.thomnichols.android.gmarks.R;
 
 import android.app.Activity;
 import android.app.ListActivity;
@@ -76,6 +74,7 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
     	SQLiteDatabase db = null;
     	try {
     		db = dbHelper.getWritableDatabase();
+    		db.beginTransaction();
     	}
     	catch ( SQLiteException ex ) {
     		Log.w(TAG, "Error opening database", ex);
@@ -83,7 +82,6 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
     	}
     	
 		try {
-    		db.beginTransaction();
     		ContentValues vals = new ContentValues();
 			
     		// sync label list
