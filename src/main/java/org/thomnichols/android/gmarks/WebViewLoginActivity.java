@@ -59,7 +59,9 @@ public class WebViewLoginActivity extends Activity {
     		
     		if ( url.startsWith(loginURL) ) {
     			if ( WebViewLoginActivity.this.waitDialog != null ) {
-    				waitDialog.dismiss(); // let the user log in.
+    				try {
+    					waitDialog.dismiss(); // let the user log in.
+    				} catch ( IllegalArgumentException ex ) {}
     				waitDialog = null;
     			}
     		}
