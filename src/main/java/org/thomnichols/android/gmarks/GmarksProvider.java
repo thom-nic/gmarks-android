@@ -1,7 +1,6 @@
 package org.thomnichols.android.gmarks;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -30,7 +29,7 @@ import android.util.Log;
 
 public class GmarksProvider extends ContentProvider {
 
-	static final String TAG = "BOOKMARKS PROVIDER";
+	static final String TAG = "GMARKS PROVIDER";
 	static String DB_NAME = "gmarks_sync.db";
 	static String COOKIES_TABLE_NAME = "auth_cookies";
 	static String BOOKMARKS_TABLE_NAME = "bookmarks";
@@ -322,7 +321,7 @@ public class GmarksProvider extends ContentProvider {
 
 			db.execSQL( "create table " + LABELS_TABLE_NAME + " ( "
 					+ "_id integer primary key,"
-					+ "label varchar(30) unique not null,"
+					+ "label varchar(30) unique not null collate nocase,"
 					+ "_count int not null default 0 )" );
 			
 			db.execSQL( "create table " + BOOKMARK_LABELS_TABLE_NAME + " ( "
@@ -339,7 +338,16 @@ public class GmarksProvider extends ContentProvider {
 		public void onUpgrade(SQLiteDatabase arg0, int arg1, int arg2) {
 			// TODO Nothing to do until we're upgrading from old db.
 		}
-
+		
+		@Override
+		public void onOpen(SQLiteDatabase db) {
+			super.onOpen(db);
+			if (!db.isReadOnly()) { 
+				// Enable foreign key constraints
+				// NOTE versions prior to Froyo don't support this.
+				db.execSQL("PRAGMA foreign_keys=ON;");
+			}
+		}
 		
 	    private static final String[] bookmarksIDColumns = new String[] {
 	    	Bookmark.Columns.GOOGLEID, 
@@ -401,7 +409,7 @@ public class GmarksProvider extends ContentProvider {
 	        	if ( rowID < 0 ) throw new DBException( "Insert conflict: " + rowID );
 	        	b.set_id(rowID);
 
-	        	this.updateLabels(db, b, null);
+	        	this.updateLabels(db, b); // labels
 	        	
 	        	// update FTS table
         		vals.clear();
@@ -469,8 +477,7 @@ public class GmarksProvider extends ContentProvider {
 	        	
 	        	if ( result < 1 ) throw new DBException( "Update conflict: " + result );
 
-	        	// TODO handle removed bookmarks
-	        	this.updateLabels(db, b, null);
+	        	this.updateLabels(db, b); // labels
 
 	        	// update FTS table
         		vals.clear();
@@ -505,11 +512,16 @@ public class GmarksProvider extends ContentProvider {
 	        }
 	    }
 	    
-	    protected void updateLabels( SQLiteDatabase db, Bookmark b, Collection<String> removedBookmarks ) {
+	    protected void updateLabels( SQLiteDatabase db, Bookmark b ) {
         	// add label relationships
         	if ( b.getLabels().size() < 1 ) { // hack to create relation to "^none" label:
         		b.getLabels().add("^none");
         	}
+        	
+        	// delete label relations & rebuild; easier than finding set difference
+        	db.delete(BOOKMARK_LABELS_TABLE_NAME, "bookmark_id=?", new String[]{b.get_id().toString()});
+
+        	// create label relations
         	ContentValues vals = new ContentValues();
         	for (String label : b.getLabels() ) {
         		Cursor c = db.query(LABELS_TABLE_NAME, new String[] {"_id", "_count"}, 
@@ -518,19 +530,13 @@ public class GmarksProvider extends ContentProvider {
         		
         		long labelID;
         		try {
-//	        		int labelCount;
 	        		if ( ! c.moveToFirst() ) { // insert a new label
 	        			vals.clear();
 	        			vals.put(Label.Columns.TITLE, label);
-//	        			vals.put(Label.Columns.COUNT, 1);
 	        			labelID = db.insertWithOnConflict(LABELS_TABLE_NAME, "", vals, 
 	        					SQLiteDatabase.CONFLICT_IGNORE);
-//	        			labelCount = 1;
 	        		}
-	        		else { // get label ID
-	        			labelID = c.getLong(0);
-//	        			labelCount = c.getInt(1);
-	        		}
+	        		else labelID = c.getLong(0); // get label ID
         		} finally { c.close(); }
         		
         		if ( labelID < 0 ) {
@@ -540,23 +546,13 @@ public class GmarksProvider extends ContentProvider {
         			vals.clear();
         			vals.put("label_id", labelID);
         			vals.put("bookmark_id", b.get_id());
-        			long rowID = db.insertWithOnConflict(BOOKMARK_LABELS_TABLE_NAME, 
+        			long result = db.insertWithOnConflict(BOOKMARK_LABELS_TABLE_NAME, 
         					"", vals, SQLiteDatabase.CONFLICT_IGNORE);
         			
-/*	        			if ( rowID > 0 ) { // increment count for that label ID
-        				vals.clear();
-        				vals.put("_count", labelCount+1);
-        				int result = db.updateWithOnConflict(LABELS_TABLE_NAME, vals, 
-        						Label.Columns._ID + "=?", 
-        						new String[] {""+labelID}, 
-        						SQLiteDatabase.CONFLICT_IGNORE);
-        				
-        				if ( result != 1 ) {
-        					Log.w(TAG, "Couldn't update label count for label ID: " + labelID);
-        				}
-        				else Log.d(TAG, "Updated count for label ID: " + labelID);
-        			}
-*/	        		}
+    				if ( result < 0 )
+    					Log.w(TAG, "Couldn't update label count for label ID: " + labelID);
+    				else Log.d(TAG, "Updated count for label ID: " + labelID);
+	        	}
         	}
         	// remove "^none" hack label if it's there.
         	b.getLabels().remove("^none");
@@ -578,6 +574,10 @@ public class GmarksProvider extends ContentProvider {
 	    		if ( result != 1 )
 	    			throw new DBException("Return result " + result 
 	    					+ " while deleting bookmark ID: " + id );
+	    		
+	    		// delete labels (SQLite in versions prior to Froyo don't
+	    		// support FK constraints
+	        	db.delete(BOOKMARK_LABELS_TABLE_NAME, "bookmark_id=?", new String[]{""+id});
 
 	    		// Delete FTS row
 				long count = db.delete(BOOKMARKS_TABLE_NAME+"_FTS", 

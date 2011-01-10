@@ -171,7 +171,9 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
     			finally { cursor.close(); }
 	        		
         		// add label relations for bookmark
-        		for ( String label : b.getLabels() ) {
+    			b.set_id(bookmarkRowID);
+    			dbHelper.updateLabels(db, b);
+/*        		for ( String label : b.getLabels() ) {
         			Long labelID = labelIDs.get( label );
         			if ( labelID == null ) {
         				Log.w(TAG, "No _id for label " + label );
@@ -193,6 +195,7 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 	        					null, vals, SQLiteDatabase.CONFLICT_IGNORE );
         			}
         		}
+*/
         		
         		// update full-text search:
         		vals.clear();
