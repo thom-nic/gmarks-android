@@ -23,6 +23,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.Log;
@@ -37,6 +38,7 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 	
 	static final int RESULT_SUCCESS = 0;
 	static final int RESULT_FAILURE_AUTH = 1;
+	static final int RESULT_FAILURE_DB = 2;
 	static final int RESULT_FAILURE_UNKNOWN = 500;
 	
 	NotificationManager notificationManager;
@@ -71,7 +73,14 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
     	if ( ! remoteSvc.authInitialized ) 
 			remoteSvc.setAuthCookies( dbHelper.restoreCookies() );
 
-		SQLiteDatabase db = dbHelper.getWritableDatabase();
+    	SQLiteDatabase db = null;
+    	try {
+    		db = dbHelper.getWritableDatabase();
+    	}
+    	catch ( SQLiteException ex ) {
+    		Log.w(TAG, "Error opening database", ex);
+    		return RESULT_FAILURE_DB;
+    	}
     	
 		try {
     		db.beginTransaction();
@@ -258,6 +267,9 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 			}
 			// update shared 'last sync' state
 			this.syncPrefs.edit().putLong(PREF_LAST_SYNC, this.thisSyncTime).commit();
+		}
+		else if ( result == RESULT_FAILURE_DB ) {
+			Toast.makeText(this.ctx, "Sync already in progress...", Toast.LENGTH_LONG).show();
 		}
 		else if ( result == RESULT_FAILURE_AUTH ) {
 			this.ctx.startActivityForResult(new Intent("org.thomnichols.gmarks.action.LOGIN"), 
