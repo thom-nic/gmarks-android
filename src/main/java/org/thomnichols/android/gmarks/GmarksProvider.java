@@ -551,7 +551,7 @@ public class GmarksProvider extends ContentProvider {
         			
     				if ( result < 0 )
     					Log.w(TAG, "Couldn't update label count for label ID: " + labelID);
-    				else Log.d(TAG, "Updated count for label ID: " + labelID);
+//    				else Log.d(TAG, "Updated count for label ID: " + labelID);
 	        	}
         	}
         	// remove "^none" hack label if it's there.
