@@ -1,19 +1,12 @@
 package org.thomnichols.android.gmarks;
 
-import java.awt.Desktop.Action;
-
-import org.thomnichols.android.gmarks.R;
-
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
-import android.util.AttributeSet;
 import android.util.Log;
 
 public class SettingsActivity extends PreferenceActivity implements Preference.OnPreferenceChangeListener {
