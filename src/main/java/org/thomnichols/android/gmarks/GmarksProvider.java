@@ -62,6 +62,7 @@ public class GmarksProvider extends ContentProvider {
     		String[] selectionArgs, String sortOrder) {
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 
+//        Log.d(TAG, "Managed query: " + uri);
         String groupBy = null;
         String orderBy = null;
 //        String limit = null;
@@ -104,6 +105,12 @@ public class GmarksProvider extends ContentProvider {
         case LIVE_FOLDER_BOOKMARKS_URI:
             qb.setTables(BOOKMARKS_TABLE_NAME);
             qb.setProjectionMap(sLiveFolderProjectionMap);
+            String labelId = uri.getQueryParameter("label_id");
+            if ( labelId != null ) {
+                qb.setTables("bookmarks join bookmark_labels on bookmarks._id = bookmark_labels.bookmark_id");
+                qb.appendWhere("bookmark_labels.label_id=?");
+                selectionArgs = (String[])ArrayUtils.addAll(selectionArgs, new String[]{labelId});
+            }
             sortOrder = "modified DESC"; // for some reason this gets set to 'name ASC'
             break;
 
@@ -265,10 +272,12 @@ public class GmarksProvider extends ContentProvider {
         
         // Support for Live Folders.
         sLiveFolderProjectionMap = new HashMap<String, String>();
-        sLiveFolderProjectionMap.put(LiveFolders._ID, Bookmark.Columns._ID + " AS " +
-                LiveFolders._ID);
-        sLiveFolderProjectionMap.put(LiveFolders.NAME, Bookmark.Columns.TITLE + " AS " +
-                LiveFolders.NAME);
+        sLiveFolderProjectionMap.put(LiveFolders._ID, 
+        		Bookmark.Columns._ID + " AS " + LiveFolders._ID);
+        sLiveFolderProjectionMap.put(LiveFolders.NAME, 
+        		Bookmark.Columns.TITLE + " AS " + LiveFolders.NAME);
+        sLiveFolderProjectionMap.put(LiveFolders.DESCRIPTION, 
+        		Bookmark.Columns.HOST + " AS " + LiveFolders.DESCRIPTION);
         // Add more columns here for more robust Live Folders.
     }
     
