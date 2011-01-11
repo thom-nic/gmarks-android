@@ -8,15 +8,16 @@ x "Please sync" empty list message
 x only sync most recent bookmarks, not whole list.
 x Add/Update/Delete bookmark support
 x Edit/ update Label support
+x list refresh after sync
+x Update label count after bookmark update
+x Webview login needs to run twice...
+x 'Choose a label' for live folder view
 
-* 'Choose a label' for live folder view
-* Update label count after bookmark update
-* list refresh after sync
-* Kill Webview after login
-* Webview login needs to run twice...
-* Favicon support
-* sync to label to browser
+* search from any activity
+* sync label to browser
 * List sub-headers
 * Sort by {date|alpha}
 * sync as a background service
 * 'GMark this' context menu item for http: URLs in other apps!
+* Favicon support
+* Kill Webview after login
