@@ -71,7 +71,7 @@
             </intent-filter>
         </activity>
         
-        <activity android:name=".LiveFolder" android:label="Gmarks Recent Items"
+        <activity android:name=".LiveFolder" android:label="@string/live_folder_activity"
             android:icon="@drawable/ic_launcher_folder">
             <intent-filter>
                 <action android:name="android.intent.action.CREATE_LIVE_FOLDER" />
@@ -79,13 +79,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".LoginActivity" android:label="@string/app_name">
-<!--             <intent-filter>
+<!--        <activity android:name=".LoginActivity" android:label="@string/app_name">
+             <intent-filter>
                 <action android:name="org.thomnichols.gmarks.action.LOGIN" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
- -->        </activity>
-        
+        </activity>
+ -->        
         <activity android:name=".WebViewLoginActivity" android:label="GMarks Sync Login">
             <intent-filter>
                 <action android:name="org.thomnichols.gmarks.action.LOGIN" />

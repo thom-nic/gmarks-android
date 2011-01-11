@@ -7,6 +7,8 @@
     <string name="choose_bookmark">Choose a Bookmark</string>
     <string name="edit_bookmark">Edit Bookmark</string>
     <string name="settings">GMarks Settings</string>
+    <string name="live_folder_activity">GMarks Label</string>
+    <string name="live_folder_title">Choose a Label</string>
     <string name="search_hint">Search Google Bookmarks</string>
     <string name="coming_soon">Coming soon!</string>
     
