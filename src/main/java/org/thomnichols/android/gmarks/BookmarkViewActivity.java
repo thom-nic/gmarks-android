@@ -57,9 +57,6 @@ public class BookmarkViewActivity extends Activity implements OnClickListener {
         mUri = intent.getData();
         final String action = intent.getAction();
         
-        // Set the layout for this activity.  You can find it in res/layout/note_editor.xml
-        setContentView(R.layout.bookmark_view);
-        
         if (Intent.ACTION_VIEW.equals(action)) {
         	// if viewing, immediately open the HTTP URL associated with this item.
         	// TODO should check to verify that the intent Uri points to a single item?
@@ -72,8 +69,13 @@ public class BookmarkViewActivity extends Activity implements OnClickListener {
         	String bookmarkURL = this.cursor.getString(COLUMN_INDEX_URL);
         	startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(bookmarkURL)));
         	finish();
+        	return;
         }
-        else if (Intent.ACTION_EDIT.equals(action) || 
+
+        // don't set the view until after we've determined that we're not launching the browser.
+        setContentView(R.layout.bookmark_view);
+        
+        if (Intent.ACTION_EDIT.equals(action) || 
         		Intent.ACTION_PICK.equals(action) ) {
         	this.cursor = managedQuery(mUri, PROJECTION, null, null, null);
         	
