@@ -30,7 +30,7 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
         Label.Columns.COUNT, // 2
     };
     
-    private static final int COLUMN_INDEX_TITLE = 1;
+    protected static final int COLUMN_INDEX_TITLE = 1;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,7 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
         setDefaultKeyMode(DEFAULT_KEYS_SHORTCUT);
 
         setContentView(R.layout.labels_list_view);
-        ((LinearLayout)findViewById(R.id.allListItems)).setOnClickListener(allItemsClicked);
+        ((LinearLayout)findViewById(R.id.allListItems)).setOnClickListener(this);
         setTitle(R.string.labels_activity);
 
         // If no data was given in the intent (because we were started
@@ -49,10 +49,10 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
         
     	if (Intent.ACTION_PICK.equals(intent.getAction()) ) {
     		// don't show 'all bookmarks' option:
-    		findViewById(R.id.allListItems).setVisibility(View.GONE);
+    		if ( ! intent.getBooleanExtra("allBookmarks", false) )
+    			findViewById(R.id.allListItems).setVisibility(View.GONE);
     		setTitle(R.string.choose_label);
     	}
-
         
         // Perform a managed query. The Activity will handle closing and requerying the cursor
         // when needed.
@@ -70,18 +70,13 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
         ((Button)findViewById(R.id.syncBtn)).setOnClickListener(this);
     }
     
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     	if ( requestCode != resultCode ) {
     		Log.w(TAG, "Did not get expected login result code: " + resultCode );
     	}
     };
     
-    OnClickListener allItemsClicked = new OnClickListener() {
-		public void onClick(View arg0) {
-			startActivity(new Intent(Intent.ACTION_VIEW).setType(Bookmark.CONTENT_TYPE));
-		}
-	};
-
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
     	String action = getIntent().getAction();
@@ -94,7 +89,7 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
     		result.setData( ContentUris.withAppendedId(getIntent().getData(), id) );
     		result.putExtra("label", labelText); // most often, they want the label text
     		Log.d(TAG, "User selected label: "+ labelText);
-    		
+    		Log.d(TAG, "Setting result" + result);
             setResult(RESULT_OK, result);
             finish();
         } 
@@ -157,6 +152,24 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
 			Log.d(TAG, "Starting sync...");
         	Toast.makeText(this, "Starting sync...", Toast.LENGTH_SHORT).show();
         	new RemoteSyncTask(this).execute();
+		}
+
+		else if ( v.getId() == R.id.allListItems ) {
+			Intent intent = getIntent();
+			String action = intent.getAction();
+			Log.d(TAG, "All items: " + action );
+			if (Intent.ACTION_PICK.equals(action) ) {
+				// The caller is waiting for us to return a label selected,
+				// in this case, 'all bookmarks'
+				Intent result = new Intent();
+				result.setData( Bookmark.CONTENT_URI );
+				Log.d(TAG, "Setting result" + result);
+				setResult(RESULT_OK, result);
+				finish();
+	        }
+			else {
+				startActivity(new Intent(Intent.ACTION_VIEW).setType(Bookmark.CONTENT_TYPE));
+			}
 		}
 	}
 }
