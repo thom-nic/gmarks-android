@@ -12,8 +12,8 @@ x list refresh after sync
 x Update label count after bookmark update
 x Webview login needs to run twice...
 x 'Choose a label' for live folder view
+x search from any activity
 
-* search from any activity
 * sync label to browser
 * List sub-headers
 * Sort by {date|alpha}
