@@ -95,7 +95,11 @@ public class UpdateBookmarkTask extends AsyncTask<Void,Void,Integer> {
 	@Override
 	protected void onPostExecute(Integer resultCode ) {
 		
-		if ( this.showProgress ) this.waitDialog.dismiss();
+		if ( this.showProgress ) {
+			try {
+				this.waitDialog.dismiss();
+			} catch ( IllegalArgumentException ex ) {} // if 'back' was pressed 
+		}
 		
 		if ( resultCode == RESULT_AUTH_FAILED ) {
 			this.onRemoteAuthFailure();
