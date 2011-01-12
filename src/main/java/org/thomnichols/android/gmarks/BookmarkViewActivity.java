@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
@@ -72,6 +73,7 @@ public class BookmarkViewActivity extends Activity implements OnClickListener {
         	return;
         }
 
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN); 
         // don't set the view until after we've determined that we're not launching the browser.
         setContentView(R.layout.bookmark_view);
         
