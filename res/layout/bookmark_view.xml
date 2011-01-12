@@ -2,60 +2,64 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	    android:orientation="vertical"
 	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-	    style='viewBG'>
+	    android:layout_height="fill_parent" >
 
-	<TextView android:text="Title" 
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"/>
-	<EditText android:id="@+id/title" 
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:maxLines="2" 
-    android:layout_marginTop="2dip" />
-
-	<TextView android:text="URL" 
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"/>
-	<EditText android:id="@+id/url" 
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:singleLine="true"
-    android:inputType='textUri'
-    android:layout_marginTop="2dip" />
-    
-  <!-- TODO chooser to add/remove labels -->
-    
-	<TextView android:text="Description" 
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"/>
-	<EditText android:id="@+id/description"  
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:maxLines="10" 
-    android:minLines='2'
-    android:layout_marginTop="2dip" />
-    
-	<TextView android:text="Labels" 
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"/>
-	<EditText android:id="@+id/labels" 
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:singleLine="true"
-    android:layout_marginTop="2dip" />
-
-	<LinearLayout
-	    android:orientation="horizontal"
-	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-	    android:gravity="bottom|center_horizontal">
-	 	<Button android:id="@+id/saveBtn"
-			android:text="@string/btn_save" 
-			style="@style/TestStyle.Btn"/>
-	 	<Button android:id="@+id/deleteBtn"
-			android:text="@string/btn_delete" 
-			style="@style/TestStyle.Btn"/>
-	</LinearLayout>
+		<ScrollView android:fillViewport='true' 
+			android:fadingEdge='vertical'
+			android:fadingEdgeLength='20dp'
+			android:layout_width='fill_parent'
+			android:layout_height='fill_parent'
+			android:layout_weight='1'>
+			<LinearLayout 
+					android:orientation="vertical"
+			    android:layout_width="fill_parent"
+			    android:layout_height="fill_parent">
+			    
+				<TextView android:text="Title" 
+					style="@style/label" />
+				<EditText android:id="@+id/title" 
+					style="@style/editLine"
+			    android:maxLines="2" 
+			    android:layout_marginTop="2dip" />
+			
+				<TextView android:text="URL"  
+					style="@style/label" />
+				<EditText android:id="@+id/url" 
+					style="@style/editLine"
+			    android:singleLine="true"
+			    android:inputType='textUri' />
+			    
+			  <!-- TODO chooser to add/remove labels -->
+			    
+				<TextView android:text="Description" 
+					style="@style/label" />
+				<EditText android:id="@+id/description"  
+					style="@style/editLine"
+			    android:maxLines="10" 
+			    android:minLines='2' />
+			    
+				<TextView android:text="Labels"  
+					style="@style/label" />
+				<EditText android:id="@+id/labels"
+					style="@style/editLine"				 
+			    android:singleLine="true" />
+		  </LinearLayout>
+	  </ScrollView>
+	  	
+	  <LinearLayout 
+		    android:orientation="horizontal"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:paddingTop='3dp'
+		    android:gravity="bottom|center_horizontal"
+		    android:background='#22ffffff'>
+		 	<Button android:id="@+id/saveBtn"
+				android:text="@string/btn_save" 
+				style="@style/TestStyle.Btn"/>
+		 	<Button android:id="@+id/deleteBtn"
+				android:text="@string/btn_delete" 
+				style="@style/TestStyle.Btn"/>
+		</LinearLayout>
+	  
 </LinearLayout>
 
