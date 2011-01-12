@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
 	<style name='viewBG' parent='@android:style/Theme.Translucent' />
+	<style name='label' parent='@android:style/TextAppearance.Small'>
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:paddingLeft">2dp</item>
+	</style>
+	<style name='editLine'>
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_marginTop">2dip</item>
+	</style>
 	<style name='TestStyle' parent='@android:style/TextAppearance.Medium'>
 		<item name="android:layout_width">wrap_content</item>
     <item name="android:layout_height">wrap_content</item>
