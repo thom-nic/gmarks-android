@@ -3,11 +3,13 @@
 import static org.thomnichols.android.gmarks.GmarksProvider.BOOKMARKS_TABLE_NAME;
 import static org.thomnichols.android.gmarks.GmarksProvider.LABELS_TABLE_NAME;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.thomnichols.android.gmarks.BookmarksQueryService.AuthException;
+import org.thomnichols.android.gmarks.GmarksProvider.DBException;
 
 import android.app.Activity;
 import android.app.ListActivity;
@@ -18,11 +20,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.CursorAdapter;
@@ -33,6 +37,7 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 	
 	static final String SHARED_PREFS_NAME = "sync_prefs";
 	static final String PREF_LAST_SYNC = "last_sync";
+	static final String PREF_LAST_BROWSER_SYNC = "last_browser_sync";
 	
 	static final int RESULT_SUCCESS = 0;
 	static final int RESULT_FAILURE_AUTH = 1;
@@ -44,6 +49,9 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 	Activity ctx;
 	long lastSyncTime = 0;
 	final SharedPreferences syncPrefs;
+	boolean syncBrowserBookmarks;
+	String browserBookmarksLabel;
+	long lastBrowserSyncTime = 0;
 	long thisSyncTime = 0;
 	
 	RemoteSyncTask(Activity ctx) {
@@ -59,8 +67,16 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 	@Override protected void onPreExecute() {
 		super.onPreExecute();
 		this.lastSyncTime = syncPrefs.getLong(PREF_LAST_SYNC, 0);
+		this.lastBrowserSyncTime = syncPrefs.getLong(PREF_LAST_BROWSER_SYNC, 0);
 		Log.d(TAG,"Syncing bookmarks modified since: " + lastSyncTime);
 		this.thisSyncTime = System.currentTimeMillis();
+		
+		SharedPreferences appPrefs = PreferenceManager.getDefaultSharedPreferences(ctx);
+		// determine if we should sync browser bookmarks:
+		this.syncBrowserBookmarks = appPrefs.getBoolean(
+				SettingsActivity.KEY_BROWSER_SYNC_ENABLED, false );
+		this.browserBookmarksLabel = appPrefs.getString(
+				SettingsActivity.KEY_BROWSER_SYNC_LABEL, null);
 	}
 	
 	@Override protected Integer doInBackground(Void... arg0) {
@@ -180,29 +196,6 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
         		// add label relations for bookmark
     			b.set_id(bookmarkRowID);
     			dbHelper.updateLabels(db, b);
-/*        		for ( String label : b.getLabels() ) {
-        			Long labelID = labelIDs.get( label );
-        			if ( labelID == null ) {
-        				Log.w(TAG, "No _id for label " + label );
-        				continue;
-        			}
-        			vals.clear();
-        			vals.put("bookmark_id", bookmarkRowID);
-        			vals.put("label_id", labelID );
-        			db.insertWithOnConflict( BOOKMARK_LABELS_TABLE_NAME, 
-        					null, vals, SQLiteDatabase.CONFLICT_IGNORE );
-        		}
-        		if ( b.getLabels().size() < 1 ) {
-        			Long labelID = labelIDs.get( "^none" );
-        			if ( labelID != null ) {
-        				vals.clear();
-	        			vals.put("bookmark_id", bookmarkRowID);
-	        			vals.put("label_id", labelID );
-	        			db.insertWithOnConflict( BOOKMARK_LABELS_TABLE_NAME, 
-	        					null, vals, SQLiteDatabase.CONFLICT_IGNORE );
-        			}
-        		}
-*/
         		
         		// update full-text search:
         		vals.clear();
@@ -236,9 +229,9 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
         		if ( count % 10 == 0 ) this.publishProgress(count);
         	}
         	
+        	
         	if ( ! this.isCancelled() ) db.setTransactionSuccessful();
 			this.publishProgress(count);
-        	return RESULT_SUCCESS;
 		}
 		catch ( AuthException ex ) {
 			Log.d(TAG, "Auth error" );
@@ -246,13 +239,32 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 		}
 		catch ( Exception ex ) {
 			Log.e(TAG, "Error syncing bookmarks", ex);
+			return RESULT_FAILURE_UNKNOWN;
 		}
 		finally {
 			db.endTransaction();
 			db.close();
 			dbHelper.close();
 		}
-		return RESULT_FAILURE_UNKNOWN;
+		
+		try {
+        	// sync browser bookmarks:
+        	if ( this.syncBrowserBookmarks && this.browserBookmarksLabel != null ) {
+        		Log.d(TAG, "Starting browser sync for label: " + browserBookmarksLabel ); 
+        		new BrowserSync(ctx).syncBrowserBookmarks( 
+        				this.browserBookmarksLabel, this.lastBrowserSyncTime );
+        	}			
+		}
+		catch ( IOException ex ) {
+			Log.w(TAG,"IOException while syncing browser bookmarks", ex);
+			return RESULT_FAILURE_UNKNOWN;
+		}
+		catch ( DBException ex ) {
+			Log.w(TAG,"Database error while syncing browser bookmarks", ex);
+			return RESULT_FAILURE_DB;
+		}
+		
+    	return RESULT_SUCCESS;
 	}
 	
 	@Override protected void onPostExecute( Integer result ) {
@@ -261,10 +273,13 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 			if ( this.ctx instanceof ListActivity ) {
 				Log.d(TAG,"Refreshing listview...");
 				((CursorAdapter)((ListActivity)this.ctx).getListAdapter()).getCursor().requery();
-//				((CursorAdapter)((ListActivity)this.ctx).getListAdapter()).notifyDataSetChanged();
 			}
 			// update shared 'last sync' state
-			this.syncPrefs.edit().putLong(PREF_LAST_SYNC, this.thisSyncTime).commit();
+			Editor prefEditor = this.syncPrefs.edit();
+			prefEditor.putLong(PREF_LAST_SYNC, this.thisSyncTime);
+			if ( this.syncBrowserBookmarks )
+				prefEditor.putLong(PREF_LAST_BROWSER_SYNC, this.thisSyncTime);
+			prefEditor.commit();
 		}
 		else if ( result == RESULT_FAILURE_DB ) {
 			Toast.makeText(this.ctx, "Sync already in progress...", Toast.LENGTH_LONG).show();

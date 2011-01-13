@@ -261,7 +261,11 @@ public class BookmarksQueryService {
 			throw new IOException( "Error creating request", ex );
 		}
 
-		return createOrUpdate( updateURL, requestObj );
+		Bookmark newBookmark = createOrUpdate( updateURL, requestObj );
+		if ( b.get_id() != null ) newBookmark.set_id(b.get_id());
+		// TODO created date is not in response
+//		if ( b.getCreatedDate() != 0 ) newBookmark.setCreatedDate(b.getCreatedDate());
+		return newBookmark;
 	}
 
 	public void delete(String googleId) throws AuthException, NotFoundException, IOException {
@@ -293,9 +297,9 @@ public class BookmarksQueryService {
 //		params.add( new BasicNameValuePair("td", requestObj.toString()) );
 		params.add( new BasicNameValuePair("td", postString) );
 
-//		Log.d(TAG,"DELETE: " + requestObj.toString());
-		Log.d(TAG,"DELETE: " + requestURI );
-		Log.d(TAG,"DELETE: " + postString);
+//		Log.v(TAG,"DELETE: " + requestObj.toString());
+		Log.v(TAG,"DELETE: " + requestURI );
+		Log.v(TAG,"DELETE: " + postString);
 
 		HttpPost post = new HttpPost( requestURI.toString() );		
 //		HttpPost post = new HttpPost( deleteURL );		
@@ -324,8 +328,8 @@ public class BookmarksQueryService {
 	protected Bookmark createOrUpdate( String url, JSONObject requestObj ) throws AuthException, IOException {
 		HttpPost post = new HttpPost( url );
 		
-		Log.d(TAG, "UPDATE: " + url);
-		Log.d(TAG, "UPDATE: " + requestObj);
+//		Log.v(TAG, "UPDATE: " + url);
+//		Log.v(TAG, "UPDATE: " + requestObj);
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add( new BasicNameValuePair("td", requestObj.toString()) );
 		post.setEntity( new UrlEncodedFormEntity(params) );
@@ -350,7 +354,7 @@ public class BookmarksQueryService {
 					-1, // no created date in response
 					respObj.getLong("timestamp") );
 			
-			Log.d(TAG, "RESPONSE: " + respObj );
+//			Log.v(TAG, "RESPONSE: " + respObj );
 			if ( respObj.has("labels") ) {
 				JSONArray labelJSON = respObj.getJSONArray("labels");
 				
@@ -398,7 +402,7 @@ public class BookmarksQueryService {
 		startIndex += mainThreadSearchString.length(); 
 		this.mainThreadId = respString.substring( startIndex, 
 				respString.indexOf("\"", startIndex) );
-		Log.d(TAG, "GOT THREAD ID: " + xtParam );
+		Log.d(TAG, "GOT THREAD ID: " + mainThreadId );
 		
 		return this.xtParam;
 	}
@@ -487,7 +491,6 @@ public class BookmarksQueryService {
 		
 		public AllBookmarksIterator( String filter ) {
 			if ( filter != null ) this.filter = "&q=" + filter;
-			this.queryNext();
 		}
 		
 		private boolean getNextSection() {

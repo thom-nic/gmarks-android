@@ -380,7 +380,7 @@ public class GmarksProvider extends ContentProvider {
 	    	}
 	        try {
 		        Cursor c = db.query(BOOKMARKS_TABLE_NAME, bookmarksIDColumns, 
-		        		"where url=?", new String[] {url}, null, null, null);
+		        		"url=?", new String[] {url}, null, null, null);
 
 		        try { // lazy for now, only looking @ first row...
 		        	if ( ! c.moveToFirst() ) return null;
@@ -393,6 +393,36 @@ public class GmarksProvider extends ContentProvider {
 	        finally { if ( closeDB ) db.close(); }
 	    }
 	    
+	    
+	    public List<Bookmark> findByLabel(String label, SQLiteDatabase db ) {
+	    	// Get the database and run the query
+	    	boolean closeDB = false;
+	    	if ( db == null ) {
+	    		db = getReadableDatabase();
+	    		closeDB = true;
+	    	}
+	        try {
+		        Cursor c = db.query("bookmarks b join bookmark_labels bl on bl.bookmark_id=b._id" 
+		        		+ " join label l on l._id=bl.label_id", 
+		        		new String[] {"b._id", "b._google_id", "b.thread_id",
+		        				"b.title", "b.url", "b.host", "b.description",
+		        				"b.created", "b.modified"},
+		        		"l.label=?", new String[] {label}, null, null, null);
+
+		        List<Bookmark> bookmarks = new ArrayList<Bookmark>();
+		        try {
+		        	while ( c.moveToNext() ) {
+			        	Bookmark b = new Bookmark(c.getString(1),c.getString(2),c.getString(3),
+			        			c.getString(4),c.getString(5),c.getString(6),c.getLong(7),c.getLong(8));
+			        	b.set_id(c.getLong(0));
+			        	bookmarks.add(b);
+		        	}
+		        }
+		        finally { c.close(); }
+		        return bookmarks;
+	        }
+	        finally { if ( closeDB ) db.close(); }	    	
+	    }
 	    
 	    public Bookmark insert( Bookmark b, SQLiteDatabase db ) throws DBException {
 	    	boolean closeDB = false;
@@ -479,10 +509,19 @@ public class GmarksProvider extends ContentProvider {
 	        		vals.put(Bookmark.Columns.MODIFIED_DATE, b.getModifiedDate());
 	        	vals.put(Bookmark.Columns.LABELS, b.getAllLabels());
 	        	
-	        	Log.v(TAG,"Updating bookmark ID: " + b.get_id() );
+	        	String whereClause = Bookmark.Columns._ID + "=?";
+	        	String[] whereArgs = new String[] { ""+b.get_id() };
+	        	if ( b.get_id() == null ) {
+	        		if ( b.getGoogleId() == null )
+	        			throw new IllegalArgumentException("Both _id and googleID are null");
+		        	whereClause = Bookmark.Columns.GOOGLEID + "=?";
+	        		whereArgs = new String[] { b.getGoogleId() };
+	        		Log.v(TAG,"Updating bookmark element ID: " + b.getGoogleId() );
+	        	}
+	        	else Log.v(TAG,"Updating bookmark _ID: " + b.get_id() );
+	        	
 	        	int result = db.updateWithOnConflict( BOOKMARKS_TABLE_NAME, vals,
-	        			Bookmark.Columns._ID + "=?", new String[] {""+b.get_id()},
-	        			SQLiteDatabase.CONFLICT_IGNORE );
+	        			whereClause, whereArgs, SQLiteDatabase.CONFLICT_IGNORE );
 	        	
 	        	if ( result < 1 ) throw new DBException( "Update conflict: " + result );
 
