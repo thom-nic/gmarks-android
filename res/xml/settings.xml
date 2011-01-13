@@ -7,24 +7,22 @@
     <CheckBoxPreference
         android:key="browser_sync_enabled"
         android:title="@string/pref_browser_sync"
-        android:enabled="false" 
-        android:summary="@string/coming_soon" />
-        <!-- android:summary="@string/pref_browser_sync_summary" />-->
+        android:summary="@string/pref_browser_sync_summary" />
     <org.thomnichols.android.gmarks.LabelPreference
     		android:key='browser_sync_label'
     		android:title='@string/pref_sync_label' 
+    		android:persistent='true'
     		android:enabled="false" />
 
     <CheckBoxPreference
         android:key="background_sync_enabled"
         android:title="@string/pref_background_sync"
-        android:enabled="false" 
-        android:summary="@string/coming_soon" />
-        <!-- android:summary="@string/pref_background_sync_summary" /> -->
+        android:summary="@string/pref_background_sync_summary" />
     <ListPreference
         android:key="background_sync_interval"
         android:title="@string/pref_sync_interval"
         android:entries="@array/pref_duration_entries"
+        android:persistent='true'
         android:entryValues="@array/pref_duration_values"
         android:defaultValue="20"
         android:dialogTitle="@string/pref_sync_interval" 

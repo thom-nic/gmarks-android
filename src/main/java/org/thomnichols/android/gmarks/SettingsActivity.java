@@ -52,26 +52,16 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     				((CheckBoxPreference)pref).isChecked() );
     	
     	if ( KEY_BROWSER_SYNC_LABEL.equals(pref.getKey()) ) {
-    		// start label picker...
-    		Intent intent = new Intent(Intent.ACTION_PICK).setType(Label.CONTENT_TYPE);
-    		startActivityForResult(intent, RESULT_OK);
+    		// label picker listens for its own click...
     	}
     	
-    	super.onPreferenceTreeClick(prefScreen, pref);
-		return true;
+		return super.onPreferenceTreeClick(prefScreen, pref);
     }
     
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     	Log.d(TAG, "ACTIVITY RESULT: " + resultCode);
-//    	if ( resultCode != RESULT_OK ) return;
-    	String label = data.getStringExtra("label");
-		Log.i(TAG, "GOT LABEL RESULT: " + label);
-    	
-    	LabelPreference pref = (LabelPreference)findPreference(KEY_BROWSER_SYNC_LABEL);
-    	pref.setValue(label);
-    	pref.setSummary( label );
-    	super.onActivityResult(requestCode, resultCode, data);
+    	((LabelPreference)findPreference(KEY_BROWSER_SYNC_LABEL)).onActivityResult(requestCode, resultCode, data);
     }
 
 	public boolean onPreferenceChange(Preference pref, Object newVal) {
@@ -83,7 +73,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 	        intervalPref.setSummary( intervalPref.getEntries()[currentSetting] );
 		}
 		else if ( KEY_BROWSER_SYNC_LABEL.equals(pref.getKey()) ) {
-			pref.setSummary( ((LabelPreference)pref).getValue());
+			// label picker handles itself.
 		}
 		return true;
 	}

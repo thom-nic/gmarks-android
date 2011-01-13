@@ -79,6 +79,7 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
     
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
+    	super.onListItemClick(l, v, position, id);
     	String action = getIntent().getAction();
     	String labelText = ((CursorWrapper)l.getItemAtPosition(position))
     		.getString(COLUMN_INDEX_TITLE);
@@ -88,7 +89,7 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
         	Intent result = new Intent();
     		result.setData( ContentUris.withAppendedId(getIntent().getData(), id) );
     		result.putExtra("label", labelText); // most often, they want the label text
-    		Log.d(TAG, "User selected label: "+ labelText);
+    		Log.d(TAG, "Selected label: "+ labelText);
     		Log.d(TAG, "Setting result" + result);
             setResult(RESULT_OK, result);
             finish();
@@ -101,7 +102,6 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
         		.build();
         	startActivity(new Intent(Intent.ACTION_VIEW, queryUri));
         }
-    	super.onListItemClick(l, v, position, id);
     }
     
     @Override
