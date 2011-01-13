@@ -105,6 +105,11 @@ public class Bookmark {
 	public Set<String> getLabels() {
 		return labels;
 	}
+	
+	@Override
+	public int hashCode() {
+		return this.url != null ? this.url.hashCode() : super.hashCode();
+	}
 
 	public static final class Columns implements BaseColumns {
 		public static final String DEFAULT_SORT_ORDER = "modified DESC";
