@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
@@ -73,21 +72,31 @@ public class BookmarkViewActivity extends Activity implements OnClickListener {
         	return;
         }
 
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN); 
         // don't set the view until after we've determined that we're not launching the browser.
         setContentView(R.layout.bookmark_view);
+    	setTitle(R.string.new_bookmark);
         
         if (Intent.ACTION_EDIT.equals(action) || 
         		Intent.ACTION_PICK.equals(action) ) {
         	this.cursor = managedQuery(mUri, PROJECTION, null, null, null);
         	
             // Requested to edit: set that state, and the data being edited.
-        	((Button)findViewById(R.id.saveBtn)).setText(R.string.btn_update);
+        	setTitle(R.string.edit_bookmark);
+            ((Button)findViewById(R.id.saveBtn)).setText(R.string.btn_update);
         }
         else if (Intent.ACTION_INSERT.equals(action)) {
         	String label = intent.getStringExtra("label");
         	if ( label != null )
         		((EditText)findViewById(R.id.labels)).setText(label + ", ");
+        	findViewById(R.id.deleteBtn).setVisibility(View.GONE);
+        }
+        else if (Intent.ACTION_SEND.equals(action)) {
+        	// TODO possibility that this is not a link???
+        	String title = intent.getStringExtra(Intent.EXTRA_SUBJECT);
+        	String url = intent.getStringExtra(Intent.EXTRA_TEXT);
+//        	Bitmap favico = intent.getParcelableExtra(Browser.EXTRA_SHARE_FAVICON);
+            ((EditText) findViewById(R.id.title)).setText(title);
+            ((EditText) findViewById(R.id.url)).setText(url);
         	findViewById(R.id.deleteBtn).setVisibility(View.GONE);
         }
         else {
