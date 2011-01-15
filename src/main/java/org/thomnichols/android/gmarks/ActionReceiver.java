@@ -23,7 +23,7 @@ public class ActionReceiver extends BroadcastReceiver {
 			PendingIntent serviceLauncher = PendingIntent.getService(
 					context, 0, action, 0);
 
-			// Schedule the service startup for 20s after boot
+			// Schedule the service startup for 60s after boot
             AlarmManager am = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
             am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
             		SystemClock.elapsedRealtime() + 60*1000, serviceLauncher);
