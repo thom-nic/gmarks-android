@@ -45,11 +45,7 @@ public class BrowserSync {
  		db.beginTransaction();
 
 		Log.d(TAG,"Syncing browser bookmarks for label: " + label);
-//		List<Bookmark> labelBookmarksToSync = bookmarksDB.findByLabel(label, db);
-		Iterable<Bookmark> labelBookmarksToSync = bookmarksSvc.getAllBookmarksForLabel(label);
-		List<Bookmark> labelBookmarks = new ArrayList<Bookmark>();
-		for ( Bookmark b : labelBookmarksToSync )
-			labelBookmarks.add(b);
+		List<Bookmark> labelBookmarks = bookmarksDB.findByLabel(label, db);
 		
 		try {
 			List<Bookmark> inserts = new ArrayList<Bookmark>();
@@ -105,7 +101,7 @@ public class BrowserSync {
 			for ( Bookmark b : updates ) bookmarksDB.update(b, db);
 			
 			// now find any new remote bookmarks that should be added to the browser:
-			for ( Bookmark b : labelBookmarksToSync ) {
+			for ( Bookmark b : labelBookmarks ) {
 				if ( b.getModifiedDate() < updatedSince ) continue;
 				if ( browserURLs.contains(b.getUrl()) ) continue;
 
