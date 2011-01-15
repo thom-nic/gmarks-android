@@ -4,9 +4,7 @@ import static org.thomnichols.android.gmarks.GmarksProvider.BOOKMARKS_TABLE_NAME
 import static org.thomnichols.android.gmarks.GmarksProvider.LABELS_TABLE_NAME;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.thomnichols.android.gmarks.BookmarksQueryService.AuthException;
 import org.thomnichols.android.gmarks.GmarksProvider.DBException;
@@ -39,6 +37,8 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 	static final String PREF_LAST_SYNC = "last_sync";
 	static final String PREF_LAST_BROWSER_SYNC = "last_browser_sync";
 	
+	static final int NOTIFY_SYNC_ID = 1;
+	
 	static final int RESULT_SUCCESS = 0;
 	static final int RESULT_FAILURE_AUTH = 1;
 	static final int RESULT_FAILURE_DB = 2;
@@ -46,7 +46,7 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 	
 	NotificationManager notificationManager;
 	Notification notification;
-	Activity ctx;
+	Context ctx;
 	long lastSyncTime = 0;
 	final SharedPreferences syncPrefs;
 	boolean syncBrowserBookmarks;
@@ -54,7 +54,7 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 	long lastBrowserSyncTime = 0;
 	long thisSyncTime = 0;
 	
-	RemoteSyncTask(Activity ctx) {
+	RemoteSyncTask(Context ctx) {
 		this.ctx = ctx;
 		notificationManager = (NotificationManager)ctx.getSystemService(Context.NOTIFICATION_SERVICE);
 		notification = new Notification( R.drawable.ic_sync, 
@@ -101,13 +101,15 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
     		ContentValues vals = new ContentValues();
 			
     		// sync label list
+    		// TODO this is mostly built off of the labels contained 
+    		// in the bookmarks now, so it might be possible to completely
+    		// remove the label sync request altogether.
 			List<Label> labels = remoteSvc.getLabels();
-    		Map<String,Long> labelIDs = new HashMap<String, Long>(labels.size());
 			
         	for ( Label l : labels ) {
         		if ( this.isCancelled() ) break;
 
-        		Long rowID = null;
+        		vals.clear();
         		vals.put(Label.Columns.COUNT, l.getCount());
         		
     			// update counts if label already exists.
@@ -117,21 +119,24 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
     					new String[] { l.getTitle() }, 
     					null, null, null );
     			try {
-	    			if ( cursor.moveToFirst() ) {
-	    				rowID = cursor.getLong(0);
-	    				// TODO check result
-	    				db.updateWithOnConflict( LABELS_TABLE_NAME, vals, 
-	    						Label.Columns.TITLE+"=?", 
-	    						new String[] { l.getTitle() },
-	    						SQLiteDatabase.CONFLICT_ABORT );
+	    			if ( cursor.moveToFirst() ) { // update label
+	    				Long rowID = cursor.getLong(0);
+	    				int rowCount = db.updateWithOnConflict( 
+	    						LABELS_TABLE_NAME, vals, 
+	    						Label.Columns._ID+"=?", 
+	    						new String[] { rowID.toString() },
+	    						SQLiteDatabase.CONFLICT_FAIL );
+	    				if ( rowCount != 1 ) 
+	    					Log.w(TAG,"Unexpected result (" + rowCount 
+	    							+ ") for label update: " + l.getTitle() );
 	    			}
-	    			else {
+	    			else {  // insert new label
 	    				vals.put(Label.Columns.TITLE, l.getTitle());
-	    				rowID = db.insertWithOnConflict( LABELS_TABLE_NAME, 
-	        				"", vals, SQLiteDatabase.CONFLICT_ABORT );
+	    				long rowID = db.insertWithOnConflict( LABELS_TABLE_NAME, 
+	        				"", vals, SQLiteDatabase.CONFLICT_FAIL );
+	    				if ( rowID < 0 ) Log.w(TAG,"Label insert returned " + 
+	    						rowID + " for label: " + l.getTitle() );
 	    			}
-	    			if ( rowID >=0 ) labelIDs.put( l.getTitle(), rowID );
-	    			else Log.w(TAG, "Invalid row ID: " + rowID );
     			}
     			finally { cursor.close(); }
         	}
@@ -226,12 +231,12 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
         		}
         		
         		// TODO different message if there were no new bookmarks.
-        		if ( count % 10 == 0 ) this.publishProgress(count);
+        		if ( count % 10 == 0 ) this.publishProgress(count,0);
         	}
         	
         	
         	if ( ! this.isCancelled() ) db.setTransactionSuccessful();
-			this.publishProgress(count);
+			this.publishProgress(count,1);
 		}
 		catch ( AuthException ex ) {
 			Log.d(TAG, "Auth error" );
@@ -285,8 +290,10 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 			Toast.makeText(this.ctx, "Sync already in progress...", Toast.LENGTH_LONG).show();
 		}
 		else if ( result == RESULT_FAILURE_AUTH ) {
-			this.ctx.startActivityForResult(new Intent("org.thomnichols.gmarks.action.LOGIN"), 
-					Activity.RESULT_OK );
+			if (this.ctx instanceof Activity)
+				((Activity)this.ctx).startActivityForResult(
+						new Intent("org.thomnichols.gmarks.action.LOGIN"), 
+						Activity.RESULT_OK );
 		}
 		else Toast.makeText(this.ctx, "GMarks sync error", Toast.LENGTH_LONG).show();
 	}
@@ -297,10 +304,15 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 	
 	@Override protected void onProgressUpdate(Integer... values) {
 		int count = values[0];
-		Intent intent = new Intent( this.ctx, this.ctx.getClass() );
+		boolean done = values[1] == 1;
+		if ( done && count == 0 ) {
+			this.notificationManager.cancel(NOTIFY_SYNC_ID);
+			return;
+		}
+		Intent intent = new Intent( this.ctx, LabelsListActivity.class );
 		notification.setLatestEventInfo( this.ctx, 
 				"GMarks Sync", "Synchronized " + count + " bookmarks", 
 				PendingIntent.getActivity(this.ctx, 0, intent, 0) );
-		this.notificationManager.notify(1, notification);
+		this.notificationManager.notify(NOTIFY_SYNC_ID, notification);
 	}
 }

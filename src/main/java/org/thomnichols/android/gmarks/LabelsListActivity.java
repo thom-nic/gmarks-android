@@ -5,10 +5,12 @@ import org.thomnichols.android.gmarks.R;
 import android.app.ListActivity;
 import android.content.ContentUris;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -46,6 +48,17 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
         // as a MAIN activity), then use our default content provider.
         Intent intent = getIntent();
         if (intent.getData() == null) intent.setData(Label.CONTENT_URI);
+        
+        if (Intent.ACTION_MAIN.equals(intent.getAction())) {
+        	// start up the background service if necessary.
+        	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        	if ( prefs.getBoolean(SettingsActivity.KEY_BACKGROUND_SYNC_ENABLED, false) ) {
+        		Log.d(TAG,"Starting background sync service...");
+        		Intent service = new Intent(this, BackgroundService.class);
+    			service.setAction( Intent.ACTION_RUN );
+        		startService(service);
+        	}
+        }
         
     	if (Intent.ACTION_PICK.equals(intent.getAction()) ) {
     		// don't show 'all bookmarks' option:

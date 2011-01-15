@@ -43,15 +43,16 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen prefScreen, Preference pref ) {
-    	if ( KEY_BROWSER_SYNC_ENABLED.equals(pref.getKey()) )
+    	String key = pref.getKey();
+    	if ( KEY_BROWSER_SYNC_ENABLED.equals(key) )
     		findPreference(KEY_BROWSER_SYNC_LABEL).setEnabled(
     				((CheckBoxPreference)pref).isChecked() );
 
-    	if ( KEY_BACKGROUND_SYNC_ENABLED.equals(pref.getKey()) )
+    	if ( KEY_BACKGROUND_SYNC_ENABLED.equals(key) )
     		findPreference(KEY_SYNC_INTERVAL).setEnabled(
     				((CheckBoxPreference)pref).isChecked() );
     	
-    	if ( KEY_BROWSER_SYNC_LABEL.equals(pref.getKey()) ) {
+    	if ( KEY_BROWSER_SYNC_LABEL.equals(key) ) {
     		// label picker listens for its own click...
     	}
     	
@@ -61,18 +62,30 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     	Log.d(TAG, "ACTIVITY RESULT: " + resultCode);
-    	((LabelPreference)findPreference(KEY_BROWSER_SYNC_LABEL)).onActivityResult(requestCode, resultCode, data);
+    	((LabelPreference)findPreference(KEY_BROWSER_SYNC_LABEL)).onActivityResult(
+    			requestCode, resultCode, data);
     }
 
 	public boolean onPreferenceChange(Preference pref, Object newVal) {
 		
-		Log.d(TAG, "GOT PREF CHANGE: " + pref.getKey() + "=" + newVal);
-		if ( KEY_SYNC_INTERVAL.equals(pref.getKey()) ) {
+		String key = pref.getKey();
+		Log.d(TAG, "GOT PREF CHANGE: " + key + "=" + newVal);
+		if ( KEY_BACKGROUND_SYNC_ENABLED.equals(key) ||
+				KEY_SYNC_INTERVAL.equals(key)) {
+			// start the Background sync service if it's not already started:
+			Intent action = new Intent(this, BackgroundService.class);
+			action.setAction( Intent.ACTION_CONFIGURATION_CHANGED );
+			action.putExtra("key", key);
+			startService(action);
+			// notify the service that settings have changed.  
+			// If there is nothing to do, it will shut back down.
+		}
+		else if ( KEY_SYNC_INTERVAL.equals(key) ) {
 			ListPreference intervalPref = (ListPreference)pref;
-	        int currentSetting = intervalPref.findIndexOfValue( intervalPref.getValue() );
+	        int currentSetting = intervalPref.findIndexOfValue( (String)newVal );
 	        intervalPref.setSummary( intervalPref.getEntries()[currentSetting] );
 		}
-		else if ( KEY_BROWSER_SYNC_LABEL.equals(pref.getKey()) ) {
+		else if ( KEY_BROWSER_SYNC_LABEL.equals(key) ) {
 			// label picker handles itself.
 		}
 		return true;
