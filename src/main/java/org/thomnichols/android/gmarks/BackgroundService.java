@@ -9,10 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
-import android.os.Binder;
 import android.os.IBinder;
-import android.os.Parcel;
-import android.os.RemoteException;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -61,12 +58,12 @@ public class BackgroundService extends Service implements OnSharedPreferenceChan
 		final String action = intent.getAction();
 		if ( Intent.ACTION_RUN.equals(action) ) {
 			// schedule the recurring service then quit immediately.
-			startRecurringTask();
+			scheduleSync();
 		}
 		else if ( Intent.ACTION_SHUTDOWN.equals(action) ) {
 			Log.d(TAG,"SHUTTING DOWN");
 			// Disable recurring task then quit immediately
-			stopRecurringTask();
+			unscheduleSync();
 		}
 		else if ( Intent.ACTION_SYNC.equals(action) ) {
 			// this is the intent called by AlarmManager
@@ -77,7 +74,7 @@ public class BackgroundService extends Service implements OnSharedPreferenceChan
 			}
 			else {
 				Log.w(TAG,"Got SYNC action, but not enabled!");
-	    		this.stopRecurringTask();
+				this.unscheduleSync();
 			}
 		}
 		else if ( Intent.ACTION_CONFIGURATION_CHANGED.equals(action) ) {
@@ -98,26 +95,36 @@ public class BackgroundService extends Service implements OnSharedPreferenceChan
 		started.compareAndSet(true, false);
 		super.onDestroy();
 	}
-	
-	protected boolean startRecurringTask() {
-		Log.d(TAG,"Scheduling recurring task...");
+
+	protected boolean scheduleSync() {
+		return this.scheduleSync(true);
+	}
+
+	protected boolean scheduleSync(boolean first) {
+		Log.d(TAG,"Scheduling task...");
 		if ( ! this.backgroundSyncEnabled ) {
 			Log.d(TAG, "Background sync not enabled!");
 			return false;
 		}
-		if ( ! scheduled.compareAndSet(false, true) ) { 
+		if ( first && ! scheduled.compareAndSet(false, true) ) { 
 			Log.d(TAG, "Already scheduled.");
 			return false;
 		}
 		long intervalInMS = backgroundSyncInterval * 60 * 1000;
     	AlarmManager am = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
-        am.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+    	// sync doesn't need to happen while the phone is asleep.  Nor does it 
+    	// need to occur any more frequently after it wakes up.  So set once
+    	// and re-schedule the next occurrence when the operation completes.
+    	am.set( AlarmManager.ELAPSED_REALTIME,
         		SystemClock.elapsedRealtime() + intervalInMS, 
-        		intervalInMS, serviceLauncher);
+        		serviceLauncher );
+//        am.setInexactRepeating(AlarmManager.ELAPSED_REALTIME,
+//        		SystemClock.elapsedRealtime() + intervalInMS, 
+//        		intervalInMS, serviceLauncher);
         return true;
 	}
 	
-	protected void stopRecurringTask() {
+	protected void unscheduleSync() {
 		Log.d(TAG,"Stopping recurring task...");
 		AlarmManager am = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
         am.cancel(serviceLauncher);
@@ -127,16 +134,19 @@ public class BackgroundService extends Service implements OnSharedPreferenceChan
 	}
 
     /**
-     * The function that runs in our worker thread
+     * The remote sync task. 
      */
     class BackgroundSyncTask extends RemoteSyncTask {    	
     	BackgroundSyncTask(Context ctx) {
 			super(ctx);
+			this.showToast = false;
 		}
     	
 		protected void onPostExecute(Integer result) {
-			Log.d(TAG,"SYNC Post-execute complete!");
+			Log.d(BackgroundService.TAG,"SYNC Post-execute complete!");
 			super.onPostExecute(result);
+			// schedule the next occurrence:
+			BackgroundService.this.scheduleSync(false);			
             // Done with our work...  stop the service!
             BackgroundService.this.stopSelf(startID);    
     	}
@@ -155,13 +165,13 @@ public class BackgroundService extends Service implements OnSharedPreferenceChan
 				this.backgroundSyncEnabled = false;
 				// shut down pending intent
 				Log.d(TAG,"Disabling...");
-				stopRecurringTask();
+				unscheduleSync();
 			}
 			else if ( enabled && ! this.backgroundSyncEnabled ) {
 				this.backgroundSyncEnabled = true;
 				// start up intent
 				Log.d(TAG,"Enabling...");
-				startRecurringTask();
+				scheduleSync();
 			}
 		}
 		else if ( KEY_SYNC_INTERVAL.equals(key) ) {
@@ -171,29 +181,14 @@ public class BackgroundService extends Service implements OnSharedPreferenceChan
 			if ( interval != this.backgroundSyncInterval ) {
 				// stop pending intent & re-schedule
 				Log.d(TAG,"Re-scheduling background svc to: " + interval);
-				stopRecurringTask();
-				startRecurringTask();
+				scheduleSync();  // this will overwrite a previously-scheduled intent
 			}
 		}
 	}
 
-
     @Override
     public IBinder onBind(Intent intent) {
     	Log.d(TAG,"onBind called");
-        //return mBinder;
     	return null;
     }
-
-    /**
-     * This is the object that receives interactions from clients.  See RemoteService
-     * for a more complete example.
-     */
-/*    private final IBinder mBinder = new Binder() {
-        @Override
-		protected boolean onTransact(int code, Parcel data, Parcel reply,
-		        int flags) throws RemoteException {
-            return super.onTransact(code, data, reply, flags);
-        }
-    }; */
 }
