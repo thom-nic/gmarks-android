@@ -403,8 +403,8 @@ public class GmarksProvider extends ContentProvider {
 	    	}
 	        try {
 		        Cursor c = db.query("bookmarks b join bookmark_labels bl on bl.bookmark_id=b._id" 
-		        		+ " join label l on l._id=bl.label_id", 
-		        		new String[] {"b._id", "b._google_id", "b.thread_id",
+		        		+ " join labels l on l._id=bl.label_id", 
+		        		new String[] {"b._id", "b.google_id", "b.thread_id",
 		        				"b.title", "b.url", "b.host", "b.description",
 		        				"b.created", "b.modified"},
 		        		"l.label=?", new String[] {label}, null, null, null);
