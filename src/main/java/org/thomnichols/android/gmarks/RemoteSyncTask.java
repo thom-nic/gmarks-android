@@ -53,6 +53,7 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 	String browserBookmarksLabel;
 	long lastBrowserSyncTime = 0;
 	long thisSyncTime = 0;
+	boolean showToast = true;
 	
 	RemoteSyncTask(Context ctx) {
 		this.ctx = ctx;
@@ -174,7 +175,7 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
     			boolean bookmarkInserted = false;
     			try {
         			if ( ! cursor.moveToFirst() ) { // insert a new bookmark row
-        				Log.d(TAG, "Inserting bookmark: " + b.getTitle() );
+//        				Log.v(TAG, "Inserting bookmark: " + b.getTitle() );
                 		vals.put(Bookmark.Columns.GOOGLEID, b.getGoogleId());
 		        		bookmarkRowID = db.insertWithOnConflict(
 		        				BOOKMARKS_TABLE_NAME, "", vals,
@@ -184,7 +185,7 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
         			}
         			else { // update current bookmark:
         				bookmarkRowID = cursor.getLong(0);
-	        			Log.d( TAG, "Updating bookmark: " + b.getTitle() );
+//	        			Log.v( TAG, "Updating bookmark: " + b.getTitle() );
 	        			db.updateWithOnConflict( BOOKMARKS_TABLE_NAME, 
 	        					vals, Bookmark.Columns._ID+ "=?", 
 	        					new String[] { bookmarkRowID.toString() },
@@ -237,6 +238,7 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
         	
         	if ( ! this.isCancelled() ) db.setTransactionSuccessful();
 			this.publishProgress(count,1);
+			Log.d(TAG,"Sync'd " + count + " bookmarks");
 		}
 		catch ( AuthException ex ) {
 			Log.d(TAG, "Auth error" );
@@ -274,7 +276,8 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 	
 	@Override protected void onPostExecute( Integer result ) {
 		if ( result == RESULT_SUCCESS ) {
-			Toast.makeText(this.ctx, "GMarks Sync complete", Toast.LENGTH_LONG).show();
+			if (showToast) Toast.makeText(this.ctx, 
+					"GMarks Sync complete", Toast.LENGTH_LONG).show();
 			if ( this.ctx instanceof ListActivity ) {
 				Log.d(TAG,"Refreshing listview...");
 				((CursorAdapter)((ListActivity)this.ctx).getListAdapter()).getCursor().requery();
@@ -287,7 +290,8 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 			prefEditor.commit();
 		}
 		else if ( result == RESULT_FAILURE_DB ) {
-			Toast.makeText(this.ctx, "Sync already in progress...", Toast.LENGTH_LONG).show();
+			if (showToast) Toast.makeText(this.ctx, 
+					"Sync already in progress...", Toast.LENGTH_LONG).show();
 		}
 		else if ( result == RESULT_FAILURE_AUTH ) {
 			if (this.ctx instanceof Activity)
@@ -295,7 +299,7 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 						new Intent("org.thomnichols.gmarks.action.LOGIN"), 
 						Activity.RESULT_OK );
 		}
-		else Toast.makeText(this.ctx, "GMarks sync error", Toast.LENGTH_LONG).show();
+		else if (showToast) Toast.makeText(this.ctx, "GMarks sync error", Toast.LENGTH_LONG).show();
 	}
 	
 	@Override protected void onCancelled() {
