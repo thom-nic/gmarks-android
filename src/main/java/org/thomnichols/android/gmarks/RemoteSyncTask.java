@@ -14,6 +14,7 @@ import android.app.ListActivity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.Service;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -141,7 +142,7 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
     			}
     			finally { cursor.close(); }
         	}
-			
+
 			// sync bookmarks:
 	    	Iterable<Bookmark> allBookmarks = remoteSvc.getAllBookmarks();
     		int count = 0;
@@ -298,6 +299,13 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 				((Activity)this.ctx).startActivityForResult(
 						new Intent("org.thomnichols.gmarks.action.LOGIN"), 
 						Activity.RESULT_OK );
+			else if (this.ctx instanceof Service) {// show notification
+				Intent intent = new Intent( "org.thomnichols.gmarks.action.LOGIN" );
+				notification.setLatestEventInfo( this.ctx, 
+						"GMarks Sync", "Login error; please log in.", 
+						PendingIntent.getActivity(this.ctx, 0, intent, 0) );
+				this.notificationManager.notify(NOTIFY_SYNC_ID, notification);
+			}		
 		}
 		else if (showToast) Toast.makeText(this.ctx, "GMarks sync error", Toast.LENGTH_LONG).show();
 	}
