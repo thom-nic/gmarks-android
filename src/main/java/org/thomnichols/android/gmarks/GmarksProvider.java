@@ -99,6 +99,7 @@ public class GmarksProvider extends ContentProvider {
         case LABELS_URI:
             qb.setTables("labels join bookmark_labels on labels._id = bookmark_labels.label_id" );
             groupBy = "label";
+            sortOrder = Label.Columns.DEFAULT_SORT_ORDER;
             qb.setProjectionMap(labelsProjectionMap);
             break;
 

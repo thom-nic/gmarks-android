@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.FilterQueryProvider;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -78,6 +79,15 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
         		this, R.layout.labels_list_item, cursor,
                 new String[] { Label.Columns.TITLE, "count(label_id)" }, 
                 new int[] { R.id.title, R.id.count });
+        adapter.setStringConversionColumn(1); // used for text filtering
+        adapter.setFilterQueryProvider(new FilterQueryProvider() {
+			public Cursor runQuery(CharSequence constraint) {
+				String label = constraint.toString();
+				label.replaceAll("'", "");
+				return managedQuery( getIntent().getData(), PROJECTION, 
+						"label like '"+label+"%'", null, null);
+			}
+		});
         setListAdapter(adapter);
         
         ((Button)findViewById(R.id.syncBtn)).setOnClickListener(this);
