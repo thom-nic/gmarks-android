@@ -176,7 +176,7 @@ public class BackgroundService extends Service implements OnSharedPreferenceChan
 		}
 		else if ( KEY_SYNC_INTERVAL.equals(key) ) {
 			String intStr = sharedPreferences.getString(
-					KEY_BACKGROUND_SYNC_ENABLED, ""+DEFAULT_SYNC_INTERVAL);
+					KEY_SYNC_INTERVAL, ""+DEFAULT_SYNC_INTERVAL);
 			int interval = Integer.parseInt(intStr);
 			if ( interval != this.backgroundSyncInterval ) {
 				// stop pending intent & re-schedule

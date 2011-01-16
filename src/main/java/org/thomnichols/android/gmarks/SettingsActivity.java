@@ -80,7 +80,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 			// notify the service that settings have changed.  
 			// If there is nothing to do, it will shut back down.
 		}
-		else if ( KEY_SYNC_INTERVAL.equals(key) ) {
+		if ( KEY_SYNC_INTERVAL.equals(key) ) {  // change the 'summary' field
 			ListPreference intervalPref = (ListPreference)pref;
 	        int currentSetting = intervalPref.findIndexOfValue( (String)newVal );
 	        intervalPref.setSummary( intervalPref.getEntries()[currentSetting] );
