@@ -86,7 +86,7 @@ public class BookmarkViewActivity extends Activity implements OnClickListener {
         }
         else if (Intent.ACTION_INSERT.equals(action)) {
         	String label = intent.getStringExtra("label");
-        	if ( label != null )
+        	if ( label != null && !"^none".equals(label) )
         		((EditText)findViewById(R.id.labels)).setText(label + ", ");
         	findViewById(R.id.deleteBtn).setVisibility(View.GONE);
         }
