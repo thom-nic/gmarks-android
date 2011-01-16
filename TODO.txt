@@ -13,11 +13,15 @@ x Update label count after bookmark update
 x Webview login needs to run twice...
 x 'Choose a label' for live folder view
 x search from any activity
+x sync label to browser
+x 'GMark this' context menu item for http: URLs in other apps!
+x sync as a background service
 
-* sync label to browser
 * List sub-headers
 * Sort by {date|alpha}
-* sync as a background service
-* 'GMark this' context menu item for http: URLs in other apps!
+* GMarks available to global search
+* Search suggestions/ search history
+* Filter menu/ softkeyboard
+* Search menu
 * Favicon support
 * Kill Webview after login
