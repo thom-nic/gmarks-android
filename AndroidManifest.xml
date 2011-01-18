@@ -9,6 +9,7 @@
 		<uses-permission android:name='com.android.browser.permission.READ_HISTORY_BOOKMARKS' />
 		<uses-permission android:name='com.android.browser.permission.WRITE_HISTORY_BOOKMARKS' />
     <uses-permission android:name='android.permission.RECEIVE_BOOT_COMPLETED' />
+    <uses-permission android:name='android.permission.WAKE_LOCK' />
     
     <application android:label="@string/app_name" android:icon="@drawable/icon">
     
@@ -109,12 +110,11 @@
             </intent-filter>
         </activity>
 
-				<service android:name=".BackgroundService" android:process=":remote" />
+				<service android:name=".BackgroundService" />
 
         <receiver android:name='.ActionReceiver'
         		android:enabled='true' 
-        		android:permission='android.permission.RECEIVE_BOOT_COMPLETED'
-        		android:process=":remote">
+        		android:permission='android.permission.RECEIVE_BOOT_COMPLETED'>
         	<intent-filter>
         		<action android:name="android.intent.action.BOOT_COMPLETED" /> 
             <category android:name="android.intent.category.DEFAULT" />
