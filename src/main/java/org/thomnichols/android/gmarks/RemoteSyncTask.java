@@ -50,6 +50,7 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 	Context ctx;
 	long lastSyncTime = 0;
 	final SharedPreferences syncPrefs;
+	final SharedPreferences legacySyncPrefs;
 	boolean syncBrowserBookmarks;
 	String browserBookmarksLabel;
 	long lastBrowserSyncTime = 0;
@@ -63,13 +64,17 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 				"Gmarks sync in progress...", 
 				System.currentTimeMillis() );
 		
-		this.syncPrefs = ctx.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE);
+		this.syncPrefs = PreferenceManager.getDefaultSharedPreferences(this.ctx);
+		this.legacySyncPrefs = ctx.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE);
 	}
 	
 	@Override protected void onPreExecute() {
 		super.onPreExecute();
 		this.lastSyncTime = syncPrefs.getLong(PREF_LAST_SYNC, 0);
+		if ( lastSyncTime == 0 ) legacySyncPrefs.getLong(PREF_LAST_SYNC, 0);
 		this.lastBrowserSyncTime = syncPrefs.getLong(PREF_LAST_BROWSER_SYNC, 0);
+		if ( lastBrowserSyncTime == 0 ) legacySyncPrefs.getLong(PREF_LAST_BROWSER_SYNC, 0);
+		
 		Log.d(TAG,"Syncing bookmarks modified since: " + lastSyncTime);
 		this.thisSyncTime = System.currentTimeMillis();
 		
