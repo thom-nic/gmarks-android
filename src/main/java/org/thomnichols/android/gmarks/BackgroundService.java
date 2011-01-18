@@ -10,7 +10,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.IBinder;
-import android.os.SystemClock;
+import android.os.PowerManager;
+import android.os.PowerManager.WakeLock;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
@@ -26,6 +27,7 @@ public class BackgroundService extends Service implements OnSharedPreferenceChan
 	int DEFAULT_SYNC_INTERVAL = 60; // 1 hour in minutes
 	boolean backgroundSyncEnabled = false;
 	int backgroundSyncInterval = DEFAULT_SYNC_INTERVAL; // value is in minutes
+	SharedPreferences syncPrefs;
 
 	PendingIntent serviceLauncher = null; // created during onStart
 	
@@ -37,10 +39,10 @@ public class BackgroundService extends Service implements OnSharedPreferenceChan
     	scheduledAction.setAction(Intent.ACTION_SYNC);
     	this.serviceLauncher = PendingIntent.getService(this, 0, scheduledAction, 0);
 
-    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+    	this.syncPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 //    	prefs.registerOnSharedPreferenceChangeListener(this);
-    	this.backgroundSyncEnabled = prefs.getBoolean(KEY_BACKGROUND_SYNC_ENABLED, false);
-    	String intStr = prefs.getString(KEY_SYNC_INTERVAL, ""+DEFAULT_SYNC_INTERVAL);
+    	this.backgroundSyncEnabled = syncPrefs.getBoolean(KEY_BACKGROUND_SYNC_ENABLED, false);
+    	String intStr = syncPrefs.getString(KEY_SYNC_INTERVAL, ""+DEFAULT_SYNC_INTERVAL);
     	this.backgroundSyncInterval = Integer.parseInt(intStr); 
     	Log.d(TAG,"Enabled: " + backgroundSyncEnabled);
     	Log.d(TAG,"Interval: " + backgroundSyncInterval);
@@ -83,7 +85,7 @@ public class BackgroundService extends Service implements OnSharedPreferenceChan
 				SharedPreferences sharedPreferences = 
 					PreferenceManager.getDefaultSharedPreferences(this);
 				this.onSharedPreferenceChanged(sharedPreferences, key);
-			}
+			} else Log.w(TAG,"No 'key' extra for preference change!");
 		}
 		else Log.d(TAG, "Unknown action: " + action);
 		this.stopSelf(this.startID);
@@ -115,12 +117,10 @@ public class BackgroundService extends Service implements OnSharedPreferenceChan
     	// sync doesn't need to happen while the phone is asleep.  Nor does it 
     	// need to occur any more frequently after it wakes up.  So set once
     	// and re-schedule the next occurrence when the operation completes.
-    	am.set( AlarmManager.ELAPSED_REALTIME,
-        		SystemClock.elapsedRealtime() + intervalInMS, 
-        		serviceLauncher );
-//        am.setInexactRepeating(AlarmManager.ELAPSED_REALTIME,
-//        		SystemClock.elapsedRealtime() + intervalInMS, 
-//        		intervalInMS, serviceLauncher);
+    	long lastSync = syncPrefs.getLong(RemoteSyncTask.PREF_LAST_SYNC, 0);
+    	long wakeUp = lastSync + intervalInMS; 
+    	am.set( AlarmManager.RTC, wakeUp, serviceLauncher );
+    	Log.d(TAG,"Scheduled for " + wakeUp);
         return true;
 	}
 	
@@ -130,21 +130,32 @@ public class BackgroundService extends Service implements OnSharedPreferenceChan
         am.cancel(serviceLauncher);
         if ( ! scheduled.compareAndSet(true, false) )
         	Log.d(TAG, "Already unscheduled!");
-//        this.stopSelf();
 	}
 
     /**
      * The remote sync task. 
      */
-    class BackgroundSyncTask extends RemoteSyncTask {    	
+    class BackgroundSyncTask extends RemoteSyncTask {
+    	WakeLock wakeLock;
     	BackgroundSyncTask(Context ctx) {
 			super(ctx);
 			this.showToast = false;
 		}
     	
-		protected void onPostExecute(Integer result) {
+    	@Override protected void onPreExecute() {
+    		// don't let the phone fall asleep during sync
+    		final PowerManager powerManager = 
+    			(PowerManager)getSystemService(Context.POWER_SERVICE);
+    		this.wakeLock = powerManager.newWakeLock(
+    				PowerManager.PARTIAL_WAKE_LOCK, BackgroundService.TAG);
+    		wakeLock.acquire();
+    		super.onPreExecute();
+    	}
+    	
+		@Override protected void onPostExecute(Integer result) {
 			Log.d(BackgroundService.TAG,"SYNC Post-execute complete!");
 			super.onPostExecute(result);
+			this.wakeLock.release();
 			// schedule the next occurrence:
 			BackgroundService.this.scheduleSync(false);			
             // Done with our work...  stop the service!
@@ -183,7 +194,7 @@ public class BackgroundService extends Service implements OnSharedPreferenceChan
 				Log.d(TAG,"Re-scheduling background svc to: " + interval);
 				scheduleSync();  // this will overwrite a previously-scheduled intent
 			}
-		}
+		} else Log.w(TAG,"Unknown key: " + key);
 	}
 
     @Override
