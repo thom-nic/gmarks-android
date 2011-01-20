@@ -36,6 +36,7 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 	
 	static final String SHARED_PREFS_NAME = "sync_prefs";
 	static final String PREF_LAST_SYNC = "last_sync";
+	static final String PREF_LAST_SYNC_ATTEMPT = "last_sync_attempt";
 	static final String PREF_LAST_BROWSER_SYNC = "last_browser_sync";
 	
 	static final int NOTIFY_SYNC_ID = 1;
@@ -77,12 +78,12 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 		
 		Log.d(TAG,"Syncing bookmarks modified since: " + lastSyncTime);
 		this.thisSyncTime = System.currentTimeMillis();
+		syncPrefs.edit().putLong(PREF_LAST_SYNC_ATTEMPT, thisSyncTime).commit();
 		
-		SharedPreferences appPrefs = PreferenceManager.getDefaultSharedPreferences(ctx);
 		// determine if we should sync browser bookmarks:
-		this.syncBrowserBookmarks = appPrefs.getBoolean(
+		this.syncBrowserBookmarks = syncPrefs.getBoolean(
 				SettingsActivity.KEY_BROWSER_SYNC_ENABLED, false );
-		this.browserBookmarksLabel = appPrefs.getString(
+		this.browserBookmarksLabel = syncPrefs.getString(
 				SettingsActivity.KEY_BROWSER_SYNC_LABEL, null);
 	}
 	
@@ -91,11 +92,11 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
     		new GmarksProvider.DatabaseHelper(this.ctx);
 
     	BookmarksQueryService remoteSvc = BookmarksQueryService.getInstance();
-    	if ( ! remoteSvc.authInitialized ) 
-			remoteSvc.setAuthCookies( dbHelper.restoreCookies() );
 
     	SQLiteDatabase db = null;
     	try {
+        	if ( ! remoteSvc.authInitialized ) 
+    			remoteSvc.setAuthCookies( dbHelper.restoreCookies() );
     		db = dbHelper.getWritableDatabase();
     		db.beginTransaction();
     	}
