@@ -30,14 +30,18 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         labelPref.setEnabled( ((CheckBoxPreference) 
         		findPreference(KEY_BROWSER_SYNC_ENABLED)).isChecked() );
         
+        CheckBoxPreference backgroundEnabledPref = 
+        	(CheckBoxPreference) findPreference(KEY_BACKGROUND_SYNC_ENABLED);
+
+        
         ListPreference intervalPref = (ListPreference)findPreference(KEY_SYNC_INTERVAL);
         int currentSetting = intervalPref.findIndexOfValue( intervalPref.getValue() ); 
         intervalPref.setSummary( currentSetting < 0 ? "(None)" : 
         	intervalPref.getEntries()[currentSetting] );
-        intervalPref.setEnabled( ((CheckBoxPreference) 
-        		findPreference(KEY_BACKGROUND_SYNC_ENABLED)).isChecked() );
+        intervalPref.setEnabled( backgroundEnabledPref.isChecked() );
         
         labelPref.setOnPreferenceChangeListener(this);
+        backgroundEnabledPref.setOnPreferenceChangeListener(this);
         intervalPref.setOnPreferenceChangeListener(this);
     }
     

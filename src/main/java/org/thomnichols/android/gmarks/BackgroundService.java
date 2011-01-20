@@ -165,35 +165,31 @@ public class BackgroundService extends Service implements OnSharedPreferenceChan
     
     /**
      * This isn't actually likely to be notified of changes since most often
-     * when preferences change it will be shut down.
+     * when preferences change it will be shut down.  Not to mention, the 
+     * same instance variables (enabled and interval) are already pulled
+     * from the preferences during onCreate so they're not likely (ever?) to 
+     * change when this is called.  The net effect is basically to re-call a 
+     * schedule or unschedule whenever this a CONFIGURATION_CHANGE intent is sent.
      */
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
 			String key) {
 		if ( KEY_BACKGROUND_SYNC_ENABLED.equals(key) ) {
 			// if enabled/ disabled, start or stop the recurring task
 			boolean enabled = sharedPreferences.getBoolean(KEY_BACKGROUND_SYNC_ENABLED, false);
-			if ( ! enabled && this.backgroundSyncEnabled ) {
+			if ( ! enabled ) {
 				this.backgroundSyncEnabled = false;
-				// shut down pending intent
-				Log.d(TAG,"Disabling...");
 				unscheduleSync();
 			}
-			else if ( enabled && ! this.backgroundSyncEnabled ) {
+			else {
 				this.backgroundSyncEnabled = true;
-				// start up intent
-				Log.d(TAG,"Enabling...");
 				scheduleSync();
 			}
 		}
 		else if ( KEY_SYNC_INTERVAL.equals(key) ) {
 			String intStr = sharedPreferences.getString(
 					KEY_SYNC_INTERVAL, ""+DEFAULT_SYNC_INTERVAL);
-			int interval = Integer.parseInt(intStr);
-			if ( interval != this.backgroundSyncInterval ) {
-				// stop pending intent & re-schedule
-				Log.d(TAG,"Re-scheduling background svc to: " + interval);
-				scheduleSync();  // this will overwrite a previously-scheduled intent
-			}
+			this.backgroundSyncInterval = Integer.parseInt(intStr);
+			scheduleSync(false);  // this will overwrite a previously-scheduled intent
 		} else Log.w(TAG,"Unknown key: " + key);
 	}
 
