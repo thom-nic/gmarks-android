@@ -29,7 +29,7 @@
     <string name="pref_sync_label">Choose Browser Sync Label</string>
     <string name="pref_sync_interval">Sync Interval</string>
     <string name="pref_background_sync">Enable Background Sync</string>
-    <string name="pref_background_sync_summary">Service does not run when disabled</string>
+    <string name="pref_background_sync_summary">Automatically sync even if GMarks is not active</string>
     
     <!-- Preference options for sync duration -->
     <string-array name="pref_duration_entries">
