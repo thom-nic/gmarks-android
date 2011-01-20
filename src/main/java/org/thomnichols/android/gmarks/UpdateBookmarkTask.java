@@ -1,10 +1,7 @@
 package org.thomnichols.android.gmarks;
 
-import java.io.IOException;
-
 import org.thomnichols.android.gmarks.BookmarksQueryService.AuthException;
 import org.thomnichols.android.gmarks.BookmarksQueryService.NotFoundException;
-import org.thomnichols.android.gmarks.GmarksProvider.DBException;
 import org.thomnichols.android.gmarks.GmarksProvider.DatabaseHelper;
 
 import android.app.ProgressDialog;
@@ -59,17 +56,21 @@ public class UpdateBookmarkTask extends AsyncTask<Void,Void,Integer> {
 	
 	@Override protected Integer doInBackground(Void... arg0) {
 		BookmarksQueryService remoteSvc = BookmarksQueryService.getInstance();
-		
+		DatabaseHelper dbHelper = new DatabaseHelper(this.ctx);
+
 		try {
 			switch ( this.action ) {
 			case ACTION_NEW:
 				this.bookmark = remoteSvc.create(this.bookmark);
+				dbHelper.insert(this.bookmark, null);
 				break;
 			case ACTION_UPDATE:
-				remoteSvc.update(this.bookmark);
+				this.bookmark = remoteSvc.update(this.bookmark);
+				dbHelper.update(this.bookmark, null);
 				break;
 			case ACTION_DELETE:
 				remoteSvc.delete(this.bookmark.getGoogleId());
+				dbHelper.deleteBookmark(this.bookmark.get_id(), null);
 				break;
 			}
 			Log.d(TAG,"Success!");
@@ -81,10 +82,11 @@ public class UpdateBookmarkTask extends AsyncTask<Void,Void,Integer> {
 		catch ( NotFoundException ex ) {
 			return RESULT_NOT_FOUND;
 		}
-		catch ( IOException ex ) {
+		catch ( Exception ex ) {
 			Log.w(TAG, "Update error", ex );
 			return RESULT_ERROR_UNKNOWN;
 		}
+		finally { dbHelper.close(); }
 	}
 	
 	/**
@@ -121,29 +123,6 @@ public class UpdateBookmarkTask extends AsyncTask<Void,Void,Integer> {
 			return;
 		}
 		
-		// update the database
-		DatabaseHelper dbHelper = new DatabaseHelper(this.ctx);
-		
-		try {
-			switch (this.action) {
-			case ACTION_NEW:
-				dbHelper.insert(this.bookmark, null);
-				break;
-			case ACTION_UPDATE:
-				dbHelper.update(this.bookmark, null);
-				break;
-			case ACTION_DELETE:
-				dbHelper.deleteBookmark(this.bookmark.get_id(), null);
-				break;
-			}
-		}
-		catch ( DBException ex ) {
-			Log.w(TAG,"Database update failure", ex);
-		}
-		finally { dbHelper.close(); }
-		
-		// TODO update labels count
-
 		String notifyText = this.action == ACTION_NEW ? "Bookmark created."
 				: this.action == ACTION_UPDATE ? "Bookmark updated." :
 					"Bookmark deleted.";

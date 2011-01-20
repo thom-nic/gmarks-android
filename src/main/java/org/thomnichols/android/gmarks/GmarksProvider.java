@@ -292,10 +292,10 @@ public class GmarksProvider extends ContentProvider {
     }
     
 	public static class DatabaseHelper extends SQLiteOpenHelper {
-		static final int DB_VERSION = 1;
+		static final int DB_VERSION = 2;
 		
 		public DatabaseHelper( Context ctx ) {
-			super(ctx, DB_NAME, null, 1 );
+			super(ctx, DB_NAME, null, DB_VERSION );
 		}
 		
 		static final String[] cookieColumns = { 
@@ -349,7 +349,7 @@ public class GmarksProvider extends ContentProvider {
 		@Override
 		public void onUpgrade(SQLiteDatabase db, int fromVersion, int toVersion) {
 			Log.i(TAG,"UPGRADE database from v" + fromVersion + " to v" + toVersion );
-			if ( fromVersion < 5 && toVersion >= 5 ) {
+			if ( fromVersion < 2 && toVersion >= 2 ) {
 				db.execSQL("alter table " + BOOKMARKS_TABLE_NAME 
 						+ " add column favicon_url varchar(100) default null");
 				// TODO set last sync time back to 0 so that all favicons will be retrieved
@@ -453,8 +453,9 @@ public class GmarksProvider extends ContentProvider {
 	        	vals.put(Bookmark.Columns.MODIFIED_DATE, b.getModifiedDate());
 	        	vals.put(Bookmark.Columns.LABELS, b.getAllLabels());
 
-	        	long rowID = db.insertWithOnConflict( BOOKMARKS_TABLE_NAME, "", vals, 
-	        			SQLiteDatabase.CONFLICT_IGNORE );
+//	        	long rowID = db.insertWithOnConflict( BOOKMARKS_TABLE_NAME, "", vals, 
+//	        			SQLiteDatabase.CONFLICT_IGNORE );
+	        	long rowID = db.insert( BOOKMARKS_TABLE_NAME, "", vals );
 	        	if ( rowID < 0 ) throw new DBException( "Insert conflict: " + rowID );
 	        	b.set_id(rowID);
 
@@ -468,8 +469,9 @@ public class GmarksProvider extends ContentProvider {
         		vals.put(Bookmark.Columns.DESCRIPTION+"_fts", b.getDescription());
         		vals.put("labels_fts", b.getAllLabels());
         		try {
-    				rowID = db.insertWithOnConflict(BOOKMARKS_TABLE_NAME+"_FTS", "",
-        				vals, SQLiteDatabase.CONFLICT_IGNORE );
+//    				rowID = db.insertWithOnConflict(BOOKMARKS_TABLE_NAME+"_FTS", "",
+//        				vals, SQLiteDatabase.CONFLICT_IGNORE );
+    				rowID = db.insert(BOOKMARKS_TABLE_NAME+"_FTS", "", vals );
     				if ( rowID < 0 )
     					Log.w(TAG, "Row result error during FTS insert: "+ rowID);
         		}
@@ -486,6 +488,9 @@ public class GmarksProvider extends ContentProvider {
 	        	}
 
 	        	return b;
+	        }
+	        catch ( SQLiteConstraintException ex ) {
+	        	throw new DBException( "Error creating bookmark: " + b.getTitle(), ex);
 	        }
 	        finally { 
 	        	if ( closeDB ) {
@@ -511,7 +516,7 @@ public class GmarksProvider extends ContentProvider {
 	        	vals.put(Bookmark.Columns.TITLE, b.getTitle());
 	        	vals.put(Bookmark.Columns.URL, b.getUrl());
 	        	vals.put(Bookmark.Columns.DESCRIPTION, b.getDescription());
-        		vals.put(Bookmark.Columns.HOST, b.getHost());
+	        	if ( b.getHost() != null ) vals.put(Bookmark.Columns.HOST, b.getHost());
         		vals.put(Bookmark.Columns.FAVICON, b.getFaviconURL());
 	        	if ( b.getCreatedDate() > 0 ) 
 	        		vals.put(Bookmark.Columns.CREATED_DATE, b.getCreatedDate());
@@ -530,8 +535,9 @@ public class GmarksProvider extends ContentProvider {
 	        	}
 	        	else Log.v(TAG,"Updating bookmark _ID: " + b.get_id() );
 	        	
-	        	int result = db.updateWithOnConflict( BOOKMARKS_TABLE_NAME, vals,
-	        			whereClause, whereArgs, SQLiteDatabase.CONFLICT_IGNORE );
+//	        	int result = db.updateWithOnConflict( BOOKMARKS_TABLE_NAME, vals,
+//	        			whereClause, whereArgs, SQLiteDatabase.CONFLICT_IGNORE );
+	        	int result = db.update( BOOKMARKS_TABLE_NAME, vals, whereClause, whereArgs );
 	        	
 	        	if ( result < 1 ) throw new DBException( "Update conflict: " + result );
 
@@ -544,9 +550,11 @@ public class GmarksProvider extends ContentProvider {
         		vals.put(Bookmark.Columns.DESCRIPTION+"_fts", b.getDescription());
         		vals.put("labels_fts", b.getAllLabels());
         		try {
-    				long rowID = db.updateWithOnConflict(BOOKMARKS_TABLE_NAME+"_FTS", vals,
-    						"docid=?", new String[] { ""+b.get_id() },
-    						SQLiteDatabase.CONFLICT_IGNORE );
+//    				long rowID = db.updateWithOnConflict(BOOKMARKS_TABLE_NAME+"_FTS", vals,
+//    						"docid=?", new String[] { ""+b.get_id() },
+//    						SQLiteDatabase.CONFLICT_IGNORE );
+    				long rowID = db.update(BOOKMARKS_TABLE_NAME+"_FTS", vals,
+    						"docid=?", new String[] { ""+b.get_id() } );
     				if ( rowID < 0 )
     					Log.w(TAG, "Row result error during FTS update: "+ rowID);
         		}
@@ -561,6 +569,9 @@ public class GmarksProvider extends ContentProvider {
 	        		Log.d(TAG, "Committing changes: " + b.getTitle() );
 	        		db.setTransactionSuccessful();
 	        	}
+	        }
+	        catch ( SQLiteConstraintException ex ) {
+	        	throw new DBException( "Error updating bookmark " + b.get_id(), ex);
 	        }
 	        finally {
 	        	if ( closeDB ) {
@@ -591,8 +602,9 @@ public class GmarksProvider extends ContentProvider {
 	        		if ( ! c.moveToFirst() ) { // insert a new label
 	        			vals.clear();
 	        			vals.put(Label.Columns.TITLE, label);
-	        			labelID = db.insertWithOnConflict(LABELS_TABLE_NAME, "", vals, 
-	        					SQLiteDatabase.CONFLICT_IGNORE);
+//	        			labelID = db.insertWithOnConflict(LABELS_TABLE_NAME, "", vals, 
+//	        					SQLiteDatabase.CONFLICT_IGNORE);
+	        			labelID = db.insert(LABELS_TABLE_NAME, "", vals );
 	        		}
 	        		else labelID = c.getLong(0); // get label ID
         		} finally { c.close(); }
@@ -604,8 +616,9 @@ public class GmarksProvider extends ContentProvider {
         			vals.clear();
         			vals.put("label_id", labelID);
         			vals.put("bookmark_id", b.get_id());
-        			long result = db.insertWithOnConflict(BOOKMARK_LABELS_TABLE_NAME, 
-        					"", vals, SQLiteDatabase.CONFLICT_IGNORE);
+//        			long result = db.insertWithOnConflict(BOOKMARK_LABELS_TABLE_NAME, 
+//        					"", vals, SQLiteDatabase.CONFLICT_IGNORE);
+        			long result = db.insert(BOOKMARK_LABELS_TABLE_NAME, "", vals );
         			
     				if ( result < 0 )
     					Log.w(TAG, "Couldn't update label count for label ID: " + labelID);

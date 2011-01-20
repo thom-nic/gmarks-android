@@ -3,7 +3,6 @@
 import static org.thomnichols.android.gmarks.GmarksProvider.BOOKMARKS_TABLE_NAME;
 import static org.thomnichols.android.gmarks.GmarksProvider.LABELS_TABLE_NAME;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.thomnichols.android.gmarks.BookmarksQueryService.AuthException;
@@ -129,19 +128,24 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
     			try {
 	    			if ( cursor.moveToFirst() ) { // update label
 	    				Long rowID = cursor.getLong(0);
-	    				int rowCount = db.updateWithOnConflict( 
-	    						LABELS_TABLE_NAME, vals, 
-	    						Label.Columns._ID+"=?", 
-	    						new String[] { rowID.toString() },
-	    						SQLiteDatabase.CONFLICT_FAIL );
+// 	    				int rowCount = db.updateWithOnConflict( 
+//	    						LABELS_TABLE_NAME, vals, 
+//	    						Label.Columns._ID+"=?", 
+//	    						new String[] { rowID.toString() },
+//	    						SQLiteDatabase.CONFLICT_FAIL );
+	    				int rowCount = db.update( 
+		    						LABELS_TABLE_NAME, vals, 
+		    						Label.Columns._ID+"=?", 
+		    						new String[] { rowID.toString() } );
 	    				if ( rowCount != 1 ) 
 	    					Log.w(TAG,"Unexpected result (" + rowCount 
 	    							+ ") for label update: " + l.getTitle() );
 	    			}
 	    			else {  // insert new label
 	    				vals.put(Label.Columns.TITLE, l.getTitle());
-	    				long rowID = db.insertWithOnConflict( LABELS_TABLE_NAME, 
-	        				"", vals, SQLiteDatabase.CONFLICT_FAIL );
+//	    				long rowID = db.insertWithOnConflict( LABELS_TABLE_NAME, 
+//	        				"", vals, SQLiteDatabase.CONFLICT_FAIL );
+	    				long rowID = db.insert( LABELS_TABLE_NAME, "", vals );
 	    				if ( rowID < 0 ) Log.w(TAG,"Label insert returned " + 
 	    						rowID + " for label: " + l.getTitle() );
 	    			}
@@ -184,19 +188,23 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
         			if ( ! cursor.moveToFirst() ) { // insert a new bookmark row
 //        				Log.v(TAG, "Inserting bookmark: " + b.getTitle() );
                 		vals.put(Bookmark.Columns.GOOGLEID, b.getGoogleId());
-		        		bookmarkRowID = db.insertWithOnConflict(
-		        				BOOKMARKS_TABLE_NAME, "", vals,
-		        				SQLiteDatabase.CONFLICT_ABORT );
+//		        		bookmarkRowID = db.insertWithOnConflict(
+//		        				BOOKMARKS_TABLE_NAME, "", vals,
+//		        				SQLiteDatabase.CONFLICT_ABORT );
+		        		bookmarkRowID = db.insert( BOOKMARKS_TABLE_NAME, "", vals );
 		        		
 		        		bookmarkInserted = true;
         			}
         			else { // update current bookmark:
         				bookmarkRowID = cursor.getLong(0);
 //	        			Log.v( TAG, "Updating bookmark: " + b.getTitle() );
-	        			db.updateWithOnConflict( BOOKMARKS_TABLE_NAME, 
+//	        			db.updateWithOnConflict( BOOKMARKS_TABLE_NAME, 
+//	        					vals, Bookmark.Columns._ID+ "=?", 
+//	        					new String[] { bookmarkRowID.toString() },
+//	        					SQLiteDatabase.CONFLICT_ABORT );
+	        			db.update( BOOKMARKS_TABLE_NAME, 
 	        					vals, Bookmark.Columns._ID+ "=?", 
-	        					new String[] { bookmarkRowID.toString() },
-	        					SQLiteDatabase.CONFLICT_ABORT );
+	        					new String[] { bookmarkRowID.toString() } );
 	        		}
         			if ( bookmarkRowID == null ) {
         				Log.w(TAG, "No row ID while attempting to insert bookmark: " + b.getTitle() );
@@ -220,8 +228,9 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
         		long result = -1;
         		try {
         			if ( bookmarkInserted )
-        				result = db.insertWithOnConflict(BOOKMARKS_TABLE_NAME+"_FTS", "",
-	        				vals, SQLiteDatabase.CONFLICT_IGNORE );
+//        				result = db.insertWithOnConflict(BOOKMARKS_TABLE_NAME+"_FTS", "",
+//    	        				vals, SQLiteDatabase.CONFLICT_IGNORE );
+        				result = db.insert(BOOKMARKS_TABLE_NAME+"_FTS", "", vals );
         		}
         		catch ( SQLiteConstraintException ex ) {
         			// this keeps throwing an exception even though I am using 
@@ -230,9 +239,11 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
         		}
         		if ( result < 0 ) { // update, not insert:
         			vals.remove("docid");
-        			result = db.updateWithOnConflict(BOOKMARKS_TABLE_NAME+"_FTS", vals, 
-        					"docid=?", new String[] { bookmarkRowID.toString() }, 
-        					SQLiteDatabase.CONFLICT_FAIL );
+//        			result = db.updateWithOnConflict(BOOKMARKS_TABLE_NAME+"_FTS", vals, 
+//        					"docid=?", new String[] { bookmarkRowID.toString() }, 
+//        					SQLiteDatabase.CONFLICT_FAIL );
+        			result = db.update(BOOKMARKS_TABLE_NAME+"_FTS", vals, 
+        					"docid=?", new String[] { bookmarkRowID.toString() } );
         			if ( result < 0 ) {
         				Log.w(TAG, "Error updating FTS table for bookmark: " + b.getTitle() );
         			}
@@ -269,13 +280,13 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
         				this.browserBookmarksLabel, this.lastBrowserSyncTime );
         	}			
 		}
-		catch ( IOException ex ) {
-			Log.w(TAG,"IOException while syncing browser bookmarks", ex);
-			return RESULT_FAILURE_UNKNOWN;
-		}
 		catch ( DBException ex ) {
 			Log.w(TAG,"Database error while syncing browser bookmarks", ex);
 			return RESULT_FAILURE_DB;
+		}
+		catch ( Exception ex ) {
+			Log.w(TAG,"Exception while syncing browser bookmarks", ex);
+			return RESULT_FAILURE_UNKNOWN;
 		}
 		
     	return RESULT_SUCCESS;
