@@ -67,7 +67,7 @@ public class BookmarksQueryService {
 	protected HttpContext ctx;
 //	protected String USER_AGENT = "";
 	protected CookieStore cookieStore;
-	protected String TAG = "BOOKMARKS QUERY";
+	protected String TAG = "GMARKS REMOTE SVC";
 	protected boolean authInitialized = false;
 	protected String xtParam = null;
 	protected String mainThreadId = null;
@@ -354,6 +354,8 @@ public class BookmarksQueryService {
 					-1, // no created date in response
 					respObj.getLong("timestamp") );
 			
+			if ( respObj.has("faviconUrl") ) b.setFaviconURL(respObj.getString("faviconUrl"));
+			
 //			Log.v(TAG, "RESPONSE: " + respObj );
 			if ( respObj.has("labels") ) {
 				JSONArray labelJSON = respObj.getJSONArray("labels");
@@ -370,15 +372,16 @@ public class BookmarksQueryService {
 		}
 	}
 	
-	protected String getXtParam() throws IOException {
+	protected String getXtParam() throws AuthException, IOException {
 		if ( this.xtParam != null ) return this.xtParam; // already init'd
 		
 		HttpGet get = new HttpGet("https://www.google.com/bookmarks/l");
 		
 		HttpResponse resp = http.execute(get, this.ctx);
 		
-		// TODO auth check
-		final int responseCode = resp.getStatusLine().getStatusCode(); 
+		final int responseCode = resp.getStatusLine().getStatusCode();
+		if ( responseCode == 401 ) 
+			throw new AuthException("Please log in");
 		if (  responseCode != 200 ) 
 			throw new IOException( "Unexpected response code: " + responseCode );
 		
@@ -398,7 +401,7 @@ public class BookmarksQueryService {
 		// Get main thread ID:
 		final String mainThreadSearchString = "(a.threadID):\"";
 		startIndex = respString.indexOf(mainThreadSearchString);
-		if ( startIndex < 0 ) throw new IOException("Could not find xtSearchString");
+		if ( startIndex < 0 ) throw new IOException("Could not find thread ID");
 		startIndex += mainThreadSearchString.length(); 
 		this.mainThreadId = respString.substring( startIndex, 
 				respString.indexOf("\"", startIndex) );
@@ -453,15 +456,10 @@ public class BookmarksQueryService {
 		}
 	}
 	
-	public Iterable<Bookmark> getAllBookmarksForLabel(String label) {
-		String query = "label%3A%22" + label + "%22";
-		return new AllBookmarksIterator(query);
-	}
-	
 	/**
 	 * This has the potential to be relatively large..
 	 */
-	public Iterable<Bookmark> getAllBookmarks() {
+	public Iterable<Bookmark> getAllBookmarks() throws AuthException, IOException {
 		// make a sequence of JSON requests until they've all been retrieved.
 		// max 25 bookmarks can be requested at one time.
 		return new AllBookmarksIterator();
@@ -479,20 +477,19 @@ public class BookmarksQueryService {
 		
 		JSONObject currentBatch = null;
 		int currentQueryIndex = 0;
+		// needs threadID params:
+//		String uriBase = "https://www.google.com/bookmarks/api/thread?op=ShowThread";
 		String uriBase = "https://www.google.com/bookmarks/api/threadsearch?g=Time&nr=25&start=";
 		int totalItems = -1; 
 		int currentItemIndex = 0;
-		String filter = "";
 
 		JSONArray currentSection = null;
 		int sectionIndex = 0;
 		
-		public AllBookmarksIterator() { this(null); }
-		
-		public AllBookmarksIterator( String filter ) {
-			if ( filter != null ) this.filter = "&q=" + filter;
+		public AllBookmarksIterator() throws AuthException, IOException { 
+			getXtParam(); // ensures we're logged in & have the default thread ID
 		}
-		
+
 		private boolean getNextSection() {
 			if ( currentBatch == null ) return false;
 			try {
@@ -515,10 +512,10 @@ public class BookmarksQueryService {
 		private boolean queryNext() throws IteratorException {
 			try {
 				this.currentBatch = BookmarksQueryService.this.queryJSON(
-						uriBase + currentQueryIndex + this.filter );
+						uriBase + currentQueryIndex );
 				this.currentItemIndex = 0;
 				this.sectionIndex = 0;
-				
+
 				if ( this.totalItems < 0 ) this.totalItems = currentBatch.getInt("nr");
 				
 				JSONArray sectionList = currentBatch.getJSONArray("threadTitles");
@@ -526,7 +523,7 @@ public class BookmarksQueryService {
 					Log.w(TAG, "JSON response has 0 items!");
 					return false;
 				}
-				
+
 				this.currentSection = sectionList.getJSONObject(sectionIndex++).getJSONArray("sectionContent");
 				this.currentQueryIndex += currentSection.length();
 				return this.currentSection.length() > 0;
@@ -548,9 +545,10 @@ public class BookmarksQueryService {
 				|| getNextSection() || queryNext();
 		}
 
-		public Bookmark next() {
+		public Bookmark next() throws IteratorException {
 			try {
 				JSONObject item = this.currentSection.getJSONObject(currentItemIndex++);
+//				Log.v(TAG,item.toString());
 				Bookmark bookmark = new Bookmark( 
 						item.getString("elementId"),
 						item.getString("threadId"),
@@ -560,26 +558,26 @@ public class BookmarksQueryService {
 						item.getString("description"),
 						item.getLong("timestamp"),
 						item.getLong("modifiedTimestamp") );
-				JSONArray labelJSON = item.getJSONArray("labels");
-				
-				for ( int i=0; i< labelJSON.length(); i++ )
-					bookmark.getLabels().add(labelJSON.getString(i));
+
+				if ( item.has("labels") ) {
+					JSONArray labelJSON = item.getJSONArray("labels");
+
+					for ( int i=0; i< labelJSON.length(); i++ )
+						bookmark.getLabels().add(labelJSON.getString(i));
+				}
+				if ( item.has("faviconUrl") )
+					bookmark.setFaviconURL(item.getString("faviconUrl"));
 				
 				return bookmark;
 			}
 			catch ( JSONException ex ) {
-				Log.w(TAG, "Error parsing JSON item" + ex.getMessage());
-				return null;
+				Log.w(TAG, "Error parsing bookmark from JSON", ex);
+				throw new IteratorException( "Error parsing bookmark from JSON", ex);
 			}
 		}
 
-		public void remove() {
-			throw new UnsupportedOperationException();
-		}
+		public void remove() { throw new UnsupportedOperationException(); }
 
-		public Iterator<Bookmark> iterator() {
-			return this;
-		}
-		
+		public Iterator<Bookmark> iterator() { return this; }
 	}
 }

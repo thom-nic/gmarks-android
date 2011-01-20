@@ -23,6 +23,7 @@ public class Bookmark {
 	private String title;
 	private String url;
 	private String host;
+	private String faviconURL;
 	private String description;
 	private long createdDate;
 	private long modifiedDate;
@@ -88,6 +89,14 @@ public class Bookmark {
 		return host;
 	}
 
+	public String getFaviconURL() {
+		return faviconURL;
+	}
+
+	public void setFaviconURL(String url) {
+		this.faviconURL = url;
+	}
+
 	public String getDescription() {
 		return description;
 	}
@@ -118,6 +127,7 @@ public class Bookmark {
 		public static final String TITLE = "title";
 		public static final String URL = "url";
 		public static final String HOST = "host";
+		public static final String FAVICON = "favicon_url";
 		public static final String DESCRIPTION = "description";
 		public static final String CREATED_DATE = "created";
 		public static final String MODIFIED_DATE = "modified";

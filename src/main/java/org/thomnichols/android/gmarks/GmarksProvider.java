@@ -264,6 +264,7 @@ public class GmarksProvider extends ContentProvider {
         bookmarksProjectionMap.put(Bookmark.Columns.LABELS, Bookmark.Columns.LABELS);
         bookmarksProjectionMap.put(Bookmark.Columns.CREATED_DATE, Bookmark.Columns.CREATED_DATE);
         bookmarksProjectionMap.put(Bookmark.Columns.MODIFIED_DATE, Bookmark.Columns.MODIFIED_DATE);
+        bookmarksProjectionMap.put(Bookmark.Columns.FAVICON, Bookmark.Columns.FAVICON);
         
         labelsProjectionMap = new HashMap<String, String>();
         labelsProjectionMap.put(Label.Columns._ID, Label.Columns._ID);
@@ -318,6 +319,7 @@ public class GmarksProvider extends ContentProvider {
 					+ "title varchar(50) not null,"
 					+ "url varchar(200) not null,"
 					+ "host varchar(50) not null,"
+					+ "favicon_url varchar(100) default null,"
 					+ "description varchar(150) not null default ''," 
 					+ "labels varchar(150) not null default '',"
 					+ "created long not null,"
@@ -345,8 +347,13 @@ public class GmarksProvider extends ContentProvider {
 		}
 	
 		@Override
-		public void onUpgrade(SQLiteDatabase arg0, int arg1, int arg2) {
-			// TODO Nothing to do until we're upgrading from old db.
+		public void onUpgrade(SQLiteDatabase db, int fromVersion, int toVersion) {
+			Log.i(TAG,"UPGRADE database from v" + fromVersion + " to v" + toVersion );
+			if ( fromVersion < 5 && toVersion >= 5 ) {
+				db.execSQL("alter table " + BOOKMARKS_TABLE_NAME 
+						+ " add column favicon_url varchar(100) default null");
+				// TODO set last sync time back to 0 so that all favicons will be retrieved
+			}
 		}
 		
 		@Override
@@ -407,7 +414,7 @@ public class GmarksProvider extends ContentProvider {
 		        		+ " join labels l on l._id=bl.label_id", 
 		        		new String[] {"b._id", "b.google_id", "b.thread_id",
 		        				"b.title", "b.url", "b.host", "b.description",
-		        				"b.created", "b.modified"},
+		        				"b.created", "b.modified", "b.favicon_url"},
 		        		"l.label=?", new String[] {label}, null, null, null);
 
 		        List<Bookmark> bookmarks = new ArrayList<Bookmark>();
@@ -416,6 +423,7 @@ public class GmarksProvider extends ContentProvider {
 			        	Bookmark b = new Bookmark(c.getString(1),c.getString(2),c.getString(3),
 			        			c.getString(4),c.getString(5),c.getString(6),c.getLong(7),c.getLong(8));
 			        	b.set_id(c.getLong(0));
+			        	b.setFaviconURL(c.getString(9));
 			        	bookmarks.add(b);
 		        	}
 		        }
@@ -440,6 +448,7 @@ public class GmarksProvider extends ContentProvider {
 	        	vals.put(Bookmark.Columns.URL, b.getUrl());
 	        	vals.put(Bookmark.Columns.DESCRIPTION, b.getDescription());
 	        	vals.put(Bookmark.Columns.HOST, b.getHost());
+	        	vals.put(Bookmark.Columns.FAVICON, b.getFaviconURL());
 	        	vals.put(Bookmark.Columns.CREATED_DATE, b.getCreatedDate());
 	        	vals.put(Bookmark.Columns.MODIFIED_DATE, b.getModifiedDate());
 	        	vals.put(Bookmark.Columns.LABELS, b.getAllLabels());
@@ -472,7 +481,7 @@ public class GmarksProvider extends ContentProvider {
 
 	        	
 	        	if ( closeDB ) {
-	        		Log.d(TAG, "COmmitting changes: " + b.getTitle() );
+	        		Log.d(TAG, "Committing changes: " + b.getTitle() );
 	        		db.setTransactionSuccessful();
 	        	}
 
@@ -502,8 +511,8 @@ public class GmarksProvider extends ContentProvider {
 	        	vals.put(Bookmark.Columns.TITLE, b.getTitle());
 	        	vals.put(Bookmark.Columns.URL, b.getUrl());
 	        	vals.put(Bookmark.Columns.DESCRIPTION, b.getDescription());
-	        	if ( b.getHost() != null ) 
-	        		vals.put(Bookmark.Columns.HOST, b.getHost());
+        		vals.put(Bookmark.Columns.HOST, b.getHost());
+        		vals.put(Bookmark.Columns.FAVICON, b.getFaviconURL());
 	        	if ( b.getCreatedDate() > 0 ) 
 	        		vals.put(Bookmark.Columns.CREATED_DATE, b.getCreatedDate());
 	        	if ( b.getModifiedDate() > 0 ) 
@@ -549,7 +558,7 @@ public class GmarksProvider extends ContentProvider {
 
 	        	
 	        	if ( closeDB ) {
-	        		Log.d(TAG, "COmmitting changes: " + b.getTitle() );
+	        		Log.d(TAG, "Committing changes: " + b.getTitle() );
 	        		db.setTransactionSuccessful();
 	        	}
 	        }
@@ -635,7 +644,7 @@ public class GmarksProvider extends ContentProvider {
 					Log.w(TAG, "Row result error during FTS delete: "+ count);
 	    		
 	        	if ( closeDB ) {
-	        		Log.d(TAG, "COmmitting delete for bookmark ID: " + id );
+	        		Log.d(TAG, "Committing delete for bookmark ID: " + id );
 	        		db.setTransactionSuccessful();
 	        	}
 	    		
