@@ -117,7 +117,7 @@ public class BackgroundService extends Service implements OnSharedPreferenceChan
     	// sync doesn't need to happen while the phone is asleep.  Nor does it 
     	// need to occur any more frequently after it wakes up.  So set once
     	// and re-schedule the next occurrence when the operation completes.
-    	long lastSync = syncPrefs.getLong(RemoteSyncTask.PREF_LAST_SYNC, 0);
+    	long lastSync = syncPrefs.getLong(RemoteSyncTask.PREF_LAST_SYNC_ATTEMPT, 0);
     	long wakeUp = lastSync + intervalInMS; 
     	am.set( AlarmManager.RTC, wakeUp, serviceLauncher );
     	Log.d(TAG,"Scheduled for " + wakeUp);
@@ -157,7 +157,7 @@ public class BackgroundService extends Service implements OnSharedPreferenceChan
 			super.onPostExecute(result);
 			this.wakeLock.release();
 			// schedule the next occurrence:
-			BackgroundService.this.scheduleSync(false);			
+			BackgroundService.this.scheduleSync(false);
             // Done with our work...  stop the service!
             BackgroundService.this.stopSelf(startID);    
     	}
