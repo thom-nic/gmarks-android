@@ -56,7 +56,13 @@ public class BackgroundService extends Service implements OnSharedPreferenceChan
 		
 		if ( ! started.compareAndSet(false, true) )
 			Log.w(TAG, "Already started!");
-		
+
+		if ( intent == null ) {
+			Log.w(TAG, "Null intent; don't know what to do!");
+			this.stopSelf(this.startID);
+			return;
+		}
+			
 		final String action = intent.getAction();
 		if ( Intent.ACTION_RUN.equals(action) ) {
 			// schedule the recurring service then quit immediately.
