@@ -1,12 +1,6 @@
 package org.thomnichols.android.gmarks;
 
-import org.thomnichols.android.gmarks.R;
-
-import android.app.Activity;
-import android.app.ListActivity;
-import android.content.ContentUris;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.CursorWrapper;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,9 +8,7 @@ import android.provider.LiveFolders;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 
 public class LiveFolder extends LabelsListActivity {
 	static final String TAG = "GMARKS LIVE FOLDER PICKER";
