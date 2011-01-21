@@ -118,7 +118,7 @@ public class UpdateBookmarkTask extends AsyncTask<Void,Void,Integer> {
 		}
 		else if ( resultCode !=  RESULT_OK ) {
 			Log.w(TAG,"Update remote failed: " );
-			String text = this.action == ACTION_DELETE ? "Delete failed" : "Save failed";
+			String text = this.action == ACTION_DELETE ? "Delete failed!" : "Save failed!";
 			Toast.makeText(this.ctx, text, Toast.LENGTH_LONG).show();
 			return;
 		}
