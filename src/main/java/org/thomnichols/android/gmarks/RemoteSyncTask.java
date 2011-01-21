@@ -71,9 +71,11 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 	@Override protected void onPreExecute() {
 		super.onPreExecute();
 		this.lastSyncTime = syncPrefs.getLong(PREF_LAST_SYNC, 0);
-		if ( lastSyncTime == 0 ) legacySyncPrefs.getLong(PREF_LAST_SYNC, 0);
+		if ( lastSyncTime == 0 ) 
+			lastSyncTime = legacySyncPrefs.getLong(PREF_LAST_SYNC, 0);
 		this.lastBrowserSyncTime = syncPrefs.getLong(PREF_LAST_BROWSER_SYNC, 0);
-		if ( lastBrowserSyncTime == 0 ) legacySyncPrefs.getLong(PREF_LAST_BROWSER_SYNC, 0);
+		if ( lastBrowserSyncTime == 0 ) 
+			lastBrowserSyncTime = legacySyncPrefs.getLong(PREF_LAST_BROWSER_SYNC, 0);
 		
 		Log.d(TAG,"Syncing bookmarks modified since: " + lastSyncTime);
 		this.thisSyncTime = System.currentTimeMillis();
