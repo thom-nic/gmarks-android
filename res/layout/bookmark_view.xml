@@ -40,9 +40,8 @@
 			    
 				<TextView android:text="Labels"  
 					style="@style/label" />
-				<EditText android:id="@+id/labels"
-					style="@style/editLine"				 
-			    android:singleLine="true" />
+				<MultiAutoCompleteTextView android:id="@+id/labels"
+					style="@style/editLine" />
 		  </LinearLayout>
 	  </ScrollView>
 	  	

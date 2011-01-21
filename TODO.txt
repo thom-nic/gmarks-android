@@ -17,6 +17,7 @@ x sync label to browser
 x 'GMark this' context menu item for http: URLs in other apps!
 x sync as a background service
 x Wake lock during sync
+x Label suggest/ auto-complete
 
 * Favicon support
 * List sub-headers

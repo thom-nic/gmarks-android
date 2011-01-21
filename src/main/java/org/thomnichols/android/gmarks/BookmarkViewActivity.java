@@ -11,6 +11,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FilterQueryProvider;
+import android.widget.MultiAutoCompleteTextView;
+import android.widget.SimpleCursorAdapter;
 
 /**
  * TODO add labels list
@@ -28,6 +31,10 @@ public class BookmarkViewActivity extends Activity implements OnClickListener {
 	        Bookmark.Columns.DESCRIPTION,  // 4
 	        Bookmark.Columns.LABELS  // 4
 	};
+    private static final String[] LABEL_PROJECTION = new String[] {
+    	Label.Columns._ID,
+    	Label.Columns.TITLE };
+
     private static final int COLUMN_INDEX_ID = 0;
     private static final int COLUMN_INDEX_GOOGLEID = 1;
     private static final int COLUMN_INDEX_THREADID = 2;
@@ -44,7 +51,7 @@ public class BookmarkViewActivity extends Activity implements OnClickListener {
 	private EditText titleField;
 	private EditText urlField;
 	private EditText descriptionField;
-	private EditText labelsField;
+	private MultiAutoCompleteTextView labelsField;
 	
 	ProgressDialog waitDialog;
 	 
@@ -109,7 +116,25 @@ public class BookmarkViewActivity extends Activity implements OnClickListener {
         this.titleField = (EditText) findViewById(R.id.title);
         this.urlField = (EditText) findViewById(R.id.url);
         this.descriptionField = (EditText) findViewById(R.id.description);
-        this.labelsField = (EditText) findViewById(R.id.labels);
+        this.labelsField = (MultiAutoCompleteTextView) findViewById(R.id.labels);
+
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, 
+        		R.layout.label_autocomplete_item,
+        		managedQuery(Label.CONTENT_URI, LABEL_PROJECTION, null, null, null),
+        		new String[] { Label.Columns.TITLE }, 
+        		new int[] { R.id.autocomplete_item} );
+        adapter.setStringConversionColumn(1); // used for text filtering
+        adapter.setFilterQueryProvider(new FilterQueryProvider() {
+			public Cursor runQuery(CharSequence constraint) {
+				if ( constraint == null || constraint.length() < 1 ) return null;
+				String label = constraint.toString();
+				label.replaceAll("'", "");
+				return managedQuery( Label.CONTENT_URI, LABEL_PROJECTION, 
+						"label like '"+label+"%'", null, null);
+			}
+		});
+        labelsField.setAdapter(adapter);
+        labelsField.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
         
         // Get the bookmark
         Log.d(TAG, "Getting data for: " + mUri);        
@@ -148,7 +173,7 @@ public class BookmarkViewActivity extends Activity implements OnClickListener {
             this.titleField.setTextKeepState( b.getTitle() );
             this.urlField.setTextKeepState( b.getUrl() );
             this.descriptionField.setTextKeepState( b.getDescription() );
-            this.labelsField.setTextKeepState( labels );
+            this.labelsField.setTextKeepState( labels + ", ");
             
             this.bookmark = b;
         }
@@ -182,13 +207,11 @@ public class BookmarkViewActivity extends Activity implements OnClickListener {
 			action = UpdateBookmarkTask.ACTION_DELETE;
 		}
 		
-		// TODO determine which labels were added or removed in order to 
-		// accurately update labels count
-		
         new UpdateBookmarkTask(action, newBookmark, this, true) {
     		@Override protected void onPostExecute(Integer resultCode) {
     			super.onPostExecute(resultCode);
-    			BookmarkViewActivity.this.finish();
+    			if ( resultCode ==  RESULT_OK ) 
+    				BookmarkViewActivity.this.finish();
     		}
     	}.execute();
 	}	
