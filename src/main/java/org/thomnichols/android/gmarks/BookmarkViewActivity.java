@@ -177,8 +177,18 @@ public class BookmarkViewActivity extends Activity implements OnClickListener {
             
             this.bookmark = b;
         }
-        else {
-        	this.bookmark = new Bookmark();
+        else this.bookmark = new Bookmark();
+        
+        if ( Intent.ACTION_DELETE.equals(getIntent().getAction()) ) {
+			Log.d(TAG, "Deleting bookmark ID: " + mUri + " ...");
+		
+	        new UpdateBookmarkTask(UpdateBookmarkTask.ACTION_DELETE, this.bookmark, this, true) {
+	    		@Override protected void onPostExecute(Integer resultCode) {
+	    			super.onPostExecute(resultCode);
+	    			if ( resultCode ==  RESULT_OK ) 
+	    				BookmarkViewActivity.this.finish();
+	    		}
+	    	}.execute();
         }
     }
         

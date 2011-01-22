@@ -71,6 +71,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.INSERT" />
                 <action android:name="android.intent.action.EDIT" />
+                <action android:name="android.intent.action.DELETE" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="vnd.android.cursor.item/vnd.google.bookmark" />
             </intent-filter>
