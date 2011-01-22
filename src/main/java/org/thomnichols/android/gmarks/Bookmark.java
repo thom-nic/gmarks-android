@@ -121,7 +121,10 @@ public class Bookmark {
 	}
 
 	public static final class Columns implements BaseColumns {
-		public static final String DEFAULT_SORT_ORDER = "modified DESC";
+		public static final String SORT_MODIFIED = "modified DESC";
+		public static final String SORT_TITLE = "title ASC";
+		public static final String DEFAULT_SORT_ORDER = SORT_MODIFIED;
+		
 		public static final String GOOGLEID = "google_id";
 		public static final String THREAD_ID = "thread_id";
 		public static final String TITLE = "title";
