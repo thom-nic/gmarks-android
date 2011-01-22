@@ -25,7 +25,9 @@ public class Label {
 	public int getCount() { return count; }
 	
 	public static final class Columns implements BaseColumns {
-		public static final String DEFAULT_SORT_ORDER = "label ASC";
+		public static final String SORT_ALPHA = "label ASC";
+		public static final String SORT_COUNT = "_count DESC";
+		public static final String DEFAULT_SORT_ORDER = SORT_ALPHA;
 
 		public static final String TITLE = "label";	
 		public static final String COUNT = "_count";

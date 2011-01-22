@@ -2,6 +2,14 @@
 	<item android:title="Add"
 		android:id="@+id/menu_add" 
 		android:icon="@android:drawable/ic_menu_add" />
+	<item android:titleCondensed="Sort by Alpha" 
+		android:title="Sort Alphabetically"
+		android:id="@+id/menu_sort_alpha" 
+		android:icon='@android:drawable/ic_menu_sort_alphabetically' />
+	<item android:titleCondensed="Sort by Count" 
+		android:title="Sort by Count"
+		android:id="@+id/menu_sort_count" 
+		android:icon='@android:drawable/ic_menu_sort_by_size' />
 	<item android:titleCondensed="Sync" 
 		android:title="Synchronize"
 		android:id="@+id/menu_sync" 

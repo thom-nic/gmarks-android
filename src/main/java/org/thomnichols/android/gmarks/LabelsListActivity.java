@@ -34,6 +34,11 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
     };
     
     protected static final int COLUMN_INDEX_TITLE = 1;
+    static final int SORT_ALPHA= 1;
+    static final int SORT_COUNT= 2;
+    static final String KEY_LABELS_SORT_PREF = "labels_sort_by";
+    
+    protected int currentSort = SORT_ALPHA;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,11 +73,12 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
     		setTitle(R.string.choose_label);
     	}
         
-        // Perform a managed query. The Activity will handle closing and requerying the cursor
-        // when needed.
         Log.i(TAG,"Intent URI: " + getIntent().getData() );
-        Cursor cursor = managedQuery( getIntent().getData(), PROJECTION, null, null,
-                Label.Columns.DEFAULT_SORT_ORDER );
+        this.currentSort = PreferenceManager.getDefaultSharedPreferences(this)
+        		.getInt(KEY_LABELS_SORT_PREF, SORT_ALPHA);
+        String sort = currentSort == SORT_ALPHA ? 
+        		Label.Columns.SORT_ALPHA : Label.Columns.SORT_COUNT;
+        Cursor cursor = managedQuery( getIntent().getData(), PROJECTION, null, null, sort );
         
         // Used to map labels from the database to views
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(
@@ -84,8 +90,10 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
 			public Cursor runQuery(CharSequence constraint) {
 				String label = constraint.toString();
 				label.replaceAll("'", "");
+		        String sort = currentSort == SORT_ALPHA ? 
+		        		Label.Columns.SORT_ALPHA : Label.Columns.SORT_COUNT;
 				return managedQuery( getIntent().getData(), PROJECTION, 
-						"label like '"+label+"%'", null, null);
+						"label like '"+label+"%'", null, sort);
 			}
 		});
         setListAdapter(adapter);
@@ -139,8 +147,13 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
     
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
+    	super.onPrepareOptionsMenu(menu);
+		menu.findItem(R.id.menu_sort_alpha).setVisible(
+				this.currentSort != SORT_ALPHA );
+		menu.findItem(R.id.menu_sort_count).setVisible(
+				this.currentSort != SORT_COUNT );
     	// TODO decide whether or not to make login/logout options visible
-    	return super.onPrepareOptionsMenu(menu);
+    	return true;
     }
     
     @Override
@@ -157,6 +170,22 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
         case R.id.menu_settings:
             startActivity(new Intent(this, SettingsActivity.class));
             return true;
+        case R.id.menu_sort_alpha:
+            this.currentSort = SORT_ALPHA; 
+            PreferenceManager.getDefaultSharedPreferences(this)
+            	.edit().putInt(KEY_LABELS_SORT_PREF, SORT_ALPHA).commit();
+        	((SimpleCursorAdapter)getListAdapter()).changeCursor(
+        			managedQuery( getIntent().getData(), PROJECTION, 
+    						null, null, Label.Columns.SORT_ALPHA) );
+        	break;
+        case R.id.menu_sort_count:
+            this.currentSort = SORT_COUNT;
+            PreferenceManager.getDefaultSharedPreferences(this)
+            	.edit().putInt(KEY_LABELS_SORT_PREF, SORT_COUNT).commit();
+        	((SimpleCursorAdapter)getListAdapter()).changeCursor(
+        			managedQuery( getIntent().getData(), PROJECTION, 
+    						null, null, Label.Columns.SORT_COUNT) );
+        	break;
 	    case R.id.menu_logout:
 	    	Log.d(TAG, "Logging out...");
 	    	BookmarksQueryService.getInstance().clearAuthCookies();
