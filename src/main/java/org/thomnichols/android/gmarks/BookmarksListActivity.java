@@ -61,6 +61,7 @@ public class BookmarksListActivity extends ListActivity {
 				.getInt(KEY_BOOKMARKS_SORT_PREF, SORT_MODIFIED);
 
         Intent intent = getIntent();
+        if (intent.getData() == null) intent.setData(Bookmark.CONTENT_URI);
         Uri uri = intent.getData();
         
         if ( Intent.ACTION_PICK.equals(intent.getAction()) ) {
