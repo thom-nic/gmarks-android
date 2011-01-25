@@ -43,8 +43,7 @@
         </activity>
         
         <activity android:name=".BookmarksListActivity"
-        			android:label="@string/bookmarks_activity"
-        			android:launchMode="singleTop">
+        			android:label="@string/app_name">
            <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.EDIT" />

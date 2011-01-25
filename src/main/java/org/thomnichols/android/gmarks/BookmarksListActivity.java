@@ -60,6 +60,8 @@ public class BookmarksListActivity extends ListActivity {
         this.currentSort = PreferenceManager.getDefaultSharedPreferences(this)
 				.getInt(KEY_BOOKMARKS_SORT_PREF, SORT_MODIFIED);
 
+        setTitle(R.string.bookmarks_activity);
+        
         final Intent intent = getIntent();
         if (intent.getData() == null) intent.setData(Bookmark.CONTENT_URI);
         Uri uri = intent.getData();
@@ -94,22 +96,6 @@ public class BookmarksListActivity extends ListActivity {
                 new String[] { Bookmark.Columns.TITLE, Bookmark.Columns.HOST }, 
                 new int[] { R.id.title, R.id.host } );
         setListAdapter(adapter);
-    }
-    
-    @Override
-    protected void onNewIntent(Intent intent) {
-    	super.onNewIntent(intent);
-    	final Uri uri = intent.getData();
-    	if ( Intent.ACTION_VIEW.equals(intent.getAction()) && 
-    			uri.getScheme().startsWith("http") ) {
-        	// this was the result of a search where an item was chosen; 
-        	// just start the view activity for that URL.
-        	startActivity(new Intent(Intent.ACTION_VIEW, uri));
-        	finish();
-        	return;
-        }
-    	((SimpleCursorAdapter)this.getListAdapter()).changeCursor(
-    			getCursorFromIntent(intent) );
     }
     
     protected Cursor getCursorFromIntent(Intent intent) {
