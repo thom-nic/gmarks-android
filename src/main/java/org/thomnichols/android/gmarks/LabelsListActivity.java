@@ -4,8 +4,10 @@ import org.thomnichols.android.gmarks.R;
 
 import android.app.ListActivity;
 import android.content.ContentUris;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 import android.net.Uri;
@@ -16,7 +18,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.WindowManager.LayoutParams;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.FilterQueryProvider;
 import android.widget.LinearLayout;
@@ -152,6 +157,12 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
 				this.currentSort != SORT_ALPHA );
 		menu.findItem(R.id.menu_sort_count).setVisible(
 				this.currentSort != SORT_COUNT );
+		
+		Configuration hwConfig = getResources().getConfiguration();
+		if (hwConfig.keyboard == Configuration.KEYBOARD_QWERTY &&
+				hwConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO)
+			// if HW keyboard visible, don't need to show the 'go to label' menu
+			menu.findItem(R.id.menu_go_to).setVisible(false);
     	// TODO decide whether or not to make login/logout options visible
     	return true;
     }
@@ -161,6 +172,11 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
         switch (item.getItemId()) {
         case R.id.menu_add:
         	startActivity(new Intent(Intent.ACTION_INSERT).setType(Bookmark.CONTENT_ITEM_TYPE));
+        	break;
+        case R.id.menu_go_to:
+//        	getWindow().setSoftInputMode(LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        	InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        	mgr.showSoftInput(getListView(), InputMethodManager.SHOW_FORCED);
         	break;
         case R.id.menu_sync:
         	Log.d(TAG, "Starting sync...");
