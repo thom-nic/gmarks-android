@@ -18,12 +18,14 @@ x 'GMark this' context menu item for http: URLs in other apps!
 x sync as a background service
 x Wake lock during sync
 x Label suggest/ auto-complete
+x Sort by {date|alpha}
+x GMarks available to global search
+x Search suggestions
 
+* Filter menu/ softkeyboard
+* search history
+* Search menu button
 * Favicon support
 * List sub-headers
-* Sort by {date|alpha}
-* GMarks available to global search
-* Search suggestions/ search history
-* Filter menu/ softkeyboard
-* Search menu
+* 'Google lists' support
 * Kill Webview after login
