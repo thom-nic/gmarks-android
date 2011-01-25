@@ -10,6 +10,7 @@ import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.cookie.BasicClientCookie;
 import org.thomnichols.android.gmarks.thirdparty.ArrayUtils;
 
+import android.app.SearchManager;
 import android.content.ContentProvider;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -39,13 +40,15 @@ public class GmarksProvider extends ContentProvider {
     private static Map<String, String> bookmarksProjectionMap;
     private static Map<String, String> labelsProjectionMap;
     private static Map<String, String> sLiveFolderProjectionMap;
+    private static Map<String, String> searchSuggestProjectionMap;
 
     private static final int BOOKMARKS_URI = 1;
     private static final int BOOKMARK_ID_URI = 2;
-    private static final int BOOKMARK_SEARCH_URI = 6;
     private static final int LABELS_URI = 3;
 //    private static final int LABELS_ID_URI = 4;
     private static final int LIVE_FOLDER_BOOKMARKS_URI = 5;
+    private static final int BOOKMARK_SEARCH_URI = 6;
+    private static final int BOOKMARK_SEARCH_SUGGEST_URI = 7;
 
     private static final UriMatcher sUriMatcher;
 
@@ -65,7 +68,7 @@ public class GmarksProvider extends ContentProvider {
 //        Log.d(TAG, "Managed query: " + uri);
         String groupBy = null;
         String orderBy = null;
-//        String limit = null;
+        String limit = null;
         switch (sUriMatcher.match(uri)) {
         case BOOKMARKS_URI:
             qb.setTables(BOOKMARKS_TABLE_NAME);
@@ -80,11 +83,21 @@ public class GmarksProvider extends ContentProvider {
             break;
 
         case BOOKMARK_SEARCH_URI:
-            String query = uri.getQueryParameter("q");
+        case BOOKMARK_SEARCH_SUGGEST_URI:
+        	String query = null;
+        	if (sUriMatcher.match(uri) == BOOKMARK_SEARCH_SUGGEST_URI ) {
+        		qb.setProjectionMap(searchSuggestProjectionMap);
+	        	// path looks like "search_suggest_query/[query]?limit=50
+        		query = uri.getLastPathSegment();
+                limit = uri.getQueryParameter("limit");        		
+        	}            
+            else query = uri.getQueryParameter("q");
+        	
             if ( query != null ) {
             	qb.setTables("bookmarks join bookmarks_FTS on bookmarks._id = bookmarks_FTS.docid");
             	qb.appendWhere("bookmarks_FTS MATCH ?");
-                selectionArgs = (String[])ArrayUtils.addAll(selectionArgs, new String[]{query});
+            	if ( selectionArgs == null ) selectionArgs = new String[]{query};
+            	else selectionArgs = (String[])ArrayUtils.addAll(selectionArgs, new String[]{query});
             }
             else if ( selectionArgs == null || selectionArgs.length < 1 )
             	throw new IllegalArgumentException("No search criteria given for query!");
@@ -128,7 +141,7 @@ public class GmarksProvider extends ContentProvider {
 
         // Get the database and run the query
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor c = qb.query(db, projection, selection, selectionArgs, groupBy, null, orderBy);
+        Cursor c = qb.query(db, projection, selection, selectionArgs, groupBy, null, orderBy, limit);
 
         // Tell the cursor what uri to watch, so it knows when its source data changes
         c.setNotificationUri(getContext().getContentResolver(), uri);
@@ -252,6 +265,8 @@ public class GmarksProvider extends ContentProvider {
         sUriMatcher.addURI(Bookmark.AUTHORITY, "labels", LABELS_URI);
 //        sUriMatcher.addURI(Bookmark.AUTHORITY, "labels/#", LABELS_ID_URI);
         sUriMatcher.addURI(Bookmark.AUTHORITY, "live_folders/bookmarks", LIVE_FOLDER_BOOKMARKS_URI);
+        sUriMatcher.addURI(Bookmark.AUTHORITY, SearchManager.SUGGEST_URI_PATH_QUERY + "/*", 
+        		BOOKMARK_SEARCH_SUGGEST_URI);
 
         bookmarksProjectionMap = new HashMap<String, String>();
         bookmarksProjectionMap.put(Bookmark.Columns._ID, Bookmark.Columns._ID);
@@ -269,8 +284,7 @@ public class GmarksProvider extends ContentProvider {
         labelsProjectionMap = new HashMap<String, String>();
         labelsProjectionMap.put(Label.Columns._ID, Label.Columns._ID);
         labelsProjectionMap.put(Label.Columns.TITLE, Label.Columns.TITLE);
-        labelsProjectionMap.put("_count", "count(label_id)");
-//        labelsProjectionMap.put(Label.Columns.COUNT, Label.Columns.COUNT);
+        labelsProjectionMap.put(Label.Columns.COUNT, "count(label_id)");
         
         // Support for Live Folders.
         sLiveFolderProjectionMap = new HashMap<String, String>();
@@ -280,7 +294,15 @@ public class GmarksProvider extends ContentProvider {
         		Bookmark.Columns.TITLE + " AS " + LiveFolders.NAME);
         sLiveFolderProjectionMap.put(LiveFolders.DESCRIPTION, 
         		Bookmark.Columns.HOST + " AS " + LiveFolders.DESCRIPTION);
-        // Add more columns here for more robust Live Folders.
+        
+        searchSuggestProjectionMap = new HashMap<String, String>();
+        searchSuggestProjectionMap.put(Bookmark.Columns._ID, Bookmark.Columns._ID );
+        searchSuggestProjectionMap.put(SearchManager.SUGGEST_COLUMN_TEXT_1, 
+        		Bookmark.Columns.TITLE + " as " + SearchManager.SUGGEST_COLUMN_TEXT_1 );
+        searchSuggestProjectionMap.put(SearchManager.SUGGEST_COLUMN_TEXT_2, 
+        		Bookmark.Columns.HOST + " as " + SearchManager.SUGGEST_COLUMN_TEXT_2 );
+        searchSuggestProjectionMap.put(SearchManager.SUGGEST_COLUMN_INTENT_DATA, 
+        		Bookmark.Columns.URL + " as " + SearchManager.SUGGEST_COLUMN_INTENT_DATA );
     }
     
     public static class DBException extends Exception {
@@ -467,7 +489,7 @@ public class GmarksProvider extends ContentProvider {
         		vals.put(Bookmark.Columns.TITLE+"_fts", b.getTitle());
         		vals.put(Bookmark.Columns.HOST+"_fts", b.getHost());
         		vals.put(Bookmark.Columns.DESCRIPTION+"_fts", b.getDescription());
-        		vals.put("labels_fts", b.getAllLabels());
+        		vals.put(Bookmark.Columns.LABELS+"_fts", b.getAllLabels());
         		try {
 //    				rowID = db.insertWithOnConflict(BOOKMARKS_TABLE_NAME+"_FTS", "",
 //        				vals, SQLiteDatabase.CONFLICT_IGNORE );
@@ -548,7 +570,7 @@ public class GmarksProvider extends ContentProvider {
         		vals.put(Bookmark.Columns.TITLE+"_fts", b.getTitle());
         		vals.put(Bookmark.Columns.HOST+"_fts", b.getHost());
         		vals.put(Bookmark.Columns.DESCRIPTION+"_fts", b.getDescription());
-        		vals.put("labels_fts", b.getAllLabels());
+        		vals.put(Bookmark.Columns.LABELS+"_fts", b.getAllLabels());
         		try {
 //    				long rowID = db.updateWithOnConflict(BOOKMARKS_TABLE_NAME+"_FTS", vals,
 //    						"docid=?", new String[] { ""+b.get_id() },

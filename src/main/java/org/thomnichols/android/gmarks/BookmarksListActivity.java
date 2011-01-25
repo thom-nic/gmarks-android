@@ -60,14 +60,22 @@ public class BookmarksListActivity extends ListActivity {
         this.currentSort = PreferenceManager.getDefaultSharedPreferences(this)
 				.getInt(KEY_BOOKMARKS_SORT_PREF, SORT_MODIFIED);
 
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         if (intent.getData() == null) intent.setData(Bookmark.CONTENT_URI);
         Uri uri = intent.getData();
+        final String action = intent.getAction();
         
-        if ( Intent.ACTION_PICK.equals(intent.getAction()) ) {
+        if ( Intent.ACTION_PICK.equals(action) ) {
         	setTitle(R.string.choose_bookmark);
         }
-        else if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+        else if ( Intent.ACTION_VIEW.equals(action) && uri.getScheme().startsWith("http") ) {
+        	// this was the result of a search where an item was chosen; 
+        	// just start the view activity for that URL.
+        	startActivity(new Intent(Intent.ACTION_VIEW, uri));
+        	finish();
+        	return;
+        }
+        else if (Intent.ACTION_SEARCH.equals(action)) {
             String query = intent.getStringExtra(SearchManager.QUERY);
             uri = uri.buildUpon().appendPath("search")
             	.appendQueryParameter("q", query).build();
@@ -91,6 +99,15 @@ public class BookmarksListActivity extends ListActivity {
     @Override
     protected void onNewIntent(Intent intent) {
     	super.onNewIntent(intent);
+    	final Uri uri = intent.getData();
+    	if ( Intent.ACTION_VIEW.equals(intent.getAction()) && 
+    			uri.getScheme().startsWith("http") ) {
+        	// this was the result of a search where an item was chosen; 
+        	// just start the view activity for that URL.
+        	startActivity(new Intent(Intent.ACTION_VIEW, uri));
+        	finish();
+        	return;
+        }
     	((SimpleCursorAdapter)this.getListAdapter()).changeCursor(
     			getCursorFromIntent(intent) );
     }
