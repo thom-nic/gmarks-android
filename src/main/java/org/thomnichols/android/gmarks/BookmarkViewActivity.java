@@ -165,6 +165,7 @@ public class BookmarkViewActivity extends Activity implements OnClickListener {
             b.set_id(cursor.getLong(COLUMN_INDEX_ID));
             String labels = cursor.getString(COLUMN_INDEX_LABELS);
             b.parseLabels(labels);
+            if ( labels != null && labels.length() > 0 ) labels += ", ";
 
             // This is a little tricky: we may be resumed after previously being
             // paused/stopped.  We want to put the new text in the text view,
@@ -173,7 +174,7 @@ public class BookmarkViewActivity extends Activity implements OnClickListener {
             this.titleField.setTextKeepState( b.getTitle() );
             this.urlField.setTextKeepState( b.getUrl() );
             this.descriptionField.setTextKeepState( b.getDescription() );
-            this.labelsField.setTextKeepState( labels + ", ");
+            this.labelsField.setTextKeepState( labels );
             
             this.bookmark = b;
         }
