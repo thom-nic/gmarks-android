@@ -10,7 +10,6 @@ import android.database.Cursor;
 import android.database.CursorWrapper;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -37,7 +36,6 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
     protected static final int COLUMN_INDEX_TITLE = 1;
     static final int SORT_ALPHA= 1;
     static final int SORT_COUNT= 2;
-    static final String KEY_LABELS_SORT_PREF = "labels_sort_by";
     
     protected int currentSort = SORT_ALPHA;
     
@@ -51,15 +49,16 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
         ((LinearLayout)findViewById(R.id.allListItems)).setOnClickListener(this);
         setTitle(R.string.labels_activity);
 
-        // If no data was given in the intent (because we were started
+    	SharedPreferences prefs = Prefs.get(this);
+
+    	// If no data was given in the intent (because we were started
         // as a MAIN activity), then use our default content provider.
         Intent intent = getIntent();
         if (intent.getData() == null) intent.setData(Label.CONTENT_URI);
         
         if (Intent.ACTION_MAIN.equals(intent.getAction())) {
         	// start up the background service if necessary.
-        	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        	if ( prefs.getBoolean(SettingsActivity.KEY_BACKGROUND_SYNC_ENABLED, false) ) {
+        	if ( prefs.getBoolean(Prefs.KEY_BACKGROUND_SYNC_ENABLED, false) ) {
         		Log.d(TAG,"Starting background sync service...");
         		Intent service = new Intent(this, BackgroundService.class);
     			service.setAction( Intent.ACTION_RUN );
@@ -75,8 +74,7 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
     	}
         
         Log.i(TAG,"Intent URI: " + getIntent().getData() );
-        this.currentSort = PreferenceManager.getDefaultSharedPreferences(this)
-        		.getInt(KEY_LABELS_SORT_PREF, SORT_ALPHA);
+        this.currentSort = prefs.getInt(Prefs.KEY_LABELS_SORT_PREF, SORT_ALPHA);
         String sort = currentSort == SORT_ALPHA ? 
         		Label.Columns.SORT_ALPHA : Label.Columns.SORT_COUNT;
         Cursor cursor = managedQuery( getIntent().getData(), PROJECTION, null, null, sort );
@@ -191,16 +189,14 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
         	break;
         case R.id.menu_sort_alpha:
             this.currentSort = SORT_ALPHA; 
-            PreferenceManager.getDefaultSharedPreferences(this)
-            	.edit().putInt(KEY_LABELS_SORT_PREF, SORT_ALPHA).commit();
+            Prefs.edit(this).putInt(Prefs.KEY_LABELS_SORT_PREF, SORT_ALPHA).commit();
         	((SimpleCursorAdapter)getListAdapter()).changeCursor(
         			managedQuery( getIntent().getData(), PROJECTION, 
     						null, null, Label.Columns.SORT_ALPHA) );
         	break;
         case R.id.menu_sort_count:
             this.currentSort = SORT_COUNT;
-            PreferenceManager.getDefaultSharedPreferences(this)
-            	.edit().putInt(KEY_LABELS_SORT_PREF, SORT_COUNT).commit();
+            Prefs.edit(this).putInt(Prefs.KEY_LABELS_SORT_PREF, SORT_COUNT).commit();
         	((SimpleCursorAdapter)getListAdapter()).changeCursor(
         			managedQuery( getIntent().getData(), PROJECTION, 
     						null, null, Label.Columns.SORT_COUNT) );

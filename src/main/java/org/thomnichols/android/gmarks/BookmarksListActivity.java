@@ -1,7 +1,5 @@
 	package org.thomnichols.android.gmarks;
 
-import org.thomnichols.android.gmarks.R;
-
 import android.app.ListActivity;
 import android.app.SearchManager;
 import android.content.ContentUris;
@@ -10,7 +8,6 @@ import android.database.Cursor;
 import android.database.CursorWrapper;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,7 +27,6 @@ public class BookmarksListActivity extends ListActivity {
     public static final int CONTEXT_MENU_ITEM_DELETE = Menu.FIRST;
     public static final int CONTEXT_MENU_ITEM_EDIT = Menu.FIRST + 1;
     
-    static final String KEY_BOOKMARKS_SORT_PREF = "bookmarks_sort_by";
     static final int SORT_MODIFIED = 0;
     static final int SORT_TITLE = 1;
     protected int currentSort = SORT_MODIFIED;
@@ -57,8 +53,7 @@ public class BookmarksListActivity extends ListActivity {
         // bind an action for long-press (not a context menu)
         getListView().setOnItemLongClickListener(this.longClickListener);
         
-        this.currentSort = PreferenceManager.getDefaultSharedPreferences(this)
-				.getInt(KEY_BOOKMARKS_SORT_PREF, SORT_MODIFIED);
+        this.currentSort = Prefs.get(this).getInt(Prefs.KEY_BOOKMARKS_SORT_PREF, SORT_MODIFIED);
 
         setTitle(R.string.bookmarks_activity);
         
@@ -154,15 +149,13 @@ public class BookmarksListActivity extends ListActivity {
         	break;
         case R.id.menu_sort_title:
             this.currentSort = SORT_TITLE;
-            PreferenceManager.getDefaultSharedPreferences(this)
-            	.edit().putInt(KEY_BOOKMARKS_SORT_PREF, SORT_TITLE).commit();
+            Prefs.edit(this).putInt(Prefs.KEY_BOOKMARKS_SORT_PREF, SORT_TITLE).commit();
         	((SimpleCursorAdapter)getListAdapter()).changeCursor(
         			getCursorFromIntent(getIntent()) );
         	break;
         case R.id.menu_sort_date:
             this.currentSort = SORT_MODIFIED;
-            PreferenceManager.getDefaultSharedPreferences(this)
-            	.edit().putInt(KEY_BOOKMARKS_SORT_PREF, SORT_MODIFIED).commit();
+            Prefs.edit(this).putInt(Prefs.KEY_BOOKMARKS_SORT_PREF, SORT_MODIFIED).commit();
         	((SimpleCursorAdapter)getListAdapter()).changeCursor(
         			getCursorFromIntent(getIntent()) );
         	break;

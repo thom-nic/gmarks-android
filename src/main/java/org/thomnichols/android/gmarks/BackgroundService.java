@@ -12,21 +12,16 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 public class BackgroundService extends Service implements OnSharedPreferenceChangeListener {
 	static final String TAG = "GMARKS BACKGROUND SVC";
 
-	static final String KEY_SYNC_INTERVAL = "background_sync_interval";
-	static final String KEY_BACKGROUND_SYNC_ENABLED = "background_sync_enabled";
-
 	static final AtomicBoolean started = new AtomicBoolean(false);
 	static final AtomicBoolean scheduled = new AtomicBoolean(false);
 	int startID = -1;
-	int DEFAULT_SYNC_INTERVAL = 60; // 1 hour in minutes
 	boolean backgroundSyncEnabled = false;
-	int backgroundSyncInterval = DEFAULT_SYNC_INTERVAL; // value is in minutes
+	int backgroundSyncInterval = 60; // value is in minutes
 	SharedPreferences syncPrefs;
 
 	PendingIntent serviceLauncher = null; // created during onStart
@@ -39,11 +34,11 @@ public class BackgroundService extends Service implements OnSharedPreferenceChan
     	scheduledAction.setAction(Intent.ACTION_SYNC);
     	this.serviceLauncher = PendingIntent.getService(this, 0, scheduledAction, 0);
 
-    	this.syncPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+    	this.syncPrefs = Prefs.get(this);
 //    	prefs.registerOnSharedPreferenceChangeListener(this);
-    	this.backgroundSyncEnabled = syncPrefs.getBoolean(KEY_BACKGROUND_SYNC_ENABLED, false);
-    	String intStr = syncPrefs.getString(KEY_SYNC_INTERVAL, ""+DEFAULT_SYNC_INTERVAL);
-    	this.backgroundSyncInterval = Integer.parseInt(intStr); 
+    	this.backgroundSyncEnabled = syncPrefs.getBoolean(Prefs.KEY_BACKGROUND_SYNC_ENABLED, false);
+    	this.backgroundSyncInterval = Integer.parseInt( syncPrefs.getString(
+    			Prefs.KEY_SYNC_INTERVAL, Prefs.DEFAULT_SYNC_INTERVAL ) );
     	Log.d(TAG,"Enabled: " + backgroundSyncEnabled);
     	Log.d(TAG,"Interval: " + backgroundSyncInterval);
     }
@@ -88,9 +83,7 @@ public class BackgroundService extends Service implements OnSharedPreferenceChan
 		else if ( Intent.ACTION_CONFIGURATION_CHANGED.equals(action) ) {
 			String key = intent.getStringExtra("key");
 			if ( key != null ) {
-				SharedPreferences sharedPreferences = 
-					PreferenceManager.getDefaultSharedPreferences(this);
-				this.onSharedPreferenceChanged(sharedPreferences, key);
+				this.onSharedPreferenceChanged(syncPrefs, key);
 			} else Log.w(TAG,"No 'key' extra for preference change!");
 		}
 		else Log.d(TAG, "Unknown action: " + action);
@@ -179,9 +172,9 @@ public class BackgroundService extends Service implements OnSharedPreferenceChan
      */
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
 			String key) {
-		if ( KEY_BACKGROUND_SYNC_ENABLED.equals(key) ) {
+		if ( Prefs.KEY_BACKGROUND_SYNC_ENABLED.equals(key) ) {
 			// if enabled/ disabled, start or stop the recurring task
-			boolean enabled = sharedPreferences.getBoolean(KEY_BACKGROUND_SYNC_ENABLED, false);
+			boolean enabled = sharedPreferences.getBoolean(Prefs.KEY_BACKGROUND_SYNC_ENABLED, false);
 			if ( ! enabled ) {
 				this.backgroundSyncEnabled = false;
 				unscheduleSync();
@@ -191,10 +184,9 @@ public class BackgroundService extends Service implements OnSharedPreferenceChan
 				scheduleSync();
 			}
 		}
-		else if ( KEY_SYNC_INTERVAL.equals(key) ) {
-			String intStr = sharedPreferences.getString(
-					KEY_SYNC_INTERVAL, ""+DEFAULT_SYNC_INTERVAL);
-			this.backgroundSyncInterval = Integer.parseInt(intStr);
+		else if ( Prefs.KEY_SYNC_INTERVAL.equals(key) ) {
+			this.backgroundSyncInterval = Integer.parseInt( sharedPreferences.getString(
+					Prefs.KEY_SYNC_INTERVAL, Prefs.DEFAULT_SYNC_INTERVAL) );
 			scheduleSync(false);  // this will overwrite a previously-scheduled intent
 		} else Log.w(TAG,"Unknown key: " + key);
 	}

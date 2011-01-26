@@ -24,7 +24,6 @@ import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.AsyncTask;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.CursorAdapter;
 import android.widget.Toast;
@@ -63,7 +62,7 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 				"Gmarks sync in progress...", 
 				System.currentTimeMillis() );
 		
-		this.syncPrefs = PreferenceManager.getDefaultSharedPreferences(this.ctx);
+		this.syncPrefs = Prefs.get(this.ctx);
 		this.legacySyncPrefs = ctx.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE);
 	}
 	
@@ -82,9 +81,9 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 		
 		// determine if we should sync browser bookmarks:
 		this.syncBrowserBookmarks = syncPrefs.getBoolean(
-				SettingsActivity.KEY_BROWSER_SYNC_ENABLED, false );
+				Prefs.KEY_BROWSER_SYNC_ENABLED, false );
 		this.browserBookmarksLabel = syncPrefs.getString(
-				SettingsActivity.KEY_BROWSER_SYNC_LABEL, null);
+				Prefs.KEY_BROWSER_SYNC_LABEL, null);
 	}
 	
 	@Override protected Integer doInBackground(Void... arg0) {
