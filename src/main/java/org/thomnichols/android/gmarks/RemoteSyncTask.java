@@ -25,7 +25,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
-import android.text.TextUtils;
 import android.util.Log;
 import android.widget.CursorAdapter;
 import android.widget.Toast;
@@ -225,8 +224,8 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
         		vals.put("docid", bookmarkRowID);
         		vals.put(Bookmark.Columns.TITLE+"_fts", b.getTitle());
         		vals.put(Bookmark.Columns.HOST+"_fts", b.getHost());
-        		vals.put(Bookmark.Columns.DESCRIPTION+"_fts", b.getDescription());
-        		vals.put("labels_fts", TextUtils.join(" ", b.getLabels()));
+        		vals.put(Bookmark.Columns.DESCRIPTION+"_fts", b.getDescription());        		
+        		vals.put(Bookmark.Columns.LABELS+"_fts", b.getAllLabels());
         		long result = -1;
         		try {
         			if ( bookmarkInserted )
