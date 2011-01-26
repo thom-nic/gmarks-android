@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/settings">
@@ -21,10 +20,10 @@
     <ListPreference
         android:key="background_sync_interval"
         android:title="@string/pref_sync_interval"
-        android:entries="@array/pref_duration_entries"
-        android:persistent='true'
-        android:entryValues="@array/pref_duration_values"
-        android:defaultValue="20"
         android:dialogTitle="@string/pref_sync_interval" 
+        android:entries="@array/pref_duration_entries"
+        android:entryValues="@array/pref_duration_values"
+        android:persistent='true'
+        android:defaultValue="60"
         android:enabled="false" />
 </PreferenceScreen>
