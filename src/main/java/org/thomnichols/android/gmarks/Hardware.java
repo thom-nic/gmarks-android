@@ -4,14 +4,17 @@ import java.util.HashSet;
 import java.util.Set;
 
 import android.os.Build;
+import android.util.Log;
 
 public final class Hardware {
 	public static final Set<String> HAS_SEARCH_KEY = new HashSet<String>();
 	static {
+		Log.d("GMARKS HARDWARE", "This device's Build.MODEL is " + Build.MODEL);
 		/* Many of these Build.MODEL codes have come from
 		 * http://en.wikipedia.org/wiki/Comparison_of_Android_devices
 		 */
 		final Set<String> s = HAS_SEARCH_KEY;
+//		s.add("google_sdk"); // Debug only
 		s.add("Liquid"); // Acer
 		s.add("HTC Liberty"); // AKA Aria
 		s.add("HTC Desire");
@@ -40,6 +43,7 @@ public final class Hardware {
 		s.add("SCH-r880"); // Samsung Acclaim (US Cellular) 
 		s.add("SGH-I897"); // Samsung Captivate 
 		s.add("M910"); // Samsung Intercept
+		// the following are un-confirmed:
 		s.add("MB525"); // Motorola Defy (guess) 
 		s.add("DROIDPRO"); // TODO (guess) 
 		s.add("SGH-T959"); // Samsung Vibrant (guess) 

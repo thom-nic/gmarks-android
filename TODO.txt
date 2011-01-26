@@ -21,10 +21,10 @@ x Label suggest/ auto-complete
 x Sort by {date|alpha}
 x GMarks available to global search
 x Search suggestions
+x Filter menu/ softkeyboard
+x Search menu button
 
-* Filter menu/ softkeyboard
 * search history
-* Search menu button
 * Favicon support
 * List sub-headers
 * 'Google lists' support

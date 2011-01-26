@@ -6,6 +6,10 @@
 		android:title="Go to Label"
 		android:id="@+id/menu_go_to" 
 		android:icon='@drawable/ic_menu_goto' />
+	<item android:titleCondensed="Search" 
+		android:title="Search Bookmarks"
+		android:id="@+id/menu_search" 
+		android:icon='@android:drawable/ic_menu_search' />
 	<item android:titleCondensed="Sort by Alpha" 
 		android:title="Sort Alphabetically"
 		android:id="@+id/menu_sort_alpha" 
@@ -17,7 +21,7 @@
 	<item android:titleCondensed="Sync" 
 		android:title="Synchronize"
 		android:id="@+id/menu_sync" 
-		android:icon='@drawable/ic_menu_sync' />
+		android:icon='@drawable/ic_menu_refresh' />
 	<item android:title="Settings"
 		android:id="@+id/menu_settings" 
 		android:icon="@android:drawable/ic_menu_preferences" />

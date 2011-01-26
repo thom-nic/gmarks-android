@@ -1,7 +1,5 @@
 package org.thomnichols.android.gmarks;
 
-import org.thomnichols.android.gmarks.R;
-
 import android.app.ListActivity;
 import android.content.ContentUris;
 import android.content.Context;
@@ -18,9 +16,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
-import android.view.WindowManager.LayoutParams;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.FilterQueryProvider;
@@ -164,6 +160,10 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
 			// if HW keyboard visible, don't need to show the 'go to label' menu
 			menu.findItem(R.id.menu_go_to).setVisible(false);
     	// TODO decide whether or not to make login/logout options visible
+		
+		if ( Hardware.hasSearchButton() )
+			menu.findItem(R.id.menu_search).setVisible(false);
+		
     	return true;
     }
     
@@ -186,6 +186,9 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
         case R.id.menu_settings:
             startActivity(new Intent(this, SettingsActivity.class));
             return true;
+        case R.id.menu_search:
+        	this.onSearchRequested();
+        	break;
         case R.id.menu_sort_alpha:
             this.currentSort = SORT_ALPHA; 
             PreferenceManager.getDefaultSharedPreferences(this)

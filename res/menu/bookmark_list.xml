@@ -2,6 +2,10 @@
 	<item android:title="Add"
 		android:id="@+id/menu_add" 
 		android:icon="@android:drawable/ic_menu_add" />
+	<item android:titleCondensed="Search" 
+		android:title="Search Bookmarks"
+		android:id="@+id/menu_search" 
+		android:icon='@android:drawable/ic_menu_search' />
 	<item android:titleCondensed="Sort by Title" 
 		android:title="Sort Title Alphabetically"
 		android:id="@+id/menu_sort_title" 
@@ -18,10 +22,5 @@
 	<item android:titleCondensed="Sync" 
 		android:title="Synchronize"
 		android:id="@+id/menu_sync" 
-		android:icon='@drawable/ic_menu_sync' />
-	<item android:titleCondensed="Search" 
-		android:title="Search Bookmarks"
-		android:id="@+id/menu_search" 
-		android:visible='false'
-		android:icon='@android:drawable/ic_menu_search' />
+		android:icon='@drawable/ic_menu_refresh' />
 </menu>

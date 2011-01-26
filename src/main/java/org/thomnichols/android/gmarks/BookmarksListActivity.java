@@ -132,6 +132,9 @@ public class BookmarksListActivity extends ListActivity {
 		menu.findItem(R.id.menu_sort_date).setVisible(
 				this.currentSort != SORT_MODIFIED );
 
+		if ( Hardware.hasSearchButton() )
+			menu.findItem(R.id.menu_search).setVisible(false);
+		
         return true;
     }
     
@@ -146,6 +149,9 @@ public class BookmarksListActivity extends ListActivity {
             // Launch activity to insert a new item
             startActivity(intent);
             return true;
+        case R.id.menu_search:
+        	this.onSearchRequested();
+        	break;
         case R.id.menu_sort_title:
             this.currentSort = SORT_TITLE;
             PreferenceManager.getDefaultSharedPreferences(this)
