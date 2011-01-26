@@ -427,7 +427,13 @@ public class BookmarksQueryService {
 	}
 	
 	protected JSONObject parseJSON( HttpResponse resp ) throws IOException, JSONException {
-		String respData = IOUtils.toString( resp.getEntity().getContent() );
+		String charset = null;
+		try {
+			charset = resp.getEntity().getContentType().getElements()[0]
+			                     .getParameterByName("charset").getValue();			
+		}
+		catch ( Exception ex ) { charset = "UTF-8"; }
+		String respData = IOUtils.toString( resp.getEntity().getContent(), charset );
 		resp.getEntity().consumeContent();
 		if ( respData.startsWith(")]}'") )
 			respData = respData.substring( respData.indexOf("\n") );
