@@ -96,7 +96,7 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
 			}
 		});
         setListAdapter(adapter);
-        
+
         ((Button)findViewById(R.id.syncBtn)).setOnClickListener(this);
     }
     
@@ -174,7 +174,7 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
         case R.id.menu_go_to:
 //        	getWindow().setSoftInputMode(LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         	InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        	mgr.showSoftInput(getListView(), InputMethodManager.SHOW_FORCED);
+        	mgr.showSoftInput(getListView(), 0);
         	break;
         case R.id.menu_sync:
         	Log.d(TAG, "Starting sync...");
