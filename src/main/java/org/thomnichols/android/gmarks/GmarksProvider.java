@@ -89,7 +89,8 @@ public class GmarksProvider extends ContentProvider {
         		qb.setProjectionMap(searchSuggestProjectionMap);
 	        	// path looks like "search_suggest_query/[query]?limit=50
         		query = uri.getLastPathSegment();
-                limit = uri.getQueryParameter("limit");        		
+                limit = uri.getQueryParameter("limit");
+                if ( sortOrder == null ) sortOrder = Bookmark.Columns.SORT_MODIFIED;
         	}            
             else query = uri.getQueryParameter("q");
         	
@@ -266,6 +267,8 @@ public class GmarksProvider extends ContentProvider {
 //        sUriMatcher.addURI(Bookmark.AUTHORITY, "labels/#", LABELS_ID_URI);
         sUriMatcher.addURI(Bookmark.AUTHORITY, "live_folders/bookmarks", LIVE_FOLDER_BOOKMARKS_URI);
         sUriMatcher.addURI(Bookmark.AUTHORITY, SearchManager.SUGGEST_URI_PATH_QUERY + "/*", 
+        		BOOKMARK_SEARCH_SUGGEST_URI);
+        sUriMatcher.addURI(Bookmark.AUTHORITY, SearchManager.SUGGEST_URI_PATH_QUERY, 
         		BOOKMARK_SEARCH_SUGGEST_URI);
 
         bookmarksProjectionMap = new HashMap<String, String>();
