@@ -209,6 +209,7 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
 		case R.id.menu_login:
 			Log.d(TAG, "Logging in...");
 			Toast.makeText(this, "Logging in...", Toast.LENGTH_SHORT).show();
+			startActivity( new Intent(this,WebViewLoginActivity.class) );
 			break;
 		}
         return super.onOptionsItemSelected(item);
