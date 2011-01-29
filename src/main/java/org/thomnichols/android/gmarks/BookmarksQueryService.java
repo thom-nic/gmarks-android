@@ -332,7 +332,7 @@ public class BookmarksQueryService {
 //		Log.v(TAG, "UPDATE: " + requestObj);
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add( new BasicNameValuePair("td", requestObj.toString()) );
-		post.setEntity( new UrlEncodedFormEntity(params) );
+		post.setEntity( new UrlEncodedFormEntity(params, "UTF-8") );
 		HttpResponse resp = http.execute( post, this.ctx );
 		
 		int respCode = resp.getStatusLine().getStatusCode(); 
