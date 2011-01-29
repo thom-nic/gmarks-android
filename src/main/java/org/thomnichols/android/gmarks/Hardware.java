@@ -46,6 +46,7 @@ public final class Hardware {
 		s.add("Nexus S");
 		s.add("SCH-r880"); // Samsung Acclaim (US Cellular) 
 		s.add("SGH-I897"); // Samsung Captivate 
+		s.add("SAMSUNG-SGH-I897"); // Samsung Captivate 
 		s.add("GT-I897"); // Samsung Captivate 
 		s.add("SGH-T959D"); // Samsung Vibrant
 		s.add("SGH-T959"); // Samsung Vibrant
