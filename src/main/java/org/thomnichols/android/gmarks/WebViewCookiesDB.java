@@ -10,6 +10,7 @@ import org.apache.http.impl.cookie.BasicClientCookie;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
@@ -80,4 +81,19 @@ public class WebViewCookiesDB extends SQLiteOpenHelper {
 		finally { db.close(); }
 	}
 
+	public void deleteCookie(String key) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		while ( db.isDbLockedByOtherThreads() ) {
+			Log.w(TAG, "Waiting for other thread to flush DB");
+			try { Thread.sleep(500); } catch ( InterruptedException ex ) {} 
+		}
+		
+		try {
+			db.delete(TABLE_NAME, COLUMNS[COL_NAME] + "=?", new String[] {key});
+		}
+		catch ( SQLiteException ex ) {
+			Log.w(TAG,"Error deleting cookie: " + key, ex);
+		}
+		finally { db.close(); }
+	}
 }

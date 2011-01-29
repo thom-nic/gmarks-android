@@ -17,6 +17,10 @@ public class WebViewLoginActivity extends Activity {
 	static final String TAG = "GMARKS WEBVIEW LOGIN";
 	
 	static final String loginURL = "https://www.google.com/accounts/ServiceLogin";
+	static final String checkCookieURL = "https://www.google.com/accounts/CheckCookie";
+	static final String loginParams = "?service=bookmarks"
+		+ "&continue=https://www.google.com/bookmarks/l"
+		+ "&followup=https://www.google.com/bookmarks/l";
 	static final String targetURL = "https://www.google.com/bookmarks/";
 	WebView webView = null;
 	boolean loggedIn = false;
@@ -35,7 +39,17 @@ public class WebViewLoginActivity extends Activity {
         this.webView = (WebView)findViewById(R.id.loginWebView);
         this.webView.setWebViewClient(this.webClient);
         this.webView.getSettings().setJavaScriptEnabled(true);
-        this.webView.loadUrl(targetURL);
+//        this.webView.loadUrl(targetURL);
+      this.webView.loadUrl(checkCookieURL + loginParams );
+    }
+    
+    @Override
+    protected void onResume() {
+    	super.onResume();
+    	WebViewCookiesDB cookieDB = new WebViewCookiesDB(WebViewLoginActivity.this);
+		try {
+			cookieDB.deleteCookie("SID");
+		} finally { cookieDB.close(); }
     }
     
     protected void onPause() {
@@ -60,29 +74,38 @@ public class WebViewLoginActivity extends Activity {
     		if ( url.startsWith(targetURL) ) {
     			// This prints out all of the cookies as one long string.  Big pain in my ass.
 //    			Log.d(TAG,"Cookie: " + cookieManager.getCookie("https://www.google.com") );
-    			try { Thread.sleep(1000); } catch ( InterruptedException ex ) {}
     			WebViewCookiesDB cookieDB = new WebViewCookiesDB(WebViewLoginActivity.this);
     			try {
-    				List<Cookie> cookies = cookieDB.getCookies();
-    				Log.d(TAG,"GOT cookies: " + cookies.size() );
+    				List<Cookie> cookies = null; 
     				boolean loggedIn = false; 
-    				for ( Cookie c : cookies ) {
-//    					Log.d(TAG,"Cookie: " + c.getName() + "=" + c.getValue() );
-    					if ( "SID".equals( c.getName() ) ) { 
-    						loggedIn = true;
-    						break;
-    					}
+    				long timeout = System.currentTimeMillis() + 10000;
+    				while ( ! loggedIn ) { 
+        				cookies = cookieDB.getCookies();
+    					try { Thread.sleep(1000); } catch ( InterruptedException ex ) {}
+	    				Log.d(TAG,"GOT cookies: " + cookies.size() );
+	    				for ( Cookie c : cookies ) {
+	//    					Log.d(TAG,"Cookie: " + c.getName() + "=" + c.getValue() );
+	    					if ( "SID".equals( c.getName() ) ) { 
+	    						loggedIn = true;
+	    						break;
+	    					}
+	    				}
+	    				if ( System.currentTimeMillis() > timeout ) {
+	    					Log.w(TAG,"Timeout looking for SID cookie!");
+	    					break;
+	    				}
     				}
-    				if ( ! loggedIn ) return;
 
-    				new GmarksProvider.DatabaseHelper(WebViewLoginActivity.this)
-    					.persistCookies( cookies );
-    				BookmarksQueryService.getInstance().setAuthCookies( cookies );
-    				
-	    			Log.d(TAG,"Restored " + cookies.size() + " cookies");
-	    			Log.d(TAG,"Logged in!");
+    				String loginMsg = "Login error!";
+    				if ( loggedIn ) {
+	    				new GmarksProvider.DatabaseHelper(WebViewLoginActivity.this)
+	    					.persistCookies( cookies );
+	    				BookmarksQueryService.getInstance().setAuthCookies( cookies );	    				
+		    			Log.d(TAG,"Logged in!");
+		    			loginMsg = "Logged in!"; 
+    				}
 	    			
-	    			Toast.makeText(WebViewLoginActivity.this, "Logged in!", Toast.LENGTH_LONG).show();
+	    			Toast.makeText(WebViewLoginActivity.this, loginMsg, Toast.LENGTH_LONG).show();
 	    			WebViewLoginActivity.this.finishActivity(RESULT_OK);
 	    			WebViewLoginActivity.this.finish();
     			}
