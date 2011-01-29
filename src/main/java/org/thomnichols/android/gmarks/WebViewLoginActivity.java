@@ -38,24 +38,15 @@ public class WebViewLoginActivity extends Activity {
         this.webView.loadUrl(targetURL);
     }
     
-    protected void onResume() {
-    	super.onResume();
-//    	cookieSyncManager.startSync();
-    };
-    
     protected void onPause() {
     	super.onPause();
-//    	cookieSyncManager.stopSync();
+    	this.waitDialog.dismiss();
     };
     
     WebViewClient webClient = new WebViewClient() {
     	public void onPageFinished(WebView view, String url) {
     		Log.d(TAG, "PAGE LOADED ======= " + url );
     		cookieSyncManager.sync();
-    		// dammit, there's no way to determine that this load is actually a redirect!
-//    		if ( url.contains("ServiceLoginAuth") ) {
-//    			
-//    		}
     		
     		if ( url.startsWith(loginURL) ) {
     			if ( WebViewLoginActivity.this.waitDialog != null ) {
@@ -69,7 +60,6 @@ public class WebViewLoginActivity extends Activity {
     		if ( url.startsWith(targetURL) ) {
     			// This prints out all of the cookies as one long string.  Big pain in my ass.
 //    			Log.d(TAG,"Cookie: " + cookieManager.getCookie("https://www.google.com") );
-//    			cookieSyncManager.stopSync(); // let it close the DB.
     			try { Thread.sleep(1000); } catch ( InterruptedException ex ) {}
     			WebViewCookiesDB cookieDB = new WebViewCookiesDB(WebViewLoginActivity.this);
     			try {
@@ -77,7 +67,7 @@ public class WebViewLoginActivity extends Activity {
     				Log.d(TAG,"GOT cookies: " + cookies.size() );
     				boolean loggedIn = false; 
     				for ( Cookie c : cookies ) {
-    					Log.d(TAG,"Cookie: " + c.getName() + "=" + c.getValue() );
+//    					Log.d(TAG,"Cookie: " + c.getName() + "=" + c.getValue() );
     					if ( "SID".equals( c.getName() ) ) { 
     						loggedIn = true;
     						break;
