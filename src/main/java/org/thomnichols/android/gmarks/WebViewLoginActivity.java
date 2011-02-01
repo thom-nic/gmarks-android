@@ -15,7 +15,9 @@
  */
 package org.thomnichols.android.gmarks;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.http.cookie.Cookie;
 
@@ -32,8 +34,8 @@ public class WebViewLoginActivity extends Activity {
 	static final String TAG = "GMARKS WEBVIEW LOGIN";
 	
 	static final String loginURL = "https://www.google.com/accounts/ServiceLogin";
-	static final String checkCookieURL = "https://www.google.com/accounts/CheckCookie";
-	static final String loginParams = "?service=bookmarks"
+//	static final String checkCookieURL = "https://www.google.com/accounts/CheckCookie";
+	static final String loginParams = "?service=bookmarks&passive=true"
 		+ "&continue=https://www.google.com/bookmarks/l"
 		+ "&followup=https://www.google.com/bookmarks/l";
 	static final String targetURL = "https://www.google.com/bookmarks/";
@@ -42,6 +44,13 @@ public class WebViewLoginActivity extends Activity {
 	CookieSyncManager cookieSyncManager;
 	ProgressDialog waitDialog;
 //	CookieManager cookieManager;
+	static final Set<String> requiredCookies = new HashSet<String>();
+	static {
+		requiredCookies.add("SID");
+		requiredCookies.add("LSID");
+		requiredCookies.add("HSID");
+		requiredCookies.add("SSID");
+	}
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,8 +63,6 @@ public class WebViewLoginActivity extends Activity {
         this.webView = (WebView)findViewById(R.id.loginWebView);
         this.webView.setWebViewClient(this.webClient);
         this.webView.getSettings().setJavaScriptEnabled(true);
-//        this.webView.loadUrl(targetURL);
-      this.webView.loadUrl(checkCookieURL + loginParams );
     }
     
     @Override
@@ -65,11 +72,12 @@ public class WebViewLoginActivity extends Activity {
 		try {
 			cookieDB.deleteCookie("SID");
 		} finally { cookieDB.close(); }
+        this.webView.loadUrl(loginURL + loginParams );
     }
     
     protected void onPause() {
     	super.onPause();
-    	this.waitDialog.dismiss();
+    	if ( this.waitDialog != null ) this.waitDialog.dismiss();
     };
     
     WebViewClient webClient = new WebViewClient() {
@@ -96,15 +104,13 @@ public class WebViewLoginActivity extends Activity {
     				long timeout = System.currentTimeMillis() + 10000;
     				while ( ! loggedIn ) { 
         				cookies = cookieDB.getCookies();
-    					try { Thread.sleep(1000); } catch ( InterruptedException ex ) {}
+    					try { Thread.sleep(1500); } catch ( InterruptedException ex ) {}
 	    				Log.d(TAG,"GOT cookies: " + cookies.size() );
-	    				for ( Cookie c : cookies ) {
-	//    					Log.d(TAG,"Cookie: " + c.getName() + "=" + c.getValue() );
-	    					if ( "SID".equals( c.getName() ) ) { 
-	    						loggedIn = true;
-	    						break;
-	    					}
-	    				}
+	    				Set<String> cookieNames = new HashSet<String>();
+	    				for ( Cookie c : cookies ) cookieNames.add(c.getName());
+	    				
+	    				if ( cookieNames.containsAll(requiredCookies) ) loggedIn = true;
+	    				
 	    				if ( System.currentTimeMillis() > timeout ) {
 	    					Log.w(TAG,"Timeout looking for SID cookie!");
 	    					break;
