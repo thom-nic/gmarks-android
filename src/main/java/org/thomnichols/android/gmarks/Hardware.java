@@ -55,6 +55,9 @@ public final class Hardware {
 		s.add("MB501"); // Motorola Cliq XT 
 		s.add("ME502"); // Motorola Charm
 		s.add("WX445"); // Motorola Citrus
+		// TODO Motorola Cliq 2
+		// TODO Motorola Bionic
+		// TODO Motorola Atrix
 		s.add("Droid"); // AKA Milestone
 		s.add("DROIDX"); 
 		s.add("DROID2"); 
