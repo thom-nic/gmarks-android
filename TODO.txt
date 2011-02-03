@@ -23,9 +23,11 @@ x GMarks available to global search
 x Search suggestions
 x Filter menu/ softkeyboard
 x Search menu button
+x GPL3 license header on all code
 
+* 'Google lists' support
+* All strings as resources to support L10N
 * search history
 * Favicon support
 * List sub-headers
-* 'Google lists' support
 * Kill Webview after login
