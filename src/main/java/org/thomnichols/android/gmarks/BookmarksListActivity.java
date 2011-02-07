@@ -92,11 +92,12 @@ public class BookmarksListActivity extends ListActivity {
             uri = uri.buildUpon().appendPath("search")
             	.appendQueryParameter("q", query).build();
             intent.setData( uri );
-            this.setTitle("GMarks search results for '" + query + "'");
+            this.setTitle( getString(R.string.search_results_title, query) );
         }
         else {
             String labelName = uri.getQueryParameter("label");
-            if ( labelName != null ) this.setTitle("Bookmarks for label '" + labelName + "'");
+            if ( labelName != null )
+            	this.setTitle( getString(R.string.label_results_title, labelName) );
         }
         
         Cursor cursor = getCursorFromIntent(intent);
@@ -180,7 +181,7 @@ public class BookmarksListActivity extends ListActivity {
         	break;
         case R.id.menu_sync:
         	Log.d(TAG, "Starting sync...");
-        	Toast.makeText(this, "Starting sync...", Toast.LENGTH_SHORT).show();
+        	Toast.makeText(this, R.string.sync_begin_msg, Toast.LENGTH_SHORT).show();
         	// TODO only sync bookmarks for this label?
         	new RemoteSyncTask(this).execute();
         }

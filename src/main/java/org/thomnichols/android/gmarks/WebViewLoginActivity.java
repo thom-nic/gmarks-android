@@ -117,13 +117,13 @@ public class WebViewLoginActivity extends Activity {
 	    				}
     				}
 
-    				String loginMsg = "Login error!";
+    				int loginMsg = R.string.login_failed_msg;
     				if ( loggedIn ) {
 	    				new GmarksProvider.DatabaseHelper(WebViewLoginActivity.this)
 	    					.persistCookies( cookies );
 	    				BookmarksQueryService.getInstance().setAuthCookies( cookies );	    				
 		    			Log.d(TAG,"Logged in!");
-		    			loginMsg = "Logged in!"; 
+		    			loginMsg = R.string.login_success_msg; 
     				}
 	    			
 	    			Toast.makeText(WebViewLoginActivity.this, loginMsg, Toast.LENGTH_LONG).show();
@@ -141,13 +141,15 @@ public class WebViewLoginActivity extends Activity {
     	public void onPageStarted(WebView view, String url, android.graphics.Bitmap favicon) {
     		if ( WebViewLoginActivity.this.waitDialog != null ) return; 
     		WebViewLoginActivity.this.waitDialog = ProgressDialog.show(
-    				WebViewLoginActivity.this, "", "please wait...", true );
+    				WebViewLoginActivity.this, "", 
+    				getText(R.string.please_wait_msg), true );
     	};
     	
     	public void onReceivedError(WebView view, int errorCode, 
     			String description, String failingUrl) {
-    		Toast.makeText(WebViewLoginActivity.this, "Login failed: " + description, 
-    				Toast.LENGTH_SHORT).show();
+    		Toast.makeText( WebViewLoginActivity.this, 
+    				getString(R.string.login_failed_detail_msg, description), 
+    				Toast.LENGTH_SHORT ).show();
     		
     		view.loadUrl(targetURL);
     	}

@@ -74,7 +74,7 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 		this.ctx = ctx;
 		notificationManager = (NotificationManager)ctx.getSystemService(Context.NOTIFICATION_SERVICE);
 		notification = new Notification( R.drawable.ic_sync, 
-				"Gmarks sync in progress...", 
+				ctx.getString(R.string.sync_notify_start), 
 				System.currentTimeMillis() );
 		
 		this.syncPrefs = Prefs.get(this.ctx);
@@ -310,7 +310,7 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 	@Override protected void onPostExecute( Integer result ) {
 		if ( result == RESULT_SUCCESS ) {
 			if (showToast) Toast.makeText(this.ctx, 
-					"GMarks Sync complete", Toast.LENGTH_LONG).show();
+					R.string.sync_done_msg, Toast.LENGTH_LONG).show();
 			if ( this.ctx instanceof ListActivity ) {
 				Log.d(TAG,"Refreshing listview...");
 				((CursorAdapter)((ListActivity)this.ctx).getListAdapter()).getCursor().requery();
@@ -324,7 +324,7 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 		}
 		else if ( result == RESULT_FAILURE_DB ) {
 			if (showToast) Toast.makeText(this.ctx, 
-					"Sync already in progress...", Toast.LENGTH_LONG).show();
+					R.string.sync_in_progress_msg, Toast.LENGTH_LONG).show();
 		}
 		else if ( result == RESULT_FAILURE_AUTH ) {
 			if (this.ctx instanceof Activity)
@@ -334,12 +334,13 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 			else if (this.ctx instanceof Service) {// show notification
 				Intent intent = new Intent( "org.thomnichols.gmarks.action.LOGIN" );
 				notification.setLatestEventInfo( this.ctx, 
-						"GMarks Sync", "Login error; please log in.", 
+						ctx.getText(R.string.sync_notify_title), 
+						ctx.getText(R.string.sync_notify_auth_error), 
 						PendingIntent.getActivity(this.ctx, 0, intent, 0) );
 				this.notificationManager.notify(NOTIFY_SYNC_ID, notification);
 			}		
 		}
-		else if (showToast) Toast.makeText(this.ctx, "GMarks sync error", Toast.LENGTH_LONG).show();
+		else if (showToast) Toast.makeText(this.ctx, R.string.sync_notify_error, Toast.LENGTH_LONG).show();
 	}
 	
 	@Override protected void onCancelled() {
@@ -355,7 +356,8 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 		}
 		Intent intent = new Intent( this.ctx, LabelsListActivity.class );
 		notification.setLatestEventInfo( this.ctx, 
-				"GMarks Sync", "Synchronized " + count + " bookmarks", 
+				ctx.getText(R.string.sync_notify_title), 
+				ctx.getString(R.string.sync_notify_count, count), 
 				PendingIntent.getActivity(this.ctx, 0, intent, 0) );
 		this.notificationManager.notify(NOTIFY_SYNC_ID, notification);
 	}

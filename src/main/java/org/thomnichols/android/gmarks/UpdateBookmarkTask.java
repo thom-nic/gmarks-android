@@ -61,8 +61,10 @@ public class UpdateBookmarkTask extends AsyncTask<Void,Void,Integer> {
 		}
 		
     	if ( showProgress ) {
-    		String progressText = "Saving...";
-    		if ( this.action == ACTION_DELETE ) progressText = "Deleting bookmark...";
+    		CharSequence progressText = ctx.getText(
+    				this.action == ACTION_DELETE ?
+    				R.string.deleting_bookmark_msg :
+    				R.string.saving_bookmark_msg);
 	    	this.waitDialog = ProgressDialog.show(
 	        		this.ctx, "", 
 	                progressText, true );
@@ -120,27 +122,33 @@ public class UpdateBookmarkTask extends AsyncTask<Void,Void,Integer> {
 		
 		if ( resultCode == RESULT_AUTH_FAILED ) {
 			this.onRemoteAuthFailure();
-			Toast.makeText(this.ctx, "Error: Auth failure", Toast.LENGTH_LONG).show();
+			Toast.makeText( this.ctx, R.string.error_auth_failed_msg, 
+					Toast.LENGTH_LONG ).show();
 			return;
 		}
 		else if ( resultCode == RESULT_NOT_FOUND ) {
 			// if deleting, that's OK, we're just deleting a stale local bookmark.
 			Log.w(TAG,"Remote bookmark not found.");
 			if ( this.action != ACTION_DELETE ) {
-				Toast.makeText(this.ctx, "Error: Bookmark not found", Toast.LENGTH_LONG).show();				
+				Toast.makeText( this.ctx, R.string.error_not_found_msg, 
+						Toast.LENGTH_LONG ).show();				
 				return;
 			}
 		}
 		else if ( resultCode !=  RESULT_OK ) {
-			Log.w(TAG,"Update remote failed: " );
-			String text = this.action == ACTION_DELETE ? "Delete failed!" : "Save failed!";
-			Toast.makeText(this.ctx, text, Toast.LENGTH_LONG).show();
+			Log.w(TAG,"Update remote failed: " + resultCode );
+			int msgID = this.action == ACTION_DELETE ? 
+					R.string.error_delete_failed_msg : 
+					R.string.error_save_failed_msg;
+			Toast.makeText(this.ctx, msgID, Toast.LENGTH_LONG).show();
 			return;
 		}
 		
-		String notifyText = this.action == ACTION_NEW ? "Bookmark created."
-				: this.action == ACTION_UPDATE ? "Bookmark updated." :
-					"Bookmark deleted.";
+		int notifyText = this.action == ACTION_NEW ? 
+				R.string.save_ok_msg :
+				this.action == ACTION_UPDATE ? 
+						R.string.update_ok_msg :
+						R.string.delete_ok_msg;
 		Toast.makeText(this.ctx, notifyText, Toast.LENGTH_SHORT).show();
 	}
 }
