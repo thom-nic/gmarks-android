@@ -15,14 +15,14 @@
 			    android:layout_width="fill_parent"
 			    android:layout_height="fill_parent">
 			    
-				<TextView android:text="Title" 
+				<TextView android:text="@string/label_title" 
 					style="@style/label" />
 				<EditText android:id="@+id/title" 
 					style="@style/editLine"
 			    android:maxLines="2" 
 			    android:layout_marginTop="2dip" />
 			
-				<TextView android:text="URL"  
+				<TextView android:text="@string/label_url"  
 					style="@style/label" />
 				<EditText android:id="@+id/url" 
 					style="@style/editLine"
@@ -31,14 +31,14 @@
 			    
 			  <!-- TODO chooser to add/remove labels -->
 			    
-				<TextView android:text="Description" 
+				<TextView android:text="@string/label_description" 
 					style="@style/label" />
 				<EditText android:id="@+id/description"  
 					style="@style/editLine"
 			    android:maxLines="10" 
 			    android:minLines='2' />
 			    
-				<TextView android:text="Labels"  
+				<TextView android:text="@string/label_labels"  
 					style="@style/label" />
 				<MultiAutoCompleteTextView android:id="@+id/labels"
 					style="@style/editLine" />

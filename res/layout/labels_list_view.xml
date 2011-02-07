@@ -10,7 +10,7 @@
          android:layout_width="fill_parent"
          android:layout_height="?android:attr/listPreferredItemHeight">
 		<TextView 
-				android:text="All Bookmarks"
+				android:text="@string/label_all_bookmarks"
 		    android:layout_width="wrap_content"
 		    android:layout_height="fill_parent"
 		    android:textAppearance="?android:attr/textAppearanceLarge"
@@ -19,7 +19,7 @@
 		    android:singleLine="true" 
 		    android:layout_weight='1' />
 		<TextView android:id="@+id/totalCount"
-				android:text="sorted by date"
+				android:text="@string/label_sub_all_bookmarks"
 		    android:layout_width="wrap_content"
 		    android:layout_height="fill_parent"
 		    android:textAppearance="?android:attr/textAppearanceMedium"

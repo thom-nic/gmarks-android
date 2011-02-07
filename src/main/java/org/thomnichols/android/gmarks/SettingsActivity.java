@@ -45,7 +45,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
         ListPreference intervalPref = (ListPreference)findPreference(Prefs.KEY_SYNC_INTERVAL);
         int currentSetting = intervalPref.findIndexOfValue( intervalPref.getValue() ); 
-        intervalPref.setSummary( currentSetting < 0 ? "(unset)" : 
+        intervalPref.setSummary( currentSetting < 0 ? getText(R.string.pref_not_set_label) : 
         	intervalPref.getEntries()[currentSetting] );
         intervalPref.setEnabled( backgroundEnabledPref.isChecked() );
         

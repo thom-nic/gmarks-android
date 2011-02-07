@@ -4,7 +4,7 @@
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
 	    style='viewBG'>
-	<TextView android:text="Please Log in to your Google account" 
+	<TextView android:text="@string/label_webview_login" 
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:paddingLeft="5dip"

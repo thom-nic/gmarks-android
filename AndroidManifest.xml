@@ -97,7 +97,7 @@
             </intent-filter>
         </activity>
  -->        
-        <activity android:name=".WebViewLoginActivity" android:label="GMarks Sync Login">
+        <activity android:name=".WebViewLoginActivity" android:label="@string/login_title">
             <intent-filter>
                 <action android:name="org.thomnichols.gmarks.action.LOGIN" />
                 <category android:name="android.intent.category.DEFAULT" />

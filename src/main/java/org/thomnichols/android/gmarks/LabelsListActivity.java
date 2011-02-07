@@ -193,7 +193,7 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
         	break;
         case R.id.menu_sync:
         	Log.d(TAG, "Starting sync...");
-        	Toast.makeText(this, "Starting sync...", Toast.LENGTH_SHORT).show();
+        	Toast.makeText(this, R.string.sync_begin_msg, Toast.LENGTH_SHORT).show();
         	new RemoteSyncTask(this).execute();
         	break;
         case R.id.menu_settings:
@@ -219,11 +219,11 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
 	    case R.id.menu_logout:
 	    	Log.d(TAG, "Logging out...");
 	    	BookmarksQueryService.getInstance().clearAuthCookies();
-	    	Toast.makeText(this, "You are now logged out.", Toast.LENGTH_SHORT).show();
+	    	Toast.makeText(this, R.string.logged_out_msg, Toast.LENGTH_SHORT).show();
 	    	break;
 		case R.id.menu_login:
 			Log.d(TAG, "Logging in...");
-			Toast.makeText(this, "Logging in...", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, R.string.logging_in_msg, Toast.LENGTH_SHORT).show();
 			startActivity( new Intent(this,WebViewLoginActivity.class) );
 			break;
 		}
@@ -233,7 +233,7 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
 	public void onClick(View v) {
 		if ( v.getId() == R.id.syncBtn ) {
 			Log.d(TAG, "Starting sync...");
-        	Toast.makeText(this, "Starting sync...", Toast.LENGTH_SHORT).show();
+        	Toast.makeText(this, R.string.sync_begin_msg, Toast.LENGTH_SHORT).show();
         	new RemoteSyncTask(this).execute();
 		}
 

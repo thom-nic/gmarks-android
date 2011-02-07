@@ -11,16 +11,81 @@
     <string name="live_folder_activity">GMarks Label</string>
     <string name="live_folder_title">Choose a Label</string>
     <string name="search_hint">Search Google Bookmarks</string>
+    <string name="login_title">GMarks Login</string>
     <string name="coming_soon">Coming soon!</string>
-    
+
+    <string name="search_results_title">GMarks search results for \'%s\'</string>
+    <string name="label_results_title">Bookmarks for label \'%s\'</string>
+
+    <string name="sync_begin_msg">Starting sync...</string>
+    <string name="sync_done_msg">GMarks Sync complete</string>
+    <string name="sync_in_progress_msg">Sync already in progress...</string>
+    <string name="sync_notify_title">Gmarks Sync</string>
+    <string name="sync_notify_start">Gmarks sync in progress...</string>
+    <string name="sync_notify_auth_error">Login error; please log in.</string>
+    <string name="sync_notify_error">Unknown sync error</string>
+    <string name="sync_notify_count">Synchronized %d bookmarks</string>
+
+    <string name="deleting_bookmark_msg">Deleting bookmark...</string>
+    <string name="saving_bookmark_msg">Saving bookmark...</string>
+    <string name="save_ok_msg">Bookmark created.</string>
+    <string name="update_ok_msg">Bookmark updated.</string>
+    <string name="delete_ok_msg">Bookmark deleted.</string>
+    <string name="error_auth_failed_msg">Error: Auth failure</string>
+    <string name="error_not_found_msg">Error: Bookmark not found</string>
+    <string name="error_delete_failed_msg">Delete failed!</string>
+    <string name="error_save_failed_msg">Save failed!</string>
+
+    <string name="please_wait_msg">Please wait...</string>
+    <string name="logged_out_msg">You are now logged out.</string>
+    <string name="logging_in_msg">Logging in...</string>
+    <string name="login_success_msg">Logged in!</string>
+    <string name="login_failed_msg">Login error!</string>
+    <string name="login_failed_detail_msg">Login failed: %s</string>
+
+    <string name="pref_not_set_label">(unset)</string>
+        
     <string name="btn_save">Save</string>
     <string name="btn_update">Update</string>
     <string name="btn_delete">Delete</string>
     <string name="btn_first_sync">Please Sync to begin</string>
 
-    <string name="menu_insert">Add</string>
+		<!-- Menu items -->
+    <string name="menu_add">Add</string>
+    <string name="menu_add_long">Add Bookmark</string>
     <string name="menu_sync">Sync</string>
+    <string name="menu_sync_long">Synchronize</string>
     <string name="menu_delete">Delete</string>
+    <string name="menu_delete_long">Delete Selected Bookmark</string>
+    <string name="menu_search">Search</string>
+    <string name="menu_search_long">Search Bookmarks</string>
+    <string name="menu_sort_title">Sort by Title</string>
+    <string name="menu_sort_title_long">Sort Title Alphabetically</string>
+    <string name="menu_sort_date">Sort by Date</string>
+    <string name="menu_sort_date_long">Sort by Modified Date</string>
+    <string name="menu_sort_label">Sort by Label</string>
+    <string name="menu_sort_label_long">Sort Labels Alphabetically</string>
+    <string name="menu_sort_count">Sort by Count</string>
+    <string name="menu_sort_count_long">Sort by Label Count</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_login">Log In</string>
+    <string name="menu_login_long">Login to your Google Account</string>
+    <string name="menu_logout">Log Out</string>
+    <string name="menu_logout_long">Logout from your Google Account</string>
+    
+
+		<!-- UI Labels -->
+    <string name="label_title">Title</string>
+    <string name="label_url">URL</string>
+    <string name="label_description">Description</string>
+    <string name="label_labels">labels</string>
+    <string name="label_bookmark_title">Delete</string>
+
+    <string name="label_all_bookmarks">All Bookmarks</string>
+    <string name="label_sub_all_bookmarks">sorted by date</string>
+    
+    <string name="label_webview_login">Please Log in to your Google account</string>
+		
 
 		<!-- Preferences -->
 		
@@ -42,6 +107,7 @@
     </string-array>
 
     <!-- Preference values for sync duration -->
+    <!-- NOTE: Don't localize this.-->
     <string-array name="pref_duration_values">
       <item>5</item>
       <item>20</item>
