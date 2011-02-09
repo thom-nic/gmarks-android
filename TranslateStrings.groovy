@@ -124,7 +124,8 @@ String translateString(String english, String language) {
 	translation = entityMatch.appendTail(sb).toString()
 	
 	// Replace each unicode character substitute with the original token:
-	tokens.each { translation = translation.replace((String)it.key, it.value) }	
+	tokens.each { translation = translation.replace((String)it.key, it.value) }
+	translation = translation.replaceAll( /([^\\])'/, /$1\\'/ )
 	println "  << " + translation
 	return translation
 }
