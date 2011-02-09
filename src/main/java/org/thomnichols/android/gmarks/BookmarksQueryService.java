@@ -18,7 +18,6 @@ package org.thomnichols.android.gmarks;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.http.Header;
@@ -179,7 +178,7 @@ public class BookmarksQueryService {
 		try {
 			HttpResponse resp = http.execute( get, this.ctx );
 			int statusCode = resp.getStatusLine().getStatusCode();
-			Log.d( "TAG", "testAuth return code: " + statusCode );
+			Log.d( TAG, "testAuth return code: " + statusCode );
 			return statusCode < 400;
 		}
 		catch ( IOException ex ) {
@@ -474,128 +473,22 @@ public class BookmarksQueryService {
 		}
 	}
 	
+	public Iterable<BookmarkList> getMyBookmarks() throws AuthException, IOException {
+		return new BookmarkListIterator(this, BookmarkList.LISTS_PRIVATE);
+	}
+	public Iterable<BookmarkList> getSharedBookmarks() throws AuthException, IOException {
+		return new BookmarkListIterator(this, BookmarkList.LISTS_SHARED);
+	}
+	public Iterable<BookmarkList> getPublishedBookmarks() throws AuthException, IOException {
+		return new BookmarkListIterator(this, BookmarkList.LISTS_PUBLIC);
+	}
+
 	/**
 	 * This has the potential to be relatively large..
 	 */
 	public Iterable<Bookmark> getAllBookmarks() throws AuthException, IOException {
 		// make a sequence of JSON requests until they've all been retrieved.
 		// max 25 bookmarks can be requested at one time.
-		return new AllBookmarksIterator();
-	}
-	
-	static class IteratorException extends RuntimeException {
-		private static final long serialVersionUID = -5283100944881775242L;
-		public IteratorException() { super(); }
-		public IteratorException(String arg0, Throwable arg1) { super(arg0, arg1); }
-		public IteratorException(String arg0) { super(arg0); }
-		public IteratorException(Throwable arg0) { super(arg0); }
-	}
-	
-	class AllBookmarksIterator implements Iterator<Bookmark>, Iterable<Bookmark> {
-		
-		JSONObject currentBatch = null;
-		int currentQueryIndex = 0;
-		// needs threadID params:
-//		String uriBase = "https://www.google.com/bookmarks/api/thread?op=ShowThread";
-		String uriBase = "https://www.google.com/bookmarks/api/threadsearch?g=Time&nr=25&start=";
-		int totalItems = -1; 
-		int currentItemIndex = 0;
-
-		JSONArray currentSection = null;
-		int sectionIndex = 0;
-		
-		public AllBookmarksIterator() throws AuthException, IOException { 
-			getXtParam(); // ensures we're logged in & have the default thread ID
-		}
-
-		private boolean getNextSection() {
-			if ( currentBatch == null ) return false;
-			try {
-				JSONArray allSections = currentBatch.getJSONArray( "threadTitles" );
-				if ( this.sectionIndex >= allSections.length() )
-					return false;
-
-				this.currentSection = allSections.getJSONObject( sectionIndex++ )
-					.getJSONArray("sectionContent");
-				this.currentItemIndex = 0;
-				this.currentQueryIndex += currentSection.length();
-				return true;
-			}
-			catch ( JSONException ex ) {
-				Log.w(TAG, "JSON iterator error", ex );
-			}
-			return false;
-		}
-		
-		private boolean queryNext() throws IteratorException {
-			try {
-				this.currentBatch = BookmarksQueryService.this.queryJSON(
-						uriBase + currentQueryIndex );
-				this.currentItemIndex = 0;
-				this.sectionIndex = 0;
-
-				if ( this.totalItems < 0 ) this.totalItems = currentBatch.getInt("nr");
-				
-				JSONArray sectionList = currentBatch.getJSONArray("threadTitles");
-				if ( sectionList.length() < 1 ) { 
-					Log.w(TAG, "JSON response has 0 items!");
-					return false;
-				}
-
-				this.currentSection = sectionList.getJSONObject(sectionIndex++).getJSONArray("sectionContent");
-				this.currentQueryIndex += currentSection.length();
-				return this.currentSection.length() > 0;
-			}
-			catch ( IOException ex ) {
-				Log.w(TAG,"IO error in query all bookmarks", ex );
-				throw new IteratorException(ex);
-//				return false;
-			}
-			catch ( JSONException ex ) {
-				Log.w(TAG,"JSON error in query all bookmarks", ex ); 
-				throw new IteratorException(ex);
-//				return false;
-			}
-		}
-		
-		public boolean hasNext() throws IteratorException {
-			return this.currentSection != null && this.currentItemIndex < this.currentSection.length()
-				|| getNextSection() || queryNext();
-		}
-
-		public Bookmark next() throws IteratorException {
-			try {
-				JSONObject item = this.currentSection.getJSONObject(currentItemIndex++);
-//				Log.v(TAG,item.toString());
-				Bookmark bookmark = new Bookmark( 
-						item.getString("elementId"),
-						item.getString("threadId"),
-						item.getString("title"), 
-						item.getString("url"),
-						item.getString("host"),
-						item.getString("description"),
-						item.getLong("timestamp"),
-						item.getLong("modifiedTimestamp") );
-
-				if ( item.has("labels") ) {
-					JSONArray labelJSON = item.getJSONArray("labels");
-
-					for ( int i=0; i< labelJSON.length(); i++ )
-						bookmark.getLabels().add(labelJSON.getString(i));
-				}
-				if ( item.has("faviconUrl") )
-					bookmark.setFaviconURL(item.getString("faviconUrl"));
-				
-				return bookmark;
-			}
-			catch ( JSONException ex ) {
-				Log.w(TAG, "Error parsing bookmark from JSON", ex);
-				throw new IteratorException( "Error parsing bookmark from JSON", ex);
-			}
-		}
-
-		public void remove() { throw new UnsupportedOperationException(); }
-
-		public Iterator<Bookmark> iterator() { return this; }
+		return new AllBookmarksIterator(this);
 	}
 }
