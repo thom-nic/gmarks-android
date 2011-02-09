@@ -153,7 +153,6 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         // if picker, don't show UI options!
-        if ( Intent.ACTION_PICK.equals(getIntent().getAction()) ) return true;
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.label_list, menu);
         return true;
@@ -176,6 +175,14 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
 		
 		if ( Hardware.hasSearchButton() )
 			menu.findItem(R.id.menu_search).setVisible(false);
+		
+        if ( Intent.ACTION_PICK.equals(getIntent().getAction()) ) {
+        	// hide menu actions that divert away from this picker:
+        	menu.findItem(R.id.menu_add).setVisible(false);
+        	menu.findItem(R.id.menu_search).setVisible(false);
+        	menu.findItem(R.id.menu_settings).setVisible(false);
+        	menu.findItem(R.id.menu_sync).setVisible(false);
+        }
 		
     	return true;
     }
