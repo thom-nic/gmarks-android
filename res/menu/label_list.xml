@@ -26,11 +26,6 @@
 	<item android:title="@string/menu_settings"
 		android:id="@+id/menu_settings" 
 		android:icon="@android:drawable/ic_menu_preferences" />
-	<item android:titleCondensed="@string/menu_search" 
-		android:title="@string/menu_search_long"
-		android:id="@+id/menu_search" 
-		android:visible='false'
-		android:icon='@android:drawable/ic_menu_search' />
 	<item android:title="@string/menu_login"
 		android:id="@+id/menu_login" 
 		android:visible='false'/>
