@@ -79,7 +79,6 @@
     <string name="label_url">URL</string>
     <string name="label_description">Description</string>
     <string name="label_labels">labels</string>
-    <string name="label_bookmark_title">Delete</string>
 
     <string name="label_all_bookmarks">All Bookmarks</string>
     <string name="label_sub_all_bookmarks">sorted by date</string>
