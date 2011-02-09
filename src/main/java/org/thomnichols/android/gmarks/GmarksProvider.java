@@ -52,10 +52,11 @@ public class GmarksProvider extends ContentProvider {
 	static String LABELS_TABLE_NAME = "labels";
 	static String BOOKMARK_LABELS_TABLE_NAME = "bookmark_labels";
 	
-    private static Map<String, String> bookmarksProjectionMap;
-    private static Map<String, String> labelsProjectionMap;
-    private static Map<String, String> sLiveFolderProjectionMap;
-    private static Map<String, String> searchSuggestProjectionMap;
+    private static final Map<String, String> bookmarksProjectionMap;
+    private static final Map<String, String> labelsProjectionMap;
+    private static final Map<String, String> listsProjectionMap;
+    private static final Map<String, String> sLiveFolderProjectionMap;
+    private static final Map<String, String> searchSuggestProjectionMap;
 
     private static final int BOOKMARKS_URI = 1;
     private static final int BOOKMARK_ID_URI = 2;
@@ -64,6 +65,8 @@ public class GmarksProvider extends ContentProvider {
     private static final int LIVE_FOLDER_BOOKMARKS_URI = 5;
     private static final int BOOKMARK_SEARCH_URI = 6;
     private static final int BOOKMARK_SEARCH_SUGGEST_URI = 7;
+    private static final int BOOKMARK_LISTS_URI = 8;
+    private static final int BOOKMARK_LISTS_ID_URI = 9;
 
     private static final UriMatcher sUriMatcher;
 
@@ -143,6 +146,16 @@ public class GmarksProvider extends ContentProvider {
             }
             sortOrder = "modified DESC"; // for some reason this gets set to 'name ASC'
             break;
+            
+        case BOOKMARK_LISTS_URI:
+        	qb.setTables(BookmarkList.TABLE_NAME);
+        	qb.setProjectionMap(listsProjectionMap);
+        	if ( sortOrder == null ) sortOrder = BookmarkList.Columns.DEFAULT_SORT_ORDER;
+        	String type = uri.getQueryParameter("type");
+        	if( BookmarkList.LISTS_PRIVATE.equals(type) ) qb.appendWhere("owned=1");
+        	else if ( BookmarkList.LISTS_SHARED.equals(type) ) qb.appendWhere("shared=1");
+        	else if ( BookmarkList.LISTS_PUBLIC.equals(type) ) qb.appendWhere("publshed=1");
+        	break;
 
         default:
             throw new IllegalArgumentException("Unknown URI " + uri);
@@ -266,8 +279,10 @@ public class GmarksProvider extends ContentProvider {
             return Bookmark.CONTENT_ITEM_TYPE;
         case LABELS_URI:
         	return Label.CONTENT_TYPE;
-//        case LABELS_ID_URI:
-//        	return Label.CONTENT_ITEM_TYPE;
+        case BOOKMARK_LISTS_URI:
+        	return BookmarkList.CONTENT_TYPE;
+        case BOOKMARK_LISTS_ID_URI:
+        	return BookmarkList.CONTENT_ITEM_TYPE;
         default:
             throw new IllegalArgumentException("Unknown URI " + uri);
         }
@@ -279,8 +294,9 @@ public class GmarksProvider extends ContentProvider {
         sUriMatcher.addURI(Bookmark.AUTHORITY, "bookmarks/search", BOOKMARK_SEARCH_URI);
         sUriMatcher.addURI(Bookmark.AUTHORITY, "bookmarks/#", BOOKMARK_ID_URI);
         sUriMatcher.addURI(Bookmark.AUTHORITY, "labels", LABELS_URI);
-//        sUriMatcher.addURI(Bookmark.AUTHORITY, "labels/#", LABELS_ID_URI);
         sUriMatcher.addURI(Bookmark.AUTHORITY, "live_folders/bookmarks", LIVE_FOLDER_BOOKMARKS_URI);
+        sUriMatcher.addURI(Bookmark.AUTHORITY, "bookmark_lists", BOOKMARK_LISTS_URI);
+        sUriMatcher.addURI(Bookmark.AUTHORITY, "bookmark_lists/#", BOOKMARK_LISTS_ID_URI);
         sUriMatcher.addURI(Bookmark.AUTHORITY, SearchManager.SUGGEST_URI_PATH_QUERY + "/*", 
         		BOOKMARK_SEARCH_SUGGEST_URI);
         sUriMatcher.addURI(Bookmark.AUTHORITY, SearchManager.SUGGEST_URI_PATH_QUERY, 
@@ -303,6 +319,12 @@ public class GmarksProvider extends ContentProvider {
         labelsProjectionMap.put(Label.Columns._ID, Label.Columns._ID);
         labelsProjectionMap.put(Label.Columns.TITLE, Label.Columns.TITLE);
         labelsProjectionMap.put(Label.Columns.COUNT, "count(label_id)");
+
+        listsProjectionMap = new HashMap<String,String>();
+        listsProjectionMap.put(BookmarkList.Columns._ID, BookmarkList.Columns._ID);
+        listsProjectionMap.put(BookmarkList.Columns.THREAD_ID, BookmarkList.Columns.THREAD_ID);
+        listsProjectionMap.put(BookmarkList.Columns.TITLE, BookmarkList.Columns.TITLE);
+        listsProjectionMap.put(BookmarkList.Columns.DESCRIPTION, BookmarkList.Columns.DESCRIPTION);
         
         // Support for Live Folders.
         sLiveFolderProjectionMap = new HashMap<String, String>();
@@ -332,7 +354,7 @@ public class GmarksProvider extends ContentProvider {
     }
     
 	public static class DatabaseHelper extends SQLiteOpenHelper {
-		static final int DB_VERSION = 2;
+		static final int DB_VERSION = 3;
 		
 		public DatabaseHelper( Context ctx ) {
 			super(ctx, DB_NAME, null, DB_VERSION );
@@ -384,6 +406,18 @@ public class GmarksProvider extends ContentProvider {
 			
 			db.execSQL( "create unique index idx_bookmarks_labels_ref on "
 					+ BOOKMARK_LABELS_TABLE_NAME + " ( label_id, bookmark_id )" );
+			
+			db.execSQL("create table " + BookmarkList.TABLE_NAME + " ( "
+					+ "_id integer primary key,"
+					+ "google_id varchar(50) not null unique,"
+					+ "thread_id varchar(20) not null,"
+					+ "title varchar(50) not null,"
+					+ "description varchar(150) not null default ''," 
+					+ "created long not null,"
+					+ "modified long not null,"
+					+ "owned tinyint not null default 0,"
+					+ "shared tinyint not null default 0,"
+					+ "published tinyint not null default 0 )" );
 		}
 	
 		@Override
@@ -393,6 +427,20 @@ public class GmarksProvider extends ContentProvider {
 				db.execSQL("alter table " + BOOKMARKS_TABLE_NAME 
 						+ " add column favicon_url varchar(100) default null");
 				// TODO set last sync time back to 0 so that all favicons will be retrieved
+			}
+			
+			if ( fromVersion < 3 && toVersion >= 3 ) {
+				db.execSQL("create table " + BookmarkList.TABLE_NAME + " ( "
+						+ "_id integer primary key,"
+						+ "google_id varchar(50) not null unique,"
+						+ "thread_id varchar(20) not null,"
+						+ "title varchar(50) not null,"
+						+ "description varchar(150) not null default ''," 
+						+ "created long not null,"
+						+ "modified long not null,"
+						+ "owned tinyint not null default 0,"
+						+ "shared tinyint not null default 0,"
+						+ "published tinyint not null default 0 )" );
 			}
 		}
 		
@@ -709,6 +757,46 @@ public class GmarksProvider extends ContentProvider {
 	    			db.close();
 	    		}
 	    	}
+	    }
+	    
+	    public BookmarkList insert( BookmarkList b, SQLiteDatabase db ) throws DBException {
+	    	boolean closeDB = false;
+	    	if ( db == null ) {
+	    		db = getWritableDatabase();
+	    		closeDB = true;
+	    		db.beginTransaction();
+	    	}
+	        try {
+	        	ContentValues vals = new ContentValues();
+	        	vals.put(BookmarkList.Columns.THREAD_ID, b.getThreadId());
+	        	vals.put(BookmarkList.Columns.TITLE, b.getTitle());
+	        	vals.put(BookmarkList.Columns.DESCRIPTION, b.getDescription());
+	        	vals.put(BookmarkList.Columns.CREATED_DATE, b.getCreatedDate());
+	        	vals.put(BookmarkList.Columns.MODIFIED_DATE, b.getModifiedDate());
+	        	vals.put(BookmarkList.Columns.OWNED, b.isOwnedByUser()?1:0);
+	        	vals.put(BookmarkList.Columns.SHARED, b.isShared()?1:0);
+	        	vals.put(BookmarkList.Columns.PUBLISHED, b.isPublished()?1:0);
+
+	        	long rowID = db.insert( BookmarkList.TABLE_NAME, "", vals );
+	        	if ( rowID < 0 ) throw new DBException( "Insert conflict: " + rowID );
+	        	b.set_id(rowID);
+	        	
+	        	if ( closeDB ) {
+	        		Log.d(TAG, "Committing changes: " + b.getTitle() );
+	        		db.setTransactionSuccessful();
+	        	}
+
+	        	return b;
+	        }
+	        catch ( SQLiteConstraintException ex ) {
+	        	throw new DBException( "Error persisting bookmark list: " + b.getTitle(), ex);
+	        }
+	        finally { 
+	        	if ( closeDB ) {
+	        		db.endTransaction();
+	        		db.close();
+	        	}
+	        }	    	
 	    }
 		
 	    public void persistCookies( List<Cookie> cookies ) {
