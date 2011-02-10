@@ -3,8 +3,7 @@
 		android:title="@string/menu_add_long"
 		android:id="@+id/menu_add" 
 		android:icon="@android:drawable/ic_menu_add" />
-	<item android:titleCondensed="Go to Label" 
-		android:title="Go to Label"
+	<item android:title="@string/menu_go_to_label"
 		android:id="@+id/menu_go_to" 
 		android:icon='@drawable/ic_menu_goto' />
 	<item android:titleCondensed="@string/menu_search" 
