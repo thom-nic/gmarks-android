@@ -59,6 +59,7 @@
     <string name="menu_delete_long">Deletar o favorito escolhido</string>
     <string name="menu_search">Procurar</string>
     <string name="menu_search_long">Procurar nos favoritos</string>
+    <string name="menu_go_to_label">Ir a Etiqueta</string>
     <string name="menu_sort_title">Ordenar por Título</string>
     <string name="menu_sort_title_long">Ordenar por Título Alfabeticamente</string>
     <string name="menu_sort_date">Ordenar por Data</string>

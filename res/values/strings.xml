@@ -60,6 +60,7 @@
     <string name="menu_delete_long">Delete Selected Bookmark</string>
     <string name="menu_search">Search</string>
     <string name="menu_search_long">Search Bookmarks</string>
+    <string name="menu_go_to_label">Go to Label</string>
     <string name="menu_sort_title">Sort by Title</string>
     <string name="menu_sort_title_long">Sort Title Alphabetically</string>
     <string name="menu_sort_date">Sort by Date</string>
