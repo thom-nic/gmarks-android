@@ -59,6 +59,7 @@
     <string name="menu_delete_long">Eliminador el marcador seleccionado</string>
     <string name="menu_search">Buscar</string>
     <string name="menu_search_long">Buscar en los marcadores</string>
+    <string name="menu_go_to_label">Ir a la Etiqueta</string>
     <string name="menu_sort_title">Ordenar por Título</string>
     <string name="menu_sort_title_long">Ordenar por Título Alfabéticamente</string>
     <string name="menu_sort_date">Ordenar por Fecha</string>
