@@ -89,11 +89,11 @@
 
 		<!-- Preferences -->
 		
-    <string name="pref_browser_sync">Habilitar Sincronización con el Navegador</string>
+    <string name="pref_browser_sync">Sincronización con el Navegador</string>
     <string name="pref_browser_sync_summary">Sincronizar el Navegador con las etiquetas elegidas</string>
     <string name="pref_sync_label">Elegir Etiqueta para sincronizar con el Navegador</string>
     <string name="pref_sync_interval">Intervalo de Sincronización</string>
-    <string name="pref_background_sync">Habilitar Sincronización de Fondo</string>
+    <string name="pref_background_sync">Sincronización de Fondo</string>
     <string name="pref_background_sync_summary">Sincronizar automáticamente aunque GMarks no esté activo</string>
     
     <!-- Preference options for sync duration -->
