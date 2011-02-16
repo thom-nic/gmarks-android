@@ -44,7 +44,8 @@ public class LabelPreference extends Preference implements OnActivityResultListe
 	@Override
 	protected void onBindView(View view) {
 		super.onBindView(view);		
-		this.setSummary(this.label != null ? this.label : "(none)");
+		this.setSummary(this.label != null ? this.label : 
+			getContext().getText(R.string.pref_not_set_label));
 	}
 	
 	@Override
@@ -89,7 +90,7 @@ public class LabelPreference extends Preference implements OnActivityResultListe
 		this.label = val;
 		
 		this.persistString(val);
-		this.setSummary(label != null ? label : "(none)" );
+		this.setSummary(label != null ? label : getContext().getText(R.string.pref_not_set_label) );
 		this.callChangeListener(val);
 		notifyDependencyChange(shouldDisableDependents());
         notifyChanged();
