@@ -55,7 +55,6 @@
     <string name="menu_add_long">Add Bookmark</string>
     <string name="menu_sync">Sync</string>
     <string name="menu_sync_long">Synchronize</string>
-    <string name="menu_go_to_label">Go to Label</string>
     <string name="menu_delete">Delete</string>
     <string name="menu_delete_long">Delete Selected Bookmark</string>
     <string name="menu_search">Search</string>
