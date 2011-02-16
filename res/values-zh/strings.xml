@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+  <string name="app_name">GMarks</string>
+  <string name="labels_activity">GMarks标签</string>
+  <string name="choose_label">选择一个GMarks标签</string>
+  <string name="bookmarks_activity">GMarks所有书签</string>
+  <string name="choose_bookmark">选择一个书签</string>
+  <string name="edit_bookmark">编辑书签</string>
+  <string name="new_bookmark">新建GMarks书签</string>
+  <string name="settings">GMarks设置</string>
+  <string name="live_folder_activity">GMarks标签</string>
+  <string name="live_folder_title">选择一个标签</string>
+  <string name="search_hint">搜索谷歌书签</string>
+  <string name="login_title">GMarks登录</string>
+  <string name="coming_soon">即将推出！</string>
+
+  <string name="search_results_title">GMarks搜索\'%s\'的结果</string>
+  <string name="label_results_title">标签为\'%s\'的书签</string>
+
+  <string name="sync_begin_msg">开始同步...</string>
+  <string name="sync_done_msg">GMarks同步完成</string>
+  <string name="sync_in_progress_msg">已在同步中...</string>
+  <string name="sync_notify_title">Gmarks同步</string>
+  <string name="sync_notify_start">Gmarks同步进行中...</string>
+  <string name="sync_notify_auth_error">登录错误，请登录</string>
+  <string name="sync_notify_error">未知的同步错误</string>
+  <string name="sync_notify_count">已同步了%d个书签</string>
+
+  <string name="deleting_bookmark_msg">正在删除书签...</string>
+  <string name="saving_bookmark_msg">正在保存书签...</string>
+  <string name="save_ok_msg">书签已创建。</string>
+  <string name="update_ok_msg">书签已更新。</string>
+  <string name="delete_ok_msg">书签已删除。</string>
+  <string name="error_auth_failed_msg">错误：权限验证失败</string>
+  <string name="error_not_found_msg">错误：找不到书签</string>
+  <string name="error_delete_failed_msg">删除失败！</string>
+  <string name="error_save_failed_msg">保存失败！</string>
+
+  <string name="please_wait_msg">请稍候...</string>
+  <string name="logged_out_msg">您现在已经登出。</string>
+  <string name="logging_in_msg">正在登录..</string>
+  <string name="login_success_msg">已登录！</string>
+  <string name="login_failed_msg">登录错误！</string>
+  <string name="login_failed_detail_msg">登录失败：%s</string>
+
+  <string name="pref_not_set_label">（未设置）</string>
+
+  <string name="btn_save">保存</string>
+  <string name="btn_update">更新</string>
+  <string name="btn_delete">删除</string>
+  <string name="btn_first_sync">请先同步以开始使用</string>
+
+		<!-- Menu items -->
+  <string name="menu_add">新增</string>
+  <string name="menu_add_long">添加书签</string>
+  <string name="menu_sync">同步</string>
+  <string name="menu_sync_long">同步</string>
+  <string name="menu_delete">删除</string>
+  <string name="menu_delete_long">删除选定的书签</string>
+  <string name="menu_search">搜索</string>
+  <string name="menu_search_long">搜索书签</string>
+  <string name="menu_go_to_label">转到标签</string>
+  <string name="menu_sort_title">按标题</string>
+  <string name="menu_sort_title_long">按标题字母排序</string>
+  <string name="menu_sort_date">按日期</string>
+  <string name="menu_sort_date_long">按修改日期排序</string>
+  <string name="menu_sort_label">按标签</string>
+  <string name="menu_sort_label_long">按标签字母排序</string>
+  <string name="menu_sort_count">按数量</string>
+  <string name="menu_sort_count_long">按标签数量排序</string>
+  <string name="menu_settings">设置</string>
+  <string name="menu_login">登录</string>
+  <string name="menu_login_long">登录到您的谷歌帐户</string>
+  <string name="menu_logout">注销</string>
+  <string name="menu_logout_long">从您的谷歌帐户注销</string>
+
+
+		<!-- UI Labels -->
+  <string name="label_title">标题</string>
+  <string name="label_url">网址</string>
+  <string name="label_description">说明</string>
+  <string name="label_labels">标签</string>
+
+  <string name="label_all_bookmarks">所有书签</string>
+  <string name="label_sub_all_bookmarks">按日期排序</string>
+
+  <string name="label_webview_login">请登录到您的谷歌帐户</string>
+
+
+		<!-- Preferences -->
+
+  <string name="pref_browser_sync">启用浏览器同步</string>
+  <string name="pref_browser_sync_summary">同步您选定标签下的书签到浏览器的书签</string>
+  <string name="pref_sync_label">选择浏览器要同步的标签</string>
+  <string name="pref_sync_interval">同步间隔</string>
+  <string name="pref_background_sync">启用后台同步</string>
+  <string name="pref_background_sync_summary">自动同步，即使GMarks并没运行</string>
+</resources>
