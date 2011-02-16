@@ -151,7 +151,7 @@ public class GmarksProvider extends ContentProvider {
         	qb.setTables(BookmarkList.TABLE_NAME);
         	qb.setProjectionMap(listsProjectionMap);
         	if ( sortOrder == null ) sortOrder = BookmarkList.Columns.DEFAULT_SORT_ORDER;
-        	String type = uri.getQueryParameter("type");
+        	String type = uri.getQueryParameter(BookmarkList.PARAM_CATEGORY);
         	if( BookmarkList.LISTS_PRIVATE.equals(type) ) qb.appendWhere("owned=1");
         	else if ( BookmarkList.LISTS_SHARED.equals(type) ) qb.appendWhere("shared=1");
         	else if ( BookmarkList.LISTS_PUBLIC.equals(type) ) qb.appendWhere("publshed=1");

@@ -209,6 +209,10 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
         case R.id.menu_search:
         	this.onSearchRequested();
         	break;
+        	
+        case R.id.menu_lists:
+        	startActivity( new Intent(Intent.ACTION_VIEW).setType(BookmarkList.CONTENT_TYPE) );
+        	break;
         case R.id.menu_sort_alpha:
             this.currentSort = SORT_ALPHA; 
             Prefs.edit(this).putInt(Prefs.KEY_LABELS_SORT_PREF, SORT_ALPHA).commit();

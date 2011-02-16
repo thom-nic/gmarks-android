@@ -30,6 +30,7 @@ public class BookmarkList {
 	public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.google.bookmark_list";
 	public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd.google.bookmark_list";
 
+	public static final String PARAM_CATEGORY = "cat";
 	public static final String LISTS_PRIVATE = "Mine";
 	public static final String LISTS_SHARED = "Shared";
 	public static final String LISTS_PUBLIC = "Pub";
