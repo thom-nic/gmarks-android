@@ -1,0 +1,62 @@
+Android için Google Yer Ýmleri!
+
+* 100% Reklamsýz ve açýk kaynaklý!
+* Tarayýcý yer imlerinizi Google Yer Ýmlerine senkronize edin, yedekleyin ya da aktarýn
+* Tüm yer imi etiketleri için Canlý Klasör
+* Arkaplanda senkronizasyon
+* Global arama entegrasyonu; Bütün kelime arama.
+* Tarayýcýnýn Paylaþ menüsünden hýzlýca GMark ekleme
+* Telefonunuzdan yer imi ekleyin / güncelleyin / silin
+* Yer imini görmek / düzenlemek için basýlý tutun
+* Eclair / 2.1 için tam destek
+
+Çeviriciler aranýyor!  Google Yer Ýmlerinin kendi dilinize çevirilmesine yardým etmek istiyorsanýz, proje sayfasýna bakýn.
+Eðer 'Zorunlu Kapanma' problemi yaþarsanasýz, lütfen bildirin ki düzeltebileyim. Ayrýca proje websitesinde özellik isteklerinde de bulunabilirsiniz.
+
+Daha Fazla:
+
+Otomatik olarak Google Yer Ýmlerinizi telefona senkronize edin!  Arkaplan Senkronizasyonu her zaman güncel kalýcaðýnýz anlamýna gelir ama sadece deðiþikleri senkronize eder. Telefonunuza hýzlýca yer imi yollamak için "GMarks for Firefox" , "the bookmarklet" yada "the Google Toolbar" kullanýn.
+
+Herhangi bir etiketi Android Tarayýcý yer imleri ile senkrozi etmek için seçin. Bu, yer imlerinizi bir çok cihaz üzerine aktarma / yedekleme yapabileceðiniz anlamýna gelir.  
+
+Canlý Klasörler size her hangi bir etikete hýzlý ulaþým saðlar. Bunu cihazýnýzda okuma listeleri oluþturmak için kullanýn!
+
+Global arama entegrasyonu , cihazýnýzýn arama ya da Google Arama Widget'ý ile hýzlýca yer imlerinizi arayabileceðiniz anlamýna gelir .  (Bu özelliði sistem ayarlarýnda "Ara" baþlýðý altýndan etkinleþtirebilirsiniz.)  Bütün-kelime arama yer imi baþlýklarýný, etiketleri, URL'leri ve açýklamalarý indeksler.
+
+Tarayýcýnýn "Paylaþ" menüsünden hýzlý yeni Google Yer Ými oluþturun.
+
+Güvenli: Kullanýcý adýnýz ve þifreniz doðruca Google'a gönderilir, ve asla GMarks uygulamasý tarafýndan okunmaz ya da saklanmaz. Mahremiyetinizin korunmasý için tüm internet istekleri HTTPS / SSL kullanýr.
+
+Keywords: Senkronizasyon Yedekleme aktarým içe aktarma dýþa aktarma Google Yer Ýmleri
+
+
+Yakýn zamandaki deðiþiklikler:
+
+0.6.3:
+* Yeni çeviriler: 
+  * Danimarkaca - LayZe saðolsun
+  * Polonyaca - Krygo saðolsun
+  * Türkçe - Proym saðolsun
+   * Geleneksel Çince - eizonuts saðolsun
+   * Almanca - Berkley saðolsun
+   * Fransızca - loic furhoff saðolsun
+   * Yunanca - danzax saðolsun
+   * Sırbistan - @delicb saðolsun
+   * İbranice - Adi saðolsun
+   * İsveç - jokrsolutions saðolsun
+   * Katalanca - jordivf saðolsun
+   * Litvanya - LFSPovo saðolsun
+0.6.2:
+* Yerelleþtirme!
+  * Çince - kouketsu saðolsun
+  * Ýspanyolca - macsjr saðolsun
+  * Portekizce - macsjr saðolsun
+* "Etiket Seçin" menüsünde FC düzeltildi
+
+0.6.x:
+* Global arama entegrasyonu
+* Yazarken arama önerileri
+* Etiketler ve yer imleri için '... göre Sýrala' menü seçeneði.
+* 'Ara' menü butonu
+* 'Etikete Git' menü butonu
+* Latin olmayan karakter setlerinin kodlamasý düzeltildi.

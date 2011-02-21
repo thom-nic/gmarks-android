@@ -1,0 +1,64 @@
+Google-bogmærker til Android!
+
+* 100 % reklamefri og open source!
+* Synkronisér/lav backup/importér browser-bogmærker til Google-bogmærker
+* Live-mappe til alle bogmærkemærkater
+* Baggrundssynkronisering
+* Integreret global søgning; Fuld tekstsøgning
+* Tilføj hurtigt et GMark fra din browsers delemenu
+* Tilføj/opdatér/slet bogmærker fra din mobil
+* Hold i bund for at se/redigere et bogmærke
+* Nu med fuld support for Éclair (Android 2.1)
+
+Søger oversættere! Hvis du vil hjælpe med at oversætte Google Bookmarks til dit sprog, så læs mere på projektsiden.
+
+Hvis du oplever force close-fejl, så rapportér venligst problemet, så jeg kan rette det. Du kan også sende anmodninger om nye features på projektsiden.
+
+Flere detaljer:
+
+Synkronisér automatisk dine Google-bogmærker til din mobil! Med baggrundssynkronisering er du altid opdateret; tjenesten synkroniserer kun det, som er blevet ændret. Brug GMarks til Firefox, en bookmarklet eller Google-værktøjslinien til hurtigt at sende bogmærker til din mobil.
+
+Vælg mellem alle dine mærkater, hvilke du vil synkronisere med din Android-browsers bogmærker. På denne måde kan du lave backup af og eksportere dine browser-bogmærker til adskillige enheder.
+
+Live-mapper giver dig hurtig adgang til alle mærkater. Brug dem til at lave en læseliste på din enhed!
+
+Integreret globalsøgning gør det muligt at finde et bogmærke hurtigt ved at bruge din enheds søgeknap eller Googles søgewidget (dette kan slås til i systemindstillingerne under "Søgning"). Fuld tekstsøgning indekserer bogmærketitler, mærkater, URLs og beskrivelser.
+
+Opret hurtigt nye Google-bogmærker fra din browsers delemenu.
+
+Sikkerhed: Dit brugernavn og kodeord bliver sendt direkte til Google og bliver derfor aldrig læst eller gemt af GMarks-applikationen. Alle internetforespørgsler benytter sig af HTTPS-/SSL-protokollen for at sikre dine personlige oplysninger.
+
+Keywords: synkroniser backup importer eksporter Google bogmærker
+
+
+Nyeste ændringer:
+
+0.6.3:
+* Nye oversættelser:
+  * Dansk - tak til LayZee
+  * Polsk - tak til Krygo93
+  * Tyrkisk - tak til Proym
+  * Traditionel kinesisk - tak til eizonuts
+  * Tysk - tak til Berkley
+  * Fransk - tak til loic furhoff
+  * Græsk - tak vdanzax
+  * serbiske - tak til @delicb
+  * Hebraisk - tak til Adi
+  * Svensk - tak til jokrsolutions
+  * Catalan - tak til jordivf
+  * litauisk - tak til LFSPovo
+  
+0.6.2:
+* Mulighed for angivelse af sprog!
+  * Kinesisk - tak til kouketsu
+  * Spansk - tak til macsjr
+  * Portugisisk - tak til macsjr
+* Force close-problem i "Vælg mærkat"-menuen rettet
+
+0.6.x:
+* Integreret globalsøgning tilføjet
+* Foreslåede søgeord tilføjet
+* "Sortér efter..."-menuvalg for mærkater og bogmærker tilføjet
+* Søgeknap tilføjet
+* "Gå til mærkat"-knap tilføjet
+* Kodning af ikke-latinske tegnsæt rettet

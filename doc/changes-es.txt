@@ -1,0 +1,47 @@
+Google Bookmarks Para Android!
+
+* 100% Sin anuncios y de código abierto!
+* Sincronización/Respaldo con Google Bookmarks
+* Live folder para cualquier etiqueta de marcador
+* Sincronización en segundo plano
+* Búsqueda por texto
+* Añade rápidamente un GMark desde el menu de compartir del navegador
+* Añadir/actualizar/borrar marcadores desde tu telefono
+* Presión larga para ver/ editar marcador
+* Ahora completamente funcional en 2.1/Eclair
+
+GMarks sigue en beta, por favor sé paciente!  Si encuentra algún FC, por favor 'Informe' del problema para poder arreglarlo. Puedes dejar sugerencias e pedidos en la página del proyecto
+
+Llamamiento a Traductores!  Si quieres ayudar a traducir Google Bookmarks a tu lengua, mira la página del proyecto.
+
+Cambios recientes:
+
+0.6.3: 
+* Nuevas traducciones:
+  * Danés - gracias Layzee
+  * Polonia - gracias Krygo
+  * Turquía - gracias Proym
+  * Tradicional China - gracias eizonuts
+  * Alemán - gracias Berkley
+  * Francia - gracias furhoff loic
+  * Griego - gracias danzax
+  * Serbia - gracias @delicb
+  * Hebreo - gracias Adi
+  * Suecia - gracias jokrsolutions
+  * Catalán - jordivf gracias
+  * Lituania - gracias LFSPovo
+
+0.6.2:
+* Localización!
+  * Chino - gracias kouketsu
+  * Español - gracias macsjr
+  * Portugues - gracias macsjr
+* Arreglado FC en el menu de "Elegir Etiqueta"
+
+0.6.x:
+* Integración con la búsqueda global
+* Sugestiones de búsqueda mientras escribes
+* Opción 'Ordenar por...' para etiquetas y favoritos
+* Menu 'Búsqueda'
+* Menu 'Ir a Etiqueta'
+* Arreglada codificación para caracteres no-latinos
