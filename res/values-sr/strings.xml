@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GMarks</string>
+    <string name="labels_activity">GMarks Kategorije</string>
+    <string name="choose_label">Izaberi GMarks kategoriju</string>
+    <string name="bookmarks_activity">Svi GMarks markeri</string>
+    <string name="choose_bookmark">Izaberi marker</string>
+    <string name="edit_bookmark">Izmeni marker</string>
+    <string name="new_bookmark">GMarks novi marker</string>
+    <string name="settings">GMarks Podešavanja</string>
+    <string name="live_folder_activity">GMarks Kategorija</string>
+    <string name="live_folder_title">Izaberi Kategoriju</string>
+    <string name="search_hint">Pretraga Google Markera</string>
+    <string name="login_title">GMarks prijavljivanje</string>
+    <string name="coming_soon">Uskoro!</string>
+
+    <string name="search_results_title">GMarks rezultati pretraživanja za \'%s\'</string>
+    <string name="label_results_title">Markeri kategorije \'%s\'</string>
+
+    <string name="sync_begin_msg">Započinjem Sinhronizaciju...</string>
+    <string name="sync_done_msg">GMarks Sinhronizacija završena</string>
+    <string name="sync_in_progress_msg">Sinhronizacija je već u toku...</string>
+    <string name="sync_notify_title">Gmarks Sinhronizacija</string>
+    <string name="sync_notify_start">Sinhronizacija u toku...</string>
+    <string name="sync_notify_auth_error">Greška u prijavljivanju; Prijavite se.</string>
+    <string name="sync_notify_error">Nepoznata greška u sinhronizaciji</string>
+    <string name="sync_notify_count">Sinhronizovano %d markera</string>
+
+    <string name="deleting_bookmark_msg">Brišem marker...</string>
+    <string name="saving_bookmark_msg">Pamtim marker...</string>
+    <string name="save_ok_msg">Marker kreiran.</string>
+    <string name="update_ok_msg">Marker osvežen.</string>
+    <string name="delete_ok_msg">Marker obrisan.</string>
+    <string name="error_auth_failed_msg">Greška: Problem sa autorizacijom</string>
+    <string name="error_not_found_msg">Greška: Marker nije pronađen</string>
+    <string name="error_delete_failed_msg">Brisanje neuspešno!</string>
+    <string name="error_save_failed_msg">Čuvanje neuspešno!</string>
+
+    <string name="please_wait_msg">Molimo sačekajte...</string>
+    <string name="logged_out_msg">Sad ste prijavljeni.</string>
+    <string name="logging_in_msg">Prijavljivanje u toku...</string>
+    <string name="login_success_msg">Prijavljeni ste!</string>
+    <string name="login_failed_msg">Greška prilikom prijavljivanja!</string>
+    <string name="login_failed_detail_msg">Neuspešno prijavljivanje: %s</string>
+
+    <string name="pref_not_set_label">(nepodešeno)</string>
+        
+    <string name="btn_save">Sačuvaj</string>
+    <string name="btn_update">Osveži</string>
+    <string name="btn_delete">Obriši</string>
+    <string name="btn_first_sync">Sinhorinzujte da počnete</string>
+
+		<!-- Menu items -->
+    <string name="menu_add">Dodavanje</string>
+    <string name="menu_add_long">Dodavanje markera</string>
+    <string name="menu_sync">Sinhronizacija</string>
+    <string name="menu_sync_long">Sinhronizacija</string>
+    <string name="menu_delete">Brisanje</string>
+    <string name="menu_delete_long">Brisanje Odabranog Markera</string>
+    <string name="menu_search">Pretraga</string>
+    <string name="menu_search_long">Pretraga Markera</string>
+    <string name="menu_go_to_label">Biranje Kategorije</string>
+    <string name="menu_sort_title">Sortiranje po Naslovu</string>
+    <string name="menu_sort_title_long">Sortiranje Naslova abecedno</string>
+    <string name="menu_sort_date">Sortiranje po Datumu</string>
+    <string name="menu_sort_date_long">Sortiranje po Datumu Izmene</string>
+    <string name="menu_sort_label">Sortiranje po Kategoriji</string>
+    <string name="menu_sort_label_long">Sortiranje Kategorija Abecedno</string>
+    <string name="menu_sort_count">Sortiranje po Učestalosti</string>
+    <string name="menu_sort_count_long">Sortiranje po Učestalosti Kategorije</string>
+    <string name="menu_settings">Podešavanja</string>
+    <string name="menu_login">Prijava</string>
+    <string name="menu_login_long">Prijavite se na Vaš Google Nalog</string>
+    <string name="menu_logout">Odjava</string>
+    <string name="menu_logout_long">Odjavite se sa Vašeg Google Naloga</string>
+    
+
+		<!-- UI Labels -->
+    <string name="label_title">Naslov</string>
+    <string name="label_url">URL</string>
+    <string name="label_description">Opis</string>
+    <string name="label_labels">Kategorije</string>
+
+    <string name="label_all_bookmarks">Svi Markeri</string>
+    <string name="label_sub_all_bookmarks">sortirano po datumu</string>
+    
+    <string name="label_webview_login">Ulogujte se na Vaš Google Nalog</string>
+
+
+		<!-- Preferences -->
+
+    <string name="pref_browser_sync">Omogućiti Sinhronizaciju Pretraživača</string>
+    <string name="pref_browser_sync_summary">Sinhronizacija markera u pretraživaču sa izabranom kategorijom</string>
+    <string name="pref_sync_label">Izaberite kateboriju za sinhronizaciju sa pretraživačem</string>
+    <string name="pref_sync_interval">Interval sinhronizacije</string>
+    <string name="pref_background_sync">Omogućavanje pozadinske sinhronizacije</string>
+    <string name="pref_background_sync_summary">Automatska sinhronizacija čak i ako GMarks nije uključen</string>
+    
+    <!-- Preference options for sync duration -->
+    <string-array name="pref_duration_entries">
+      <item>5 minuta</item>
+      <item>20 minuta</item>
+      <item>1 sat</item>
+      <item>4 sata</item>
+      <item>12 sati</item>
+      <item>1 dan</item>
+    </string-array>
+
+    <!-- Preference values for sync duration -->
+    <!-- NOTE: Don't localize this.-->
+    <string-array name="pref_duration_values">
+      <item>5</item>
+      <item>20</item>
+      <item>60</item>
+      <item>240</item>
+      <item>720</item>
+      <item>1440</item>
+    </string-array>
+    
+</resources>

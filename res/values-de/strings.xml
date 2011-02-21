@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GMarks</string>
+    <string name="labels_activity">GMarks Labels</string>
+    <string name="choose_label">Wähle ein GMarks Label</string>
+    <string name="bookmarks_activity">GMarks Alle Lesezeichen</string>
+    <string name="choose_bookmark">Wähle ein Lesezeichen</string>
+    <string name="edit_bookmark">Lesezeichen bearbeiten</string>
+    <string name="new_bookmark">GMarks Neues Lesezeichen</string>
+    <string name="settings">GMarks Einstellungen</string>
+    <string name="live_folder_activity">GMarks Label</string>
+    <string name="live_folder_title">Wähle ein Label</string>
+    <string name="search_hint">Durchsuche die Lesezeichen von Google</string>
+    <string name="login_title">GMarks Login</string>
+    <string name="coming_soon">Erscheint demnächst!</string>
+
+    <string name="search_results_title">GMarks Suchergebnisse für \'%s\'</string>
+    <string name="label_results_title">Lesezeichen für Label \'%s\'</string>
+
+    <string name="sync_begin_msg">Starte Synchronisation...</string>
+    <string name="sync_done_msg">GMarks Synchronisation vollständig</string>
+    <string name="sync_in_progress_msg">Synchronisation läuft bereits...</string>
+    <string name="sync_notify_title">Gmarks Sync</string>
+    <string name="sync_notify_start">Gmarks sync in progress...</string>
+    <string name="sync_notify_auth_error">Fehler beim Login; bitte erneut versuchen.</string>
+    <string name="sync_notify_error">Unbekannter Synchronisationsfehler</string>
+    <string name="sync_notify_count">%d Lesezeichen synchronisiert</string>
+
+    <string name="deleting_bookmark_msg">Lösche Lesezeichen...</string>
+    <string name="saving_bookmark_msg">Speichere Lesezeichen...</string>
+    <string name="save_ok_msg">Lesezeichen erstellt.</string>
+    <string name="update_ok_msg">Lesezeichen aktualisiert.</string>
+    <string name="delete_ok_msg">Lesezeichen gelöscht.</string>
+    <string name="error_auth_failed_msg">Fehler: Authentifizierung fehlgeschlagen</string>
+    <string name="error_not_found_msg">Fehler: Lesezeichen nicht gefunden</string>
+    <string name="error_delete_failed_msg">Löschen fehlgeschlagen!</string>
+    <string name="error_save_failed_msg">Speichern fehlgeschlagen!</string>
+
+    <string name="please_wait_msg">Bitte warten...</string>
+    <string name="logged_out_msg">Du hast dich abgemeldet.</string>
+    <string name="logging_in_msg">Anmeldung läuft...</string>
+    <string name="login_success_msg">Angemeldet!</string>
+    <string name="login_failed_msg">Fehler beim Anmelden!</string>
+    <string name="login_failed_detail_msg">Anmeldung fehlgeschlagen: %s</string>
+
+    <string name="pref_not_set_label">(unset)</string>
+        
+    <string name="btn_save">Speichern</string>
+    <string name="btn_update">Aktualisieren</string>
+    <string name="btn_delete">Löschen</string>
+    <string name="btn_first_sync">Bitte synchronisiere, um zu beginnen</string>
+
+		<!-- Menu items -->
+    <string name="menu_add">Hinzufügen</string>
+    <string name="menu_add_long">Lesezeichen Hinzufügen</string>
+    <string name="menu_sync">Synchronisieren</string>
+    <string name="menu_sync_long">Synchronisieren</string>
+    <string name="menu_delete">Löschen</string>
+    <string name="menu_delete_long">Lösche ausgewähltes Lesezeichen</string>
+    <string name="menu_search">Suche</string>
+    <string name="menu_search_long">Suche Lesezeichen</string>
+    <string name="menu_go_to_label">Gehe zu Label</string>
+    <string name="menu_sort_title">Nach Titel sortieren</string>
+    <string name="menu_sort_title_long">Sortiere Titel alphabetisch</string>
+    <string name="menu_sort_date">Nach Datum sortieren</string>
+    <string name="menu_sort_date_long">Nach verändertem Datum sortieren</string>
+    <string name="menu_sort_label">Nach Label sortieren</string>
+    <string name="menu_sort_label_long">Sortiere Label alphabetisch</string>
+    <string name="menu_sort_count">Nach Anzahl sortieren</string>
+    <string name="menu_sort_count_long">Nach Anzahl der Label sortieren</string>
+    <string name="menu_settings">Einstellungen</string>
+    <string name="menu_login">Anmelden</string>
+    <string name="menu_login_long">Bei Google anmelden</string>
+    <string name="menu_logout">Abmelden</string>
+    <string name="menu_logout_long">Von Google abmelden</string>
+    
+
+		<!-- UI Labels -->
+    <string name="label_title">Titel</string>
+    <string name="label_url">URL</string>
+    <string name="label_description">Beschreibung</string>
+    <string name="label_labels">Labels</string>
+
+    <string name="label_all_bookmarks">Alle Lesezeichen</string>
+    <string name="label_sub_all_bookmarks">Nach Datum sortiert</string>
+    
+    <string name="label_webview_login">Bitte beim Google Konto anmelden</string>
+		
+
+		<!-- Preferences -->
+		
+    <string name="pref_browser_sync">Erlaube Browser Synchronisation</string>
+    <string name="pref_browser_sync_summary">Synchronisiere die Lesezeichen des Browsers mit einem ausgewählten Label</string>
+    <string name="pref_sync_label">Wähle das Label zur Browsersynchronisation</string>
+    <string name="pref_sync_interval">Zeitabstand zum synchronisieren</string>
+    <string name="pref_background_sync">Erlaube Synchronisation im Hintergrund</string>
+    <string name="pref_background_sync_summary">Synchronisiere automatisch, auch wenn GMarks nicht aktiv ist</string>
+    
+    <!-- Preference options for sync duration -->
+    <string-array name="pref_duration_entries">
+      <item>5 Minuten</item>
+      <item>20 Minuten</item>
+      <item>1 Stunde</item>
+      <item>4 Stunden</item>
+      <item>12 Stunden</item>
+      <item>1 Tag</item>
+    </string-array>
+
+    <!-- Preference values for sync duration -->
+    <!-- NOTE: Don't localize this.-->
+    <string-array name="pref_duration_values">
+      <item>5</item>
+      <item>20</item>
+      <item>60</item>
+      <item>240</item>
+      <item>720</item>
+      <item>1440</item>
+    </string-array>
+    
+</resources>
