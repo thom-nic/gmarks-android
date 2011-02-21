@@ -79,7 +79,7 @@
     <string name="label_title">Title</string>
     <string name="label_url">URL</string>
     <string name="label_description">Description</string>
-    <string name="label_labels">labels</string>
+    <string name="label_labels">Labels</string>
 
     <string name="label_all_bookmarks">All Bookmarks</string>
     <string name="label_sub_all_bookmarks">sorted by date</string>
