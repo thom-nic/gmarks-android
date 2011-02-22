@@ -10,7 +10,7 @@ Google Bookmarks for Android!
 * Langes Drücken, um ein Lesezeichen zu sehen/bearbeiten
 * Eclair/2.1 wird jetzt vollständig unterstützt
 
-Calling for translators!  If you want to help translate Google Bookmarks to your language, see the project page.mv
+Calling for translators!  If you want to help translate Google Bookmarks to your language, see the project page.
 
 Berichte mir bitte, falls das Programm zum schließen gezwungen wird (Force Close, FC), damit ich das Problem beheben kann. Man kann übrigens auch auf der Projekt Seite Anfragen zu den Leistungsmerkmalen erfragen. 
 

@@ -10,7 +10,7 @@ Google Bookmarks pour Android!
 * Longue pression pour voir/ modifier un marque-page
 * Support complet maintenant de Eclair/ 2.1
 
-Calling for translators!  If you want to help translate Google Bookmarks to your language, see the project page.mv
+Calling for translators!  If you want to help translate Google Bookmarks to your language, see the project page.
 
 Si vous rencontrez un problème de fermeture de l'application(Force close), reportez-le, svp, afin que je puisse résoudre le problème. Vous pouvez aussi envoyer des demandes de nouvelles fonctionnalités sur le site du projet.
 
