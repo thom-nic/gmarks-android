@@ -89,11 +89,11 @@
 
 		<!-- Preferences -->
 		
-    <string name="pref_browser_sync">Erlaube Browser Synchronisation</string>
+    <string name="pref_browser_sync">Browser Synchronisation</string>
     <string name="pref_browser_sync_summary">Synchronisiere die Lesezeichen des Browsers mit einem ausgewählten Label</string>
     <string name="pref_sync_label">Wähle das Label zur Browsersynchronisation</string>
     <string name="pref_sync_interval">Zeitabstand zum synchronisieren</string>
-    <string name="pref_background_sync">Erlaube Synchronisation im Hintergrund</string>
+    <string name="pref_background_sync">Synchro im Hintergrund</string>
     <string name="pref_background_sync_summary">Synchronisiere automatisch, auch wenn GMarks nicht aktiv ist</string>
     
     <!-- Preference options for sync duration -->
