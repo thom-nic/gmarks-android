@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GMarks</string>
+    <string name="labels_activity">GMarks Etiketės</string>
+    <string name="choose_label">Pasirinkite GMarks Etiketę</string>
+    <string name="bookmarks_activity">GMarks Visos žymės</string>
+    <string name="choose_bookmark">Pasirinkite žymę</string>
+    <string name="edit_bookmark">Redaguoti žymę</string>
+    <string name="new_bookmark">GMarks Nauja žymė</string>
+    <string name="settings">GMarks Settings</string>
+    <string name="live_folder_activity">GMarks Nustatymai</string>
+    <string name="live_folder_title">Pasirinkite Etiketę</string>
+    <string name="search_hint">Ieškoti Google\'ję žymių</string>
+    <string name="login_title">GMarks Prisijungimas</string>
+    <string name="coming_soon">Jau greitai!</string>
+
+    <string name="search_results_title">GMarks \'%s\' paieškos rezultatai</string>
+    <string name="label_results_title">Žymės etiketei \'%s\'</string>
+
+    <string name="sync_begin_msg">Pradžia sinchronizavimo...</string>
+    <string name="sync_done_msg">GMarks Sinchronizacija baigta</string>
+    <string name="sync_in_progress_msg">Sinchronizacija jau vyksta...</string>
+    <string name="sync_notify_title">Gmarks Sinchronizacija</string>
+    <string name="sync_notify_start">Gmarks sinchronizacija vyksta...</string>
+    <string name="sync_notify_auth_error">Prisijungimo klaida; prašome prisijungti</string>
+    <string name="sync_notify_error">Nežinoma sinchronizavimo klaida</string>
+    <string name="sync_notify_count">Sinchronizuotą(os) %d žymes</string>
+
+    <string name="deleting_bookmark_msg">Trinama žymę...</string>
+    <string name="saving_bookmark_msg">Išsaugoma žymę...</string>
+    <string name="save_ok_msg">Žymė sukurta.</string>
+    <string name="update_ok_msg">Žymė atnaujinta.</string>
+    <string name="delete_ok_msg">Žymė ištrinta.</string>
+    <string name="error_auth_failed_msg">Klaida: Atpažinimo gedimas</string>
+    <string name="error_not_found_msg">Klaida: Žymė nerasta</string>
+    <string name="error_delete_failed_msg">Ištrinimas nepavyko!</string>
+    <string name="error_save_failed_msg">Išsaugojimas nepavyko!</string>
+
+    <string name="please_wait_msg">Prašome palaukti...</string>
+    <string name="logged_out_msg">Dabar esate atsijungęs.</string>
+    <string name="logging_in_msg">Prisijungiame...</string>
+    <string name="login_success_msg">Prisijungete!</string>
+    <string name="login_failed_msg">Prisijungimo klaida!</string>
+    <string name="login_failed_detail_msg">Prisijungti nepavyko: %s</string>
+
+    <string name="pref_not_set_label">(nenustatytas)</string>
+        
+    <string name="btn_save">Išsaugoti</string>
+    <string name="btn_update">Atnaujinti</string>
+    <string name="btn_delete">Ištrinti</string>
+    <string name="btn_first_sync">Prašome Sinchronizuoti kad pradėti</string>
+
+		<!-- Menu items -->
+    <string name="menu_add">Pridėti</string>
+    <string name="menu_add_long">Pridėti žymę</string>
+    <string name="menu_sync">Sinchronizuoti</string>
+    <string name="menu_sync_long">Sinchronizuoti (ilgas)</string>
+    <string name="menu_delete">Ištrinti</string>
+    <string name="menu_delete_long">Ištrinti Pasirinkta Žymė</string>
+    <string name="menu_search">Paieška</string>
+    <string name="menu_search_long">Žymių Paieška</string>
+    <string name="menu_go_to_label">Eiti į Etiketę</string>
+    <string name="menu_sort_title">Rūšiuoti pagal Pavadinimą</string>
+    <string name="menu_sort_title_long">Rūšiuoti Pavadinimą Abėcėlės tvarka</string>
+    <string name="menu_sort_date">Rūšiuoti pagal Data</string>
+    <string name="menu_sort_date_long">Rūšiuoti pagal Keitimo Data</string>
+    <string name="menu_sort_label">Rūšiuoti pagal Etiketę</string>
+    <string name="menu_sort_label_long">Rūšiuoti Etiketės Abėcėlės tvarka</string>
+    <string name="menu_sort_count">Rūšiuoti pagal Skaičius</string>
+    <string name="menu_sort_count_long">Rūšiuoti pagal Etikečių Skaičius</string>
+    <string name="menu_settings">Nustatymai</string>
+    <string name="menu_login">Prisijungti</string>
+    <string name="menu_login_long">Prisijungti prie Google sąskaitos</string>
+    <string name="menu_logout">Atsijungti</string>
+    <string name="menu_logout_long">Atsijungti nuo Google sąskaitos </string>
+    
+
+		<!-- UI Labels -->
+    <string name="label_title">Pavadinimas</string>
+    <string name="label_url">Adresas</string>
+    <string name="label_description">Aprašymas</string>
+    <string name="label_labels">etiketės</string>
+
+    <string name="label_all_bookmarks">Visos Žymės</string>
+    <string name="label_sub_all_bookmarks">surikiuota pagal datą</string>
+    
+    <string name="label_webview_login">Prašome prisijungti prie jūsų Google sąskaitos</string>
+		
+
+		<!-- Preferences -->
+		
+    <string name="pref_browser_sync">Įjungti Naršyklės Sinchronizavima</string>
+    <string name="pref_browser_sync_summary">Sinchronizuoti savo naršyklės žymęs su pasirinkta etiketę</string>
+    <string name="pref_sync_label">Pasirinkite Naršyklės Sinchronizavimo Etiketę</string>
+    <string name="pref_sync_interval">Sinchronizavimo intervalas</string>
+    <string name="pref_background_sync">Įgalinti foninį Sinchronizavima</string>
+    <string name="pref_background_sync_summary">Automatiškai sinchronizuoti net jei GMarks nėra aktyvus</string>
+    
+    <!-- Preference options for sync duration -->
+    <string-array name="pref_duration_entries">
+      <item>5 minutės</item>
+      <item>20 minučių</item>
+      <item>1 valandą</item>
+      <item>4 valandos</item>
+      <item>12 valandų</item>
+      <item>1 diena</item>
+    </string-array>
+
+    <!-- Preference values for sync duration -->
+    <!-- NOTE: Don't localize this.-->
+    <string-array name="pref_duration_values">
+      <item>5</item>
+      <item>20</item>
+      <item>60</item>
+      <item>240</item>
+      <item>720</item>
+      <item>1440</item>
+    </string-array>
+    
+</resources>
