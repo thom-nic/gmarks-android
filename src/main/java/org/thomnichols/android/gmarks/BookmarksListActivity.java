@@ -75,6 +75,7 @@ public class BookmarksListActivity extends ListActivity {
         final Intent intent = getIntent();
         if (intent.getData() == null) intent.setData(Bookmark.CONTENT_URI);
         Uri uri = intent.getData();
+        if ( uri == null ) intent.setData(Bookmark.CONTENT_URI);
         final String action = intent.getAction();
         
         if ( Intent.ACTION_PICK.equals(action) ) {
@@ -206,7 +207,7 @@ public class BookmarksListActivity extends ListActivity {
     
     protected OnItemLongClickListener longClickListener = new OnItemLongClickListener() {
 		public boolean onItemLongClick(AdapterView<?> adapter, View v, int position, long id) {
-			Uri uri = ContentUris.withAppendedId(getIntent().getData(), id);	        
+			Uri uri = ContentUris.withAppendedId(Bookmark.CONTENT_URI, id);
             startActivity(new Intent(Intent.ACTION_EDIT, uri));
 			return false;
 		}    	
