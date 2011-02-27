@@ -12,7 +12,7 @@
     <string name="live_folder_title">Elija una Etiqueta</string>
     <string name="search_hint">Buscar en los Marcadores de Google</string>
     <string name="login_title">GMarks Iniciar Sesión</string>
-    <string name="coming_soon">Próximamente!</string>
+    <string name="coming_soon">¡Próximamente!</string>
 
     <string name="search_results_title">GMarks resultados de búsqueda para \'%s\'</string>
     <string name="label_results_title">Marcadores para la Etiqueta \'%s\'</string>
@@ -22,31 +22,31 @@
     <string name="sync_in_progress_msg">Sincronización ya en curso...</string>
     <string name="sync_notify_title">Gmarks Sincronización</string>
     <string name="sync_notify_start">Sincronización en curso...</string>
-    <string name="sync_notify_auth_error">Error al iniciar sesión; por favor iniciar sesión.</string>
+    <string name="sync_notify_auth_error">Error al iniciar sesión; por favor inicie sesión.</string>
     <string name="sync_notify_error">Error de Sincronización desconocido</string>
     <string name="sync_notify_count">Sincronizados %d Marcadores</string>
 
     <string name="deleting_bookmark_msg">Eliminar Marcador...</string>
     <string name="saving_bookmark_msg">Guardar Marcador...</string>
     <string name="save_ok_msg">Marcador creado.</string>
-    <string name="update_ok_msg">Marcador atualizado.</string>
+    <string name="update_ok_msg">Marcador actualizado.</string>
     <string name="delete_ok_msg">Marcador eliminado.</string>
     <string name="error_auth_failed_msg">Error: Error de autenticación</string>
     <string name="error_not_found_msg">Error: Marcador no encontrado</string>
-    <string name="error_delete_failed_msg">Eliminación fallida!</string>
-    <string name="error_save_failed_msg">Guardado fallido!</string>
+    <string name="error_delete_failed_msg">¡Eliminación fallida!</string>
+    <string name="error_save_failed_msg">¡Guardado fallido!</string>
 
     <string name="please_wait_msg">Por Favor espere...</string>
-    <string name="logged_out_msg">Usted se ha conectado.</string>
+    <string name="logged_out_msg">Usted se ha desconectado.</string>
     <string name="logging_in_msg">Iniciando sesión...</string>
-    <string name="login_success_msg">Sesión iniciada!</string>
-    <string name="login_failed_msg">Error al iniciar sesión!</string>
+    <string name="login_success_msg">¡Sesión iniciada!</string>
+    <string name="login_failed_msg">¡Error al iniciar sesión!</string>
     <string name="login_failed_detail_msg">Fallo al iniciar sesión: %s</string>
 
-    <string name="pref_not_set_label">(sinnombre)</string>
+    <string name="pref_not_set_label">(sin nombre)</string>
         
     <string name="btn_save">Guardar</string>
-    <string name="btn_update">Atulizar</string>
+    <string name="btn_update">Actualizar</string>
     <string name="btn_delete">Eliminar</string>
     <string name="btn_first_sync">Por Favor Sincronizar</string>
 
@@ -56,7 +56,7 @@
     <string name="menu_sync">Sincronizar</string>
     <string name="menu_sync_long">Sincronizar</string>
     <string name="menu_delete">Eliminar</string>
-    <string name="menu_delete_long">Eliminador el marcador seleccionado</string>
+    <string name="menu_delete_long">Eliminar el marcador seleccionado</string>
     <string name="menu_search">Buscar</string>
     <string name="menu_search_long">Buscar en los marcadores</string>
     <string name="menu_go_to_label">Ir a la Etiqueta</string>
@@ -70,9 +70,9 @@
     <string name="menu_sort_count_long">Ordenar por Cantidad</string>
     <string name="menu_settings">Configuraciones</string>
     <string name="menu_login">Iniciar Sesión</string>
-    <string name="menu_login_long">Iniciar Sesión a tu Cuenta Google</string>
+    <string name="menu_login_long">Iniciar sesión con su cuenta de Google</string>
     <string name="menu_logout">Desconectar</string>
-    <string name="menu_logout_long">Desconectar de tu Cuenta Google</string>
+    <string name="menu_logout_long">Desconectar su cuenta de Google</string>
     
 
 		<!-- UI Labels -->
@@ -84,16 +84,16 @@
     <string name="label_all_bookmarks">Todos los Marcadores</string>
     <string name="label_sub_all_bookmarks">por fecha</string>
     
-    <string name="label_webview_login">Por Favor Iniciar Sesión a tu Cuenta Google</string>
+    <string name="label_webview_login">Por favor, inicie sesión con su cuenta de Google</string>
 		
 
 		<!-- Preferences -->
 		
-    <string name="pref_browser_sync">Sincronización con el Navegador</string>
+    <string name="pref_browser_sync">Sincro con el Navegador</string>
     <string name="pref_browser_sync_summary">Sincronizar el Navegador con las etiquetas elegidas</string>
     <string name="pref_sync_label">Elegir Etiqueta para sincronizar con el Navegador</string>
     <string name="pref_sync_interval">Intervalo de Sincronización</string>
-    <string name="pref_background_sync">Sincronización de Fondo</string>
+    <string name="pref_background_sync">Sincro en segundo plano</string>
     <string name="pref_background_sync_summary">Sincronizar automáticamente aunque GMarks no esté activo</string>
     
     <!-- Preference options for sync duration -->
