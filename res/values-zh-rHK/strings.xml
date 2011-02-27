@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GMarks</string>
+    <string name="labels_activity">GMarks標籤</string>
+    <string name="choose_label">請選擇一個GMarks標籤</string>
+    <string name="bookmarks_activity">全部GMarks標籤</string>
+    <string name="choose_bookmark">選擇一個書籤</string>
+    <string name="edit_bookmark">編輯書籤</string>
+    <string name="new_bookmark">新建GMarks書籤</string>
+    <string name="settings">GMarks設定</string>
+    <string name="live_folder_activity">GMarks標籤</string>
+    <string name="live_folder_title">選擇一個標籤</string>
+    <string name="search_hint">搜索Google書籤</string>
+    <string name="login_title">登錄GMarks</string>
+    <string name="coming_soon">即將推出</string>
+
+    <string name="search_results_title">GMarks 搜索 \'%s\' 結果</string>
+    <string name="label_results_title">標籤 \'%s\' 裡面的書籤</string>
+
+    <string name="sync_begin_msg">更新中...</string>
+    <string name="sync_done_msg">GMarks同步更新完成</string>
+    <string name="sync_in_progress_msg">已在同步更新...</string>
+    <string name="sync_notify_title">Gmarks 同步更新</string>
+    <string name="sync_notify_start">Gmarks 同步更新中...</string>
+    <string name="sync_notify_auth_error">登錄失敗,請重試</string>
+    <string name="sync_notify_error">同步更新錯誤</string>
+    <string name="sync_notify_count">更新了 %d 個書籤</string>
+
+    <string name="deleting_bookmark_msg">正在刪除書籤...</string>
+    <string name="saving_bookmark_msg">刪除保存書籤...</string>
+    <string name="save_ok_msg">書籤創作成功.</string>
+    <string name="update_ok_msg">書籤更新成功.</string>
+    <string name="delete_ok_msg">書籤刪除成功.</string>
+    <string name="error_auth_failed_msg">錯誤: 認證失敗</string>
+    <string name="error_not_found_msg">錯誤: 書籤不存在</string>
+    <string name="error_delete_failed_msg">刪除失敗!</string>
+    <string name="error_save_failed_msg">保存失敗!</string>
+
+    <string name="please_wait_msg">請稍候...</string>
+    <string name="logged_out_msg">登出成功</string>
+    <string name="logging_in_msg">正在登錄...</string>
+    <string name="login_success_msg">登錄成功</string>
+    <string name="login_failed_msg">登錄失敗,請重試</string>
+    <string name="login_failed_detail_msg">登錄失敗: %s</string>
+
+    <string name="pref_not_set_label">(unset)</string>
+        
+    <string name="btn_save">保存</string>
+    <string name="btn_update">更新</string>
+    <string name="btn_delete">刪除</string>
+    <string name="btn_first_sync">請先更新</string>
+
+		<!-- Menu items -->
+    <string name="menu_add">新增</string>
+    <string name="menu_add_long">新增書籤</string>
+    <string name="menu_sync">同步更新</string>
+    <string name="menu_sync_long">同步更新</string>
+    <string name="menu_delete">刪除</string>
+    <string name="menu_delete_long">刪除選定的書籤</string>
+    <string name="menu_search">搜索</string>
+    <string name="menu_search_long">搜索書籤</string>
+    <string name="menu_go_to_label">開啟書籤</string>
+    <string name="menu_sort_title">按標題排序</string>
+    <string name="menu_sort_title_long">按字母排序</string>
+    <string name="menu_sort_date">按日期排序</string>
+    <string name="menu_sort_date_long">按修改日期排序</string>
+    <string name="menu_sort_label">按標籤排序</string>
+    <string name="menu_sort_label_long">按標籤字母排序</string>
+    <string name="menu_sort_count">按總數排序</string>
+    <string name="menu_sort_count_long">按標籤總數排序</string>
+    <string name="menu_settings">設定</string>
+    <string name="menu_login">登錄</string>
+    <string name="menu_login_long">登錄您的Google Account</string>
+    <string name="menu_logout">登出</string>
+    <string name="menu_logout_long">請登出您的Google Account</string>
+    
+
+		<!-- UI Labels -->
+    <string name="label_title">標題</string>
+    <string name="label_url">網址</string>
+    <string name="label_description">說明</string>
+    <string name="label_labels">標籤</string>
+
+    <string name="label_all_bookmarks">所有書籤</string>
+    <string name="label_sub_all_bookmarks">按日期排序書籤</string>
+    
+    <string name="label_webview_login">登錄您的Google account</string>
+		
+
+		<!-- Preferences -->
+		
+    <string name="pref_browser_sync">啟用瀏覽器同步更新</string>
+    <string name="pref_browser_sync_summary">同步更新選擇了的瀏覽器書籤</string>
+    <string name="pref_sync_label">選擇瀏覽器標籤</string>
+    <string name="pref_sync_interval">同步更新時間間隔</string>
+    <string name="pref_background_sync">啟用背景同步更新</string>
+    <string name="pref_background_sync_summary">自動同步更新</string>
+    
+    <!-- Preference options for sync duration -->
+    <string-array name="pref_duration_entries">
+      <item>5 minutes</item>
+      <item>20 minutes</item>
+      <item>1 hour</item>
+      <item>4 hours</item>
+      <item>12 hours</item>
+      <item>1 day</item>
+    </string-array>
+    <!-- translated by eizonuts -->
+    <!-- Preference values for sync duration -->
+    <!-- NOTE: Don't localize this.-->
+    <string-array name="pref_duration_values">
+      <item>5</item>
+      <item>20</item>
+      <item>60</item>
+      <item>240</item>
+      <item>720</item>
+      <item>1440</item>
+    </string-array>
+    
+</resources>

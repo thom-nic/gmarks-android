@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GMarks</string>
+    <string name="labels_activity">Etichette GMarks</string>
+    <string name="choose_label">Scegli una Etichetta GMarks</string>
+    <string name="bookmarks_activity">Tutti i Segnalibri GMarks</string>
+    <string name="choose_bookmark">Scegli un Segnalibro</string>
+    <string name="edit_bookmark">Modifica Segnalibro</string>
+    <string name="new_bookmark">Nuovo Segnalibro GMarks</string>
+    <string name="settings">Impostazioni GMarks</string>
+    <string name="live_folder_activity">Etichetta GMarks</string>
+    <string name="live_folder_title">Seleziona una Etichetta</string>
+    <string name="search_hint">Cerca Segnalibri di Google</string>
+    <string name="login_title">Login GMarks</string>
+    <string name="coming_soon">Novità in Arrivo!</string>
+
+    <string name="search_results_title">Risultato della ricerca GMarks per \'%s\'</string>
+    <string name="label_results_title">Segnalibri per etichetta \'%s\'</string>
+
+    <string name="sync_begin_msg">Inizio a sinc....</string>
+    <string name="sync_done_msg">Sinc. GMarks Completa</string>
+    <string name="sync_in_progress_msg">Sinc. ancora in corso...</string>
+    <string name="sync_notify_title">Sinc. Gmarks</string>
+    <string name="sync_notify_start">Sinc. Gmarks in corso...</string>
+    <string name="sync_notify_auth_error">Errore di Login; Verifica Login.</string>
+    <string name="sync_notify_error">Errore di Sinc. Sconosciuto</string>
+    <string name="sync_notify_count">%d segnalibri sinc.</string>
+
+    <string name="deleting_bookmark_msg">Rimuovo segnalibro...</string>
+    <string name="saving_bookmark_msg">Salvo segnalibro...</string>
+    <string name="save_ok_msg">Segnalibro creato.</string>
+    <string name="update_ok_msg">Segnalibro aggiornato.</string>
+    <string name="delete_ok_msg">Segnalibro cancellato.</string>
+    <string name="error_auth_failed_msg">Errore: Autorizzazione fallita</string>
+    <string name="error_not_found_msg">Errore: Segnalibro non trovato</string>
+    <string name="error_delete_failed_msg">Errore di Eliminazione!</string>
+    <string name="error_save_failed_msg">Errore di Salvataggio!</string>
+
+    <string name="please_wait_msg">Attendere prego...</string>
+    <string name="logged_out_msg">Sessione chiusa correttamente.</string>
+    <string name="logging_in_msg">Login in corso...</string>
+    <string name="login_success_msg">Login OK!</string>
+    <string name="login_failed_msg">Login Error!</string>
+    <string name="login_failed_detail_msg">Login non riuscito: %s</string>
+
+    <string name="pref_not_set_label">(non impostato)</string>
+        
+    <string name="btn_save">Salva</string>
+    <string name="btn_update">Aggiorna</string>
+    <string name="btn_delete">Elimina</string>
+    <string name="btn_first_sync">Sincronizza qui per procedere</string>
+
+		<!-- Menu items -->
+    <string name="menu_add">Aggiungi</string>
+    <string name="menu_add_long">Aggiungi Segnalibro</string>
+    <string name="menu_sync">Sinc.</string>
+    <string name="menu_sync_long">Sincronizzazione</string>
+    <string name="menu_delete">Elimina</string>
+    <string name="menu_delete_long">Elimina Segnalibro Selezionato</string>
+    <string name="menu_search">Cerca</string>
+    <string name="menu_search_long">Cerca nei Segnalibri</string>
+    <string name="menu_go_to_label">Vai a Etichetta</string>
+    <string name="menu_sort_title">Ordina per Titolo</string>
+    <string name="menu_sort_title_long">Ordina per Titolo Alfabeticamente</string>
+    <string name="menu_sort_date">Ordina per Data</string>
+    <string name="menu_sort_date_long">Ordina per Ultima Modifica</string>
+    <string name="menu_sort_label">Ordina per Etichetta</string>
+    <string name="menu_sort_label_long">Ordina Etichette Alfabeticamente</string>
+    <string name="menu_sort_count">Ordina per Conteggio</string>
+    <string name="menu_sort_count_long">Ordina per Conteggio Etichetta</string>
+    <string name="menu_settings">Impostazioni</string>
+    <string name="menu_login">Accesso</string>
+    <string name="menu_login_long">Accedi al tuo Account Google</string>
+    <string name="menu_logout">Uscita</string>
+    <string name="menu_logout_long">Chiudi sessione dal tuo Account Google</string>
+    
+
+		<!-- UI Labels -->
+    <string name="label_title">Titolo</string>
+    <string name="label_url">URL</string>
+    <string name="label_description">Descrizione</string>
+    <string name="label_labels">Etichette</string>
+
+    <string name="label_all_bookmarks">Tutti i Segnalibri</string>
+    <string name="label_sub_all_bookmarks">ordina per data</string>
+    
+    <string name="label_webview_login">Accedi al tuo Account Google per proseguire</string>
+		
+
+		<!-- Preferences -->
+		
+    <string name="pref_browser_sync">Abilita Sinc. Browser</string>
+    <string name="pref_browser_sync_summary">Sincronizza i segnalibri del tuo browser con una etichetta da te scelta</string>
+    <string name="pref_sync_label">Scegli Etichetta Sinc.</string>
+    <string name="pref_sync_interval">Intervallo di Sinc.</string>
+    <string name="pref_background_sync">Abilita Sinc. in Background</string>
+    <string name="pref_background_sync_summary">Sincronizza automaticamente anche se GMarks non è attivo</string>
+    
+    <!-- Preference options for sync duration -->
+    <string-array name="pref_duration_entries">
+      <item>5 minuti</item>
+      <item>20 minuti</item>
+      <item>1 ora</item>
+      <item>4 ore</item>
+      <item>12 ore</item>
+      <item>1 giorno</item>
+    </string-array>
+
+    <!-- Preference values for sync duration -->
+    <!-- NOTE: Don't localize this.-->
+    <string-array name="pref_duration_values">
+      <item>5</item>
+      <item>20</item>
+      <item>60</item>
+      <item>240</item>
+      <item>720</item>
+      <item>1440</item>
+    </string-array>
+    
+</resources>

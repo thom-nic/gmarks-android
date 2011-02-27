@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GMarks</string>
+    <string name="labels_activity">GMarks Labels</string>
+    <string name="choose_label">Kies een GMarks Label</string>
+    <string name="bookmarks_activity">GMarks Alle bookmarks</string>
+    <string name="choose_bookmark">Kies een Bookmark</string>
+    <string name="edit_bookmark">Bewerk Bookmark</string>
+    <string name="new_bookmark">GMarks Nieuwe Bookmark</string>
+    <string name="settings">GMarks Instellingen</string>
+    <string name="live_folder_activity">GMarks Label</string>
+    <string name="live_folder_title">Kies een Label</string>
+    <string name="search_hint">Zoek Google Bookmarks</string>
+    <string name="login_title">GMarks Login</string>
+    <string name="coming_soon">Binnenkort!</string>
+
+    <string name="search_results_title">GMarks zoekresultaten voor \'%s\'</string>
+    <string name="label_results_title">Bookmarks voor label \'%s\'</string>
+
+    <string name="sync_begin_msg">start sync...</string>
+    <string name="sync_done_msg">GMarks Sync klaar</string>
+    <string name="sync_in_progress_msg">Sync is al bezig...</string>
+    <string name="sync_notify_title">Gmarks Sync</string>
+    <string name="sync_notify_start">Gmarks sync bezig...</string>
+    <string name="sync_notify_auth_error">Login fout; log in a.u.b..</string>
+    <string name="sync_notify_error">Onbekende sync fout</string>
+    <string name="sync_notify_count">%d Bookmarks Gesynchroniseerd</string>
+
+    <string name="deleting_bookmark_msg">Bookmark verwijderen...</string>
+    <string name="saving_bookmark_msg">Bbookmark opslaan...</string>
+    <string name="save_ok_msg">Bookmark gemaakt.</string>
+    <string name="update_ok_msg">Bookmark bijgewerkt.</string>
+    <string name="delete_ok_msg">Bookmark verwijderd.</string>
+    <string name="error_auth_failed_msg">Fout: Authenticatie mislukt</string>
+    <string name="error_not_found_msg">Fout: Bookmark niet gevonden</string>
+    <string name="error_delete_failed_msg">Verwijderen Mislukt!</string>
+    <string name="error_save_failed_msg">Opslaan mislukt!</string>
+
+    <string name="please_wait_msg">Wacht a.u.b...</string>
+    <string name="logged_out_msg">U bent uitgelogd.</string>
+    <string name="logging_in_msg">Inloggen...</string>
+    <string name="login_success_msg">Ingelogd!</string>
+    <string name="login_failed_msg">Inlog fout!</string>
+    <string name="login_failed_detail_msg">Inloggen mislukt: %s</string>
+
+    <string name="pref_not_set_label">(geenlabel)</string>
+        
+    <string name="btn_save">Opslaan</string>
+    <string name="btn_update">Bijwerken</string>
+    <string name="btn_delete">Verwijderen</string>
+    <string name="btn_first_sync">Sync a.u.b. om te beginnen</string>
+
+		<!-- Menu items -->
+    <string name="menu_add">Toevoegen</string>
+    <string name="menu_add_long">Bookmark Toevoegen</string>
+    <string name="menu_sync">Sync</string>
+    <string name="menu_sync_long">Synchroniseer</string>
+    <string name="menu_delete">Verwijder</string>
+    <string name="menu_delete_long">Verwijder geselecteerde bookmark</string>
+    <string name="menu_search">Zoek</string>
+    <string name="menu_search_long">Zoek Bookmarks</string>
+    <string name="menu_go_to_label">Ga naar Label</string>
+    <string name="menu_sort_title">Sorteer op Titel</string>
+    <string name="menu_sort_title_long">Sorteer Titel Alfabetisch</string>
+    <string name="menu_sort_date">Sorteer op Datum</string>
+    <string name="menu_sort_date_long">Sorteer op Wijzigings Datum</string>
+    <string name="menu_sort_label">Sorteer op Label</string>
+    <string name="menu_sort_label_long">Sorteer Labels Alfabetisch</string>
+    <string name="menu_sort_count">Sorteer op Aantal</string>
+    <string name="menu_sort_count_long">Sorteer op Label aantallen</string>
+    <string name="menu_settings">Instellingen</string>
+    <string name="menu_login">Inloggen</string>
+    <string name="menu_login_long">Login met je Google Account</string>
+    <string name="menu_logout">Uitloggen</string>
+    <string name="menu_logout_long">Uitloggen met je Google Account</string>
+    
+
+		<!-- UI Labels -->
+    <string name="label_title">Titel</string>
+    <string name="label_url">URL</string>
+    <string name="label_description">Omschrijving</string>
+    <string name="label_labels">labels</string>
+
+    <string name="label_all_bookmarks">Alle Bookmarks</string>
+    <string name="label_sub_all_bookmarks">gesorteerd op datum</string>
+    
+    <string name="label_webview_login">Log a.u.b. in met je Google account</string>
+		
+
+		<!-- Preferences -->
+		
+    <string name="pref_browser_sync">Browser Sync Inschakelen</string>
+    <string name="pref_browser_sync_summary">Synchroniseer je browser bookmarks met een gekozen label</string>
+    <string name="pref_sync_label">Kies Browser Sync Label</string>
+    <string name="pref_sync_interval">Sync Interval</string>
+    <string name="pref_background_sync">Achtergrond Sync inschakelen</string>
+    <string name="pref_background_sync_summary">Automatisch syncen zelfs als GMarks niet actief is</string>
+    
+    <!-- Preference options for sync duration -->
+    <string-array name="pref_duration_entries">
+      <item>5 minuten</item>
+      <item>20 minuten</item>
+      <item>1 uur</item>
+      <item>4 uren</item>
+      <item>12 uren</item>
+      <item>1 dag</item>
+    </string-array>
+
+    <!-- Preference values for sync duration -->
+    <!-- NOTE: Don't localize this.-->
+    <string-array name="pref_duration_values">
+      <item>5</item>
+      <item>20</item>
+      <item>60</item>
+      <item>240</item>
+      <item>720</item>
+      <item>1440</item>
+    </string-array>
+    
+</resources>

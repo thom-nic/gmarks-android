@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GMarks</string>
+    <string name="labels_activity">GMarks Etiķetes</string>
+    <string name="choose_label">Izvēlieties GMarks Etiķeti</string>
+    <string name="bookmarks_activity">GMarks Visas gramatzīmes</string>
+    <string name="choose_bookmark">Izvēlieties Grāmatzīmi</string>
+    <string name="edit_bookmark">Labot Grāmatzīmi</string>
+    <string name="new_bookmark">GMarks Jauna Grāmatzīme</string>
+    <string name="settings">GMarks Iestatījumi</string>
+    <string name="live_folder_activity">GMarks Etiķete</string>
+    <string name="live_folder_title">Izvēlieties Etiķeti</string>
+    <string name="search_hint">Meklēt Google Grāmatzīmes</string>
+    <string name="login_title">GMarks Ielogoties</string>
+    <string name="coming_soon">Drīzumā!</string>
+
+    <string name="search_results_title">GMarks meklēt rezultātus \'%s\'</string>
+    <string name="label_results_title">Grāmatzīmes etiķetei \'%s\'</string>
+
+    <string name="sync_begin_msg">Sāk sinhr...</string>
+    <string name="sync_done_msg">GMarks Sinhr pabeigta</string>
+    <string name="sync_in_progress_msg">Sinhr darbojas...</string>
+    <string name="sync_notify_title">Gmarks Sinhr</string>
+    <string name="sync_notify_start">Gmarks sinhr darbojas...</string>
+    <string name="sync_notify_auth_error">Lietotajvārda kļūda; ielogojieties.</string>
+    <string name="sync_notify_error">Nezināma sinhr kļūda</string>
+    <string name="sync_notify_count">Sinhronizētas %d grāmatzīmes</string>
+
+    <string name="deleting_bookmark_msg">Dzēš grāmatzīmi...</string>
+    <string name="saving_bookmark_msg">Saglabā grāmatzīmi...</string>
+    <string name="save_ok_msg">Grāmatzīme izveidota.</string>
+    <string name="update_ok_msg">Grāmatzīme atjaunota.</string>
+    <string name="delete_ok_msg">grāmatzīme dzēsta.</string>
+    <string name="error_auth_failed_msg">Kļūda: Autorizējoties</string>
+    <string name="error_not_found_msg">Kļūda: Grāmatzīme nav atrasta</string>
+    <string name="error_delete_failed_msg">Neizdevās izdzēst!</string>
+    <string name="error_save_failed_msg">Neizdevās saglabāt!</string>
+
+    <string name="please_wait_msg">Lūdzu gaidiet...</string>
+    <string name="logged_out_msg">Jūs esat izlogojies.</string>
+    <string name="logging_in_msg">Ielogojos...</string>
+    <string name="login_success_msg">Ielogojies!</string>
+    <string name="login_failed_msg">Ielogošanās kļūda!</string>
+    <string name="login_failed_detail_msg">Neizdevās ielogoties: %s</string>
+
+    <string name="pref_not_set_label">(neiestatīts)</string>
+        
+    <string name="btn_save">Saglabāt</string>
+    <string name="btn_update">Atjaunt</string>
+    <string name="btn_delete">Dzēst</string>
+    <string name="btn_first_sync">Sinhronizējiet lai sāktu</string>
+
+		<!-- Menu items -->
+    <string name="menu_add">Pievienot</string>
+    <string name="menu_add_long">Pievienot grāmatzīmi</string>
+    <string name="menu_sync">Sinhr</string>
+    <string name="menu_sync_long">Sinhronizēt</string>
+    <string name="menu_delete">Dzēst</string>
+    <string name="menu_delete_long">Dzēst izvēlēto grāmatzīmi</string>
+    <string name="menu_search">Meklēt</string>
+    <string name="menu_search_long">Meklēt grāmatzīmi</string>
+    <string name="menu_go_to_label">Iet uz etiķeti</string>
+    <string name="menu_sort_title">Šķirot pēc nosaukuma</string>
+    <string name="menu_sort_title_long">Šķirot pēc Alfabēta</string>
+    <string name="menu_sort_date">Šķirot pēc Datuma</string>
+    <string name="menu_sort_date_long">Šķirot pēc Izveides datuma</string>
+    <string name="menu_sort_label">Šķirot pēc Etiķetes</string>
+    <string name="menu_sort_label_long">Šķirot etiķetes pēc Alfabēta</string>
+    <string name="menu_sort_count">Šķirot pēc daudzuma</string>
+    <string name="menu_sort_count_long">Šķirot pēc Etiķešu daudzuma</string>
+    <string name="menu_settings">iestatījumi</string>
+    <string name="menu_login">Ielogoties</string>
+    <string name="menu_login_long">Ielogoties Jūsu Google Kontā</string>
+    <string name="menu_logout">Izlogoties</string>
+    <string name="menu_logout_long">Izlogoties no Jūsu Google Konta</string>
+    
+
+		<!-- UI Labels -->
+    <string name="label_title">Nosaukums</string>
+    <string name="label_url">URL</string>
+    <string name="label_description">Apraksts</string>
+    <string name="label_labels">etiķetes</string>
+
+    <string name="label_all_bookmarks">Visas Grāmatzīmes</string>
+    <string name="label_sub_all_bookmarks">šķirot pec datuma</string>
+    
+    <string name="label_webview_login">Lūdzu ielogojieties Jūsu Google kontā</string>
+		
+
+		<!-- Preferences -->
+		
+    <string name="pref_browser_sync">Iespējot Parlūka sinhr</string>
+    <string name="pref_browser_sync_summary">Sinhr jūsu Pārlūka grāmatzīmes ar izvēlēto etiķeti</string>
+    <string name="pref_sync_label">Izvēlieties Pārlūka Sinhr Etiķeti</string>
+    <string name="pref_sync_interval">Sinhr Intervāls</string>
+    <string name="pref_background_sync">Iespējot sinhr fonā</string>
+    <string name="pref_background_sync_summary">Automātiski sinhr pat tad ja GMarks nav aktīvs</string>
+    
+    <!-- Preference options for sync duration -->
+    <string-array name="pref_duration_entries">
+      <item>5 minūtes</item>
+      <item>20 minūtes</item>
+      <item>1 stunda</item>
+      <item>4 stundas</item>
+      <item>12 stundas</item>
+      <item>1 diena</item>
+    </string-array>
+
+    <!-- Preference values for sync duration -->
+    <!-- NOTE: Don't localize this.-->
+    <string-array name="pref_duration_values">
+      <item>5</item>
+      <item>20</item>
+      <item>60</item>
+      <item>240</item>
+      <item>720</item>
+      <item>1440</item>
+    </string-array>
+    
+</resources>

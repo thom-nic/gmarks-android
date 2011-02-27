@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GMarks</string>
+    <string name="labels_activity">GMark Oznake</string>
+    <string name="choose_label">Izberi GMarks Oznako</string>
+    <string name="bookmarks_activity">GMarks Vsi zaznamki</string>
+    <string name="choose_bookmark">Izberi zaznamek</string>
+    <string name="edit_bookmark">Uredi zaznamek</string>
+    <string name="new_bookmark">GMarks Nov zaznamek</string>
+    <string name="settings">GMarks Nastavitve</string>
+    <string name="live_folder_activity">GMarks Oznaka</string>
+    <string name="live_folder_title">Izberi oznako</string>
+    <string name="search_hint">Išči Google zaznamke</string>
+    <string name="login_title">GMarks Prijava</string>
+    <string name="coming_soon">Prihaja kmalu!</string>
+
+    <string name="search_results_title">GMarks rezultati iskanja za \'%s\'</string>
+    <string name="label_results_title">zaznamki za oznako \'%s\'</string>
+
+    <string name="sync_begin_msg">Začetek sinhronizacije...</string>
+    <string name="sync_done_msg">GMarks Sinhronizacija končana</string>
+    <string name="sync_in_progress_msg">Sinhronizacija je v teku...</string>
+    <string name="sync_notify_title">Gmarks Sinhronizacija</string>
+    <string name="sync_notify_start">Gmarks Sinhronizacija je v teku...</string>
+    <string name="sync_notify_auth_error">Napaka pri prijavi; Prosim prijavite se.</string>
+    <string name="sync_notify_error">Neznana napaka pri sinhronizaciji</string>
+    <string name="sync_notify_count">Sinhroniziranih %d zaznamkov</string>
+
+    <string name="deleting_bookmark_msg">Brisanje zaznamka...</string>
+    <string name="saving_bookmark_msg">Shranjevanje zaznamka...</string>
+    <string name="save_ok_msg">Zaznamek ustvarjen.</string>
+    <string name="update_ok_msg">Zaznamek posodobljen.</string>
+    <string name="delete_ok_msg">Zaznamek izbrisan.</string>
+    <string name="error_auth_failed_msg">Napaka: problem pri avtentikaciji</string>
+    <string name="error_not_found_msg">Napaka: Zaznamek ni najden</string>
+    <string name="error_delete_failed_msg">Brisanje ni bilo uspešno!</string>
+    <string name="error_save_failed_msg">Shranitev ni uspela!</string>
+
+    <string name="please_wait_msg">Prosim počakajte...</string>
+    <string name="logged_out_msg">Prijava uspešna.</string>
+    <string name="logging_in_msg">Prijavljanje...</string>
+    <string name="login_success_msg">Prijava uspešna!</string>
+    <string name="login_failed_msg">Napaka pri prijavi!</string>
+    <string name="login_failed_detail_msg">Prijava ni uspela: %s</string>
+
+    <string name="pref_not_set_label">(nedoločeno)</string>
+        
+    <string name="btn_save">Shrani</string>
+    <string name="btn_update">Posodobi</string>
+    <string name="btn_delete">Briši</string>
+    <string name="btn_first_sync">Sinhronizacija potrebna za začetek</string>
+
+		<!-- Menu items -->
+    <string name="menu_add">Dodaj</string>
+    <string name="menu_add_long">Dodaj zaznamek</string>
+    <string name="menu_sync">Sinh.</string>
+    <string name="menu_sync_long">Sinhroniziraj</string>
+    <string name="menu_delete">Briši</string>
+    <string name="menu_delete_long">Briši označeni zaznamek</string>
+    <string name="menu_search">Išči</string>
+    <string name="menu_search_long">Išči zaznamek</string>
+    <string name="menu_go_to_label">Pojdi na oznako</string>
+    <string name="menu_sort_title">Sortiraj po naslovu</string>
+    <string name="menu_sort_title_long">Sortiraj naslove po abecedi</string>
+    <string name="menu_sort_date">Sortiraj po datumu</string>
+    <string name="menu_sort_date_long">Sortiraj po datumu spremembe</string>
+    <string name="menu_sort_label">Sortiraj po oznaki</string>
+    <string name="menu_sort_label_long">Sortiraj oznake po abecedi</string>
+    <string name="menu_sort_count">Sortiraj po številu</string>
+    <string name="menu_sort_count_long">Sortiraj po številu v oznaki</string>
+    <string name="menu_settings">Nastavitve</string>
+    <string name="menu_login">Prijava</string>
+    <string name="menu_login_long">Prijavite se v svoj Google račun</string>
+    <string name="menu_logout">Odjava</string>
+    <string name="menu_logout_long">Odjava iz vašega Google računa</string>
+    
+
+		<!-- UI Labels -->
+    <string name="label_title">Naslov</string>
+    <string name="label_url">URL</string>
+    <string name="label_description">Opis</string>
+    <string name="label_labels">Oznake</string>
+
+    <string name="label_all_bookmarks">Vsi zaznamki</string>
+    <string name="label_sub_all_bookmarks">sortirani po datumu</string>
+    
+    <string name="label_webview_login">Prosim prijavite se v svoj Google račun</string>
+		
+
+		<!-- Preferences -->
+		
+    <string name="pref_browser_sync">Omogoči sinhronizacijo z brskalnikom</string>
+    <string name="pref_browser_sync_summary">Sinhroniziraj zaznamke iz brskalnika v določeno oznako</string>
+    <string name="pref_sync_label">Izberi oznako za sinh. z brskalnikom</string>
+    <string name="pref_sync_interval">Interval sinh.</string>
+    <string name="pref_background_sync">Omogoči sinhronizacijo v ozadju</string>
+    <string name="pref_background_sync_summary">Avtomatsko sinhroniziraj tudi če GMarks ni odprt</string>
+    
+    <!-- Preference options for sync duration -->
+    <string-array name="pref_duration_entries">
+      <item>5 minut</item>
+      <item>20 minut</item>
+      <item>1 uro</item>
+      <item>4 ure</item>
+      <item>12 ur</item>
+      <item>1 dan</item>
+    </string-array>
+
+    <!-- Preference values for sync duration -->
+    <!-- NOTE: Don't localize this.-->
+    <string-array name="pref_duration_values">
+      <item>5</item>
+      <item>20</item>
+      <item>60</item>
+      <item>240</item>
+      <item>720</item>
+      <item>1440</item>
+    </string-array>
+    
+</resources>

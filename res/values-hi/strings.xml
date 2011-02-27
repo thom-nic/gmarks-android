@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GMarks</string>
+    <string name="labels_activity">GMarks लेबल्स</string>
+    <string name="choose_label">एक GMarks लेबल चुनें</string>
+    <string name="bookmarks_activity">GMarks सभी बुकमार्क्स</string>
+    <string name="choose_bookmark">एक बुकमार्क चुनें</string>
+    <string name="edit_bookmark">बुकमार्क सम्पादन करें</string>
+    <string name="new_bookmark">GMarks नया बुकमार्क</string>
+    <string name="settings">GMarks सेटिंग्स</string>
+    <string name="live_folder_activity">GMarks लेबल</string>
+    <string name="live_folder_title">एक लेबल चुनें</string>
+    <string name="search_hint">Google बुकमार्क्स खोज</string>
+    <string name="login_title">GMarks लॉग इन</string>
+    <string name="coming_soon">जल्द ही आ रहा है!</string>
+
+    <string name="search_results_title">GMarks \'%s\' के लिए खोज परिणाम </string>
+    <string name="label_results_title">लेबल \'%s\' के लिए बुकमार्क्स </string>
+
+    <string name="sync_begin_msg">सिंक शुरू हो रहा है...</string>
+    <string name="sync_done_msg">GMarks सिंक सफल</string>
+    <string name="sync_in_progress_msg">अभी सिंक हो रहा है...</string>
+    <string name="sync_notify_title">Gmarks सिंक</string>
+    <string name="sync_notify_start">Gmarks सिंक हो रहा है...</string>
+    <string name="sync_notify_auth_error">लॉगिन में ग़लती; कृपया लॉग इन करे.</string>
+    <string name="sync_notify_error">सिंक करने में अज्ञात ग़लती</string>
+    <string name="sync_notify_count">%d बुकमार्क्स सिंक किये गए है</string>
+
+    <string name="deleting_bookmark_msg">बुकमार्क मिटाया जा रहा है...</string>
+    <string name="saving_bookmark_msg">बुकमार्क संचय किया जा रहा है...</string>
+    <string name="save_ok_msg">बुकमार्क संचित हो चूका है.</string>
+    <string name="update_ok_msg">बुकमार्क का अद्यतन हो चुका है.</string>
+    <string name="delete_ok_msg">बुकमार्क मिट चुका है.</string>
+    <string name="error_auth_failed_msg">ग़लती: प्राधिकरण में विफलता</string>
+    <string name="error_not_found_msg">ग़लती: बुकमार्क नहीं मिला</string>
+    <string name="error_delete_failed_msg">मिटाने  में विफलता !</string>
+    <string name="error_save_failed_msg">संचित करने में विफलता !</string>
+
+    <string name="please_wait_msg">कृपया प्रतीक्षा करें...</string>
+    <string name="logged_out_msg">अब आप लॉग आउट हो चुके हैं.</string>
+    <string name="logging_in_msg">लॉग इन किया जा रहा है...</string>
+    <string name="login_success_msg">लॉग इन सफल!</string>
+    <string name="login_failed_msg">लॉग इन करने में ग़लती!</string>
+    <string name="login_failed_detail_msg">लॉग इन असफल: %s</string>
+
+    <string name="pref_not_set_label">(अस्थित)</string>
+        
+    <string name="btn_save">संचित करे</string>
+    <string name="btn_update">अद्यतन करे</string>
+    <string name="btn_delete">मिटाए</string>
+    <string name="btn_first_sync">कृपया शुरूवात करने के लिए सिंक करे</string>
+
+		<!-- Menu items -->
+    <string name="menu_add">नया</string>
+    <string name="menu_add_long">नया बुकमार्क</string>
+    <string name="menu_sync">सिंक करे</string>
+    <string name="menu_sync_long">सिंक करे</string>
+    <string name="menu_delete">मिटाए</string>
+    <string name="menu_delete_long">चयनित बुकमार्क को मिटाए</string>
+    <string name="menu_search">खोजे</string>
+    <string name="menu_search_long">बुकमार्क्स खोजे</string>
+    <string name="menu_go_to_label">लेबल में जाए</string>
+    <string name="menu_sort_title">शीर्षक को छाँटें</string>
+    <string name="menu_sort_title_long">शीर्षक को वर्णानुक्रम के आधार पर छाँटें</string>
+    <string name="menu_sort_date">तिथि के आधार पर छाँटें</string>
+    <string name="menu_sort_date_long">संशोधित तिथि के आधार पर छाँटें</string>
+    <string name="menu_sort_label">लेबल के आधार पर छाँटें</string>
+    <string name="menu_sort_label_long">लेबल को वर्णानुक्रम के आधार पर छाँटें</string>
+    <string name="menu_sort_count">गणना के आधार पर छाँटें</string>
+    <string name="menu_sort_count_long">लेबल को गणना के आधार पर छाँटें</string>
+    <string name="menu_settings">सेटिंग्स</string>
+    <string name="menu_login">लोग इन</string>
+    <string name="menu_login_long">अपने Google खाते में लोग इन करें</string>
+    <string name="menu_logout">लॉग आउट</string>
+    <string name="menu_logout_long">अपने Google खाते से लॉग आउट करें</string>
+    
+
+		<!-- UI Labels -->
+    <string name="label_title">शीर्षक</string>
+    <string name="label_url">यूआरएल</string>
+    <string name="label_description">विवरण</string>
+    <string name="label_labels">लेबल्स</string>
+
+    <string name="label_all_bookmarks">सभी बुकमार्क्स</string>
+    <string name="label_sub_all_bookmarks">तिथि के अनुसार छाँटे हुए</string>
+    
+    <string name="label_webview_login">अपने Google खाते में लोग इन करें</string>
+		
+
+		<!-- Preferences -->
+		
+    <string name="pref_browser_sync">ब्राउज़र सिंक चालू रखे</string>
+    <string name="pref_browser_sync_summary">अपने ब्राउज़र बुकमार्क को एक चुने हुए लेबल के साथ सिंक करे</string>
+    <string name="pref_sync_label">ब्राउज़र सिंक के लिए लेबल चुनें</string>
+    <string name="pref_sync_interval">सिंक अंतराल</string>
+    <string name="pref_background_sync">पृष्ठभूमि में सिंक चालू रखे</string>
+    <string name="pref_background_sync_summary">स्वचालित रूप से सिंक करें, भले ही GMarks सक्रिय नहीं है</string>
+    
+    <!-- Preference options for sync duration -->
+    <string-array name="pref_duration_entries">
+      <item>५ मिनट</item>
+      <item>२० मिनट</item>
+      <item>१ घंटा</item>
+      <item>४ घंटे</item>
+      <item>१२ घंटे</item>
+      <item>१ दिन</item>
+    </string-array>
+
+    <!-- Preference values for sync duration -->
+    <!-- NOTE: Don't localize this.-->
+    <string-array name="pref_duration_values">
+      <item>5</item>
+      <item>20</item>
+      <item>60</item>
+      <item>240</item>
+      <item>720</item>
+      <item>1440</item>
+    </string-array>
+    
+</resources>
