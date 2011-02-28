@@ -423,6 +423,26 @@
        y1="184.04535"
        x2="276.23761"
        y2="37.510712" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3911"
+       id="linearGradient4049"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(115.06067,326.69084)"
+       x1="428.09006"
+       y1="244.93643"
+       x2="571.28711"
+       y2="47.41169" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3901"
+       id="linearGradient4051"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(350.70423,305.87896)"
+       x1="276.23761"
+       y1="184.04535"
+       x2="276.23761"
+       y2="37.510712" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -431,9 +451,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.5"
-     inkscape:cx="285.31692"
-     inkscape:cy="526.18109"
+     inkscape:zoom="0.38"
+     inkscape:cx="163.76323"
+     inkscape:cy="218.45944"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -461,11 +481,11 @@
     <image
        sodipodi:absref="/Users/tnichols/dev/gmarks-android/icon-dev/bookmark.png"
        xlink:href="bookmark.png"
-       y="97.505035"
-       x="42.285728"
-       id="image3084"
+       width="126.37624"
        height="133.30693"
-       width="126.37624" />
+       id="image3084"
+       x="42.285728"
+       y="97.505035" />
     <g
        id="g4276"
        inkscape:export-filename="/Users/tnichols/dev/gmarks-sync/res/drawable-hdpi/icon.png"
@@ -683,10 +703,7 @@
            y="496.17328">G</tspan></text>
     </g>
     <g
-       id="g3118"
-       inkscape:export-filename="/Users/tnichols/dev/gmarks-android/icon-dev/site-logo.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
+       id="g3239">
       <g
          id="g4348">
         <path
@@ -824,14 +841,14 @@
         <image
            sodipodi:absref="/Users/tnichols/dev/gmarks-android/icon-dev/drawable-hdpi/ic_launcher_folder.png"
            xlink:href="drawable-hdpi/ic_launcher_folder.png"
-           y="391.01007"
-           x="76.676064"
-           id="image4047"
-           height="72"
-           width="72"
-           inkscape:export-filename="/Users/tnichols/dev/gmarks-sync/res/drawable-hdpi/ic_launcher_folder.png"
+           inkscape:export-ydpi="90"
            inkscape:export-xdpi="90"
-           inkscape:export-ydpi="90" />
+           inkscape:export-filename="/Users/tnichols/dev/gmarks-sync/res/drawable-hdpi/ic_launcher_folder.png"
+           width="72"
+           height="72"
+           id="image4047"
+           x="76.676064"
+           y="391.01007" />
         <g
            id="g4150"
            transform="matrix(0.11538361,0,0,0.11538361,64.892346,394.25791)"
@@ -882,14 +899,14 @@
         <image
            sodipodi:absref="/Users/tnichols/dev/gmarks-android/icon-dev/drawable-mdpi/ic_launcher_folder.png"
            xlink:href="drawable-mdpi/ic_launcher_folder.png"
-           y="521.07397"
-           x="88.282898"
-           id="image4139"
-           height="48"
-           width="48"
-           inkscape:export-filename="/Users/tnichols/dev/gmarks-sync/icon-dev/drawable-mdpi/ic_launcher_folder.png"
+           inkscape:export-ydpi="90"
            inkscape:export-xdpi="90"
-           inkscape:export-ydpi="90" />
+           inkscape:export-filename="/Users/tnichols/dev/gmarks-sync/icon-dev/drawable-mdpi/ic_launcher_folder.png"
+           width="48"
+           height="48"
+           id="image4139"
+           x="88.282898"
+           y="521.07397" />
         <g
            transform="matrix(0.07976147,0,0,0.07976147,80.682865,523.19181)"
            id="g4177"
@@ -1051,5 +1068,60 @@
              y="496.17328">G</tspan></text>
       </g>
     </g>
+    <g
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/Users/tnichols/dev/gmarks-android/icon-dev/amazon-market-icon-512x512.png"
+       id="g4033"
+       transform="matrix(4.4912281,0,0,4.4912281,60.772088,-2781.7206)">
+      <rect
+         style="fill:#000000;fill-opacity:0;stroke:none"
+         id="rect4035"
+         width="114"
+         height="114"
+         x="64"
+         y="800.36218"
+         rx="0"
+         ry="0" />
+      <g
+         id="g4037"
+         transform="matrix(0.36387346,0,0,0.36387346,-107.11723,673.96952)">
+        <path
+           style="fill:url(#linearGradient4049);fill-opacity:1;stroke:none;filter:url(#filter3935)"
+           d="m 551.69433,379.05302 1.9802,261.38616 70.29703,-66.33665 60.39604,59.40595 1.9802,-259.40595 -134.65347,4.95049 z"
+           id="path4039"
+           sodipodi:nodetypes="cccccc" />
+        <path
+           sodipodi:nodetypes="cccccc"
+           id="path4041"
+           d="m 560.60522,364.20154 0.9901,258.41585 64.35644,-67.32674 66.33663,66.33664 1.9802,-259.40595 -133.66337,1.9802 z"
+           style="fill:#fa1f1f;fill-opacity:1;stroke:#70000a;stroke-width:7.69999981;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+        <path
+           style="fill:url(#linearGradient4051);fill-opacity:1;stroke:#de1a2b;stroke-width:3.70000005;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           d="m 570.50621,371.94441 -0.15402,226.8908 56.32565,-57.00034 57.84378,61.0398 -1.14412,-232.75234 -112.87129,1.82208 z"
+           id="path4043"
+           sodipodi:nodetypes="cccccc" />
+        <text
+           sodipodi:linespacing="100%"
+           id="text4045"
+           y="496.17328"
+           x="580.29266"
+           style="font-size:121.51649475px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#f6f6f6;fill-opacity:1;stroke:none;filter:url(#filter3959);font-family:Georgia;-inkscape-font-specification:Georgia"
+           xml:space="preserve"><tspan
+             y="496.17328"
+             x="580.29266"
+             id="tspan4047"
+             sodipodi:role="line">G</tspan></text>
+      </g>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans"
+       x="458.36081"
+       y="771.80518"
+       id="text4053"
+       sodipodi:linespacing="100%"><tspan
+         sodipodi:role="line"
+         id="tspan4057">512x512 Amazon Market Icon:</tspan></text>
   </g>
 </svg>
