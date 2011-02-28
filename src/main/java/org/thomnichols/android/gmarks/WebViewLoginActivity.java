@@ -34,6 +34,7 @@ public class WebViewLoginActivity extends Activity {
 	static final String TAG = "GMARKS WEBVIEW LOGIN";
 	
 	static final String loginURL = "https://www.google.com/accounts/ServiceLogin";
+	static final String twoFactorAuthURL = "https://www.google.com/accounts/SmsAuth";
 //	static final String checkCookieURL = "https://www.google.com/accounts/CheckCookie";
 	static final String loginParams = "?service=bookmarks&passive=true"
 		+ "&continue=https://www.google.com/bookmarks/l"
@@ -85,7 +86,7 @@ public class WebViewLoginActivity extends Activity {
     		Log.d(TAG, "PAGE LOADED ======= " + url );
     		cookieSyncManager.sync();
     		
-    		if ( url.startsWith(loginURL) ) {
+    		if ( url.startsWith(loginURL) || url.startsWith(twoFactorAuthURL) ) {
     			if ( WebViewLoginActivity.this.waitDialog != null ) {
     				try {
     					waitDialog.dismiss(); // let the user log in.
