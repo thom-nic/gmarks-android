@@ -36,15 +36,15 @@ Google Bookmarks עבור אנדרואיד!
   * דנית - תודה LayZee 
   * פולנית - תודה Krygo 
   * טורקיה - תודה Proym
-   * סינית מסורתית - תודה eizonuts
-   * גרמניה - תודה Berkley
-   * צרפת - תודה Loic furhoff
-   * היוונית - תודה danzax
-   * סרבית - תודה @delicb
-   * עברית - תודה Adi
-   * שוודית - תודהjokrsolutions 
-   * קטלאנית - תודהjordivf 
-   * ליטאית - תודה LFSPovo
+  * סינית מסורתית - תודה eizonuts
+  * גרמניה - תודה Berkley
+  * צרפת - תודה Loic furhoff
+  * היוונית - תודה danzax
+  * סרבית - תודה @delicb
+  * עברית - תודה Adi
+  * שוודית - תודהjokrsolutions 
+  * קטלאנית - תודהjordivf 
+  * ליטאית - תודה LFSPovo
 
 0.6.2: 
 * מקומי

@@ -1,0 +1,73 @@
+I Segnalibri preferiti di Google per Android!
+
+* 100% senza pubblicità e open source!
+* Supporta 12 lingue
+* Sincronizza/ copia di backup/ importa i preferiti del browser ai Segnalibri di Google (www.google.com/bookmarks)
+* Support a Live Folders, con criterio di raggruppamento per Etichetta
+* Sincronizzazione in background
+* Possibilita' di ricerca globale integrata per titolo, url, descrizione o etichetta
+* Aggiungi velocemente un segnalibro google dal menu' "condividi" del tuo browser
+* Aggiungi/aggiorna/elimina segnalibri dal tuo telefonino
+* Visualizza o Modifica Touch del tuo segnalibro tenendo premuto a lungo su di esso
+* Supporta pientamente Eclair/ 2.1
+
+Cerco traduttori! Se vuoi aiutarmi a tradurre Google Bookmarks nella tua lingua consulta la pagina web del progetto.
+
+Se riscontri una chiusura forzata dell'applicazione (un errore), per favore avvisami in modo che posso risolvere il problema.
+Potete chiedere nuove caratteristiche per il programma alla pagina web del progetto.
+
+Dettagli:
+
+Sincronizza automaticamente i Sgnalibri di Google con il tuo telefonino!  Sincronizzazione in Background significa che i tuoi dati sono sempre aggiornati, il programma funziona tenendo in considerazione solo i cambiamenti apportati ai Segnalibri e effettua le opportune modifiche. Usa GMarks per Firefox, o il bookmarklet di Google o la Google Toolbar per inviare velocemente i segnalibri sul tuo telefonino.
+
+Puoi scegliere di sincronizzare solo i Segnalibri di Google contrasegnati con una etichetta in particolare o tutti quanti. In questo modo puoi importare ed esportare parte dei segnalibri o tutti tra il tuo browser e diversi dispositivi.
+
+Supporta la funzione di android Live Folders, i Segnalibri di Google possono essere raggruppati per Etichetta. Cliccando sulla cartellina "magica" in automatico appariranno tutti i nostri Segnalibri preferiti sempre aggiornati. (Aggiungi su schermo una Cartella e seleziona GMarks label.)
+
+Riceca globale integrata significa che puoi cercare un Segnalibro usando il tasto Cerca del tuo dispositivo android o il widget di Ricerca Google(Puoi abilitarlo nel menu' di sistema sotto "Ricerche.")  La ricerca globale puo' avvenire per titolo, etichetta, URL e descrizione.  
+
+Aggiungi velocemente un segnalibro google dal menu' "condividi" del tuo browser
+
+Sicurezza: Il tuo nome utente e la tua password di accesso a Google non sono memorizzati o processati dall'applicazione GMarks ma utilizzati in maniera "diretta" per l'accesso a Goggle.  Tutte i canali di comunicazione su internet usano HTTPS o SSL nel pieno rispetto della privacy. 
+Per assicurare la privacy piu' completa è supportato anche l'autenticazione con verifica doppia di Google (nella versione 0.6.4.) Vedi http://www.google.com/support/a/bin/answer.py?hlrm=en&answer=184711
+
+Keywords: Sincronizza backup importa esporta Segnalibri Google 
+
+Cambiamenti Recenti:
+
+0.6.4: (In Arrivo)
+* Supporto verifica a due passi di Google
+Traduzioni:
+  * Swedish - thanks jokrsolutions
+  * Catalan - thanks jordivf
+  * Slovak - thanks Lubos
+  * Japanese - thanks Koomo
+
+0.6.3:
+* Nuove Traduzioni: 
+  * Danish - thanks LayZee
+  * Polish - thanks Krygo
+  * Turkish - thanks Proym
+  * Traditional Chinese - thanks eizonuts
+  * German - thanks Berkley
+  * French - thanks loic furhoff
+  * Greek - thanks danzax
+  * Serbian - thanks @delicb
+  * Hebrew - thanks Adi
+  * Lithuanian - thanks LFSPovo
+* Fixed FC when editing a search result
+
+0.6.2:
+* Localizzazioni!
+  * Chinese - thanks kouketsu
+  * Spanish - thanks macsjr
+  * Portuguese - thanks macsjr
+* Risolto chiusura forzata in "Scegli Etichetta" menu.
+
+0.6.x:
+* Integrata la Ricerca globale
+* suggerimenti in tempo reale nella sezione "cerca"
+* 'Ordina per...' menu aggiunto per etochette e segnalibri
+* Pulsante 'Cerca' nel menu
+* Pulsante 'Vai a Etichetta' nel menu
+* Risolto decodifica per set di caratteri non Latini.
