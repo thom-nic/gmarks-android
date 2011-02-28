@@ -1,0 +1,77 @@
+Google Bookmarks for Android!
+
+* 100% reklamefri og åpen kildekode!
+* Støtte for 12 språk
+* Synk/ backup/ import av nettleser-bokmerker til Google Bookmarks
+* Live folder for samtlige bokmerke-etiketter
+* Bakgrunnssynkronisering
+* Global søkeintegrering; Fullt tekstsøk
+* Tilføy hurtig et GMark fra nettleserens 'share' meny
+* Tilføy/oppdater/slett bokmerker fra din telefon
+* "Hold-trykk" for å se/ redigere et bokmerke
+* Støtter nå fullt ut Eclair/ 2.1
+
+Trenger oversettere!  Hvis du ønsker å hjelpe til med å oveersette Google Bookmarks til ditt språk, vennligst les prosjektsiden.mv
+
+Hvis du opplever FC (Tvungen lukking), vennligst 'Rapporter' det slik at jeg kan ordne problemet.  Du kan også sende inn ønsker om nye funksjoner på prosjektets nettsider.
+
+Flere detaljer:
+
+Synkroniser automatisk dine Google Bokmerker til telefonen din!  Bakgrunns-synkronisering betyr at du alltid er up-to-date, og appen synkroniserer kun endringer.  Bruk GMarks for Firefox, Google bookmarklet eller Google Toolbar for å hurtig sende bokmerker til telefonen.
+
+Velg hvilken som helst etikett for å synkronisere med Android Nettleser sine bokmerker .  Dette betyr at du kan ta backup og eksportere din nettlesers bokmerker over flere enheter.  
+
+Live Folders gir deg hurtig tilgang til alle etiketter.  Bruk det for å lage en leseliste på enheten din!
+
+Global søkeintegrering betyr at du kjapt kan finne et bokmerke ved å bruke enhetens Søkeknapp eller Google Search widget.  (Du kan aktivere dette i systeminnstillingene under "Søk.")  Fulltekstsøk indekserer bokmerketitler, etiketter, URLs og beskrivelser.  
+
+Lag hurtig nye Google Bokmerker fra nettleserens "Share" meny.
+
+Sikkert: Brukernavnet og passordet ditt sendes direkte til Google, og blir aldri lest eller lagret av GMarks appen.  Alle internett-forespørsler benytter HTTPS/ SSL for å sikre fullstendig personvern.  Støtter også Google "two-factor authentication" (fra versjon 0.6.4.)
+
+Nøkkelord: Synkroniser Synchronize backup import export eksport Google Bookmarks Bokmerker
+
+
+Nylige Endringer:
+
+0.6.4: (Kommer snart)
+* Two-factor godkjenningsstøtte 
+Oversettelser:
+  * Svensk - takk til jokrsolutions
+  * Katalansk - takk til jordivf
+  * Slovakisk - takk til Lubos
+  * Japansk - takk til Koomo
+  * Italiensk - takk til Uttermarcus
+  * Russisk - takk til devision
+  * Tysk -
+  * Rumensk - takk til tmahai20
+  * Norsk - takk til Gøran
+
+0.6.3:
+* Nye oversettelser: 
+  * Dansk - takk til LayZee
+  * Polsk - takk til Krygo
+  * Tyrkisk - takk til Proym
+  * Tradisjonell Kinesisk - takk til eizonuts
+  * Tysk - takk til Berkley
+  * Fransk - takk til loic furhoff
+  * Gresk - takk til danzax
+  * Serbisk - takk til @delicb
+  * Hebraisk - takk til Adi
+  * Litauisk - takk til LFSPovo
+* Ordnet FC ved redigering av et søkeresultat
+
+0.6.2:
+* Språkstøtte!
+  * Kinesisk - takk til kouketsu
+  * Spansk - takk til macsjr
+  * Portugisisk - takk til macsjr
+* Ordnet FC i "Velg Etikett" meny
+
+0.6.x:
+* Global søkeintegrering
+* søkeforslag mens-du-taster
+* 'Sorter etter...' menyvalg for etiketter og bokmerker
+* 'Søk' menyknapp
+* 'Gå til etikett' menyknapp
+* Ordnet koding for ikke-latinske tegnsett
