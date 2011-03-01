@@ -14,8 +14,8 @@
     <string name="login_title">GMarks Belépés</string>
     <string name="coming_soon">Hamarosan!</string>
 
-    <string name="search_results_title">GMarks \'%s\' keresési eredménye</string>
-    <string name="label_results_title">\'%s\' címke könyvjelzői</string>
+    <string name="search_results_title">GMarks "%s" keresési eredménye</string>
+    <string name="label_results_title">"%s" címke könyvjelzői</string>
 
     <string name="sync_begin_msg">Szinkronizálás indítása...</string>
     <string name="sync_done_msg">GMarks Szinkronizálás elkészült</string>
