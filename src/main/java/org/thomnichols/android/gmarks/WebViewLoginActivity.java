@@ -33,6 +33,9 @@ import android.widget.Toast;
 public class WebViewLoginActivity extends Activity {
 	static final String TAG = "GMARKS WEBVIEW LOGIN";
 	
+	static final String KEY_PAUSED_FOR_TWO_FACTOR_AUTH = "gmarks.webview.paused_for_two_factor_auth";
+	static final String KEY_PAUSED_AT_URL = "gmarks.webview.paused_at_current_url";
+	
 	static final String loginURL = "https://www.google.com/accounts/ServiceLogin";
 	static final String twoFactorAuthURL = "https://www.google.com/accounts/SmsAuth";
 //	static final String checkCookieURL = "https://www.google.com/accounts/CheckCookie";
@@ -42,6 +45,8 @@ public class WebViewLoginActivity extends Activity {
 	static final String targetURL = "https://www.google.com/bookmarks/";
 	WebView webView = null;
 	boolean loggedIn = false;
+	boolean resumingTwoFactorAuth = false;
+	private String resumeAtURL = loginURL + loginParams; 
 	CookieSyncManager cookieSyncManager;
 	ProgressDialog waitDialog;
 //	CookieManager cookieManager;
@@ -71,14 +76,34 @@ public class WebViewLoginActivity extends Activity {
     	super.onResume();
     	WebViewCookiesDB cookieDB = new WebViewCookiesDB(WebViewLoginActivity.this);
 		try {
-			cookieDB.deleteCookie("SID");
+			if ( ! resumingTwoFactorAuth ) cookieDB.deleteCookie("SID");
 		} finally { cookieDB.close(); }
-        this.webView.loadUrl(loginURL + loginParams );
+		final String currentURL = webView.getUrl();
+		if ( resumingTwoFactorAuth && currentURL != null && 
+				currentURL.startsWith(twoFactorAuthURL) ) return;
+		this.webView.loadUrl( this.resumeAtURL );
     }
     
     protected void onPause() {
     	super.onPause();
     	if ( this.waitDialog != null ) this.waitDialog.dismiss();
+    };
+    
+    protected void onSaveInstanceState(Bundle outState) {
+    	final String currentURL = webView.getUrl(); 
+    	if ( currentURL.startsWith(twoFactorAuthURL) ) {
+    		outState.putBoolean(KEY_PAUSED_FOR_TWO_FACTOR_AUTH, true);
+    		outState.putString(KEY_PAUSED_AT_URL, currentURL );
+    	}
+    	super.onSaveInstanceState(outState);
+    };
+    
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+    	super.onRestoreInstanceState(savedInstanceState);
+    	this.resumingTwoFactorAuth = savedInstanceState.getBoolean(
+    			KEY_PAUSED_FOR_TWO_FACTOR_AUTH, false );
+    	if ( this.resumingTwoFactorAuth && savedInstanceState.containsKey(KEY_PAUSED_AT_URL) )
+    		this.resumeAtURL = savedInstanceState.getString( KEY_PAUSED_AT_URL );
     };
     
     WebViewClient webClient = new WebViewClient() {
