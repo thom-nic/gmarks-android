@@ -27,6 +27,8 @@ import android.util.Log;
 public class SettingsActivity extends PreferenceActivity implements Preference.OnPreferenceChangeListener {
 	static final String TAG = "GMARKS SETTINGS";
 	
+	static final String KEY_FULL_SYNC_PREF = "dummy_full_sync_action";
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,12 +63,17 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     		findPreference(Prefs.KEY_BROWSER_SYNC_LABEL).setEnabled(
     				((CheckBoxPreference)pref).isChecked() );
 
-    	if ( Prefs.KEY_BACKGROUND_SYNC_ENABLED.equals(key) )
+    	else if ( Prefs.KEY_BACKGROUND_SYNC_ENABLED.equals(key) )
     		findPreference(Prefs.KEY_SYNC_INTERVAL).setEnabled(
     				((CheckBoxPreference)pref).isChecked() );
     	
-    	if ( Prefs.KEY_BROWSER_SYNC_LABEL.equals(key) ) {
+    	else if ( Prefs.KEY_BROWSER_SYNC_LABEL.equals(key) ) {
     		// label picker listens for its own click...
+    	}
+    	
+    	else if ( KEY_FULL_SYNC_PREF.equals(key) ) {
+    		Log.d(TAG,"Performing full sync...");
+    		new RemoteSyncTask(this, true).execute();
     	}
     	
 		return super.onPreferenceTreeClick(prefScreen, pref);

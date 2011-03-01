@@ -66,6 +66,7 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 	long lastBrowserSyncTime = 0;
 	long thisSyncTime = 0;
 	boolean showToast = true;
+	boolean syncAll = false;
 	
 	RemoteSyncTask(Context ctx) {
 		this.ctx = ctx;
@@ -78,6 +79,11 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 		this.legacySyncPrefs = ctx.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE);
 	}
 	
+	RemoteSyncTask(Context ctx, boolean fullSync ) {
+		this(ctx);
+		this.syncAll = fullSync;
+	}
+	
 	@Override protected void onPreExecute() {
 		super.onPreExecute();
 		this.lastSyncTime = syncPrefs.getLong(Prefs.PREF_LAST_SYNC, 0);
@@ -86,6 +92,11 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 		this.lastBrowserSyncTime = syncPrefs.getLong(Prefs.PREF_LAST_BROWSER_SYNC, 0);
 		if ( lastBrowserSyncTime == 0 ) 
 			lastBrowserSyncTime = legacySyncPrefs.getLong(Prefs.PREF_LAST_BROWSER_SYNC, 0);
+		
+		if ( this.syncAll ) {
+			this.lastSyncTime = 0;
+			this.lastBrowserSyncTime = 0;
+		}
 		
 		Log.d(TAG,"Syncing bookmarks modified since: " + lastSyncTime);
 		this.thisSyncTime = System.currentTimeMillis();
@@ -117,6 +128,14 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
     	}
     	
 		try {
+			if ( this.syncAll ) {
+				db.execSQL("delete from " + GmarksProvider.BOOKMARKS_TABLE_NAME + "_FTS");
+				db.execSQL("delete from " + GmarksProvider.BOOKMARK_LABELS_TABLE_NAME);
+				db.execSQL("delete from " + GmarksProvider.BOOKMARKS_TABLE_NAME);
+				db.execSQL("delete from " + GmarksProvider.LABELS_TABLE_NAME);
+				Log.d(TAG,"DELETED all rows from GMarks database");
+			}
+			
     		ContentValues vals = new ContentValues();
 			
     		// sync label list
@@ -308,7 +327,7 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 		if ( result == RESULT_SUCCESS ) {
 			if (showToast) Toast.makeText(this.ctx, 
 					R.string.sync_done_msg, Toast.LENGTH_LONG).show();
-			if ( this.ctx instanceof ListActivity ) {
+			if ( this.ctx instanceof LabelsListActivity ) {
 				Log.d(TAG,"Refreshing listview...");
 				((CursorAdapter)((ListActivity)this.ctx).getListAdapter()).getCursor().requery();
 			}

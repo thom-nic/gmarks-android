@@ -26,4 +26,10 @@
         android:persistent='true'
         android:defaultValue="60"
         android:enabled="false" />
+
+    <Preference
+        android:key="dummy_full_sync_action"
+        android:title="@string/menu_full_sync"
+        android:summary="@string/menu_full_sync_long"
+        android:persistent='false' />
 </PreferenceScreen>
