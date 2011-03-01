@@ -47,9 +47,6 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 	static final String TAG = "GMARKS SYNC";
 	
 	static final String SHARED_PREFS_NAME = "sync_prefs";
-	static final String PREF_LAST_SYNC = "last_sync";
-	static final String PREF_LAST_SYNC_ATTEMPT = "last_sync_attempt";
-	static final String PREF_LAST_BROWSER_SYNC = "last_browser_sync";
 	
 	static final int NOTIFY_SYNC_ID = 1;
 	
@@ -83,16 +80,16 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 	
 	@Override protected void onPreExecute() {
 		super.onPreExecute();
-		this.lastSyncTime = syncPrefs.getLong(PREF_LAST_SYNC, 0);
+		this.lastSyncTime = syncPrefs.getLong(Prefs.PREF_LAST_SYNC, 0);
 		if ( lastSyncTime == 0 ) 
-			lastSyncTime = legacySyncPrefs.getLong(PREF_LAST_SYNC, 0);
-		this.lastBrowserSyncTime = syncPrefs.getLong(PREF_LAST_BROWSER_SYNC, 0);
+			lastSyncTime = legacySyncPrefs.getLong(Prefs.PREF_LAST_SYNC, 0);
+		this.lastBrowserSyncTime = syncPrefs.getLong(Prefs.PREF_LAST_BROWSER_SYNC, 0);
 		if ( lastBrowserSyncTime == 0 ) 
-			lastBrowserSyncTime = legacySyncPrefs.getLong(PREF_LAST_BROWSER_SYNC, 0);
+			lastBrowserSyncTime = legacySyncPrefs.getLong(Prefs.PREF_LAST_BROWSER_SYNC, 0);
 		
 		Log.d(TAG,"Syncing bookmarks modified since: " + lastSyncTime);
 		this.thisSyncTime = System.currentTimeMillis();
-		syncPrefs.edit().putLong(PREF_LAST_SYNC_ATTEMPT, thisSyncTime).commit();
+		syncPrefs.edit().putLong(Prefs.PREF_LAST_SYNC_ATTEMPT, thisSyncTime).commit();
 		
 		// determine if we should sync browser bookmarks:
 		this.syncBrowserBookmarks = syncPrefs.getBoolean(
@@ -317,9 +314,9 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 			}
 			// update shared 'last sync' state
 			Editor prefEditor = this.syncPrefs.edit();
-			prefEditor.putLong(PREF_LAST_SYNC, this.thisSyncTime);
+			prefEditor.putLong(Prefs.PREF_LAST_SYNC, this.thisSyncTime);
 			if ( this.syncBrowserBookmarks )
-				prefEditor.putLong(PREF_LAST_BROWSER_SYNC, this.thisSyncTime);
+				prefEditor.putLong(Prefs.PREF_LAST_BROWSER_SYNC, this.thisSyncTime);
 			prefEditor.commit();
 		}
 		else if ( result == RESULT_FAILURE_DB ) {
