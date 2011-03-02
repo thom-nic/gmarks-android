@@ -375,6 +375,9 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 				ctx.getText(R.string.sync_notify_title), 
 				ctx.getString(R.string.sync_notify_count, count), 
 				PendingIntent.getActivity(this.ctx, 0, intent, 0) );
+		if ( done ) notification.flags ^= Notification.FLAG_ONGOING_EVENT;
+		else notification.flags |= Notification.FLAG_ONGOING_EVENT;
+
 		this.notificationManager.notify(NOTIFY_SYNC_ID, notification);
 	}
 }
