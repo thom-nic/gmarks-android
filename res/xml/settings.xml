@@ -10,8 +10,8 @@
     <org.thomnichols.android.gmarks.LabelPreference
     		android:key='browser_sync_label'
     		android:title='@string/pref_sync_label' 
-    		android:persistent='true'
-    		android:enabled="false" />
+    		android:dependency='browser_sync_enabled'
+    		android:persistent='true'/>
 
     <CheckBoxPreference
         android:key="background_sync_enabled"
@@ -23,11 +23,11 @@
         android:dialogTitle="@string/pref_sync_interval" 
         android:entries="@array/pref_duration_entries"
         android:entryValues="@array/pref_duration_values"
+    		android:dependency='background_sync_enabled'
         android:persistent='true'
-        android:defaultValue="60"
-        android:enabled="false" />
+        android:defaultValue="60"/>
 
-    <Preference
+    <Preference 
         android:key="dummy_full_sync_action"
         android:title="@string/menu_full_sync"
         android:summary="@string/menu_full_sync_long"

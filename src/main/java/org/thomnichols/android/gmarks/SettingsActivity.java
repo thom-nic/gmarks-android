@@ -21,10 +21,12 @@ import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceScreen;
 import android.util.Log;
 
-public class SettingsActivity extends PreferenceActivity implements Preference.OnPreferenceChangeListener {
+public class SettingsActivity extends PreferenceActivity implements 
+		Preference.OnPreferenceChangeListener,
+		Preference.OnPreferenceClickListener {
+	
 	static final String TAG = "GMARKS SETTINGS";
 	
 	static final String KEY_FULL_SYNC_PREF = "dummy_full_sync_action";
@@ -39,44 +41,20 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     protected void onResume() {
         super.onResume();        
         Preference labelPref = findPreference(Prefs.KEY_BROWSER_SYNC_LABEL);
-        labelPref.setEnabled( ((CheckBoxPreference) 
-        		findPreference(Prefs.KEY_BROWSER_SYNC_ENABLED)).isChecked() );
+        labelPref.setOnPreferenceChangeListener(this);
         
         CheckBoxPreference backgroundEnabledPref = 
         	(CheckBoxPreference) findPreference(Prefs.KEY_BACKGROUND_SYNC_ENABLED);
+        backgroundEnabledPref.setOnPreferenceChangeListener(this);
 
         ListPreference intervalPref = (ListPreference)findPreference(Prefs.KEY_SYNC_INTERVAL);
         int currentSetting = intervalPref.findIndexOfValue( intervalPref.getValue() ); 
         intervalPref.setSummary( currentSetting < 0 ? getText(R.string.pref_not_set_label) : 
         	intervalPref.getEntries()[currentSetting] );
-        intervalPref.setEnabled( backgroundEnabledPref.isChecked() );
-        
-        labelPref.setOnPreferenceChangeListener(this);
-        backgroundEnabledPref.setOnPreferenceChangeListener(this);
         intervalPref.setOnPreferenceChangeListener(this);
-    }
-    
-    @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen prefScreen, Preference pref ) {
-    	String key = pref.getKey();
-    	if ( Prefs.KEY_BROWSER_SYNC_ENABLED.equals(key) )
-    		findPreference(Prefs.KEY_BROWSER_SYNC_LABEL).setEnabled(
-    				((CheckBoxPreference)pref).isChecked() );
-
-    	else if ( Prefs.KEY_BACKGROUND_SYNC_ENABLED.equals(key) )
-    		findPreference(Prefs.KEY_SYNC_INTERVAL).setEnabled(
-    				((CheckBoxPreference)pref).isChecked() );
-    	
-    	else if ( Prefs.KEY_BROWSER_SYNC_LABEL.equals(key) ) {
-    		// label picker listens for its own click...
-    	}
-    	
-    	else if ( KEY_FULL_SYNC_PREF.equals(key) ) {
-    		Log.d(TAG,"Performing full sync...");
-    		new RemoteSyncTask(this, true).execute();
-    	}
-    	
-		return super.onPreferenceTreeClick(prefScreen, pref);
+        
+        Preference fullSyncPref = findPreference(KEY_FULL_SYNC_PREF);
+        fullSyncPref.setOnPreferenceClickListener(this);
     }
     
     @Override
@@ -103,11 +81,18 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 		if ( Prefs.KEY_SYNC_INTERVAL.equals(key) ) {  // change the 'summary' field
 			ListPreference intervalPref = (ListPreference)pref;
 	        int currentSetting = intervalPref.findIndexOfValue( (String)newVal );
+	        Log.d(TAG,"New interval idx: " + currentSetting);
 	        intervalPref.setSummary( intervalPref.getEntries()[currentSetting] );
 		}
-		else if ( Prefs.KEY_BROWSER_SYNC_LABEL.equals(key) ) {
-			// label picker handles itself.
-		}
+
 		return true;
+	}
+
+	public boolean onPreferenceClick(Preference pref) {
+		if ( KEY_FULL_SYNC_PREF.equals( pref.getKey() ) ) {
+    		Log.d(TAG,"Performing full sync...");
+    		new RemoteSyncTask(this, true).execute();
+    	}
+    	return false;
 	}
 }
