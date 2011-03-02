@@ -19,9 +19,9 @@
 
     <string name="sync_begin_msg">Zahajuji synchronizaci...</string>
     <string name="sync_done_msg">Synchronizace GMarks dokončena</string>
-    <string name="sync_in_progress_msg">Probíhá synchornizace...</string>
-    <string name="sync_notify_title">Synchronizace Gmarks</string>
-    <string name="sync_notify_start">Synchronizace Gmarks probíhá...</string>
+    <string name="sync_in_progress_msg">Probíhá synchronizace...</string>
+    <string name="sync_notify_title">Synchronizace GMarks</string>
+    <string name="sync_notify_start">Synchronizace GMarks probíhá...</string>
     <string name="sync_notify_auth_error">Přihlášení selhalo; Prosím, přihlaste se.</string>
     <string name="sync_notify_error">Neznámá chyba synchronizace</string>
     <string name="sync_notify_count">Synchronizováno %d záložek</string>
@@ -66,7 +66,7 @@
     <string name="menu_sort_date_long">Řadit dle data změny</string>
     <string name="menu_sort_label">Řadit dle štítku</string>
     <string name="menu_sort_label_long">Řadit dle štítku abecedně</string>
-    <string name="menu_sort_count">Řadiot dle počtu</string>
+    <string name="menu_sort_count">Řadit dle počtu</string>
     <string name="menu_sort_count_long">Řadit dle počtu štítků</string>
     <string name="menu_settings">Nastavení</string>
     <string name="menu_login">Přihlášení</string>
@@ -93,7 +93,7 @@
     <string name="pref_browser_sync_summary">Synchronizujte záložky v prohlížeči s vybraným štítkem</string>
     <string name="pref_sync_label">Vyberte štítky synchronizované s prohlížečem</string>
     <string name="pref_sync_interval">Interval synchronizace</string>
-    <string name="pref_background_sync">Zapnout synchronizaci na pozadí</string>
+    <string name="pref_background_sync">Synchronizace na pozadí</string>
     <string name="pref_background_sync_summary">Automaticky synchronizovat i když GMarks není spuštěn</string>
     
     <!-- Preference options for sync duration -->
