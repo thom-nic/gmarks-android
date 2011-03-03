@@ -22,8 +22,16 @@ import java.util.Set;
 import org.apache.http.cookie.Cookie;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.webkit.CookieSyncManager;
 import android.webkit.WebView;
@@ -36,6 +44,11 @@ public class WebViewLoginActivity extends Activity {
 	static final String KEY_PAUSED_FOR_TWO_FACTOR_AUTH = "gmarks.webview.paused_for_two_factor_auth";
 	static final String KEY_PAUSED_AT_URL = "gmarks.webview.paused_at_current_url";
 	
+	static final String AUTHENTICATOR_PACKAGE = "com.google.android.apps.authenticator";
+	static final Uri MARKET_URI = Uri.parse("market://details?id=" + AUTHENTICATOR_PACKAGE);
+	static final Uri MARKET_WEB_URI = Uri.parse(
+			"http://market.android.com/details?id=" + AUTHENTICATOR_PACKAGE);
+		
 	static final String loginURL = "https://www.google.com/accounts/ServiceLogin";
 	static final String twoFactorAuthURL = "https://www.google.com/accounts/SmsAuth";
 //	static final String checkCookieURL = "https://www.google.com/accounts/CheckCookie";
@@ -74,10 +87,10 @@ public class WebViewLoginActivity extends Activity {
     @Override
     protected void onResume() {
     	super.onResume();
-    	WebViewCookiesDB cookieDB = new WebViewCookiesDB(WebViewLoginActivity.this);
-		try {
-			if ( ! resumingTwoFactorAuth ) cookieDB.deleteCookie("SID");
-		} finally { cookieDB.close(); }
+    	if ( ! resumingTwoFactorAuth ) {
+        	WebViewCookiesDB cookieDB = new WebViewCookiesDB(WebViewLoginActivity.this);
+    		try { cookieDB.deleteCookie("SID"); } finally { cookieDB.close(); }
+    	}
 		final String currentURL = webView.getUrl();
 		if ( resumingTwoFactorAuth && currentURL != null && 
 				currentURL.startsWith(twoFactorAuthURL) ) return;
@@ -87,7 +100,7 @@ public class WebViewLoginActivity extends Activity {
     protected void onPause() {
     	super.onPause();
     	if ( this.waitDialog != null ) this.waitDialog.dismiss();
-    };
+    }
     
     protected void onSaveInstanceState(Bundle outState) {
     	final String currentURL = webView.getUrl(); 
@@ -96,7 +109,7 @@ public class WebViewLoginActivity extends Activity {
     		outState.putString(KEY_PAUSED_AT_URL, currentURL );
     	}
     	super.onSaveInstanceState(outState);
-    };
+    }
     
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
     	super.onRestoreInstanceState(savedInstanceState);
@@ -104,7 +117,70 @@ public class WebViewLoginActivity extends Activity {
     			KEY_PAUSED_FOR_TWO_FACTOR_AUTH, false );
     	if ( this.resumingTwoFactorAuth && savedInstanceState.containsKey(KEY_PAUSED_AT_URL) )
     		this.resumeAtURL = savedInstanceState.getString( KEY_PAUSED_AT_URL );
-    };
+    }
+    
+    protected void showTwoFactorAuthDialog() {
+		final Intent launchAuthIntent = new Intent(Intent.ACTION_MAIN)
+			.addCategory(Intent.CATEGORY_LAUNCHER)
+			.setClassName( AUTHENTICATOR_PACKAGE, 
+				"com.google.android.apps.authenticator.AuthenticatorActivity");
+		
+		ResolveInfo ri = getPackageManager().resolveActivity(launchAuthIntent, 0);
+		if ( ri == null ) {
+			WebViewLoginActivity.this.showAuthenticatorMissingDialog();
+			return;
+		}
+		Log.d(TAG,"Resolve info: " + ri);
+		
+    	new AlertDialog.Builder(this)
+    		.setTitle(R.string.two_factor_auth_dlg_title)
+    		.setMessage(Html.fromHtml(getString(R.string.two_factor_auth_dlg_msg)))
+    		.setCancelable(true)
+    		.setNegativeButton(R.string.btn_cancel, new OnClickListener() {
+    			public void onClick(DialogInterface dlg, int _) {
+    				dlg.dismiss();
+    			}
+    		})
+    		.setPositiveButton(R.string.btn_ok, new OnClickListener() {
+				public void onClick(DialogInterface dlg, int _) {
+//					dlg.dismiss();
+					try { startActivity( launchAuthIntent ); }
+					catch ( ActivityNotFoundException ex ) {
+						Log.d(TAG,"Activity not found",ex);
+						WebViewLoginActivity.this.showAuthenticatorMissingDialog();
+					}
+//					catch ( Exception ex ) {
+//						Log.w(TAG,"Unexpected exception from activity launch",ex);
+//					}
+				}
+			})
+			.show();
+    }
+    
+    protected void showAuthenticatorMissingDialog() {
+    	new AlertDialog.Builder(this)
+			.setTitle(R.string.two_factor_auth_dlg_title)
+			.setMessage( Html.fromHtml( getString( 
+				R.string.two_factor_not_installed_dlg_msg) ) )
+			.setCancelable(false)
+			.setPositiveButton(R.string.btn_download, new OnClickListener() {
+				public void onClick(DialogInterface dialog, int _) {
+					final Intent marketActivity = new Intent(Intent.ACTION_VIEW, MARKET_URI );
+					if ( getPackageManager().resolveActivity(marketActivity, 0) == null )
+						marketActivity.setData(MARKET_WEB_URI);
+					try { startActivity( marketActivity ); }
+					catch ( Exception ex ) {
+						Log.w(TAG,"Couldn't open Android Market for Authenticator app!!");
+					}
+				}
+			})
+			.setNegativeButton(getString(R.string.btn_cancel), new OnClickListener() {
+				public void onClick(DialogInterface dlg, int _) {
+					dlg.dismiss();
+				}
+			})
+			.show();    	
+    }
     
     WebViewClient webClient = new WebViewClient() {
     	public void onPageFinished(WebView view, String url) {
@@ -118,6 +194,11 @@ public class WebViewLoginActivity extends Activity {
     				} catch ( IllegalArgumentException ex ) {}
     				waitDialog = null;
     			}
+    		}
+    		
+    		if ( url.startsWith(twoFactorAuthURL) ) {
+    			resumingTwoFactorAuth = true;
+    			showTwoFactorAuthDialog();
     		}
     		
     		if ( url.startsWith(targetURL) ) {

@@ -35,6 +35,18 @@
     <string name="error_not_found_msg">Error: Bookmark not found</string>
     <string name="error_delete_failed_msg">Delete failed!</string>
     <string name="error_save_failed_msg">Save failed!</string>
+    
+    <string name="two_factor_auth_dlg_title">Two-Factor Authentication</string>
+    <string name="two_factor_auth_dlg_msg"><![CDATA[
+      GMarks will now open the Google Authenticator app.
+      Please <b>COPY</b> the verification code by long-pressing it.  
+      Then press the <b>BACK</b> hardware key to return to GMarks and paste the code here.
+      ]]></string>
+    <string name="two_factor_not_installed_dlg_msg"><![CDATA[
+      It looks like the Google Authenticator isn\'t installed!  Please 
+      <a href=\'https://market.android.com/details?id=com.google.android.apps.authenticator\'
+      >install it from the Android Market</a> then try again.
+      ]]></string>
 
     <string name="please_wait_msg">Please wait...</string>
     <string name="logged_out_msg">You are now logged out.</string>
@@ -49,6 +61,10 @@
     <string name="btn_update">Update</string>
     <string name="btn_delete">Delete</string>
     <string name="btn_first_sync">Please Sync to begin</string>
+    
+    <string name="btn_ok">Ok</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_download">Download</string>
 
 		<!-- Menu items -->
     <string name="menu_add">Add</string>
