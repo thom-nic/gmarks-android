@@ -23,7 +23,7 @@
     <string name="sync_notify_title">Gmarks Sync</string>
     <string name="sync_notify_start">Gmarks sync in progress...</string>
     <string name="sync_notify_auth_error">Login error; please log in.</string>
-    <string name="sync_notify_error">Unknown sync error</string>
+    <string name="sync_notify_error">Connection error</string>
     <string name="sync_notify_count">Synchronized %d bookmarks</string>
 
     <string name="deleting_bookmark_msg">Deleting bookmark...</string>

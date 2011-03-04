@@ -356,7 +356,15 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 				this.notificationManager.notify(NOTIFY_SYNC_ID, notification);
 			}		
 		}
-		else if (showToast) Toast.makeText(this.ctx, R.string.sync_notify_error, Toast.LENGTH_LONG).show();
+		else { // most likely a connection-related error.
+			Intent intent = new Intent( this.ctx, LabelsListActivity.class );
+			notification.setLatestEventInfo( this.ctx, 
+					ctx.getText(R.string.sync_notify_title), 
+					ctx.getText(R.string.sync_notify_error), 
+					PendingIntent.getActivity(this.ctx, 0, intent, 0) );
+			this.notificationManager.notify(NOTIFY_SYNC_ID, notification);
+			if (showToast) Toast.makeText(this.ctx, R.string.sync_notify_error, Toast.LENGTH_LONG).show();
+		}
 	}
 	
 	@Override protected void onCancelled() {
