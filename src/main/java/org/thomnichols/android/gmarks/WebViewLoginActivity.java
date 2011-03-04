@@ -99,7 +99,7 @@ public class WebViewLoginActivity extends Activity {
     
     protected void onPause() {
     	super.onPause();
-    	if ( this.waitDialog != null ) this.waitDialog.dismiss();
+    	dismissWaitDialog();
     }
     
     protected void onSaveInstanceState(Bundle outState) {
@@ -120,6 +120,8 @@ public class WebViewLoginActivity extends Activity {
     }
     
     protected void showTwoFactorAuthDialog() {
+		dismissWaitDialog();
+
 		final Intent launchAuthIntent = new Intent(Intent.ACTION_MAIN)
 			.addCategory(Intent.CATEGORY_LAUNCHER)
 			.setClassName( AUTHENTICATOR_PACKAGE, 
@@ -179,7 +181,15 @@ public class WebViewLoginActivity extends Activity {
 					dlg.dismiss();
 				}
 			})
-			.show();    	
+			.show();
+    }
+    
+    protected void dismissWaitDialog() {
+    	if ( this.waitDialog == null ) return;
+		try {
+			waitDialog.dismiss(); // let the user log in.
+		} catch ( IllegalArgumentException ex ) {}
+		waitDialog = null;
     }
     
     WebViewClient webClient = new WebViewClient() {
@@ -187,16 +197,12 @@ public class WebViewLoginActivity extends Activity {
     		Log.d(TAG, "PAGE LOADED ======= " + url );
     		cookieSyncManager.sync();
     		
-    		if ( url.startsWith(loginURL) || url.startsWith(twoFactorAuthURL) ) {
-    			if ( WebViewLoginActivity.this.waitDialog != null ) {
-    				try {
-    					waitDialog.dismiss(); // let the user log in.
-    				} catch ( IllegalArgumentException ex ) {}
-    				waitDialog = null;
-    			}
+    		if ( url.startsWith(loginURL) ) {
+    			dismissWaitDialog();
+    			resumingTwoFactorAuth = false;
     		}
     		
-    		if ( url.startsWith(twoFactorAuthURL) ) {
+    		if ( ! resumingTwoFactorAuth && url.startsWith(twoFactorAuthURL) ) {
     			resumingTwoFactorAuth = true;
     			showTwoFactorAuthDialog();
     		}
