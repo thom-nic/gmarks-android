@@ -35,14 +35,24 @@ Keywords: Sincronizza backup importa esporta Segnalibri Google
 
 Cambiamenti Recenti:
 
-0.6.4: (In Arrivo)
+0.6.4: 
 * Supporto verifica a due passi di Google
+* Full-sync to remove stale bookmarks on the device
 Traduzioni:
-  * Swedish - thanks jokrsolutions
-  * Catalan - thanks jordivf
-  * Slovak - thanks Lubos
-  * Japanese - thanks Koomo
-
+  * Italian - thanks Uttermarcus
+  * Russian - thanks smth
+  * Dutch - thanks nmx
+  * Hungarian - thanks Cenzi
+  * Croatian - thanks carlowise
+  * Hindi - thanks @abhisekprasad
+  * Arabic - thanks Adham El-Wakeel 
+  * Latvian - thanks kuceens007
+  * Slovenian - thanks Franci
+  * Finnish - thanks Blorro
+  * Czech - thanks honzika
+  * Norwegian - thanks Gøran
+  * Romanian - thanks tmahai20
+  
 0.6.3:
 * Nuove Traduzioni: 
   * Danish - thanks LayZee
