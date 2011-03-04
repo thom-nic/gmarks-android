@@ -1,8 +1,12 @@
 Google Bookmarks for Android!
 
 * 100% Ad-free and open source!
-* Support for 12 languages
-* Sync/ backup/ import browser bookmarks to Google Bookmarks
+* Support for 28 languages
+* Supports Google two-factor auth
+* Secure: You never type your username or password into GMarks
+
+More Features:
+* Sync/ backup/ import bookmarks between the Android browser and Google Bookmarks
 * Live folder for any bookmark label
 * Background sync
 * Global search integration; Full text search
@@ -27,16 +31,18 @@ Global Search integration means you can quickly find a bookmark using your devic
 
 Quickly create new Google Bookmarks from the browser's "Share" menu.
 
-Secure: Your username and password are sent straight to Google, and are never read or stored by the GMarks app.  All internet requests use HTTPS/ SSL to ensure complete privacy.  Also supports Google two-factor authentication (in version 0.6.4.)
+Secure: Your username and password are sent straight to Google, and are never read or stored by the GMarks app.  All internet requests use HTTPS/ SSL to ensure complete privacy.  GMarks also supports Google two-factor authentication (Since version 0.6.4.)  You must have the Google Authenticator app installed.
 
 Keywords: Synchronize backup import export Google Bookmarks
 
 
 Recent Changes:
 
-0.6.4: (Coming soon)
-* Two-factor auth support 
-Translations:
+0.6.4: 
+* Support for two-factor auth/ login 
+* "Full sync" (in settings) to remove stale bookmarks and fix incomplete syncs
+
+New Translations:
   * Italian - thanks Uttermarcus
   * Russian - thanks smth
   * Dutch - thanks nmx
@@ -48,14 +54,15 @@ Translations:
   * Slovenian - thanks Franci
   * Finnish - thanks Blorro
   * Czech - thanks honzika
+  * Norwegian - thanks Gøran
+  * Romanian - thanks tmahai20
+  * Japanese - thanks Koomo
   
   (unfinished)
+  * Korean - thanks @bbmatic
   * Swedish - thanks jokrsolutions
   * Catalan - thanks jordivf
   * Slovak - thanks Lubos
-  * Japanese - thanks Koomo
-  * Norwegian - thanks Gøran
-  * Romanian - thanks tmahai20
   
 
 0.6.3:
