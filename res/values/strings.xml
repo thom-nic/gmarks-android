@@ -13,6 +13,7 @@
     <string name="search_hint">Search Google Bookmarks</string>
     <string name="login_title">GMarks Login</string>
     <string name="coming_soon">Coming soon!</string>
+    <string name="feedback_thanks_msg">Thanks for your feedback!</string>
 
     <string name="search_results_title">GMarks search results for \'%s\'</string>
     <string name="label_results_title">Bookmarks for label \'%s\'</string>
@@ -35,6 +36,7 @@
     <string name="error_not_found_msg">Error: Bookmark not found</string>
     <string name="error_delete_failed_msg">Delete failed!</string>
     <string name="error_save_failed_msg">Save failed!</string>
+    <string name="error_cant_send_email_msg">Sorry! Can\'t send email!</string>
     
     <string name="two_factor_auth_dlg_title">Two-Factor Authentication</string>
     <string name="two_factor_auth_dlg_msg"><![CDATA[
@@ -71,9 +73,6 @@
     <string name="menu_add_long">Add Bookmark</string>
     <string name="menu_sync">Sync</string>
     <string name="menu_sync_long">Synchronize</string>
-    <string name="menu_full_sync">Full Sync</string>
-    <string name="menu_full_sync_long">Force a full sync from the server.\nThis 
-        will overwrite all locally-cached bookmarks and clear deleted bookmarks</string>
     <string name="menu_delete">Delete</string>
     <string name="menu_delete_long">Delete Selected Bookmark</string>
     <string name="menu_search">Search</string>
@@ -108,12 +107,20 @@
 
 		<!-- Preferences -->
 		
+    <string name="pref_cat_sync_options">Sync Options</string>
+    <string name="pref_cat_misc_actions">Misc. Actions</string>
     <string name="pref_browser_sync">Enable Browser Sync</string>
     <string name="pref_browser_sync_summary">Sync your browser bookmarks with a chosen label</string>
     <string name="pref_sync_label">Choose Browser Sync Label</string>
     <string name="pref_sync_interval">Sync Interval</string>
     <string name="pref_background_sync">Enable Background Sync</string>
     <string name="pref_background_sync_summary">Automatically sync even if GMarks is not active</string>
+    <string name="pref_full_sync">Full Sync</string>
+    <string name="pref_full_sync_summary">Force a full sync from the server.\nThis 
+        will overwrite all locally-cached bookmarks and clear deleted bookmarks</string>
+    <string name="pref_send_feedback">Send Feedback</string>
+    <string name="pref_send_feedback_summary">Tell me how to make GMarks better!</string>
+    
     
     <!-- Preference options for sync duration -->
     <string-array name="pref_duration_entries">

@@ -25,11 +25,12 @@ x Filter menu/ softkeyboard
 x Search menu button
 x Full-sync to flush orphaned bookmarks
 x Two-factor auth support
+x Logout from settings
+x Send feedback: launch email intent to developer
 
-* Logout from settings
-* Send feedback: launch email intent to developer
 * Donate link in settings
 * Hide labels setting
+* Optional expanded view
 * search history
 * Favicon support
 * List sub-headers

@@ -2,7 +2,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/settings">
-    
+    <PreferenceCategory android:title="@string/pref_cat_sync_options">
     <CheckBoxPreference
         android:key="browser_sync_enabled"
         android:title="@string/pref_browser_sync"
@@ -26,10 +26,23 @@
     		android:dependency='background_sync_enabled'
         android:persistent='true'
         android:defaultValue="60"/>
-
+    </PreferenceCategory>
+    
+    <PreferenceCategory android:title="@string/pref_cat_misc_actions">    
     <Preference 
         android:key="dummy_full_sync_action"
-        android:title="@string/menu_full_sync"
-        android:summary="@string/menu_full_sync_long"
+        android:title="@string/pref_full_sync"
+        android:summary="@string/pref_full_sync_summary"
         android:persistent='false' />
+    <Preference 
+        android:key="dummy_logout_action"
+        android:title="@string/menu_logout"
+        android:summary="@string/menu_logout_long"
+        android:persistent='false' />
+    <Preference 
+        android:key="dummy_send_feedback_action"
+        android:title="@string/pref_send_feedback"
+        android:summary="@string/pref_send_feedback_summary"
+        android:persistent='false' />
+    </PreferenceCategory>
 </PreferenceScreen>
