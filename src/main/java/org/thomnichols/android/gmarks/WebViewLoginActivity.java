@@ -33,6 +33,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.view.WindowManager.BadTokenException;
 import android.webkit.CookieSyncManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -104,7 +105,7 @@ public class WebViewLoginActivity extends Activity {
     
     protected void onSaveInstanceState(Bundle outState) {
     	final String currentURL = webView.getUrl(); 
-    	if ( currentURL.startsWith(twoFactorAuthURL) ) {
+    	if ( currentURL != null && currentURL.startsWith(twoFactorAuthURL) ) {
     		outState.putBoolean(KEY_PAUSED_FOR_TWO_FACTOR_AUTH, true);
     		outState.putString(KEY_PAUSED_AT_URL, currentURL );
     	}
@@ -253,9 +254,13 @@ public class WebViewLoginActivity extends Activity {
     	
     	public void onPageStarted(WebView view, String url, android.graphics.Bitmap favicon) {
     		if ( WebViewLoginActivity.this.waitDialog != null ) return; 
-    		WebViewLoginActivity.this.waitDialog = ProgressDialog.show(
-    				WebViewLoginActivity.this, "", 
-    				getText(R.string.please_wait_msg), true );
+    		try {
+	    		WebViewLoginActivity.this.waitDialog = ProgressDialog.show(
+	    				WebViewLoginActivity.this, "", 
+	    				getText(R.string.please_wait_msg), true );
+    		}
+    		// This probably happens if the activity is backgrounded 
+    		catch ( BadTokenException ex ) { Log.w(TAG, "Couldn't show progress dialog...",ex); }
     	};
     	
     	public void onReceivedError(WebView view, int errorCode, 
