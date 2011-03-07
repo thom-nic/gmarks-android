@@ -126,11 +126,13 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
     protected void onResume() {
         if ( BookmarksQueryService.getInstance().isAuthInitialized() ) { 
         	findViewById(R.id.syncBtn).setVisibility(View.VISIBLE);
+        	findViewById(R.id.add_new_instructions).setVisibility(View.VISIBLE);
         	findViewById(R.id.loginBtn).setVisibility(View.GONE);
         }
         else {
         	findViewById(R.id.loginBtn).setVisibility(View.VISIBLE);
         	findViewById(R.id.syncBtn).setVisibility(View.GONE);
+        	findViewById(R.id.add_new_instructions).setVisibility(View.GONE);
         }
         
         findViewById(R.id.allListItems).setVisibility(
