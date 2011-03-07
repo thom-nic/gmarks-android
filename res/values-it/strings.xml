@@ -30,7 +30,7 @@
     <string name="saving_bookmark_msg">Salvo segnalibro...</string>
     <string name="save_ok_msg">Segnalibro creato.</string>
     <string name="update_ok_msg">Segnalibro aggiornato.</string>
-    <string name="delete_ok_msg">Segnalibro cancellato.</string>
+    <string name="delete_ok_msg">Segnalibro rimosso.</string>
     <string name="error_auth_failed_msg">Errore: Autorizzazione fallita</string>
     <string name="error_not_found_msg">Errore: Segnalibro non trovato</string>
     <string name="error_delete_failed_msg">Errore di Eliminazione!</string>
@@ -69,7 +69,7 @@
     <string name="menu_sort_count">Ordina per Conteggio</string>
     <string name="menu_sort_count_long">Ordina per Conteggio Etichetta</string>
     <string name="menu_settings">Impostazioni</string>
-    <string name="menu_login">Accesso</string>
+    <string name="menu_login">Login</string>
     <string name="menu_login_long">Accedi al tuo Account Google</string>
     <string name="menu_logout">Uscita</string>
     <string name="menu_logout_long">Chiudi sessione dal tuo Account Google</string>
@@ -118,3 +118,20 @@
     </string-array>
     
 </resources>
+
+
+<!-- 064 ver addon -->
+
+<string name="two_factor_auth_dlg_msg"><![CDATA[
+      GMarks adesso apre l'interfaccia di autenticazione di Goggle, si prega di cliccare sul codice di verifica tenendo premuto a lungo e selezionando <b>COPIA</b>
+Poi ritornare a GMarks premendo il pulsante <b>FRECCIA INDIETRO</b> e incollare il testo qui, sempre tenendo premuto a lungo e selezionando incolla.]]></string>
+<string name="two_factor_not_installed_dlg_msg"><![CDATA[
+      Impossibile procedere l'Autenticatore di Google non è installato! Installalo dal Android Market prima di procedere 
+      <a href=\'https://market.android.com/details?id=com.google.android.apps.authenticator\'
+      >install it from the Android Market</a> e riprova.]]></string>
+    <string name="btn_ok">Ok</string>
+    <string name="btn_cancel">Cancella</string>
+    <string name="btn_download">Scarica</string>
+
+    <string name="menu_full_sync">Sinc. completo</string>
+    <string name="menu_full_sync_long">Sinc. completo forzato dal server.\nRimuove tutti i Segnalibri locali e li sostituisce con quelli presenti sul server.</string>
