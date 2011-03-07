@@ -187,7 +187,7 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
     	super.onPrepareOptionsMenu(menu);
     	
         // if not logged in, don't show UI options!
-        if ( ! BookmarksQueryService.getInstance().isAuthInitialized() ) return false;
+//        if ( ! BookmarksQueryService.getInstance().isAuthInitialized() ) return false;
     	
 		menu.findItem(R.id.menu_sort_alpha).setVisible(
 				this.currentSort != SORT_ALPHA );
