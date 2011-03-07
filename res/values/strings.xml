@@ -14,6 +14,14 @@
     <string name="login_title">GMarks Login</string>
     <string name="coming_soon">Coming soon!</string>
     <string name="feedback_thanks_msg">Thanks for your feedback!</string>
+    <string name="welcome_msg"><![CDATA[
+    <b>Welcome to GMarks!</b>
+    <p>GMarks gives you access to your 
+    <a href="http://www.google.com/bookmarks/">Google Bookmarks</a> on your
+    Android device.  You can browse, view and edit bookmarks, and sync with 
+    your Android browser bookmarks.</p>
+    <p>First, you need to login and download your bookmarks from the server</p>   
+    ]]></string>
 
     <string name="search_results_title">GMarks search results for \'%s\'</string>
     <string name="label_results_title">Bookmarks for label \'%s\'</string>
@@ -91,7 +99,6 @@
     <string name="menu_login_long">Login to your Google Account</string>
     <string name="menu_logout">Log Out</string>
     <string name="menu_logout_long">Logout from your Google Account</string>
-    
 
 		<!-- UI Labels -->
     <string name="label_title">Title</string>
@@ -104,9 +111,7 @@
     
     <string name="label_webview_login">Please Log in to your Google account</string>
 		
-
-		<!-- Preferences -->
-		
+    <!-- Preferences -->
     <string name="pref_cat_sync_options">Sync Options</string>
     <string name="pref_cat_misc_actions">Misc. Actions</string>
     <string name="pref_browser_sync">Enable Browser Sync</string>
@@ -120,7 +125,6 @@
         will overwrite all locally-cached bookmarks and clear deleted bookmarks</string>
     <string name="pref_send_feedback">Send Feedback</string>
     <string name="pref_send_feedback_summary">Tell me how to make GMarks better!</string>
-    
     
     <!-- Preference options for sync duration -->
     <string-array name="pref_duration_entries">

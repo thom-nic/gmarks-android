@@ -25,6 +25,7 @@ import android.database.Cursor;
 import android.database.CursorWrapper;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -34,9 +35,9 @@ import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.FilterQueryProvider;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class LabelsListActivity extends ListActivity implements OnClickListener {
@@ -47,6 +48,8 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
         Label.Columns.TITLE, // 1
         Label.Columns.COUNT, // 2
     };
+    
+    static final int LOGIN_ACTIVITY_RESULT = 0x01;
     
     protected static final int COLUMN_INDEX_TITLE = 1;
     static final int SORT_ALPHA= 1;
@@ -61,9 +64,8 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
         setDefaultKeyMode(DEFAULT_KEYS_SHORTCUT);
 
         setContentView(R.layout.labels_list_view);
-        ((LinearLayout)findViewById(R.id.allListItems)).setOnClickListener(this);
         setTitle(R.string.labels_activity);
-
+        
     	SharedPreferences prefs = Prefs.get(this);
 
     	// If no data was given in the intent (because we were started
@@ -111,14 +113,37 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
 			}
 		});
         setListAdapter(adapter);
+        
+        findViewById(R.id.allListItems).setOnClickListener(this);
 
         ((Button)findViewById(R.id.syncBtn)).setOnClickListener(this);
+        ((Button)findViewById(R.id.loginBtn)).setOnClickListener(this);
+        ((TextView)findViewById(R.id.welcome_msg)).setText(
+        		Html.fromHtml(getString(R.string.welcome_msg)) );
+    }
+    
+    @Override
+    protected void onResume() {
+        if ( BookmarksQueryService.getInstance().isAuthInitialized() ) { 
+        	findViewById(R.id.syncBtn).setVisibility(View.VISIBLE);
+        	findViewById(R.id.loginBtn).setVisibility(View.GONE);
+        }
+        else {
+        	findViewById(R.id.loginBtn).setVisibility(View.VISIBLE);
+        	findViewById(R.id.syncBtn).setVisibility(View.GONE);
+        }
+        
+        findViewById(R.id.allListItems).setVisibility(
+        		getListView().getChildCount() < 1 ? View.GONE : View.VISIBLE );
+
+    	super.onResume();
     }
     
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    	if ( requestCode != resultCode ) {
-    		Log.w(TAG, "Did not get expected login result code: " + resultCode );
+    	if ( requestCode == LOGIN_ACTIVITY_RESULT && resultCode == RESULT_OK ) {
+    		// Login successful.
+    		// nothing to do here since onResume should toggle the correct UI state.
     	}
     };
     
@@ -152,7 +177,6 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        // if picker, don't show UI options!
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.label_list, menu);
         return true;
@@ -161,6 +185,10 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
     	super.onPrepareOptionsMenu(menu);
+    	
+        // if not logged in, don't show UI options!
+        if ( ! BookmarksQueryService.getInstance().isAuthInitialized() ) return false;
+    	
 		menu.findItem(R.id.menu_sort_alpha).setVisible(
 				this.currentSort != SORT_ALPHA );
 		menu.findItem(R.id.menu_sort_count).setVisible(
@@ -171,7 +199,6 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
 				hwConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO)
 			// if HW keyboard visible, don't need to show the 'go to label' menu
 			menu.findItem(R.id.menu_go_to).setVisible(false);
-    	// TODO decide whether or not to make login/logout options visible
 		
 		if ( Hardware.hasSearchButton() )
 			menu.findItem(R.id.menu_search).setVisible(false);
@@ -238,13 +265,20 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
     }
 
 	public void onClick(View v) {
-		if ( v.getId() == R.id.syncBtn ) {
+		final int viewID = v.getId();
+		if ( viewID == R.id.syncBtn ) {
 			Log.d(TAG, "Starting sync...");
         	Toast.makeText(this, R.string.sync_begin_msg, Toast.LENGTH_SHORT).show();
         	new RemoteSyncTask(this).execute();
 		}
+		
+		else if ( viewID == R.id.loginBtn ) {
+			startActivityForResult(
+					new Intent("org.thomnichols.gmarks.action.LOGIN"), 
+					LOGIN_ACTIVITY_RESULT );
+		}
 
-		else if ( v.getId() == R.id.allListItems ) {
+		else if ( viewID == R.id.allListItems ) {
 			Intent intent = getIntent();
 			String action = intent.getAction();
 			Log.d(TAG, "All items: " + action );
