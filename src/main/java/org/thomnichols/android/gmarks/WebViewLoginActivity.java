@@ -104,10 +104,12 @@ public class WebViewLoginActivity extends Activity {
     }
     
     protected void onSaveInstanceState(Bundle outState) {
-    	final String currentURL = webView.getUrl(); 
-    	if ( currentURL != null && currentURL.startsWith(twoFactorAuthURL) ) {
-    		outState.putBoolean(KEY_PAUSED_FOR_TWO_FACTOR_AUTH, true);
-    		outState.putString(KEY_PAUSED_AT_URL, currentURL );
+    	if ( this.webView != null ) {
+    		final String currentURL = this.webView.getUrl(); 
+    		if ( currentURL != null && currentURL.startsWith(twoFactorAuthURL) ) {
+    			outState.putBoolean(KEY_PAUSED_FOR_TWO_FACTOR_AUTH, true);
+    			outState.putString(KEY_PAUSED_AT_URL, currentURL );
+    		}
     	}
     	super.onSaveInstanceState(outState);
     }
