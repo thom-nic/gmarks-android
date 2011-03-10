@@ -95,6 +95,10 @@
     <string name="pref_sync_interval">Intervallo di Sinc.</string>
     <string name="pref_background_sync">Abilita Sinc. in Background</string>
     <string name="pref_background_sync_summary">Sincronizza automaticamente anche se GMarks non è attivo</string>
+    <string name="pref_full_sync">Sinc. completo</string>
+    <string name="pref_full_sync_summary">Sinc. completo forzato dal server.\n
+    Rimuove tutti i Segnalibri locali e li sostituisce con quelli presenti sul server.</string>
+
     
     <string name="two_factor_auth_dlg_msg"><![CDATA[
       GMarks adesso apre l\'interfaccia di autenticazione di Goggle, si prega di 
@@ -109,10 +113,6 @@
     <string name="btn_ok">Ok</string>
     <string name="btn_cancel">Cancella</string>
     <string name="btn_download">Scarica</string>
-
-    <string name="menu_full_sync">Sinc. completo</string>
-    <string name="menu_full_sync_long">Sinc. completo forzato dal server.\n
-    Rimuove tutti i Segnalibri locali e li sostituisce con quelli presenti sul server.</string>
 
     <!-- Preference options for sync duration -->
     <string-array name="pref_duration_entries">
