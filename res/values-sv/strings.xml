@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GMarks</string>
+    <string name="labels_activity">GMarks Etiketter</string>
+    <string name="choose_label">Välj GMarks Etikett</string>
+    <string name="bookmarks_activity">GMarks Alla Bokmärken</string>
+    <string name="choose_bookmark">Välj Bokmärke</string>
+    <string name="edit_bookmark">Redigera Bokmärke</string>
+    <string name="new_bookmark">GMarks Nytt Bokmärke</string>
+    <string name="settings">GMarks Inställningar</string>
+    <string name="live_folder_activity">GMarks Etikett</string>
+    <string name="live_folder_title">Välj en etikett</string>
+    <string name="search_hint">Sök Google Bokmärken</string>
+    <string name="login_title">GMarks Login</string>
+    <string name="coming_soon">Kommer snart!</string>
+
+    <string name="search_results_title">GMarks sökresultat för \'%s\'</string>
+    <string name="label_results_title">Bokmärken för etikett \'%s\'</string>
+
+    <string name="sync_begin_msg">Startar sync...</string>
+    <string name="sync_done_msg">GMarks Sync klar</string>
+    <string name="sync_in_progress_msg">Sync pågår...</string>
+    <string name="sync_notify_title">Gmarks Sync</string>
+    <string name="sync_notify_start">Gmarks sync påbörjad...</string>
+    <string name="sync_notify_auth_error">Login fel; var vänlig och logga in.</string>
+    <string name="sync_notify_error">Okänt sync fel</string>
+    <string name="sync_notify_count">Synkroniserat %d Bokmärken</string>
+
+    <string name="deleting_bookmark_msg">Raderar bokmärke...</string>
+    <string name="saving_bookmark_msg">Sparar bokmärke...</string>
+    <string name="save_ok_msg">Bokmärke sparat.</string>
+    <string name="update_ok_msg">Bokmärke uppdaterad.</string>
+    <string name="delete_ok_msg">Bokmärke raderad.</string>
+    <string name="error_auth_failed_msg">Error: Autentiseringfel</string>
+    <string name="error_not_found_msg">Error: Bokmärke ej funnen</string>
+    <string name="error_delete_failed_msg">Radering misslyckades!</string>
+    <string name="error_save_failed_msg">Det gick inte att spara!</string>
+
+    <string name="please_wait_msg">Var vänlig vänta...</string>
+    <string name="logged_out_msg">Du är nu utloggad.</string>
+    <string name="logging_in_msg">Loggar in...</string>
+    <string name="login_success_msg">Inloggad!</string>
+    <string name="login_failed_msg">Login fel!</string>
+    <string name="login_failed_detail_msg">Login misslyckad: %s</string>
+
+    <string name="pref_not_set_label">(unset)</string>
+        
+    <string name="btn_save">Spara</string>
+    <string name="btn_update">Uppdatera</string>
+    <string name="btn_delete">Radera</string>
+    <string name="btn_first_sync">Börja med att synca</string>
+
+		<!-- Menu items -->
+    <string name="menu_add">Lägg till</string>
+    <string name="menu_add_long">Lägg till Bokmärke</string>
+    <string name="menu_sync">Sync</string>
+    <string name="menu_sync_long">Synkronisera</string>
+    <string name="menu_delete">Radera</string>
+    <string name="menu_delete_long">Radera valt bokmärke</string>
+    <string name="menu_search">Sök</string>
+    <string name="menu_search_long">Sök bokmärken</string>
+    <string name="menu_go_to_label">Gå till etikett</string>
+    <string name="menu_sort_title">Sortera efter titel</string>
+    <string name="menu_sort_title_long">Sortera titlar alfabetiskt</string>
+    <string name="menu_sort_date">Sortera efter datum</string>
+    <string name="menu_sort_date_long">Sortera efter ändrat datum</string>
+    <string name="menu_sort_label">Sortera efter etiketter</string>
+    <string name="menu_sort_label_long">Sortera etiketter alfabetiskt</string>
+    <string name="menu_sort_count">Sortera efter antal</string>
+    <string name="menu_sort_count_long">Sortera efter etikett antal</string>
+    <string name="menu_settings">Inställningar</string>
+    <string name="menu_login">Logga In</string>
+    <string name="menu_login_long">Logga in på ditt Google Konto</string>
+    <string name="menu_logout">Logga Ut</string>
+    <string name="menu_logout_long">Logga ut från ditt Google Konto</string>
+    
+
+		<!-- UI Labels -->
+    <string name="label_title">Titel</string>
+    <string name="label_url">Url</string>
+    <string name="label_description">Beskrivning</string>
+    <string name="label_labels">Etiketter</string>
+
+    <string name="label_all_bookmarks">Alla Bokmärken</string>
+    <string name="label_sub_all_bookmarks">sorterad efter datum</string>
+    
+    <string name="label_webview_login">Var vänlig och logga in på ditt Google Konto</string>
+		
+
+		<!-- Preferences -->
+		
+    <string name="pref_browser_sync">Tillåt sync med webbläsare</string>
+    <string name="pref_browser_sync_summary">Synca webbläsaren med en vald etikett</string>
+    <string name="pref_sync_label">Välj webbläsarens Sync Etikett</string>
+    <string name="pref_sync_interval">Sync Intervall</string>
+    <string name="pref_background_sync">Tillåt sync i bakgrunden</string>
+    <string name="pref_background_sync_summary">Synca Automatiskt även om GMarks inte är aktivt</string>
+    <string name="pref_full_sync">Full Sync</string>
+    <string name="pref_full_sync_summary">Tvinga full sync från servern.\nDetta 
+      kommer att skriva över alla lokalt cachade bokmärken och rensa raderade bokmärken</string>
+    
+    <!-- Preference options for sync duration -->
+    <string-array name="pref_duration_entries">
+      <item>5 minuter</item>
+      <item>20 minuter</item>
+      <item>1 Timme</item>
+      <item>4 Timmar</item>
+      <item>12 Timmar</item>
+      <item>1 dag</item>
+    </string-array>
+
+    <!-- Preference values for sync duration -->
+    <!-- NOTE: Don't localize this.-->
+    <string-array name="pref_duration_values">
+      <item>5</item>
+      <item>20</item>
+      <item>60</item>
+      <item>240</item>
+      <item>720</item>
+      <item>1440</item>
+    </string-array>
+    
+</resources>
