@@ -38,6 +38,25 @@ Keywords: Synchronize backup import export Google Bookmarks
 
 Recent Changes:
 
+0.6.6:
+* Choose labels to hide from list
+
+0.6.5:
+* Better beginning instructions for first-time users
+* "Send Feedback" action in settings
+* Logout action in settings
+* Swedish translation
+* Fixed 2 FCs in login activity
+
+New Translations:
+  * Swedish - thanks blorro
+  
+  (unfinished)
+  * Korean - thanks @bbmatic
+  * Catalan - thanks jordivf
+  * Slovak - thanks Lubos
+ 
+
 0.6.4: 
 * Support for two-factor auth/ login 
 * "Full sync" (in settings) to remove stale bookmarks and fix incomplete syncs
@@ -56,14 +75,7 @@ New Translations:
   * Czech - thanks honzika
   * Norwegian - thanks Gøran
   * Romanian - thanks tmahai20
-  * Japanese - thanks Koomo
-  
-  (unfinished)
-  * Korean - thanks @bbmatic
-  * Swedish - thanks jokrsolutions
-  * Catalan - thanks jordivf
-  * Slovak - thanks Lubos
-  
+  * Japanese - thanks Koomo  
 
 0.6.3:
 * New translations: 
