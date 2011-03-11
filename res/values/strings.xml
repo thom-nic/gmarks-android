@@ -20,10 +20,10 @@
     <a href="http://www.google.com/bookmarks/">Google Bookmarks</a> on your
     Android device.  You can browse, view and edit bookmarks, and sync with 
     your Android browser bookmarks.</p>
-    <p>First, you need to login and download your bookmarks from the server</p>   
+    <p>First, you need to login and download your bookmarks from the server.</p>   
     ]]></string>
-    <string name='add_bookmark_msg'>You can create a new bookmark using the 
-    \'Add\' menu action, or from the \'Share\' menu action your device\'s browser</string>
+    <string name='add_bookmark_msg'>You can also create a new bookmark using the 
+    \'Add\' menu action, or from the \'Share\' menu action your device\'s browser.</string>
 
     <string name="search_results_title">GMarks search results for \'%s\'</string>
     <string name="label_results_title">Bookmarks for label \'%s\'</string>
