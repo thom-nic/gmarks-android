@@ -136,7 +136,7 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
         }
         
         findViewById(R.id.allListItems).setVisibility(
-        		getListView().getChildCount() < 1 ? View.GONE : View.VISIBLE );
+        		getListAdapter().getCount() < 1 ? View.GONE : View.VISIBLE );
 
     	super.onResume();
     }
