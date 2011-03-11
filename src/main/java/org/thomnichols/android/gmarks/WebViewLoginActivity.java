@@ -204,6 +204,7 @@ public class WebViewLoginActivity extends Activity {
     			dismissWaitDialog();
     			resumingTwoFactorAuth = false;
     		}
+    		else if ( url.startsWith(twoFactorAuthURL) ) dismissWaitDialog();
     		
     		if ( ! resumingTwoFactorAuth && url.startsWith(twoFactorAuthURL) ) {
     			resumingTwoFactorAuth = true;
