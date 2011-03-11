@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.thomnichols.gmarks</groupId>
 		<artifactId>gmarks-android</artifactId>
-		<version>0.6.4</version>
+		<version>0.6.5</version>
     <packaging>apk</packaging>
 		<name>Google Bookmarks for Android</name>
 		<!-- See http://code.google.com/p/maven-android-plugin/wiki/GettingStarted 
