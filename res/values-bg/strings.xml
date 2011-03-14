@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GMarks</string>
+    <string name="labels_activity">GMarks Етикети</string>
+    <string name="choose_label">Изберете GMarks Етикет</string>
+    <string name="bookmarks_activity">GMarks Всички отметки</string>
+    <string name="choose_bookmark">Изберете Отметка</string> 
+    <string name="edit_bookmark">Редактирайте Отметка</string>
+    <string name="new_bookmark">GMarks Нова Отметка</string>
+    <string name="settings">GMarks Настройки</string>
+    <string name="live_folder_activity">GMarks Етикет</string>
+    <string name="live_folder_title">Изберете Етикет</string>
+    <string name="search_hint">Търсене в Google Bookmarks</string>
+    <string name="login_title">GMarks Вход</string>
+    <string name="coming_soon">Очаквайте скоро!</string>
+    <string name="feedback_thanks_msg">Благодарим Ви за обратната връзка!</string>
+    <string name="welcome_msg"><![CDATA[
+    <b>Добре дошли в GMarks!</b>
+    <p>GMarks Ви дава достъп до 
+    <a href="http://www.google.com/bookmarks/">Google Bookmarks</a> от Вашето
+    Android устройство.  Можете да разглеждате и редактирате отметки и да синхронизирате такива
+    от Android браузърът Ви.</p>
+    <p>Първо трябва да влезете и да свалите Вашите отмекти от сървъра.</p>   
+    ]]></string>
+    <string name='add_bookmark_msg'>Можете да създадете нова отметка и като използвате 
+    \'Добави\' от менюто или \'Сподели\' опцията на браузъра.</string>
+
+    <string name="search_results_title">GMarks резултати от търсенето за \'%s\'</string>
+    <string name="label_results_title">Отметки с етикет \'%s\'</string>
+
+    <string name="sync_begin_msg">Начало на синхронизацията...</string>
+    <string name="sync_done_msg">GMarks синхронизацията е готова</string>
+    <string name="sync_in_progress_msg">Синхронизацията вече се изпълнява...</string>
+    <string name="sync_notify_title">GMarks Синхронизация</string>
+    <string name="sync_notify_start">GMarks синхронизацията се изпълнява...</string>
+    <string name="sync_notify_auth_error">Login error; моля влезте.</string>
+    <string name="sync_notify_error">Грешка при свързването</string>
+    <string name="sync_notify_count">Синхронизирани бяха %d отметки</string>
+
+    <string name="deleting_bookmark_msg">Изтриване на отметка...</string>
+    <string name="saving_bookmark_msg">Запазване на отметка...</string>
+    <string name="save_ok_msg">Отметката беше създадена.</string>
+    <string name="update_ok_msg">Отметката беше обновена.</string>
+    <string name="delete_ok_msg">Отметката беше изтрита.</string>
+    <string name="error_auth_failed_msg">Грешка: Auth failure</string>
+    <string name="error_not_found_msg">Грешка: Отметката не беше намерена</string>
+    <string name="error_delete_failed_msg">Изтриването не беше успешно!</string>
+    <string name="error_save_failed_msg">Запазването не беше успешно!</string>
+    <string name="error_cant_send_email_msg">Съжаляваме! Не може да бъде изпратен e-mail!</string>
+    
+    <string name="two_factor_auth_dlg_title">Two-Factor Authentication</string>
+    <string name="two_factor_auth_dlg_msg"><![CDATA[
+      GMarks ще отвори приложението Google Authenticator.
+      Моля, <b>копирайте</b> потвърждаващият код чрез продължително натискане върху него.  
+      След това натиснете хардуерния <b>Back</b> бутон, за да се върнете в GMarks и да го поставите там.
+      ]]></string>
+    <string name="two_factor_not_installed_dlg_msg"><![CDATA[
+      Изглежда, че приложението Google Authenticator не е инсталирано!  Моля 
+      <a href=\'https://market.android.com/details?id=com.google.android.apps.authenticator\'
+      >инсталирайте го от Android Market</a> и опитайте пак.
+      ]]></string>
+
+    <string name="please_wait_msg">Моля изчакайте...</string>
+    <string name="logged_out_msg">Вие излязохте успешно.</string>
+    <string name="logging_in_msg">Влизане...</string>
+    <string name="login_success_msg">Влизането успешно!</string>
+    <string name="login_failed_msg">Грешка при влизането!</string>
+    <string name="login_failed_detail_msg">Грешка при влизане: %s</string>
+
+    <string name="pref_not_set_label">(unset)</string>
+        
+    <string name="btn_save">Запази</string>
+    <string name="btn_update">Обнови</string>
+    <string name="btn_delete">Изтрий</string>
+    <string name="btn_first_sync">Синхронизирайте, за да започнете</string>
+    
+    <string name="btn_ok">Ok</string>
+    <string name="btn_cancel">Отказ</string>
+    <string name="btn_download">Изтегли</string>
+
+		<!-- Menu items -->
+    <string name="menu_add">Добави</string>
+    <string name="menu_add_long">Добави Отметка</string>
+    <string name="menu_sync">Синхр.</string>
+    <string name="menu_sync_long">Синхронизирай</string>
+    <string name="menu_delete">Изтрий</string>
+    <string name="menu_delete_long">Изтрий Избраната Отметка</string>
+    <string name="menu_search">Търси</string>
+    <string name="menu_search_long">Търси в Отметки</string>
+    <string name="menu_go_to_label">Отиди на Етикет</string>
+    <string name="menu_sort_title">Сортирай по Заглавие</string>
+    <string name="menu_sort_title_long">Сортирай заглавията по азбучен ред</string>
+    <string name="menu_sort_date">Сортирай по Дата</string>
+    <string name="menu_sort_date_long">Сортирай по Дата на промяна</string>
+    <string name="menu_sort_label">Сортирай по Етикет</string>
+    <string name="menu_sort_label_long">Сортирай етикетите по азбучен ред<string>
+    <string name="menu_sort_count">Сортирай по Брой</string>
+    <string name="menu_sort_count_long">Сортирай по Брой етикети</string>
+    <string name="menu_settings">Настройки</string>
+    <string name="menu_login">Вход</string>
+    <string name="menu_login_long">Влезте във Вашия Google профил</string>
+    <string name="menu_logout">Изход</string>
+    <string name="menu_logout_long">Излезте от Вашия Google профил</string>
+
+		<!-- UI Labels -->
+    <string name="label_title">Заглавие</string>
+    <string name="label_url">URL</string>
+    <string name="label_description">Описание</string>
+    <string name="label_labels">Етикети</string>
+
+    <string name="label_all_bookmarks">Всички Отметки</string>
+    <string name="label_sub_all_bookmarks">сортирани по дата</string>
+    
+    <string name="label_webview_login">Моля, влезете във Вашия Google профил</string>
+		
+    <!-- Preferences -->
+    <string name="pref_cat_sync_options">Настройки на синхронизацията</string>
+    <string name="pref_cat_misc_actions">Допълнителни действия</string>
+    <string name="pref_browser_sync">Разреши браузър синхронизацията</string>
+    <string name="pref_browser_sync_summary">Синхронизирайте отметките от Вашия браузър с избран етикет</string>
+    <string name="pref_sync_label">Изберете браузър етикет за синхронизация</string>
+    <string name="pref_sync_interval">Интервал на синхронизация</string>
+    <string name="pref_background_sync">Разреши синхронизирането във фонов режим</string>
+    <string name="pref_background_sync_summary">Синхронизирай автоматично дори и ако GMarks не е активен</string>
+    <string name="pref_full_sync">Пълна синхронизация</string>
+    <string name="pref_full_sync_summary">Форсирайте пълна синхронизация от сървъра.\nТова 
+        ще презапише всички локални отметки и ще изчисти изтритите</string>
+    <string name="pref_send_feedback">Изпрати обратна връзка</string>
+    <string name="pref_send_feedback_summary">Кажете как да направим GMarks по-добър!</string>
+    
+    <string name="hide_labels_title">Скрий Етикетите</string>
+    <string name="menu_select_all">Избери Всичко</string>
+    <string name="menu_select_none">Избери Нищо</string>
+    <string name="pref_hide_labels">Скрий Етикетите</string>
+    <string name="pref_hide_labels_summary">Изберете етикети за скриване от главния списък</string>
+    <string name="label_choose_hidden_labels">Избраните етикети ще бъдат скрити в главния списък</string>
+
+    <!-- Preference options for sync duration -->
+    <string-array name="pref_duration_entries">
+      <item>5 минути</item>
+      <item>20 минути</item>
+      <item>1 час</item>
+      <item>4 часа</item>
+      <item>12 часа</item>
+      <item>1 ден</item>
+    </string-array>
+
+    <!-- Preference values for sync duration -->
+    <!-- NOTE: Don't localize this.-->
+    <string-array name="pref_duration_values">
+      <item>5</item>
+      <item>20</item>
+      <item>60</item>
+      <item>240</item>
+      <item>720</item>
+      <item>1440</item>
+    </string-array>
+    
+</resources>
