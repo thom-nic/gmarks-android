@@ -23,7 +23,6 @@
     <string name="sync_notify_title">Sinc. Gmarks</string>
     <string name="sync_notify_start">Sinc. Gmarks in corso...</string>
     <string name="sync_notify_auth_error">Errore di Login; Verifica Login.</string>
-    <string name="sync_notify_error">Errore di Sinc. Sconosciuto</string>
     <string name="sync_notify_count">%d segnalibri sinc.</string>
 
     <string name="deleting_bookmark_msg">Rimuovo segnalibro...</string>
@@ -95,25 +94,7 @@
     <string name="pref_sync_interval">Intervallo di Sinc.</string>
     <string name="pref_background_sync">Abilita Sinc. in Background</string>
     <string name="pref_background_sync_summary">Sincronizza automaticamente anche se GMarks non è attivo</string>
-    <string name="pref_full_sync">Sinc. completo</string>
-    <string name="pref_full_sync_summary">Sinc. completo forzato dal server.\n
-    Rimuove tutti i Segnalibri locali e li sostituisce con quelli presenti sul server.</string>
-
     
-    <string name="two_factor_auth_dlg_msg"><![CDATA[
-      GMarks adesso apre l\'interfaccia di autenticazione di Goggle, si prega di 
-      cliccare sul codice di verifica tenendo premuto a lungo e selezionando <b>COPIA</b>
-      Poi ritornare a GMarks premendo il pulsante <b>FRECCIA INDIETRO</b> e 
-      incollare il testo qui, sempre tenendo premuto a lungo e selezionando incolla.]]></string>
-    <string name="two_factor_not_installed_dlg_msg"><![CDATA[
-      Impossibile procedere l\'Autenticatore di Google non è installato! Installalo 
-      dal Android Market prima di procedere 
-      <a href="https://market.android.com/details?id=com.google.android.apps.authenticator"
-      >install it from the Android Market</a> e riprova.]]></string>
-    <string name="btn_ok">Ok</string>
-    <string name="btn_cancel">Cancella</string>
-    <string name="btn_download">Scarica</string>
-
     <!-- Preference options for sync duration -->
     <string-array name="pref_duration_entries">
       <item>5 minuti</item>
@@ -134,5 +115,40 @@
       <item>720</item>
       <item>1440</item>
     </string-array>
+    
+    <!-- 064 ver addon -->
+    
+    <string name="feedback_thanks_msg">Grazie per il tuo aiuto!</string>
+    <string name="sync_notify_error">Errore di connessione</string>
+    <string name="error_cant_send_email_msg">Impossibile inviare email!</string>
+
+    <string name="two_factor_auth_dlg_msg"><![CDATA[
+      GMarks adesso apre l\'interfaccia di autenticazione di Goggle, si prega di 
+      cliccare sul codice di verifica tenendo premuto a lungo e selezionando <b>COPIA</b>.
+      Poi ritornare a GMarks premendo il pulsante <b>FRECCIA INDIETRO</b> e incollare 
+      il testo qui, sempre tenendo premuto a lungo e selezionando incolla.
+    ]]></string>
+    <string name="two_factor_not_installed_dlg_msg"><![CDATA[
+      Impossibile procedere l\'Autenticatore di Google non è installato! 
+      Installalo dal Android Market prima di procedere 
+      <a href=\'https://market.android.com/details?id=com.google.android.apps.authenticator\'
+      >install it from the Android Market</a> e riprova.
+    ]]></string>
+    <string name="btn_ok">Ok</string>
+    <string name="btn_cancel">Cancella</string>
+    <string name="btn_download">Scarica</string>
+
+    <string name="menu_full_sync">Sinc. completo</string>
+    <string name="menu_full_sync_long">Sinc. completo forzato dal server.\n
+      Rimuove tutti i Segnalibri locali e li sostituisce con quelli presenti sul server.</string>
+
+    <string name="pref_cat_sync_options">Opzioni Sinc.</string>
+    <string name="pref_cat_misc_actions">Azioni Varie</string>
+    <string name="pref_full_sync">Sinc. Completo</string>
+    <string name="pref_full_sync_summary">Sinc. completo forzato dal server.\n
+        Rimuove tutti i Segnalibri locali e li sostituisce con quelli presenti sul server.</string>
+
+    <string name="pref_send_feedback">Invia Suggerimento</string>
+    <string name="pref_send_feedback_summary">Dimmi come posso migliorare GMarks!</string>
     
 </resources>
