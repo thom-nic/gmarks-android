@@ -40,6 +40,11 @@
         android:summary="@string/menu_logout_long"
         android:persistent='false' />
     <Preference 
+        android:key="dummy_faq"
+        android:title="@string/pref_faq"
+        android:summary="@string/pref_faq_summary"
+        android:persistent='false' />
+    <Preference 
         android:key="dummy_send_feedback_action"
         android:title="@string/pref_send_feedback"
         android:summary="@string/pref_send_feedback_summary"

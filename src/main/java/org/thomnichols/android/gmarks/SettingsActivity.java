@@ -15,6 +15,8 @@
  */
 package org.thomnichols.android.gmarks;
 
+import org.thomnichols.android.gmarks.thirdparty.ArrayUtils;
+
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -24,6 +26,7 @@ import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -35,10 +38,13 @@ public class SettingsActivity extends PreferenceActivity implements
 	
 	static final String MAILTO_URI = "mailto:tmnichols@gmail.com";
 	static final String MAILTO_SUBJECT = "GMarks for Android feedback";
+	static final String FAQ_URI = 
+		"http://code.google.com/p/gmarks-android/wiki/FAQ#Frequently_Asked_Questions";
 	
 	static final String KEY_FULL_SYNC_ACTION = "dummy_full_sync_action";
 	static final String KEY_LOGOUT_ACTION = "dummy_logout_action";
 	static final String KEY_SEND_FEEDBACK_ACTION = "dummy_send_feedback_action";
+	static final String KEY_FAQ_ACTION = "dummy_faq";
 	
 	static final int START_EMAIL_ACTIVITY = 0x2;
 	
@@ -46,11 +52,7 @@ public class SettingsActivity extends PreferenceActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.settings);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();        
+  
         Preference labelPref = findPreference(Prefs.KEY_BROWSER_SYNC_LABEL);
         labelPref.setOnPreferenceChangeListener(this);
         
@@ -67,6 +69,7 @@ public class SettingsActivity extends PreferenceActivity implements
         findPreference(KEY_FULL_SYNC_ACTION).setOnPreferenceClickListener(this);
         findPreference(KEY_LOGOUT_ACTION).setOnPreferenceClickListener(this);
         findPreference(KEY_SEND_FEEDBACK_ACTION).setOnPreferenceClickListener(this);
+        findPreference(KEY_FAQ_ACTION).setOnPreferenceClickListener(this);
     }
     
     @Override
@@ -107,20 +110,21 @@ public class SettingsActivity extends PreferenceActivity implements
 	}
 
 	public boolean onPreferenceClick(Preference pref) {
-		if ( KEY_FULL_SYNC_ACTION.equals( pref.getKey() ) ) {
+		final String key = pref.getKey();
+		if ( KEY_FULL_SYNC_ACTION.equals( key ) ) {
     		Log.d(TAG,"Performing full sync...");
     		new RemoteSyncTask(this, true).execute();
     	}
-		else if ( KEY_LOGOUT_ACTION.equals( pref.getKey() ) ) {
+		else if ( KEY_LOGOUT_ACTION.equals( key ) ) {
 			new GmarksProvider.DatabaseHelper(this).clearCookies();
 			BookmarksQueryService.getInstance().clearAuthCookies();
 			Toast.makeText(this, R.string.logged_out_msg, Toast.LENGTH_LONG).show();
 		}
-		else if ( KEY_SEND_FEEDBACK_ACTION.equals( pref.getKey() ) ) {
+		else if ( KEY_SEND_FEEDBACK_ACTION.equals( key ) ) {
 			try {
 				startActivityForResult(
 						new Intent(Intent.ACTION_SENDTO,Uri.parse(MAILTO_URI))
-						.putExtra(Intent.EXTRA_SUBJECT, MAILTO_SUBJECT), 
+							.putExtra(Intent.EXTRA_SUBJECT, MAILTO_SUBJECT), 
 						START_EMAIL_ACTIVITY );
 			}
 			catch ( ActivityNotFoundException ex ) {
@@ -128,6 +132,9 @@ public class SettingsActivity extends PreferenceActivity implements
 						R.string.error_cant_send_email_msg, 
 						Toast.LENGTH_LONG).show();
 			}
+		}
+		else if ( KEY_FAQ_ACTION.equals(key) ) {
+			startActivity( new Intent(Intent.ACTION_VIEW).setData(Uri.parse(FAQ_URI)) );
 		}
     	return false;
 	}
