@@ -353,6 +353,8 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 						ctx.getText(R.string.sync_notify_title), 
 						ctx.getText(R.string.sync_notify_auth_error), 
 						PendingIntent.getActivity(this.ctx, 0, intent, 0) );
+				notification.flags ^= Notification.FLAG_ONGOING_EVENT;
+				notification.flags |= Notification.FLAG_AUTO_CANCEL;
 				this.notificationManager.notify(NOTIFY_SYNC_ID, notification);
 			}		
 		}
@@ -362,6 +364,8 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 					ctx.getText(R.string.sync_notify_title), 
 					ctx.getText(R.string.sync_notify_error), 
 					PendingIntent.getActivity(this.ctx, 0, intent, 0) );
+			notification.flags ^= Notification.FLAG_ONGOING_EVENT;
+			notification.flags |= Notification.FLAG_AUTO_CANCEL;
 			this.notificationManager.notify(NOTIFY_SYNC_ID, notification);
 			if (showToast) Toast.makeText(this.ctx, R.string.sync_notify_error, Toast.LENGTH_LONG).show();
 		}
@@ -383,7 +387,10 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 				ctx.getText(R.string.sync_notify_title), 
 				ctx.getString(R.string.sync_notify_count, count), 
 				PendingIntent.getActivity(this.ctx, 0, intent, 0) );
-		if ( done ) notification.flags ^= Notification.FLAG_ONGOING_EVENT;
+		if ( done ) { 
+			notification.flags ^= Notification.FLAG_ONGOING_EVENT;
+			notification.flags |= Notification.FLAG_AUTO_CANCEL;
+		}
 		else notification.flags |= Notification.FLAG_ONGOING_EVENT;
 
 		this.notificationManager.notify(NOTIFY_SYNC_ID, notification);
