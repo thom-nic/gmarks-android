@@ -93,7 +93,7 @@
     <string name="menu_sort_date">Сортирай по Дата</string>
     <string name="menu_sort_date_long">Сортирай по Дата на промяна</string>
     <string name="menu_sort_label">Сортирай по Етикет</string>
-    <string name="menu_sort_label_long">Сортирай етикетите по азбучен ред<string>
+    <string name="menu_sort_label_long">Сортирай етикетите по азбучен ред</string>
     <string name="menu_sort_count">Сортирай по Брой</string>
     <string name="menu_sort_count_long">Сортирай по Брой етикети</string>
     <string name="menu_settings">Настройки</string>
