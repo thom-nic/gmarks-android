@@ -52,6 +52,7 @@ public class WebViewLoginActivity extends Activity {
 		
 	static final String loginURL = "https://www.google.com/accounts/ServiceLogin";
 	static final String twoFactorAuthURL = "https://www.google.com/accounts/SmsAuth";
+	static final String twoFactorRecoveryURL = "https://www.google.com/accounts/AccountRecoveryOptionsPrompt";
 //	static final String checkCookieURL = "https://www.google.com/accounts/CheckCookie";
 	static final String loginParams = "?service=bookmarks&passive=true"
 		+ "&continue=https://www.google.com/bookmarks/l"
@@ -204,7 +205,8 @@ public class WebViewLoginActivity extends Activity {
     			dismissWaitDialog();
     			resumingTwoFactorAuth = false;
     		}
-    		else if ( url.startsWith(twoFactorAuthURL) ) dismissWaitDialog();
+    		else if ( url.startsWith(twoFactorAuthURL) || 
+    				url.startsWith(twoFactorRecoveryURL) ) dismissWaitDialog();
     		
     		if ( ! resumingTwoFactorAuth && url.startsWith(twoFactorAuthURL) ) {
     			resumingTwoFactorAuth = true;
@@ -260,7 +262,7 @@ public class WebViewLoginActivity extends Activity {
     		try {
 	    		WebViewLoginActivity.this.waitDialog = ProgressDialog.show(
 	    				WebViewLoginActivity.this, "", 
-	    				getText(R.string.please_wait_msg), true );
+	    				getText(R.string.please_wait_msg), true, true );
     		}
     		// This probably happens if the activity is backgrounded 
     		catch ( BadTokenException ex ) { Log.w(TAG, "Couldn't show progress dialog...",ex); }
