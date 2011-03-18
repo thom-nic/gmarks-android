@@ -24,6 +24,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
@@ -86,8 +88,14 @@ public class BackgroundService extends Service implements OnSharedPreferenceChan
 		else if ( Intent.ACTION_SYNC.equals(action) ) {
 			// this is the intent called by AlarmManager
 			if ( backgroundSyncEnabled ) {
-				Log.d(TAG,"STARTING BACKGROUND SYNC!");
-				new BackgroundSyncTask(getApplicationContext()).execute();
+				ConnectivityManager netwkMan = 
+					(ConnectivityManager)getApplicationContext().getSystemService(
+							Context.CONNECTIVITY_SERVICE );
+				NetworkInfo netState = netwkMan.getActiveNetworkInfo();  
+				if ( netState != null && netState.isConnected() ) {
+					Log.d(TAG,"STARTING BACKGROUND SYNC!");
+					new BackgroundSyncTask(getApplicationContext()).execute();
+				}
 				return; // don't stop the service yet.
 			}
 			else {
