@@ -274,12 +274,7 @@ public class WebViewLoginActivity extends Activity {
     				getString(R.string.login_failed_detail_msg, description), 
     				Toast.LENGTH_SHORT ).show();
     		
-    		view.loadUrl(targetURL);
+//    		view.loadUrl(targetURL);
     	}
     };
-
-    void getCookies() {
-    	String dbLocation = this.webView.getSettings().getDatabasePath();
-    	Log.d(TAG, "DB path: " + dbLocation );
-    }
 }
