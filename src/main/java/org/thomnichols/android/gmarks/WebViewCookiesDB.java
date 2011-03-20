@@ -26,7 +26,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 /**
@@ -34,7 +33,7 @@ import android.util.Log;
  * that you have to parse manually, plus you don't get path/expiry/secure params.
  * @author tnichols
  */
-public class WebViewCookiesDB extends SQLiteOpenHelper {
+public class WebViewCookiesDB {
 	static final String TAG = "WEBVIEW DB QUERY";
 	static final int DB_VERSION = 10;
 	static final String DATABASE = "webview.db";
@@ -48,30 +47,23 @@ public class WebViewCookiesDB extends SQLiteOpenHelper {
 	static final int COL_EXPIRES = 5;
 	static final int COL_SECURE = 6;
 	
-	public WebViewCookiesDB( Context ctx ) {
-		// TODO version is probably different for different 
-		// android versions; on 2.2 it is 10
-		super(ctx, DATABASE, null, DB_VERSION );
-	}
+	Context ctx;
 	
-	@Override
-	public void onCreate(SQLiteDatabase db) {
-		// the table should already exist, created by the webview!
-	}
-
-	@Override
-	public void onUpgrade(SQLiteDatabase db, int from, int to) {
-		
+	public WebViewCookiesDB( Context ctx ) {
+		this.ctx = ctx;
 	}
 	
 	List<Cookie> getCookies() {
-		SQLiteDatabase db = this.getReadableDatabase();
+		SQLiteDatabase db = SQLiteDatabase.openDatabase(
+				ctx.getDatabasePath(DATABASE).getPath(), 
+				null, SQLiteDatabase.OPEN_READONLY);
 		while ( db.isDbLockedByOtherThreads() ) {
 			Log.w(TAG, "Waiting for other thread to flush DB");
 			try { Thread.sleep(500); } catch ( InterruptedException ex ) {} 
 		}
 		
 		try {
+			db.execSQL("PRAGMA read_uncommitted = true;");
 			List<Cookie> cookies = new ArrayList<Cookie>();
 			Cursor cursor = db.query(TABLE_NAME, COLUMNS, null, null, null, null, null );
 			
@@ -97,7 +89,9 @@ public class WebViewCookiesDB extends SQLiteOpenHelper {
 	}
 
 	public void deleteCookie(String key) {
-		SQLiteDatabase db = this.getReadableDatabase();
+		SQLiteDatabase db = SQLiteDatabase.openDatabase(
+				ctx.getDatabasePath(DATABASE).getPath(), 
+				null, SQLiteDatabase.OPEN_READWRITE);
 		while ( db.isDbLockedByOtherThreads() ) {
 			Log.w(TAG, "Waiting for other thread to flush DB");
 			try { Thread.sleep(500); } catch ( InterruptedException ex ) {} 

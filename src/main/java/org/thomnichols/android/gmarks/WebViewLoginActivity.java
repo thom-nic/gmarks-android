@@ -26,9 +26,10 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.content.pm.ResolveInfo;
+import android.database.sqlite.SQLiteException;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
@@ -91,7 +92,8 @@ public class WebViewLoginActivity extends Activity {
     	super.onResume();
     	if ( ! resumingTwoFactorAuth ) {
         	WebViewCookiesDB cookieDB = new WebViewCookiesDB(WebViewLoginActivity.this);
-    		try { cookieDB.deleteCookie("SID"); } finally { cookieDB.close(); }
+    		try { cookieDB.deleteCookie("SID"); }
+    		catch ( SQLiteException ex ) { Log.w(TAG, "Couldn't delete SID cookie"); }
     	}
 		final String currentURL = webView.getUrl();
 		if ( resumingTwoFactorAuth && currentURL != null && 
@@ -196,85 +198,83 @@ public class WebViewLoginActivity extends Activity {
 		waitDialog = null;
     }
     
-    WebViewClient webClient = new WebViewClient() {
-    	public void onPageFinished(WebView view, String url) {
-    		Log.d(TAG, "PAGE LOADED ======= " + url );
-    		cookieSyncManager.sync();
-    		
-    		if ( url.startsWith(loginURL) ) {
-    			dismissWaitDialog();
-    			resumingTwoFactorAuth = false;
-    		}
-    		else if ( url.startsWith(twoFactorAuthURL) || 
-    				url.startsWith(twoFactorRecoveryURL) ) dismissWaitDialog();
-    		
-    		if ( ! resumingTwoFactorAuth && url.startsWith(twoFactorAuthURL) ) {
-    			resumingTwoFactorAuth = true;
-    			showTwoFactorAuthDialog();
-    		}
-    		
-    		if ( url.startsWith(targetURL) ) {
-    			// This prints out all of the cookies as one long string.  Big pain in my ass.
-//    			Log.d(TAG,"Cookie: " + cookieManager.getCookie("https://www.google.com") );
-    			WebViewCookiesDB cookieDB = new WebViewCookiesDB(WebViewLoginActivity.this);
-    			try {
-    				List<Cookie> cookies = null; 
-    				boolean loggedIn = false; 
-    				long timeout = System.currentTimeMillis() + 10000;
-    				while ( ! loggedIn ) { 
-        				cookies = cookieDB.getCookies();
-    					try { Thread.sleep(1500); } catch ( InterruptedException ex ) {}
-	    				Log.d(TAG,"GOT cookies: " + cookies.size() );
-	    				Set<String> cookieNames = new HashSet<String>();
-	    				for ( Cookie c : cookies ) cookieNames.add(c.getName());
-	    				
-	    				if ( cookieNames.containsAll(requiredCookies) ) loggedIn = true;
-	    				
-	    				if ( System.currentTimeMillis() > timeout ) {
-	    					Log.w(TAG,"Timeout looking for SID cookie!");
-	    					break;
-	    				}
-    				}
-
-    				int loginMsg = R.string.login_failed_msg;
-    				if ( loggedIn ) {
-	    				new GmarksProvider.DatabaseHelper(WebViewLoginActivity.this)
-	    					.persistCookies( cookies );
-	    				BookmarksQueryService.getInstance().setAuthCookies( cookies );	    				
-		    			Log.d(TAG,"Logged in!");
-		    			loginMsg = R.string.login_success_msg; 
-    				}
-	    			
-	    			Toast.makeText(WebViewLoginActivity.this, loginMsg, Toast.LENGTH_LONG).show();
-	    			WebViewLoginActivity.this.finishActivity(RESULT_OK);
-	    			WebViewLoginActivity.this.finish();
-    			}
-    			finally { cookieDB.close(); }
-    		}
-    		else if ( ! url.startsWith("https://www.google.com/") ) {
-    			Log.w(TAG, "Somehow we got redirected to a different domain! " + url);
-    			view.loadUrl(targetURL);
-    		}
-    	}
-    	
-    	public void onPageStarted(WebView view, String url, android.graphics.Bitmap favicon) {
-    		if ( WebViewLoginActivity.this.waitDialog != null ) return; 
-    		try {
+	WebViewClient webClient = new WebViewClient() {
+		public void onPageFinished(WebView view, String url) {
+			Log.d(TAG, "PAGE LOADED ======= " + url );
+			cookieSyncManager.sync();
+			
+			if ( url.startsWith(loginURL) ) {
+				dismissWaitDialog();
+				resumingTwoFactorAuth = false;
+			}
+			else if ( url.startsWith(twoFactorAuthURL) || 
+					url.startsWith(twoFactorRecoveryURL) ) dismissWaitDialog();
+			
+			if ( ! resumingTwoFactorAuth && url.startsWith(twoFactorAuthURL) ) {
+				resumingTwoFactorAuth = true;
+				showTwoFactorAuthDialog();
+			}
+			
+			if ( url.startsWith(targetURL) ) {
+				// This prints out all of the cookies as one long string.  Big pain in my ass.
+	//    			Log.d(TAG,"Cookie: " + cookieManager.getCookie("https://www.google.com") );
+				WebViewCookiesDB cookieDB = new WebViewCookiesDB(WebViewLoginActivity.this);
+	
+				List<Cookie> cookies = null; 
+				boolean loggedIn = false; 
+				long timeout = System.currentTimeMillis() + 10000;
+				while ( ! loggedIn ) { 
+					cookies = cookieDB.getCookies();
+					try { Thread.sleep(1500); } catch ( InterruptedException ex ) {}
+					Log.d(TAG,"GOT cookies: " + cookies.size() );
+					Set<String> cookieNames = new HashSet<String>();
+					for ( Cookie c : cookies ) cookieNames.add(c.getName());
+	
+					if ( cookieNames.containsAll(requiredCookies) ) loggedIn = true;
+	
+					if ( System.currentTimeMillis() > timeout ) {
+						Log.w(TAG,"Timeout looking for SID cookie!");
+						break;
+					}
+				}
+	
+				int loginMsg = R.string.login_failed_msg;
+				if ( loggedIn ) {
+					new GmarksProvider.DatabaseHelper(WebViewLoginActivity.this)
+							.persistCookies( cookies );
+					BookmarksQueryService.getInstance().setAuthCookies( cookies );	    				
+					Log.d(TAG,"Logged in!");
+					loginMsg = R.string.login_success_msg; 
+				}
+				
+				Toast.makeText(WebViewLoginActivity.this, loginMsg, Toast.LENGTH_LONG).show();
+				WebViewLoginActivity.this.finishActivity(RESULT_OK);
+				WebViewLoginActivity.this.finish();
+			}
+			else if ( ! url.startsWith("https://www.google.com/") ) {
+				Log.w(TAG, "Somehow we got redirected to a different domain! " + url);
+				view.loadUrl(targetURL);
+			}
+		}
+		
+		public void onPageStarted(WebView view, String url, android.graphics.Bitmap favicon) {
+			if ( WebViewLoginActivity.this.waitDialog != null ) return; 
+			try {
 	    		WebViewLoginActivity.this.waitDialog = ProgressDialog.show(
 	    				WebViewLoginActivity.this, "", 
 	    				getText(R.string.please_wait_msg), true, true );
-    		}
-    		// This probably happens if the activity is backgrounded 
-    		catch ( BadTokenException ex ) { Log.w(TAG, "Couldn't show progress dialog...",ex); }
-    	};
-    	
-    	public void onReceivedError(WebView view, int errorCode, 
-    			String description, String failingUrl) {
-    		Toast.makeText( WebViewLoginActivity.this, 
-    				getString(R.string.login_failed_detail_msg, description), 
-    				Toast.LENGTH_SHORT ).show();
-    		
+			}
+			// This probably happens if the activity is backgrounded 
+			catch ( BadTokenException ex ) { Log.w(TAG, "Couldn't show progress dialog...",ex); }
+		};
+		
+		public void onReceivedError(WebView view, int errorCode, 
+				String description, String failingUrl) {
+			Toast.makeText( WebViewLoginActivity.this, 
+					getString(R.string.login_failed_detail_msg, description), 
+					Toast.LENGTH_SHORT ).show();
+			
 //    		view.loadUrl(targetURL);
-    	}
-    };
+		}
+	};
 }
