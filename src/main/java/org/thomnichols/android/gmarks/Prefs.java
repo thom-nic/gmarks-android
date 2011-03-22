@@ -33,6 +33,8 @@ public final class Prefs {
 	static final String PREF_LAST_SYNC_ATTEMPT = "last_sync_attempt";
 	static final String PREF_LAST_BROWSER_SYNC = "last_browser_sync";
 
+	static final String PREF_HIDDEN_LABEL_IDS = "hidden_label_ids";
+
 	static final String DEFAULT_SYNC_INTERVAL = "60"; // 1 hour in minutes
 	static final boolean DEFAULT_SYNC_ENABLED = false;
 	static final boolean DEFAULT_BROWSER_SYNC_ENABLED = false;

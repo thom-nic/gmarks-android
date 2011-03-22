@@ -26,6 +26,11 @@
     		android:dependency='background_sync_enabled'
         android:persistent='true'
         android:defaultValue="60"/>
+    <Preference 
+        android:key="dummy_hide_labels_action"
+        android:title="@string/pref_hide_labels"
+        android:summary="@string/pref_hide_labels_summary"
+        android:persistent='false' />
     </PreferenceCategory>
     
     <PreferenceCategory android:title="@string/pref_cat_misc_actions">    

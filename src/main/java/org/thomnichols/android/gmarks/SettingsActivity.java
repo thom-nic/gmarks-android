@@ -44,9 +44,11 @@ public class SettingsActivity extends PreferenceActivity implements
 	static final String KEY_FULL_SYNC_ACTION = "dummy_full_sync_action";
 	static final String KEY_LOGOUT_ACTION = "dummy_logout_action";
 	static final String KEY_SEND_FEEDBACK_ACTION = "dummy_send_feedback_action";
+	static final String KEY_HIDE_LABELS_ACTION = "dummy_hide_labels_action";
 	static final String KEY_FAQ_ACTION = "dummy_faq";
 	
 	static final int START_EMAIL_ACTIVITY = 0x2;
+	static final int START_HIDE_LABELS_ACTIVITY = 0x3;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +71,7 @@ public class SettingsActivity extends PreferenceActivity implements
         findPreference(KEY_FULL_SYNC_ACTION).setOnPreferenceClickListener(this);
         findPreference(KEY_LOGOUT_ACTION).setOnPreferenceClickListener(this);
         findPreference(KEY_SEND_FEEDBACK_ACTION).setOnPreferenceClickListener(this);
+        findPreference(KEY_HIDE_LABELS_ACTION).setOnPreferenceClickListener(this);
         findPreference(KEY_FAQ_ACTION).setOnPreferenceClickListener(this);
     }
     
@@ -82,6 +85,15 @@ public class SettingsActivity extends PreferenceActivity implements
     	}
     	else if ( requestCode == START_EMAIL_ACTIVITY && resultCode == Activity.RESULT_OK ) {
     		Toast.makeText(this, R.string.feedback_thanks_msg, Toast.LENGTH_SHORT);
+    	}
+    	else if ( requestCode == START_HIDE_LABELS_ACTIVITY ) {
+    		Long[] hiddenLabels = ArrayUtils.toObject( 
+    				data.getLongArrayExtra(ChooseLabelsActivity.EXTRA_LABEL_IDS) );
+    		String labelIDs = TextUtils.join(",", hiddenLabels);
+    		Log.d(TAG,"Hidden label IDs: " + labelIDs);
+    		getPreferenceManager().getSharedPreferences().edit()
+    			.putString( Prefs.PREF_HIDDEN_LABEL_IDS, labelIDs )
+    			.commit();
     	}
     }
 
@@ -132,6 +144,11 @@ public class SettingsActivity extends PreferenceActivity implements
 						R.string.error_cant_send_email_msg, 
 						Toast.LENGTH_LONG).show();
 			}
+		}
+		else if ( KEY_HIDE_LABELS_ACTION.equals(key) ) {
+			startActivityForResult( 
+					new Intent(Intent.ACTION_CHOOSER).setType(Label.CONTENT_TYPE), 
+					START_HIDE_LABELS_ACTIVITY );
 		}
 		else if ( KEY_FAQ_ACTION.equals(key) ) {
 			startActivity( new Intent(Intent.ACTION_VIEW).setData(Uri.parse(FAQ_URI)) );

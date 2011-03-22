@@ -130,6 +130,13 @@
     <string name="pref_faq">FAQ</string>
     <string name="pref_faq_summary">Frequently asked questions</string>
     
+    <string name="hide_labels_title">Hide Labels</string>
+    <string name="menu_select_all">Select All</string>
+    <string name="menu_select_none">Select None</string>
+    <string name="pref_hide_labels">Hide Labels</string>
+    <string name="pref_hide_labels_summary">Select labels to hide from main list</string>
+    <string name="label_choose_hidden_labels">Selected labels will be hidden in main list</string>
+
     <!-- Preference options for sync duration -->
     <string-array name="pref_duration_entries">
       <item>5 minutes</item>
