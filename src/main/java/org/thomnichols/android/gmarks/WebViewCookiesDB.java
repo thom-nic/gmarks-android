@@ -15,6 +15,7 @@
  */
 package org.thomnichols.android.gmarks;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -54,8 +55,10 @@ public class WebViewCookiesDB {
 	}
 	
 	List<Cookie> getCookies() {
-		SQLiteDatabase db = SQLiteDatabase.openDatabase(
-				ctx.getDatabasePath(DATABASE).getPath(), 
+		List<Cookie> cookies = new ArrayList<Cookie>();
+		File dbPath =  ctx.getDatabasePath(DATABASE);
+		if ( ! dbPath.exists() ) return cookies;
+		SQLiteDatabase db = SQLiteDatabase.openDatabase( dbPath.getPath(), 
 				null, SQLiteDatabase.OPEN_READONLY);
 		while ( db.isDbLockedByOtherThreads() ) {
 			Log.w(TAG, "Waiting for other thread to flush DB");
@@ -64,7 +67,6 @@ public class WebViewCookiesDB {
 		
 		try {
 			db.execSQL("PRAGMA read_uncommitted = true;");
-			List<Cookie> cookies = new ArrayList<Cookie>();
 			Cursor cursor = db.query(TABLE_NAME, COLUMNS, null, null, null, null, null );
 			
 			while ( cursor.moveToNext() ) {
@@ -89,8 +91,9 @@ public class WebViewCookiesDB {
 	}
 
 	public void deleteCookie(String key) {
-		SQLiteDatabase db = SQLiteDatabase.openDatabase(
-				ctx.getDatabasePath(DATABASE).getPath(), 
+		File dbPath =  ctx.getDatabasePath(DATABASE);
+		if ( ! dbPath.exists() ) return;
+		SQLiteDatabase db = SQLiteDatabase.openDatabase( dbPath.getPath(), 
 				null, SQLiteDatabase.OPEN_READWRITE);
 		while ( db.isDbLockedByOtherThreads() ) {
 			Log.w(TAG, "Waiting for other thread to flush DB");
