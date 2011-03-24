@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:orientation="vertical"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent">
+     
+   	<TextView android:text='@string/label_choose_hidden_labels'
+ 			android:layout_width='fill_parent'
+			android:layout_height='wrap_content'
+			android:paddingTop='10dip' />
+			
+  <ListView android:id="@id/android:list"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      android:layout_weight="1"
+      android:choiceMode="multipleChoice"
+      android:textFilterEnabled="true" 
+      android:drawSelectorOnTop="false"/>
+      
+	<LinearLayout android:id='@id/android:empty'
+   	android:layout_width='fill_parent'
+   	android:layout_height='fill_parent'
+   	android:orientation='vertical'>
+   	
+   	<TextView android:id='@+id/empty_instructions'
+   		android:text=''
+ 			android:layout_width='fill_parent'
+			android:layout_height='wrap_content'
+			android:linksClickable='true' 
+			android:paddingTop='10dip' />
+	</LinearLayout>
+</LinearLayout>
