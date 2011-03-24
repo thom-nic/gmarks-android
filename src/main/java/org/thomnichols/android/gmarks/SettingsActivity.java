@@ -130,6 +130,7 @@ public class SettingsActivity extends PreferenceActivity implements
 		else if ( KEY_LOGOUT_ACTION.equals( key ) ) {
 			new GmarksProvider.DatabaseHelper(this).clearCookies();
 			BookmarksQueryService.getInstance().clearAuthCookies();
+			new WebViewCookiesDB(this).deleteAllCookies();
 			Toast.makeText(this, R.string.logged_out_msg, Toast.LENGTH_LONG).show();
 		}
 		else if ( KEY_SEND_FEEDBACK_ACTION.equals( key ) ) {

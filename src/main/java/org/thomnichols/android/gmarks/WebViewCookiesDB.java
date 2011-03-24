@@ -56,14 +56,8 @@ public class WebViewCookiesDB {
 	
 	List<Cookie> getCookies() {
 		List<Cookie> cookies = new ArrayList<Cookie>();
-		File dbPath =  ctx.getDatabasePath(DATABASE);
-		if ( ! dbPath.exists() ) return cookies;
-		SQLiteDatabase db = SQLiteDatabase.openDatabase( dbPath.getPath(), 
-				null, SQLiteDatabase.OPEN_READONLY);
-		while ( db.isDbLockedByOtherThreads() ) {
-			Log.w(TAG, "Waiting for other thread to flush DB");
-			try { Thread.sleep(500); } catch ( InterruptedException ex ) {} 
-		}
+		SQLiteDatabase db = openDatabase(SQLiteDatabase.OPEN_READONLY); 
+		if ( db == null ) return cookies;
 		
 		try {
 			db.execSQL("PRAGMA read_uncommitted = true;");
@@ -91,15 +85,8 @@ public class WebViewCookiesDB {
 	}
 
 	public void deleteCookie(String key) {
-		File dbPath =  ctx.getDatabasePath(DATABASE);
-		if ( ! dbPath.exists() ) return;
-		SQLiteDatabase db = SQLiteDatabase.openDatabase( dbPath.getPath(), 
-				null, SQLiteDatabase.OPEN_READWRITE);
-		while ( db.isDbLockedByOtherThreads() ) {
-			Log.w(TAG, "Waiting for other thread to flush DB");
-			try { Thread.sleep(500); } catch ( InterruptedException ex ) {} 
-		}
-		
+		SQLiteDatabase db = openDatabase(SQLiteDatabase.OPEN_READWRITE); 
+		if ( db == null ) return;
 		try {
 			db.delete(TABLE_NAME, COLUMNS[COL_NAME] + "=?", new String[] {key});
 		}
@@ -107,5 +94,35 @@ public class WebViewCookiesDB {
 			Log.w(TAG,"Error deleting cookie: " + key, ex);
 		}
 		finally { db.close(); }
+	}
+	
+	public void deleteAllCookies() {
+		SQLiteDatabase db = openDatabase(SQLiteDatabase.OPEN_READWRITE); 
+		if ( db == null ) return;
+		try {
+			db.delete(TABLE_NAME, null, null);
+		}
+		catch ( SQLiteException ex ) {
+			Log.w(TAG,"Error deleting cookies", ex);
+		}
+		finally { db.close(); }	
+	}
+	
+	protected SQLiteDatabase openDatabase(final int mode) {
+		File dbPath =  ctx.getDatabasePath(DATABASE);
+		if ( ! dbPath.exists() ) return null;
+		try {
+			SQLiteDatabase db = SQLiteDatabase.openDatabase( 
+					dbPath.getPath(), null, mode);
+			while ( db.isDbLockedByOtherThreads() ) {
+				Log.w(TAG, "Waiting for other thread to flush DB");
+				try { Thread.sleep(200); } catch ( InterruptedException ex ) {} 
+			}
+			return db;
+		}
+		catch ( SQLiteException ex ) {
+			Log.w(TAG, "Error opening database", ex);
+			return null;
+		}
 	}
 }
