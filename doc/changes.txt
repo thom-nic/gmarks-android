@@ -1,7 +1,7 @@
 Google Bookmarks for Android!
 
 * 100% Ad-free and open source!
-* Support for 28 languages
+* Support for 30 languages
 * Supports Google two-factor auth
 * Secure: You never type your username or password into GMarks
 
@@ -39,18 +39,23 @@ Keywords: Synchronize backup import export Google Bookmarks
 Recent Changes:
 
 0.6.6:
+* FAQ link in settings
+* Preliminary support for Honeycomb
+* Clear sync notification when tapped
+* Don't attempt background sync if no network connection is available
+* Clear 'wait' dialog if the two-factor recovery page is displayed during login 
+* Bulgarian translation - thanks p0inte
+* Fixed a database error during webview login
+
 * Choose labels to hide from list
 
 0.6.5:
 * Better beginning instructions for first-time users
 * "Send Feedback" action in settings
 * Logout action in settings
-* Swedish translation
+* Swedish translation - thanks blorro
 * Fixed 2 FCs in login activity
 
-New Translations:
-  * Swedish - thanks blorro
-  
   (unfinished)
   * Korean - thanks @bbmatic
   * Catalan - thanks jordivf

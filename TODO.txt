@@ -28,9 +28,16 @@ x Two-factor auth support
 x Logout from settings
 x Send feedback: launch email intent to developer
 
+* Clear notification when clicked
+* FAQ link in settings
+* Don't attempt sync if netwk is down
+* 'share' bookmark
+* Move to SD card
 * Donate link in settings
 * Hide labels setting
-* Optional expanded view
+* Optional tree/expanded view
+* sync to between multiple folders in browser
+* sync to dolphin browser
 * search history
 * Favicon support
 * List sub-headers
