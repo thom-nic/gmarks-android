@@ -223,18 +223,19 @@ public class WebViewLoginActivity extends Activity {
 				List<Cookie> cookies = null; 
 				boolean loggedIn = false; 
 				long timeout = System.currentTimeMillis() + 10000;
-				while ( ! loggedIn ) { 
+				while ( ! loggedIn ) {
 					cookies = cookieDB.getCookies();
-					try { Thread.sleep(1500); } catch ( InterruptedException ex ) {}
 					Log.d(TAG,"GOT cookies: " + cookies.size() );
 					Set<String> cookieNames = new HashSet<String>();
 					for ( Cookie c : cookies ) cookieNames.add(c.getName());
 	
 					if ( cookieNames.containsAll(requiredCookies) ) loggedIn = true;
-	
-					if ( System.currentTimeMillis() > timeout ) {
-						Log.w(TAG,"Timeout looking for SID cookie!");
-						break;
+					else {
+						if ( System.currentTimeMillis() > timeout ) {
+							Log.w(TAG,"Timeout looking for SID cookie!");
+							break;
+						}
+						try { Thread.sleep(1000); } catch ( InterruptedException ex ) {}
 					}
 				}
 	
