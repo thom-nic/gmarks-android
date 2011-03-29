@@ -7,7 +7,7 @@
     <string name="choose_bookmark">Escolha um Favorito</string>
     <string name="edit_bookmark">Editar Favorito</string>
     <string name="new_bookmark">GMarks Novo Favorito</string>
-    <string name="settings">GMarks Configurações</string>
+    <string name="settings">GMarks Definições</string>
     <string name="live_folder_activity">GMarks Etiqueta</string>
     <string name="live_folder_title">Escolha uma Etiqueta</string>
     <string name="search_hint">Procurar em Favoritos do Google</string>
@@ -20,15 +20,15 @@
     <a href="http://www.google.com/bookmarks/">Google Bookmarks</a> no seu
     dispositivo Android. Você pode navegar, ver e editar os favoritos, e sincronizar com
     seus favoritos do navegador do Android.</p>
-    <p>Primeiro, você precisa efetuar o login e transferir seus favoritos do servidor.</p>
+    <p>Primeiro, você precisa efectuar o login e transferir seus favoritos do servidor.</p>
     ]]></string>
     <string name='add_bookmark_msg'>Você pode também criar um novo favorito usando a
-    opção \'Adicionar\' no menu, ou escolha \'Compartilhar\' no menu do navegador do Android.</string>
+    opção \'Adicionar\' no menu, ou escolha \'Partilhar\' no menu do navegador do Android.</string>
 
     <string name="search_results_title">GMarks resultados de busca para \'%s\'</string>
     <string name="label_results_title">Favoritos para Etiqueta \'%s\'</string>
 
-    <string name="sync_begin_msg">Começando Sincronização...</string>
+    <string name="sync_begin_msg">A iniciar Sincronização...</string>
     <string name="sync_done_msg">GMarks Sincronização completa</string>
     <string name="sync_in_progress_msg">Sincronização já em progresso...</string>
     <string name="sync_notify_title">Gmarks Sincronização</string>
@@ -37,22 +37,22 @@
     <string name="sync_notify_error">Erro de conexão</string>
     <string name="sync_notify_count">Sincronizados %d favoritos</string>
 
-    <string name="deleting_bookmark_msg">Deletando Favorito...</string>
-    <string name="saving_bookmark_msg">Salvando Favorito...</string>
+    <string name="deleting_bookmark_msg">A eliminar Favorito...</string>
+    <string name="saving_bookmark_msg">A guardar Favorito...</string>
     <string name="save_ok_msg">Favorito criado.</string>
     <string name="update_ok_msg">Favorito atualizado.</string>
     <string name="delete_ok_msg">Favorito deletado.</string>
     <string name="error_auth_failed_msg">Erro: Falha de autenticação</string>
     <string name="error_not_found_msg">Erro: Favorito não encontrado</string>
-    <string name="error_delete_failed_msg">Falha ao deletar!</string>
-    <string name="error_save_failed_msg">Falha ao salvar!</string>
+    <string name="error_delete_failed_msg">Falha ao eliminar!</string>
+    <string name="error_save_failed_msg">Falha ao guardar!</string>
     <string name="error_cant_send_email_msg">Desculpe! O e-mail não pôde ser enviado!</string>
     
     <string name="two_factor_auth_dlg_title">Autenticação em duas etapas</string>
     <string name="two_factor_auth_dlg_msg"><![CDATA[
       O GMarks irá abrir agora o Google Authenticator.
-      Por favor <b>COPIE</b> o código de verificação pressionando longamente.  
-      Então pressione <b>VOLTAR</b> no seu telefone para voltar ao GMarks e cole o código aqui.
+      Por favor <b>COPIE</b> o código de verificação carregando longamente.  
+      Então carregue <b>VOLTAR</b> no seu telefone para voltar ao GMarks e cole o código aqui.
       ]]></string>
     <string name="two_factor_not_installed_dlg_msg"><![CDATA[
       Parece que o Google Authenticator não está instalado! Por favor 
@@ -61,17 +61,17 @@
       ]]></string>
 
     <string name="please_wait_msg">Por favor aguarde...</string>
-    <string name="logged_out_msg">Você está desconectado.</string>
-    <string name="logging_in_msg">Fazendo Login...</string>
-    <string name="login_success_msg">Conectado!</string>
+    <string name="logged_out_msg">Você está desligado.</string>
+    <string name="logging_in_msg">A efectuar Login...</string>
+    <string name="login_success_msg">Ligado!</string>
     <string name="login_failed_msg">Erro de Login!</string>
     <string name="login_failed_detail_msg">Login falhou: %s</string>
 
     <string name="pref_not_set_label">(semnome)</string>
         
-    <string name="btn_save">Salvar</string>
-    <string name="btn_update">Atualizar</string>
-    <string name="btn_delete">Deletar</string>
+    <string name="btn_save">Guardar</string>
+    <string name="btn_update">Actualizar</string>
+    <string name="btn_delete">Eliminar</string>
     <string name="btn_first_sync">Por favor Sincronize</string>
     
     <string name="btn_ok">Ok</string>
@@ -83,8 +83,8 @@
     <string name="menu_add_long">Adicionar Favorito</string>
     <string name="menu_sync">Sincronizar</string>
     <string name="menu_sync_long">Sincronizar</string>
-    <string name="menu_delete">Deletar</string>
-    <string name="menu_delete_long">Deletar o favorito escolhido</string>
+    <string name="menu_delete">Eliminar</string>
+    <string name="menu_delete_long">Eliminar o favorito escolhido</string>
     <string name="menu_search">Procurar</string>
     <string name="menu_search_long">Procurar nos favoritos</string>
     <string name="menu_go_to_label">Ir à Etiqueta</string>
@@ -96,11 +96,11 @@
     <string name="menu_sort_label_long">Ordenar por Etiqueta Alfabeticamente</string>
     <string name="menu_sort_count">Ordenar por Quantidade</string>
     <string name="menu_sort_count_long">Ordenar por Quantidade na Etiqueta</string>
-    <string name="menu_settings">Configurações</string>
+    <string name="menu_settings">Definições</string>
     <string name="menu_login">Login</string>
     <string name="menu_login_long">Faça Login em sua conta Google</string>
-    <string name="menu_logout">Desconectar</string>
-    <string name="menu_logout_long">Desconectar de sua Conta Google</string>
+    <string name="menu_logout">Desligar</string>
+    <string name="menu_logout_long">Desligar de sua Conta Google</string>
 
 		<!-- UI Labels -->
     <string name="label_title">Título</string>
@@ -115,7 +115,7 @@
 		
     <!-- Preferences -->
     <string name="pref_cat_sync_options">Opções de sincronização</string>
-    <string name="pref_cat_misc_actions">Outras ações</string>
+    <string name="pref_cat_misc_actions">Outras acções</string>
     <string name="pref_browser_sync">Sincronização com Navegador</string>
     <string name="pref_browser_sync_summary">Sincronizar seu Navegador com a Etiqueta escolhida</string>
     <string name="pref_sync_label">Escolha a Etiqueta para sincronizar com Navegador</string>
@@ -124,18 +124,18 @@
     <string name="pref_background_sync_summary">Sincronizar automaticamente mesmo que Gmarks não esteja ativo</string>
     <string name="pref_full_sync">Sincronização completa</string>
     <string name="pref_full_sync_summary">Força uma sincronização completa com o servidor.\nIsto irá sobrescrever 
-        todos os favoritos armazenados localmente e limpará os favoritos deletados</string>
+        todos os favoritos armazenados localmente e limpará os favoritos eliminados</string>
     <string name="pref_send_feedback">Enviar comentários</string>
     <string name="pref_send_feedback_summary">Diga-me como fazer o GMarks melhor!</string>
     <string name="pref_faq">FAQ</string>
     <string name="pref_faq_summary">Perguntas frequentes</string>
     
     <string name="hide_labels_title">Ocultar Etiquetas</string>
-    <string name="menu_select_all">Selecionar Todos</string>
-    <string name="menu_select_none">Selecionar Nenhum</string>
+    <string name="menu_select_all">Seleccionar Todos</string>
+    <string name="menu_select_none">Seleccionar Nenhum</string>
     <string name="pref_hide_labels">Ocultar Etiquetas</string>
-    <string name="pref_hide_labels_summary">Selecionar etiquetas para ocultar na lista principal</string>
-    <string name="label_choose_hidden_labels">As etiquetas selecionadas não serão exibidas na lista principal</string>
+    <string name="pref_hide_labels_summary">Seleccionar etiquetas para ocultar na lista principal</string>
+    <string name="label_choose_hidden_labels">As etiquetas seleccionadas não serão exibidas na lista principal</string>
 
     <!-- Preference options for sync duration -->
     <string-array name="pref_duration_entries">
