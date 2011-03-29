@@ -35,7 +35,7 @@ import android.util.Log;
  * @author tnichols
  */
 public class WebViewCookiesDB {
-	static final String TAG = "WEBVIEW DB QUERY";
+	static final String TAG = "GMARKS WEBVIEW DB";
 	static final int DB_VERSION = 10;
 	static final String DATABASE = "webview.db";
 	static final String TABLE_NAME = "cookies";
@@ -70,7 +70,7 @@ public class WebViewCookiesDB {
 				Long expiry = cursor.getLong(COL_EXPIRES);
 				if ( expiry != null ) c.setExpiryDate( new Date( expiry ) );
 				c.setSecure( cursor.getShort(COL_SECURE) == 1 );
-				Log.d(TAG, "Got cookie: " + c);
+				Log.d(TAG, "Got cookie: " + c.getName());
 				cookies.add(c);
 			}
 			cursor.close();
