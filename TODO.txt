@@ -27,10 +27,10 @@ x Full-sync to flush orphaned bookmarks
 x Two-factor auth support
 x Logout from settings
 x Send feedback: launch email intent to developer
+x Clear notification when clicked
+x FAQ link in settings
+x Don't attempt sync if netwk is down
 
-* Clear notification when clicked
-* FAQ link in settings
-* Don't attempt sync if netwk is down
 * 'share' bookmark
 * Move to SD card
 * Donate link in settings
