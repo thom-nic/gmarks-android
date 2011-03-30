@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GMarks</string>
+    <string name="labels_activity">GMarks Labels</string>
+    <string name="choose_label">Choisissez un GMarks Label</string>
+    <string name="bookmarks_activity">GMarks Tous Les Marques-pages</string>
+    <string name="choose_bookmark">Choisissez un marque-page</string>
+    <string name="edit_bookmark">Modifier le marque-page</string>
+    <string name="new_bookmark">GMarks Nouveau Marque-page</string>
+    <string name="settings">GMarks Paramètres</string>
+    <string name="live_folder_activity">GMarks Label</string>
+    <string name="live_folder_title">Choisissez un label</string>
+    <string name="search_hint">Rechercher un marque-page Google</string>
+    <string name="login_title">GMarks Identifiant</string>
+    <string name="coming_soon">Prochainement!</string>
+
+    <string name="search_results_title">GMarks Résultat de la recherche pour \'%s\'</string>
+    <string name="label_results_title">Marques-pages du label \'%s\'</string>
+
+    <string name="sync_begin_msg">Début de la synchronisation...</string>
+    <string name="sync_done_msg">GMarks Synchronisation Achevée </string>
+    <string name="sync_in_progress_msg">Synchronisation déjà lancée...</string>
+    <string name="sync_notify_title">Gmarks Synchronisation</string>
+    <string name="sync_notify_start">Gmarks Synchronisation en cours...</string>
+    <string name="sync_notify_auth_error">Erreur de connection; réesayez, svp.</string>
+    <string name="sync_notify_error">Erreur inconnue de synchronisation</string>
+    <string name="sync_notify_count">%d marques-pages synchronisés</string>
+
+    <string name="deleting_bookmark_msg">Effacement du marque-page...</string>
+    <string name="saving_bookmark_msg">Sauvegarde du marque-page...</string>
+    <string name="save_ok_msg">Marque-page créé.</string>
+    <string name="update_ok_msg">Marque-page mis à jour.</string>
+    <string name="delete_ok_msg">Marque-page effacé.</string>
+    <string name="error_auth_failed_msg">Erreur: échec de l\'authentification</string>
+    <string name="error_not_found_msg">Erreur: marque-page non trouvé</string>
+    <string name="error_delete_failed_msg">Echec de l\'effacement!</string>
+    <string name="error_save_failed_msg">Echec de la sauvegarde!</string>
+
+    <string name="please_wait_msg">Patientez, svp...</string>
+    <string name="logged_out_msg">Vous êtes maintenant déconnecté.</string>
+    <string name="logging_in_msg">Connection en cours...</string>
+    <string name="login_success_msg">Connecté!</string>
+    <string name="login_failed_msg">Erreur d\'identifiant!</string>
+    <string name="login_failed_detail_msg">Erreur d\'identifiant: %s</string>
+
+    <string name="pref_not_set_label">(non paramétré)</string>
+        
+    <string name="btn_save">Sauvegarder</string>
+    <string name="btn_update">Mettre à jour</string>
+    <string name="btn_delete">Effacer</string>
+    <string name="btn_first_sync">Synchroniser pour commencer</string>
+
+		<!-- Menu items -->
+    <string name="menu_add">Ajouter</string>
+    <string name="menu_add_long">Ajouter un marque-page</string>
+    <string name="menu_sync">Synchronisation</string>
+    <string name="menu_sync_long">Synchronisation</string>
+    <string name="menu_delete">Effacer</string>
+    <string name="menu_delete_long">Effacer le marque-page séléctionné</string>
+    <string name="menu_search">Recherche</string>
+    <string name="menu_search_long">Rechercher des marques-pages</string>
+    <string name="menu_go_to_label">Aller au label</string>
+    <string name="menu_sort_title">Trier par titre</string>
+    <string name="menu_sort_title_long">Trier les titres par ordre alphabétique</string>
+    <string name="menu_sort_date">Trier par date</string>
+    <string name="menu_sort_date_long">Trier par la dernière modification de date</string>
+    <string name="menu_sort_label">Trier par label</string>
+    <string name="menu_sort_label_long">Trier les labels par ordre alphabétique</string>
+    <string name="menu_sort_count">Trier par le nombre</string>
+    <string name="menu_sort_count_long">Trier par le nombre de labels</string>
+    <string name="menu_settings">Paramètres</string>
+    <string name="menu_login">Connection</string>
+    <string name="menu_login_long">Connectez-vous à votre compte Google</string>
+    <string name="menu_logout">Déconnection</string>
+    <string name="menu_logout_long">Déconnectez-vous de votre compte Google</string>
+    
+
+		<!-- UI Labels -->
+    <string name="label_title">Titre</string>
+    <string name="label_url">URL</string>
+    <string name="label_description">Description</string>
+    <string name="label_labels">Labels</string>
+
+    <string name="label_all_bookmarks">Tout les marques-pages</string>
+    <string name="label_sub_all_bookmarks">trier par date</string>
+    
+    <string name="label_webview_login">Connectez-vous à votre compte Google</string>
+		
+
+		<!-- Preferences -->
+		
+    <string name="pref_browser_sync">Synchro de votre navigateur Android</string>
+    <string name="pref_browser_sync_summary">Synchroniser les marques-pages de votre navigateur Android avec un label spécifique</string>
+    <string name="pref_sync_label">Choisissez le label pour la synchronisation de votre navigateur Android</string>
+    <string name="pref_sync_interval">Interval de synchronisation</string>
+    <string name="pref_background_sync">Synchro en arrière-plan</string>
+    <string name="pref_background_sync_summary">Synchroniser automatiquement même si GMarks n\'est pas actif</string>
+    
+    <!-- Preference options for sync duration -->
+    <string-array name="pref_duration_entries">
+      <item>5 minutes</item>
+      <item>20 minutes</item>
+      <item>1 heure</item>
+      <item>4 heures</item>
+      <item>12 heures</item>
+      <item>1 jour</item>
+    </string-array>
+
+    <!-- Preference values for sync duration -->
+    <!-- NOTE: Don't localize this.-->
+    <string-array name="pref_duration_values">
+      <item>5</item>
+      <item>20</item>
+      <item>60</item>
+      <item>240</item>
+      <item>720</item>
+      <item>1440</item>
+    </string-array>
+    
+</resources>

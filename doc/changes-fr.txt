@@ -1,0 +1,64 @@
+Google Bookmarks pour Android!
+
+* 100% sans publicité et open source!
+* Synchroniser/ sauvegarder/ importer vos marques-pages de votre navigateur dans Google Bookmarks
+* Dossier Live pour n'importe quel label
+* Synchronisation en arrière-plan
+* Recherche globale intégrée; Full text search
+* Ajouter rapidement un GMark depuis le menu partage de votre navigateur
+* Ajouter/ mettre à jour/ effacer les marques-pages depuis votre téléphone
+* Longue pression pour voir/ modifier un marque-page
+* Support complet maintenant de Eclair/ 2.1
+
+Calling for translators!  If you want to help translate Google Bookmarks to your language, see the project page.
+
+Si vous rencontrez un problème de fermeture de l'application(Force close), reportez-le, svp, afin que je puisse résoudre le problème. Vous pouvez aussi envoyer des demandes de nouvelles fonctionnalités sur le site du projet.
+
+Plus de détails:
+
+Synchronise automatiquement vos marques-pages Google sur votre téléphone ! La synchronisation en arrière-plan vous permet d'avoir toujours vos marques-pages à jour.  Utiliser GMarks pour Fifrefox, un marque-page scripté(bookmarklet) ou la barre d'outils Google pour envoyer rapidement vos marque-pages à votre téléphone portable.
+
+Choisissez n'importe quel label à synchroniser avec vos marques-page de votre navigateur Android. Cela veut dire que vous pouvez sauvegarder et exporter vos marques-pages de votre navigateur à traver plusieurs dispositifs.  
+
+Les dossier Live vous donne un accès rapide à n'importe quel label. Utiliser les pour créer une listes de lectures sur votre dispositifs Android !
+
+La recherche globale intégree vous permet de retrouver rapidement un marque-page en utilisant le bouton de recherches intégré à votre dispositif Android ou en utilisant le widget de recherche Google.  (Vous pouvez activer cela dans les préférences du système sous "Recherche.")  Full-text search index les titres des marques-pages, les labels, les URLs et les descriptions.  
+
+Ajouter rapidement un Google Bookmarks depuis le menu partage de votre navigateur
+
+Sécurité: Votre nom d'utilisateur et votre mot de passe sont directement envoyé à Google et ne sont jamais lu ou stocké par l'application GMarks.  Toutes les requêtes utilise HTTPS/ SSL pour vous assurer une confidentialité complète.
+
+Mot-clés: Synchronisation sauvegarde importation exportation Google Bookmarks
+
+
+Récents changements:
+
+0.6.3:
+* De nouvelles traductions:
+  * Danemark - merci LayZee
+  * Polonais - merci Krygo
+  * Turque - merci Proym
+  * Traditionnelle Chinoise - merci eizonuts
+  * Allemand - merci Berkley
+  * Française - merci Loic Furhoff
+  * Grec - merci danzax
+  * Serbe - merci @delicb
+  * Hébreu - merci Adi
+  * Suédois - merci jokrsolutions
+  * Catalan - merci jordivf
+  * Lituanien - merci LFSPovo
+   
+0.6.2:
+* Localization!
+  * Chinese - thanks kouketsu
+  * Spanish - thanks macsjr
+  * Portuguese - thanks macsjr
+* Fixed FC in "Choose Label" menu
+
+0.6.x:
+* Global search integration
+* search suggestions as-you-type
+* 'Sort by...' menu option for labels and bookmarks
+* 'Search' menu button
+* 'Go to label' menu button
+* Fixed encoding for non-Latin charsets

@@ -2,7 +2,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/settings">
-    
+    <PreferenceCategory android:title="@string/pref_cat_sync_options">
     <CheckBoxPreference
         android:key="browser_sync_enabled"
         android:title="@string/pref_browser_sync"
@@ -10,8 +10,8 @@
     <org.thomnichols.android.gmarks.LabelPreference
     		android:key='browser_sync_label'
     		android:title='@string/pref_sync_label' 
-    		android:persistent='true'
-    		android:enabled="false" />
+    		android:dependency='browser_sync_enabled'
+    		android:persistent='true'/>
 
     <CheckBoxPreference
         android:key="background_sync_enabled"
@@ -23,7 +23,36 @@
         android:dialogTitle="@string/pref_sync_interval" 
         android:entries="@array/pref_duration_entries"
         android:entryValues="@array/pref_duration_values"
+    		android:dependency='background_sync_enabled'
         android:persistent='true'
-        android:defaultValue="60"
-        android:enabled="false" />
+        android:defaultValue="60"/>
+    <Preference 
+        android:key="dummy_hide_labels_action"
+        android:title="@string/pref_hide_labels"
+        android:summary="@string/pref_hide_labels_summary"
+        android:persistent='false' />
+    </PreferenceCategory>
+    
+    <PreferenceCategory android:title="@string/pref_cat_misc_actions">    
+    <Preference 
+        android:key="dummy_full_sync_action"
+        android:title="@string/pref_full_sync"
+        android:summary="@string/pref_full_sync_summary"
+        android:persistent='false' />
+    <Preference 
+        android:key="dummy_logout_action"
+        android:title="@string/menu_logout"
+        android:summary="@string/menu_logout_long"
+        android:persistent='false' />
+    <Preference 
+        android:key="dummy_faq"
+        android:title="@string/pref_faq"
+        android:summary="@string/pref_faq_summary"
+        android:persistent='false' />
+    <Preference 
+        android:key="dummy_send_feedback_action"
+        android:title="@string/pref_send_feedback"
+        android:summary="@string/pref_send_feedback_summary"
+        android:persistent='false' />
+    </PreferenceCategory>
 </PreferenceScreen>

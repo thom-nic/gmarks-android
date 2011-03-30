@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GMarks</string>
+    <string name="labels_activity">Etichete GMarks</string>
+    <string name="choose_label">Alege o etichetă GMarks</string>
+    <string name="bookmarks_activity">Toate semnele de carte GMarks</string>
+    <string name="choose_bookmark">Alege un semn de carte</string>
+    <string name="edit_bookmark">Editează semn de carte</string>
+    <string name="new_bookmark">Nou semn de carte GMarks</string>
+    <string name="settings">Setări GMarks</string>
+    <string name="live_folder_activity">Etichetă GMarks</string>
+    <string name="live_folder_title">Alege o etichetă</string>
+    <string name="search_hint">Caută în semnele de carte Google</string>
+    <string name="login_title">Conectare GMarks</string>
+    <string name="coming_soon">În curând!</string>
+
+    <string name="search_results_title">Rezultatele căutării GMarks pentru \'%s\'</string>
+    <string name="label_results_title">Semne de carte pentru eticheta \'%s\'</string>
+
+    <string name="sync_begin_msg">Se începe sincronizarea...</string>
+    <string name="sync_done_msg">Sincronizare completă GMarks</string>
+    <string name="sync_in_progress_msg">Sincronizare deja în progres...</string>
+    <string name="sync_notify_title">Sincronizare Gmarks</string>
+    <string name="sync_notify_start">Sincronizare Gmarks în desfăşurare...</string>
+    <string name="sync_notify_auth_error">Eroare de conectare; vă rugăm să vă conectaţi.</string>
+    <string name="sync_notify_error">Eroare necunoscută de sincronizare</string>
+    <string name="sync_notify_count">%d semne de carte sincronizate</string>
+
+    <string name="deleting_bookmark_msg">Se şterge semn de carte...</string>
+    <string name="saving_bookmark_msg">Se salvează semn de carte...</string>
+    <string name="save_ok_msg">Semn de carte creat.</string>
+    <string name="update_ok_msg">Semn de carte actualizat.</string>
+    <string name="delete_ok_msg">Semn de carte şters.</string>
+    <string name="error_auth_failed_msg">Eroare: greşeală de autorizare</string>
+    <string name="error_not_found_msg">Eroare: semn de carte negăsit</string>
+    <string name="error_delete_failed_msg">Ştergere eşuată!</string>
+    <string name="error_save_failed_msg">Salvare eşuată!</string>
+
+    <string name="please_wait_msg">Vă rugăm să aşteptaţi...</string>
+    <string name="logged_out_msg">Aţi fost deconectat(ă).</string>
+    <string name="logging_in_msg">Conectare în curs...</string>
+    <string name="login_success_msg">Conectat!</string>
+    <string name="login_failed_msg">Eroare de conectare!</string>
+    <string name="login_failed_detail_msg">Conectare eşuată: %s</string>
+
+    <string name="pref_not_set_label">(fără etichetă)</string>
+        
+    <string name="btn_save">Salvare</string>
+    <string name="btn_update">Actualizare</string>
+    <string name="btn_delete">Ştergere</string>
+    <string name="btn_first_sync">Vă rugăm să sincronizaţi pentru a începe</string>
+
+		<!-- Menu items -->
+    <string name="menu_add">Adaugă</string>
+    <string name="menu_add_long">Adaugă semn de carte</string>
+    <string name="menu_sync">Sincronizare</string>
+    <string name="menu_sync_long">Sincronizare</string>
+    <string name="menu_delete">Ştergere</string>
+    <string name="menu_delete_long">Şterge semnul de carte selectat</string>
+    <string name="menu_search">Caută</string>
+    <string name="menu_search_long">Caută semne de carte</string>
+    <string name="menu_go_to_label">Du-te la etichetă</string>
+    <string name="menu_sort_title">Sortare după titlu</string>
+    <string name="menu_sort_title_long">Sortează alfabetic după titlu</string>
+    <string name="menu_sort_date">Sortează după dată</string>
+    <string name="menu_sort_date_long">Sortează după data modificării</string>
+    <string name="menu_sort_label">Sortează după etichetă</string>
+    <string name="menu_sort_label_long">Sort alfabetic după etichetă</string>
+    <string name="menu_sort_count">Sortează după număr</string>
+    <string name="menu_sort_count_long">Sortează după numărul de etichete</string>
+    <string name="menu_settings">Setări</string>
+    <string name="menu_login">Conectare</string>
+    <string name="menu_login_long">Conectare cu contul Google</string>
+    <string name="menu_logout">Deconectare</string>
+    <string name="menu_logout_long">Deconectare din contul Google</string>
+    
+
+		<!-- UI Labels -->
+    <string name="label_title">Titlu</string>
+    <string name="label_url">URL</string>
+    <string name="label_description">Descriere</string>
+    <string name="label_labels">Etichete</string>
+
+    <string name="label_all_bookmarks">Toate semnele de carte</string>
+    <string name="label_sub_all_bookmarks">sortate după dată</string>
+    
+    <string name="label_webview_login">Vă rugăm să vă conectaţi cu contul Google</string>
+		
+
+		<!-- Preferences -->
+		
+    <string name="pref_browser_sync">Activează sincronizarea cu browser-ul</string>
+    <string name="pref_browser_sync_summary">Sincronizează semnele de carte din browser cu eticheta aleasă</string>
+    <string name="pref_sync_label">Alegeţi eticheta sincronizării din browser</string>
+    <string name="pref_sync_interval">Interval de sincronizare</string>
+    <string name="pref_background_sync">Activează sincronizarea în fundal</string>
+    <string name="pref_background_sync_summary">Sincronizează automat chiar dacă GMarks nu este activ</string>
+    
+    <!-- Preference options for sync duration -->
+    <string-array name="pref_duration_entries">
+      <item>5 minute</item>
+      <item>20 minute</item>
+      <item>1 oră</item>
+      <item>4 ore</item>
+      <item>12 ore</item>
+      <item>1 zi</item>
+    </string-array>
+
+    <!-- Preference values for sync duration -->
+    <!-- NOTE: Don't localize this.-->
+    <string-array name="pref_duration_values">
+      <item>5</item>
+      <item>20</item>
+      <item>60</item>
+      <item>240</item>
+      <item>720</item>
+      <item>1440</item>
+    </string-array>
+    
+</resources>

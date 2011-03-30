@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GMarks</string>
+    <string name="labels_activity">GMarks Címkék</string>
+    <string name="choose_label">GMarks Címke kiválasztása</string>
+    <string name="bookmarks_activity">GMarks Összes könyvjelző</string>
+    <string name="choose_bookmark">Könyvjelző választása</string>
+    <string name="edit_bookmark">Könyvjelző szerkesztése</string>
+    <string name="new_bookmark">GMarks Új könyvjelző</string>
+    <string name="settings">GMarks Beállítások</string>
+    <string name="live_folder_activity">GMarks Címke</string>
+    <string name="live_folder_title">Címke választása</string>
+    <string name="search_hint">Google könyvjelzők keresése</string>
+    <string name="login_title">GMarks Belépés</string>
+    <string name="coming_soon">Hamarosan!</string>
+
+    <string name="search_results_title">GMarks "%s" keresési eredménye</string>
+    <string name="label_results_title">"%s" címke könyvjelzői</string>
+
+    <string name="sync_begin_msg">Szinkronizálás indítása...</string>
+    <string name="sync_done_msg">GMarks Szinkronizálás elkészült</string>
+    <string name="sync_in_progress_msg">Szinkronizálás folyamatban...</string>
+    <string name="sync_notify_title">Gmarks Szinkronizálás</string>
+    <string name="sync_notify_start">Gmarks szinkronizálás folyamatban...</string>
+    <string name="sync_notify_auth_error">Bejelentkezési hiba; jelentkezzen be.</string>
+    <string name="sync_notify_error">Ismeretlen szinkronizálási hiba</string>
+    <string name="sync_notify_count">Szinkronizálva %d könyvjelző</string>
+
+    <string name="deleting_bookmark_msg">Könyvjelző törlése...</string>
+    <string name="saving_bookmark_msg">Könyvjelző mentése...</string>
+    <string name="save_ok_msg">Könyvjelző létrehozva.</string>
+    <string name="update_ok_msg">Könyvjelző frissítve.</string>
+    <string name="delete_ok_msg">Könyvjelző törölve.</string>
+    <string name="error_auth_failed_msg">Hiba: Sikertelen azonosítás</string>
+    <string name="error_not_found_msg">Hiba: Könyvjelző nem található</string>
+    <string name="error_delete_failed_msg">Törlés sikertelen!</string>
+    <string name="error_save_failed_msg">Mentés sikertelen!</string>
+
+    <string name="please_wait_msg">Kérem várjon...</string>
+    <string name="logged_out_msg">Kijelentkezve.</string>
+    <string name="logging_in_msg">Bejelentkezés...</string>
+    <string name="login_success_msg">Bejelentkezve!</string>
+    <string name="login_failed_msg">Bejelentkezési hiba!</string>
+    <string name="login_failed_detail_msg">Sikertelen bejelentkezés: %s</string>
+
+    <string name="pref_not_set_label">(nincs beállítva)</string>
+        
+    <string name="btn_save">Mentés</string>
+    <string name="btn_update">Frissítés</string>
+    <string name="btn_delete">Törlés</string>
+    <string name="btn_first_sync">Először kérjük, hogy szinkronizáljon</string>
+
+		<!-- Menu items -->
+    <string name="menu_add">Hozzáadás</string>
+    <string name="menu_add_long">Könyvjelző hozzáadása</string>
+    <string name="menu_sync">Szinkronizálás</string>
+    <string name="menu_sync_long">Szinkronizálás</string>
+    <string name="menu_delete">Törlés</string>
+    <string name="menu_delete_long">Kijelölt könyvjelzők törlése</string>
+    <string name="menu_search">Keresés</string>
+    <string name="menu_search_long">Könyvjelzők keresése</string>
+    <string name="menu_go_to_label">Irány a címkéhez</string>
+    <string name="menu_sort_title">Cím szerint rendezés</string>
+    <string name="menu_sort_title_long">Betű szerint rendezés</string>
+    <string name="menu_sort_date">Dátum szerint rendezés</string>
+    <string name="menu_sort_date_long">Módosítás ideje szerint rendezés</string>
+    <string name="menu_sort_label">Címke szerint rendezés</string>
+    <string name="menu_sort_label_long">Címke betű szerint rendezés</string>
+    <string name="menu_sort_count">Szám szerint rendezés</string>
+    <string name="menu_sort_count_long">Címke szám szerint rendezés</string>
+    <string name="menu_settings">Beállítások</string>
+    <string name="menu_login">Bejelentkezés</string>
+    <string name="menu_login_long">Bejelentkezés a Google Fiókba</string>
+    <string name="menu_logout">Kijelentkezés</string>
+    <string name="menu_logout_long">Kijelentkezés a Google Fiókból</string>
+    
+
+		<!-- UI Labels -->
+    <string name="label_title">Cím</string>
+    <string name="label_url">URL</string>
+    <string name="label_description">Leírás</string>
+    <string name="label_labels">Címkék</string>
+
+    <string name="label_all_bookmarks">Könyvjelzők</string>
+    <string name="label_sub_all_bookmarks">dátum szerint rendezve</string>
+    
+    <string name="label_webview_login">Kérjük jelentkezzen be a Google Fiókba</string>
+		
+
+		<!-- Preferences -->
+		
+    <string name="pref_browser_sync">Böngésző szinkronizálás</string>
+    <string name="pref_browser_sync_summary">Könyvjelzők szinkronizálása a kiválasztott címke szerint</string>
+    <string name="pref_sync_label">Böngésző címke kiválasztása szinkronra</string>
+    <string name="pref_sync_interval">Szinkronizálás ideje</string>
+    <string name="pref_background_sync">Háttér-szinkronizálás</string>
+    <string name="pref_background_sync_summary">Automatikus szinkronizálás, még akkor is, ha a GMarks nem aktív</string>
+    
+    <!-- Preference options for sync duration -->
+    <string-array name="pref_duration_entries">
+      <item>5 perc</item>
+      <item>20 perc</item>
+      <item>1 óra</item>
+      <item>4 óra</item>
+      <item>12 óra</item>
+      <item>1 nap</item>
+    </string-array>
+
+    <!-- Preference values for sync duration -->
+    <!-- NOTE: Don't localize this.-->
+    <string-array name="pref_duration_values">
+      <item>5</item>
+      <item>20</item>
+      <item>60</item>
+      <item>240</item>
+      <item>720</item>
+      <item>1440</item>
+    </string-array>
+    
+</resources>

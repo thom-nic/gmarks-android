@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GMarks</string>
+    <string name="labels_activity">GMarks</string>
+    <string name="choose_label">Wybierz etykietę zakładki</string>
+    <string name="bookmarks_activity">Wszystkie zakładki</string>
+    <string name="choose_bookmark">Wybierz zakładkę</string>
+    <string name="edit_bookmark">Edytuj zakładkę</string>
+    <string name="new_bookmark">Nowa zakładka</string>
+    <string name="settings">Ustawienia GMarks</string>
+    <string name="live_folder_activity">Etykieta GMarks</string>
+    <string name="live_folder_title">Wybierz etykietę GMarks</string>
+    <string name="search_hint">Znajdź zakładkę</string>
+    <string name="login_title">Logowanie GMarks</string>
+    <string name="coming_soon">W budowie!</string>
+
+    <string name="search_results_title">Wyniki wyszukiwania dla \'%s\'</string>
+    <string name="label_results_title">Etykiety zawierające \'%s\'</string>
+
+    <string name="sync_begin_msg">Synchronizacja...</string>
+    <string name="sync_done_msg">Zsynchronizowano</string>
+    <string name="sync_in_progress_msg">Synchronizacja...</string>
+    <string name="sync_notify_title">Zakładki GMarks</string>
+    <string name="sync_notify_start">Trwa synchronizacja</string>
+    <string name="sync_notify_auth_error">Błąd logowania!</string>
+    <string name="sync_notify_error">Błąd synchronizacji!</string>
+    <string name="sync_notify_count">Zsynchronizowano %d zakładek.</string>
+
+    <string name="deleting_bookmark_msg">Kasowanie zakładki...</string>
+    <string name="saving_bookmark_msg">Zapisywanie zakładki...</string>
+    <string name="save_ok_msg">Zakładka zapisana.</string>
+    <string name="update_ok_msg">Zakładka zaktualizowana.</string>
+    <string name="delete_ok_msg">Zakładka usunięta.</string>
+    <string name="error_auth_failed_msg">Błąd autoryzacji!</string>
+    <string name="error_not_found_msg">Zakładka nie znaleziona!</string>
+    <string name="error_delete_failed_msg">Błąd kasowania!</string>
+    <string name="error_save_failed_msg">Błąd zapisu!</string>
+
+    <string name="please_wait_msg">Proszę czekać...</string>
+    <string name="logged_out_msg">Zostałeś wylogowany.</string>
+    <string name="logging_in_msg">Logowanie...</string>
+    <string name="login_success_msg">Zalogowano!</string>
+    <string name="login_failed_msg">Błąd logowania!</string>
+    <string name="login_failed_detail_msg">Błąd logowania: %s</string>
+
+    <string name="pref_not_set_label">(brak)</string>
+        
+    <string name="btn_save">Zapisz</string>
+    <string name="btn_update">Zaktualizuj</string>
+    <string name="btn_delete">Skasuj</string>
+    <string name="btn_first_sync">Zsynchronizuj aby zacząć</string>
+
+		<!-- Menu items -->
+    <string name="menu_add">Dodaj</string>
+    <string name="menu_add_long">Dodaj zakładkę</string>
+    <string name="menu_sync">Synchronizuj</string>
+    <string name="menu_sync_long">Zsynchronizuj</string>
+    <string name="menu_delete">Skasuj</string>
+    <string name="menu_delete_long">Skasuj zaznaczoną zakładkę</string>
+    <string name="menu_search">Wyszukaj</string>
+    <string name="menu_search_long">Znajdź zakładkę</string>
+    <string name="menu_go_to_label">Idź do etykiety</string>
+    <string name="menu_sort_title">Sortuj wg tytułu</string>
+    <string name="menu_sort_title_long">Sortuj alfabetycznie</string>
+    <string name="menu_sort_date">Sortuj wg daty</string>
+    <string name="menu_sort_date_long">Sortuj według daty modyfikacji</string>
+    <string name="menu_sort_label">Sortuj wg etykiety</string>
+    <string name="menu_sort_label_long">Sortuj według etykiet</string>
+    <string name="menu_sort_count">Sortuj wg numeru</string>
+    <string name="menu_sort_count_long">Sortuj według numeru etykiety</string>
+    <string name="menu_settings">Ustawienia</string>
+    <string name="menu_login">Zaloguj</string>
+    <string name="menu_login_long">Zaloguj do konta Google</string>
+    <string name="menu_logout">Wyloguj</string>
+    <string name="menu_logout_long">Wyloguj się z konta Google</string>
+    
+
+		<!-- UI Labels -->
+    <string name="label_title">Tytuł</string>
+    <string name="label_url">Adres url</string>
+    <string name="label_description">Opis</string>
+    <string name="label_labels">Etykieta</string>
+
+    <string name="label_all_bookmarks">Wszystkie zakładki</string>
+    <string name="label_sub_all_bookmarks">wg daty</string>
+    
+    <string name="label_webview_login">Zaloguj się do konta Google</string>
+		
+
+		<!-- Preferences -->
+		
+    <string name="pref_browser_sync">Zakładki przeglądarki</string>
+    <string name="pref_browser_sync_summary">Synchronizuje zakładki przeglądarki internetowej telefonu</string>
+    <string name="pref_sync_label">Wybierz etykietę dla przeglądarki</string>
+    <string name="pref_sync_interval">Częstotliwość synchronizacji</string>
+    <string name="pref_background_sync">Synchronizuj w tle</string>
+    <string name="pref_background_sync_summary">Synchronizuje zakładki automatycznie</string>
+    
+    <!-- Preference options for sync duration -->
+    <string-array name="pref_duration_entries">
+      <item>5 minut</item>
+      <item>20 minut</item>
+      <item>1 godzina</item>
+      <item>4 godziny</item>
+      <item>12 godzin</item>
+      <item>1 dzień</item>
+    </string-array>
+
+    <!-- Preference values for sync duration -->
+    <!-- NOTE: Don't localize this.-->
+    <string-array name="pref_duration_values">
+      <item>5</item>
+      <item>20</item>
+      <item>60</item>
+      <item>240</item>
+      <item>720</item>
+      <item>1440</item>
+    </string-array>
+    
+</resources>

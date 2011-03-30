@@ -24,9 +24,23 @@ x Search suggestions
 x Filter menu/ softkeyboard
 x Search menu button
 x GPL3 license header on all code
+x All strings as resources to support L10N
+x Full-sync to flush orphaned bookmarks
+x Two-factor auth support
+x Logout from settings
+x Send feedback: launch email intent to developer
+x Clear notification when clicked
+x FAQ link in settings
+x Don't attempt sync if netwk is down
 
+* 'share' bookmark
+* Move to SD card
+* Donate link in settings
+* Hide labels setting
+* Optional tree/expanded view
+* sync to between multiple folders in browser
+* sync to dolphin browser
 * 'Google lists' support
-* All strings as resources to support L10N
 * search history
 * Favicon support
 * List sub-headers

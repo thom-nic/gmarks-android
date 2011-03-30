@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GMarks</string>
+    <string name="labels_activity">GMarks Etiketleri</string>
+    <string name="choose_label">GMarks Etiketi Seçin</string>
+    <string name="bookmarks_activity">Tüm GMarks Yer İmleri</string>
+    <string name="choose_bookmark">Yer İmi Seçin</string>
+    <string name="edit_bookmark">Yer İmini Düzenle</string>
+    <string name="new_bookmark">Yeni GMarks Yer İmi</string>
+    <string name="settings">GMarks Ayarları</string>
+    <string name="live_folder_activity">GMarks Etiketi</string>
+    <string name="live_folder_title">Etiket Seçin </string>
+    <string name="search_hint">Google Yer İmi Ara</string>
+    <string name="login_title">GMarks Üye Girişi</string>
+    <string name="coming_soon">Yakında!</string>
+
+    <string name="search_results_title">\'%s\' için GMarks arama sonuçları</string>
+    <string name="label_results_title">\'%s\' etiketi için Yer İmleri</string>
+
+    <string name="sync_begin_msg">Senkronizasyon başlıyor...</string>
+    <string name="sync_done_msg">GMarks Senkronizasyonu tamamlandı</string>
+    <string name="sync_in_progress_msg">Senkronizasyon devam ediyor...</string>
+    <string name="sync_notify_title">Gmarks Senkronizasyonu</string>
+    <string name="sync_notify_start">Gmarks senkronizasyonu devam etmekte...</string>
+    <string name="sync_notify_auth_error">Giriş Hatası; lütfen üye girişi yapın.</string>
+    <string name="sync_notify_error">Bilinmeyen senkron hatası</string>
+    <string name="sync_notify_count">%d yer imi senkronize edildi</string>
+
+    <string name="deleting_bookmark_msg">Yer imi siliniyor...</string>
+    <string name="saving_bookmark_msg">Yer imi kaydediliyor...</string>
+    <string name="save_ok_msg">Yer imi oluşturuldu.</string>
+    <string name="update_ok_msg">Yer imi güncelleştirildi.</string>
+    <string name="delete_ok_msg">Yer imi silindi.</string>
+    <string name="error_auth_failed_msg">Hata: Yetkilendirme başarısız</string>
+    <string name="error_not_found_msg">Hata: Yer imi bulunamadı</string>
+    <string name="error_delete_failed_msg">Silme başarısız!</string>
+    <string name="error_save_failed_msg">Kaydetme başarısız!</string>
+
+    <string name="please_wait_msg">Lütfen Bekleyiniz...</string>
+    <string name="logged_out_msg">Başarıyla çıkış yaptınız.</string>
+    <string name="logging_in_msg">Giriş yapılıyor...</string>
+    <string name="login_success_msg">Giriş yapıldı!</string>
+    <string name="login_failed_msg">Giriş hatası!</string>
+    <string name="login_failed_detail_msg">Giriş yapılamadı: %s</string>
+
+    <string name="pref_not_set_label">(boş)</string> 
+        
+    <string name="btn_save">Kaydet</string>
+    <string name="btn_update">Güncelle</string>
+    <string name="btn_delete">Sil</string>
+    <string name="btn_first_sync">Başlamak için lütfen senkronize edin</string>
+
+		<!-- Menu items -->
+    <string name="menu_add">Ekle</string>
+    <string name="menu_add_long">Yer İmi Ekle</string>
+    <string name="menu_sync">Senkron</string>
+    <string name="menu_sync_long">Senkronize Et</string>
+    <string name="menu_delete">Sil</string>
+    <string name="menu_delete_long">Seçili Yer İmini Sil</string>
+    <string name="menu_search">Ara</string>
+    <string name="menu_search_long">Yer İmi Ara</string>
+    <string name="menu_go_to_label">Etikete Git</string>
+    <string name="menu_sort_title">Başlığa göre Sırala</string>
+    <string name="menu_sort_title_long">Başlıkları Alfabetik Olarak Sırala</string>
+    <string name="menu_sort_date">Tarihe göre Sırala</string>
+    <string name="menu_sort_date_long">Değiştirilme Tarihine göre Sırala</string>
+    <string name="menu_sort_label">Etikete göre Sırala</string>
+    <string name="menu_sort_label_long">Etiketleri Alfabetik Olarak Sırala</string>
+    <string name="menu_sort_count">Sayıya göre Sırala</string>
+    <string name="menu_sort_count_long">Etiket Sayısına göre Sırala</string>
+    <string name="menu_settings">Ayarlar</string>
+    <string name="menu_login">Giriş</string>
+    <string name="menu_login_long">Google Hesabınıza giriş yapın</string>
+    <string name="menu_logout">Çıkış</string>
+    <string name="menu_logout_long">Google Hesabınızdan çıkın</string>
+    
+
+		<!-- UI Labels -->
+    <string name="label_title">Başlık</string>
+    <string name="label_url">URL</string>
+    <string name="label_description">Açıklama</string>
+    <string name="label_labels">Etiketler</string>
+
+    <string name="label_all_bookmarks">Tüm Yer İmleri</string>
+    <string name="label_sub_all_bookmarks">tarihe göre sıralı</string>
+    
+    <string name="label_webview_login">Lütfen Google hesabınıza giriş yapın</string>
+		
+
+		<!-- Preferences -->
+		
+    <string name="pref_browser_sync">Tarayıcı Senkronizasyonunu Etkinleştir</string>
+    <string name="pref_browser_sync_summary">Tarayıcı yer imlerini seçili etiket ile senkronize eder</string>
+    <string name="pref_sync_label">Tarayacı Senkron Etiketi Seçin</string>
+    <string name="pref_sync_interval">Aralığı Senkronize Et</string>
+    <string name="pref_background_sync">Arkaplanda Senkronizasyonu Etkinleştir</string>
+    <string name="pref_background_sync_summary">Gmarks aktif değilken bile otomatik senkronizasyon yapar</string>
+    
+    <!-- Preference options for sync duration -->
+    <string-array name="pref_duration_entries">
+      <item>5 dakika</item>
+      <item>20 dakika</item>
+      <item>1 saat</item>
+      <item>4 saat</item>
+      <item>12 saat</item>
+      <item>1 gün</item>
+    </string-array>
+
+    <!-- Preference values for sync duration -->
+    <!-- NOTE: Don't localize this.-->
+    <string-array name="pref_duration_values">
+      <item>5</item>
+      <item>20</item>
+      <item>60</item>
+      <item>240</item>
+      <item>720</item>
+      <item>1440</item>
+    </string-array>
+    
+</resources>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GMarks</string>
+    <string name="labels_activity">GMarks Etiquetas</string>
+    <string name="choose_label">Escolha uma Etiqueta GMarks</string>
+    <string name="bookmarks_activity">GMarks Todos os Favoritos</string>
+    <string name="choose_bookmark">Escolha um Favorito</string>
+    <string name="edit_bookmark">Editar Favorito</string>
+    <string name="new_bookmark">GMarks Novo Favorito</string>
+    <string name="settings">GMarks Definições</string>
+    <string name="live_folder_activity">GMarks Etiqueta</string>
+    <string name="live_folder_title">Escolha uma Etiqueta</string>
+    <string name="search_hint">Procurar em Favoritos do Google</string>
+    <string name="login_title">GMarks Login</string>
+    <string name="coming_soon">Em Breve!</string>
+    <string name="feedback_thanks_msg">Obrigado pelo seu comentário!</string>
+    <string name="welcome_msg"><![CDATA[
+    <b>Bem-vindo ao GMarks!</b>
+    <p>GMarks lhe dá acesso ao seu
+    <a href="http://www.google.com/bookmarks/">Google Bookmarks</a> no seu
+    dispositivo Android. Você pode navegar, ver e editar os favoritos, e sincronizar com
+    seus favoritos do navegador do Android.</p>
+    <p>Primeiro, você precisa efectuar o login e transferir seus favoritos do servidor.</p>
+    ]]></string>
+    <string name='add_bookmark_msg'>Você pode também criar um novo favorito usando a
+    opção \'Adicionar\' no menu, ou escolha \'Partilhar\' no menu do navegador do Android.</string>
+
+    <string name="search_results_title">GMarks resultados de busca para \'%s\'</string>
+    <string name="label_results_title">Favoritos para Etiqueta \'%s\'</string>
+
+    <string name="sync_begin_msg">A iniciar Sincronização...</string>
+    <string name="sync_done_msg">GMarks Sincronização completa</string>
+    <string name="sync_in_progress_msg">Sincronização já em progresso...</string>
+    <string name="sync_notify_title">Gmarks Sincronização</string>
+    <string name="sync_notify_start">Gmarks Sincronização em progresso...</string>
+    <string name="sync_notify_auth_error">Erro de login; Por favor faça login.</string>
+    <string name="sync_notify_error">Erro de conexão</string>
+    <string name="sync_notify_count">Sincronizados %d favoritos</string>
+
+    <string name="deleting_bookmark_msg">A eliminar Favorito...</string>
+    <string name="saving_bookmark_msg">A guardar Favorito...</string>
+    <string name="save_ok_msg">Favorito criado.</string>
+    <string name="update_ok_msg">Favorito atualizado.</string>
+    <string name="delete_ok_msg">Favorito deletado.</string>
+    <string name="error_auth_failed_msg">Erro: Falha de autenticação</string>
+    <string name="error_not_found_msg">Erro: Favorito não encontrado</string>
+    <string name="error_delete_failed_msg">Falha ao eliminar!</string>
+    <string name="error_save_failed_msg">Falha ao guardar!</string>
+    <string name="error_cant_send_email_msg">Desculpe! O e-mail não pôde ser enviado!</string>
+    
+    <string name="two_factor_auth_dlg_title">Autenticação em duas etapas</string>
+    <string name="two_factor_auth_dlg_msg"><![CDATA[
+      O GMarks irá abrir agora o Google Authenticator.
+      Por favor <b>COPIE</b> o código de verificação carregando longamente.  
+      Então carregue <b>VOLTAR</b> no seu telefone para voltar ao GMarks e cole o código aqui.
+      ]]></string>
+    <string name="two_factor_not_installed_dlg_msg"><![CDATA[
+      Parece que o Google Authenticator não está instalado! Por favor 
+      <a href=\'https://market.android.com/details?id=com.google.android.apps.authenticator\'>
+      instale do Android Market</a> e tente novamente.
+      ]]></string>
+
+    <string name="please_wait_msg">Por favor aguarde...</string>
+    <string name="logged_out_msg">Você está desligado.</string>
+    <string name="logging_in_msg">A efectuar Login...</string>
+    <string name="login_success_msg">Ligado!</string>
+    <string name="login_failed_msg">Erro de Login!</string>
+    <string name="login_failed_detail_msg">Login falhou: %s</string>
+
+    <string name="pref_not_set_label">(semnome)</string>
+        
+    <string name="btn_save">Guardar</string>
+    <string name="btn_update">Actualizar</string>
+    <string name="btn_delete">Eliminar</string>
+    <string name="btn_first_sync">Por favor Sincronize</string>
+    
+    <string name="btn_ok">Ok</string>
+    <string name="btn_cancel">Cancelar</string>
+    <string name="btn_download">Download</string>
+
+		<!-- Menu items -->
+    <string name="menu_add">Adicionar</string>
+    <string name="menu_add_long">Adicionar Favorito</string>
+    <string name="menu_sync">Sincronizar</string>
+    <string name="menu_sync_long">Sincronizar</string>
+    <string name="menu_delete">Eliminar</string>
+    <string name="menu_delete_long">Eliminar o favorito escolhido</string>
+    <string name="menu_search">Procurar</string>
+    <string name="menu_search_long">Procurar nos favoritos</string>
+    <string name="menu_go_to_label">Ir à Etiqueta</string>
+    <string name="menu_sort_title">Ordenar por Título</string>
+    <string name="menu_sort_title_long">Ordenar por Título Alfabeticamente</string>
+    <string name="menu_sort_date">Ordenar por Data</string>
+    <string name="menu_sort_date_long">Ordenar por Data de Modificação</string>
+    <string name="menu_sort_label">Ordenar por Etiqueta</string>
+    <string name="menu_sort_label_long">Ordenar por Etiqueta Alfabeticamente</string>
+    <string name="menu_sort_count">Ordenar por Quantidade</string>
+    <string name="menu_sort_count_long">Ordenar por Quantidade na Etiqueta</string>
+    <string name="menu_settings">Definições</string>
+    <string name="menu_login">Login</string>
+    <string name="menu_login_long">Faça Login em sua conta Google</string>
+    <string name="menu_logout">Desligar</string>
+    <string name="menu_logout_long">Desligar de sua Conta Google</string>
+
+		<!-- UI Labels -->
+    <string name="label_title">Título</string>
+    <string name="label_url">URL</string>
+    <string name="label_description">Descrição</string>
+    <string name="label_labels">Etiquetas</string>
+
+    <string name="label_all_bookmarks">Todos os Favoritos</string>
+    <string name="label_sub_all_bookmarks">ordenado por data</string>
+    
+    <string name="label_webview_login">Por Favor faça Login em sua Conta Google</string>
+		
+    <!-- Preferences -->
+    <string name="pref_cat_sync_options">Opções de sincronização</string>
+    <string name="pref_cat_misc_actions">Outras acções</string>
+    <string name="pref_browser_sync">Sincronização com Navegador</string>
+    <string name="pref_browser_sync_summary">Sincronizar seu Navegador com a Etiqueta escolhida</string>
+    <string name="pref_sync_label">Escolha a Etiqueta para sincronizar com Navegador</string>
+    <string name="pref_sync_interval">Intervalo de sincronização</string>
+    <string name="pref_background_sync">Sincronização em segundo plano</string>
+    <string name="pref_background_sync_summary">Sincronizar automaticamente mesmo que Gmarks não esteja ativo</string>
+    <string name="pref_full_sync">Sincronização completa</string>
+    <string name="pref_full_sync_summary">Força uma sincronização completa com o servidor.\nIsto irá sobrescrever 
+        todos os favoritos armazenados localmente e limpará os favoritos eliminados</string>
+    <string name="pref_send_feedback">Enviar comentários</string>
+    <string name="pref_send_feedback_summary">Diga-me como fazer o GMarks melhor!</string>
+    <string name="pref_faq">FAQ</string>
+    <string name="pref_faq_summary">Perguntas frequentes</string>
+    
+    <string name="hide_labels_title">Ocultar Etiquetas</string>
+    <string name="menu_select_all">Seleccionar Todos</string>
+    <string name="menu_select_none">Seleccionar Nenhum</string>
+    <string name="pref_hide_labels">Ocultar Etiquetas</string>
+    <string name="pref_hide_labels_summary">Seleccionar etiquetas para ocultar na lista principal</string>
+    <string name="label_choose_hidden_labels">As etiquetas seleccionadas não serão exibidas na lista principal</string>
+
+    <!-- Preference options for sync duration -->
+    <string-array name="pref_duration_entries">
+      <item>5 minutos</item>
+      <item>20 minutos</item>
+      <item>1 hora</item>
+      <item>4 horas</item>
+      <item>12 horas</item>
+      <item>1 dia</item>
+    </string-array>
+
+    <!-- Preference values for sync duration -->
+    <!-- NOTE: Don't localize this.-->
+    <string-array name="pref_duration_values">
+      <item>5</item>
+      <item>20</item>
+      <item>60</item>
+      <item>240</item>
+      <item>720</item>
+      <item>1440</item>
+    </string-array>
+    
+</resources>

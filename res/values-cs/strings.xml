@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GMarks</string>
+    <string name="labels_activity">GMarks Štítky</string>
+    <string name="choose_label">Vyberte GMarks Štítek</string>
+    <string name="bookmarks_activity">GMarks Všechny záložky</string>
+    <string name="choose_bookmark">Zvolit záložku</string>
+    <string name="edit_bookmark">Upravit záložku</string>
+    <string name="new_bookmark">GMarks Nová záložka</string>
+    <string name="settings">GMarks Nastavení</string>
+    <string name="live_folder_activity">GMarks Štítky</string>
+    <string name="live_folder_title">Zvolte štítek</string>
+    <string name="search_hint">Vyhledat Google záložky</string>
+    <string name="login_title">GMarks Přihlášení</string>
+    <string name="coming_soon">Již brzy!</string>
+
+    <string name="search_results_title">Výsledky vyhledávání GMarks \'%s\'</string>
+    <string name="label_results_title">Záložky pro štítek \'%s\'</string>
+
+    <string name="sync_begin_msg">Zahajuji synchronizaci...</string>
+    <string name="sync_done_msg">Synchronizace GMarks dokončena</string>
+    <string name="sync_in_progress_msg">Probíhá synchronizace...</string>
+    <string name="sync_notify_title">Synchronizace GMarks</string>
+    <string name="sync_notify_start">Synchronizace GMarks probíhá...</string>
+    <string name="sync_notify_auth_error">Přihlášení selhalo; Prosím, přihlaste se.</string>
+    <string name="sync_notify_error">Neznámá chyba synchronizace</string>
+    <string name="sync_notify_count">Synchronizováno %d záložek</string>
+
+    <string name="deleting_bookmark_msg">Ostraňuji záložku...</string>
+    <string name="saving_bookmark_msg">Ukládám záložku...</string>
+    <string name="save_ok_msg">Záložka vytvořena.</string>
+    <string name="update_ok_msg">Záložka upravena.</string>
+    <string name="delete_ok_msg">Záložka odstraněna.</string>
+    <string name="error_auth_failed_msg">Chyba: selhání ověření</string>
+    <string name="error_not_found_msg">Chyba: Záložka nenalezena</string>
+    <string name="error_delete_failed_msg">Smazání selhalo!</string>
+    <string name="error_save_failed_msg">Ukládání selhalo!</string>
+
+    <string name="please_wait_msg">Prosím čekejte...</string>
+    <string name="logged_out_msg">Nyní jste odhlášen.</string>
+    <string name="logging_in_msg">Přihlašuji se...</string>
+    <string name="login_success_msg">Přihlášen!</string>
+    <string name="login_failed_msg">Chyba přihlašování!</string>
+    <string name="login_failed_detail_msg">Přihlášení %s selhalo</string>
+
+    <string name="pref_not_set_label">(prázdné)</string>
+        
+    <string name="btn_save">Uložit</string>
+    <string name="btn_update">Aktualizovat</string>
+    <string name="btn_delete">Odstranit</string>
+    <string name="btn_first_sync">Pro pokračování se přihlaste</string>
+
+		<!-- Menu items -->
+    <string name="menu_add">Přidat</string>
+    <string name="menu_add_long">Přidat záložku</string>
+    <string name="menu_sync">Synchronizovat</string>
+    <string name="menu_sync_long">Synchronizovat</string>
+    <string name="menu_delete">Odstranit</string>
+    <string name="menu_delete_long">Odstranit vybranou záložku</string>
+    <string name="menu_search">Hledat</string>
+    <string name="menu_search_long">Hledat záložky</string>
+    <string name="menu_go_to_label">Přejít na štítek</string>
+    <string name="menu_sort_title">Řadit dle názvu</string>
+    <string name="menu_sort_title_long">Řadit abecedně dle názvu</string>
+    <string name="menu_sort_date">Řadit dle data</string>
+    <string name="menu_sort_date_long">Řadit dle data změny</string>
+    <string name="menu_sort_label">Řadit dle štítku</string>
+    <string name="menu_sort_label_long">Řadit dle štítku abecedně</string>
+    <string name="menu_sort_count">Řadit dle počtu</string>
+    <string name="menu_sort_count_long">Řadit dle počtu štítků</string>
+    <string name="menu_settings">Nastavení</string>
+    <string name="menu_login">Přihlášení</string>
+    <string name="menu_login_long">Přihlášení na Účet Google</string>
+    <string name="menu_logout">Odhlášení</string>
+    <string name="menu_logout_long">Odhlášení Účtu Google</string>
+    
+
+		<!-- UI Labels -->
+    <string name="label_title">Název</string>
+    <string name="label_url">URL</string>
+    <string name="label_description">Popis</string>
+    <string name="label_labels">Štítky</string>
+
+    <string name="label_all_bookmarks">Všechny záložky</string>
+    <string name="label_sub_all_bookmarks">seřazeny dle data</string>
+    
+    <string name="label_webview_login">Prosím přihlaste se do vašeho Účtu Google</string>
+		
+
+		<!-- Preferences -->
+		
+    <string name="pref_browser_sync">Zapnout synchronizaci prohlížeče</string>
+    <string name="pref_browser_sync_summary">Synchronizujte záložky v prohlížeči s vybraným štítkem</string>
+    <string name="pref_sync_label">Vyberte štítky synchronizované s prohlížečem</string>
+    <string name="pref_sync_interval">Interval synchronizace</string>
+    <string name="pref_background_sync">Synchronizace na pozadí</string>
+    <string name="pref_background_sync_summary">Automaticky synchronizovat i když GMarks není spuštěn</string>
+    
+    <!-- Preference options for sync duration -->
+    <string-array name="pref_duration_entries">
+      <item>5 minut</item>
+      <item>20 minut</item>
+      <item>1 hodina</item>
+      <item>4 hodiny</item>
+      <item>12 hodin</item>
+      <item>1 den</item>
+    </string-array>
+
+    <!-- Preference values for sync duration -->
+    <!-- NOTE: Don't localize this.-->
+    <string-array name="pref_duration_values">
+      <item>5</item>
+      <item>20</item>
+      <item>60</item>
+      <item>240</item>
+      <item>720</item>
+      <item>1440</item>
+    </string-array>
+    
+</resources>

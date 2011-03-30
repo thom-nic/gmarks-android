@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GMarks</string>
+    <string name="labels_activity">GMarksラベル</string>
+    <string name="choose_label">GMarksラベルを選択</string>
+    <string name="bookmarks_activity">GMarksすべてのブックマーク</string>
+    <string name="choose_bookmark">ブックマークを選択</string>
+    <string name="edit_bookmark">ブックマークを編集</string>
+    <string name="new_bookmark">GMarks新しいブックマーク</string>
+    <string name="settings">GMarks設定</string>
+    <string name="live_folder_activity">GMarksラベル</string>
+    <string name="live_folder_title">ラベルを選択</string>
+    <string name="search_hint">Googleブックマークを検索</string>
+    <string name="login_title">GMarksログイン</string>
+    <string name="coming_soon">Coming soon!</string>
+
+    <string name="search_results_title">GMarks\'%s\'の検索結果</string>
+    <string name="label_results_title">ラベル \'%s\'をブックマーク</string>
+
+    <string name="sync_begin_msg">同期開始...</string>
+    <string name="sync_done_msg">GMarks同期完了</string>
+    <string name="sync_in_progress_msg">同期中</string>
+    <string name="sync_notify_title">Gmarks 同期</string>
+    <string name="sync_notify_start">Gmarks同期中</string>
+    <string name="sync_notify_auth_error">ログインにエラーが発生しました。再度ログインしてください。</string>
+    <string name="sync_notify_error">同期エラー</string>
+    <string name="sync_notify_count"> %d個のブックマークが同期完了</string>
+
+    <string name="deleting_bookmark_msg">ブックマークを削除しています。</string>
+    <string name="saving_bookmark_msg">ブックマークを保存しています。</string>
+    <string name="save_ok_msg">ブックマークが作成されました。</string>
+    <string name="update_ok_msg">ブックマークが更新されました。</string>
+    <string name="delete_ok_msg">ブックマークが削除されました。</string>
+    <string name="error_auth_failed_msg">エラー: 認証失敗</string>
+    <string name="error_not_found_msg">エラー: ブックマークが見つかりません。</string>
+    <string name="error_delete_failed_msg">削除できませんでした。</string>
+    <string name="error_save_failed_msg">保存できませんでした。</string>
+
+    <string name="please_wait_msg">しばらくお待ちください。</string>
+    <string name="logged_out_msg">ログアウトしました。</string>
+    <string name="logging_in_msg">ログインしています。</string>
+    <string name="login_success_msg">ログインしました。</string>
+    <string name="login_failed_msg">ログインできませんでした。</string>
+    <string name="login_failed_detail_msg">ログインできませんでした。: %s</string>
+
+    <string name="pref_not_set_label">(unset)</string>
+        
+    <string name="btn_save">保存</string>
+    <string name="btn_update">更新</string>
+    <string name="btn_delete">削除</string>
+    <string name="btn_first_sync">同期してください。</string>
+
+		<!-- Menu items -->
+    <string name="menu_add">追加</string>
+    <string name="menu_add_long">ブックマーク追加</string>
+    <string name="menu_sync">同期</string>
+    <string name="menu_sync_long">同期</string>
+    <string name="menu_delete">削除</string>
+    <string name="menu_delete_long">選択したブックマークを削除</string>
+    <string name="menu_search">検索</string>
+    <string name="menu_search_long">ブックマークを検索</string>
+    <string name="menu_go_to_label">ラベルを見る。</string>
+    <string name="menu_sort_title">タイトルで並べ替え</string>
+    <string name="menu_sort_title_long">タイトルをアルファベット順に並び替え</string>
+    <string name="menu_sort_date">日にちで並び替え</string>
+    <string name="menu_sort_date_long">更新日で並び替え</string>
+    <string name="menu_sort_label">ラベルで並び替え</string>
+    <string name="menu_sort_label_long">ラベルをアルファベット順に並び替え</string>
+    <string name="menu_sort_count">Sort by 数で並べ替え</string>
+    <string name="menu_sort_count_long">ラベルの数で並び替え</string>
+    <string name="menu_settings">設定</string>
+    <string name="menu_login">ログイン</string>
+    <string name="menu_login_long">Googleアカウントにログイン</string>
+    <string name="menu_logout">ログアウト</string>
+    <string name="menu_logout_long">アカウントからログアウトする</string>
+    
+
+		<!-- UI Labels -->
+    <string name="label_title">タイトル</string>
+    <string name="label_url">URL</string>
+    <string name="label_description">説明</string>
+    <string name="label_labels">ラベル</string>
+
+    <string name="label_all_bookmarks">すべてのブックマーク</string>
+    <string name="label_sub_all_bookmarks">日にちで並び替え</string>
+    
+    <string name="label_webview_login">Googleアカウントにログインしてください。</string>
+		
+
+		<!-- Preferences -->
+		
+    <string name="pref_browser_sync">ブラウザの同期を有効にする</string>
+    <string name="pref_browser_sync_summary">ブラウザのブックマークを選択したラベルに同期する</string>
+    <string name="pref_sync_label">ブラウザ同期ラベルを選択</string>
+    <string name="pref_sync_interval">同期間隔</string>
+    <string name="pref_background_sync">ブックマークの同期を有効にする</string>
+    <string name="pref_background_sync_summary">GMarkがアクティブでない場合でも自動的に同期</string>
+    
+    <!-- Preference options for sync duration -->
+    <string-array name="pref_duration_entries">
+      <item>5 分</item>
+      <item>20 分</item>
+      <item>1 時間</item>
+      <item>4 時間</item>
+      <item>12 時間</item>
+      <item>1 日</item>
+    </string-array>
+
+    <!-- Preference values for sync duration -->
+    <!-- NOTE: Don't localize this.-->
+    <string-array name="pref_duration_values">
+      <item>5</item>
+      <item>20</item>
+      <item>60</item>
+      <item>240</item>
+      <item>720</item>
+      <item>1440</item>
+    </string-array>
+    
+</resources>

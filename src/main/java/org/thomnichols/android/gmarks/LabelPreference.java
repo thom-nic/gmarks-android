@@ -31,7 +31,9 @@ public class LabelPreference extends Preference implements OnActivityResultListe
 	static final String TAG = "LABEL PREF";
 	
 	String label = null;
-
+	
+	static final int START_LABEL_CHOOSER_ACTIVITY = 0x01;
+	
 	public LabelPreference(Context context) { super(context); }
 	
 	public LabelPreference(Context context, AttributeSet attrs, int defStyle) {
@@ -64,15 +66,15 @@ public class LabelPreference extends Preference implements OnActivityResultListe
 //		preferenceManager.registerOnActivityResultListener(this);
 	}
 	
+	@Override
 	protected void onClick() {
 		// start label picker...
 		Log.d(TAG, "Starting label picker...");
 		Intent intent = new Intent(Intent.ACTION_PICK).setType(Label.CONTENT_ITEM_TYPE);
 		// another method that isn't exposed...  WTS Android.
 //		getPreferenceManager().getActivity().startActivityForResult(intent, 1);
-		((Activity)getContext()).startActivityForResult(intent, 1);		
+		((Activity)getContext()).startActivityForResult(intent, START_LABEL_CHOOSER_ACTIVITY);		
 	}
-	
 	
 	public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
     	Log.d(TAG, "ACTIVITY RESULT: " + resultCode);

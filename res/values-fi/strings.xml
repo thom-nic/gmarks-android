@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GMarks</string>
+    <string name="labels_activity">GMarks Tunnisteet</string>
+    <string name="choose_label">Valitse GMarks Tunniste</string>
+    <string name="bookmarks_activity">GMarks Kaikki Kirjamerkit</string>
+    <string name="choose_bookmark">Valitse Kirjamerkki</string>
+    <string name="edit_bookmark">Muokkaa Kirjamerkki</string>
+    <string name="new_bookmark">GMarks Uusi Kirjamerkki</string>
+    <string name="settings">GMarks Asetukset</string>
+    <string name="live_folder_activity">GMarks Tunniste</string>
+    <string name="live_folder_title">Valitse Tunniste</string>
+    <string name="search_hint">Hae Google Kirjamerkki</string>
+    <string name="login_title">GMarks Kirjautuminen</string>
+    <string name="coming_soon">Tulossa Pian!</string>
+
+    <string name="search_results_title">GMarks Hakutulokset \'%s\'</string>
+    <string name="label_results_title">Kirjanmerkit Tunnisteelle \'%s\'</string>
+
+    <string name="sync_begin_msg">Aloittaa sync...</string>
+    <string name="sync_done_msg">GMarks Sync valmis</string>
+    <string name="sync_in_progress_msg">Sync jo meneillään...</string>
+    <string name="sync_notify_title">Gmarks Sync</string>
+    <string name="sync_notify_start">Gmarks sync meneillä...</string>
+    <string name="sync_notify_auth_error">Kirjautuminen epäonnistui; Kirjaudu .</string>
+    <string name="sync_notify_error">Tuntematon sync vika</string>
+    <string name="sync_notify_count">Synkronoitua %d Kirjamerkkejä</string>
+
+    <string name="deleting_bookmark_msg">Poistamassa Kirjamerkkiä...</string>
+    <string name="saving_bookmark_msg">Tallentaa Kirjamerkkiä...</string>
+    <string name="save_ok_msg">Kirjamerkki luotu.</string>
+    <string name="update_ok_msg">Kirjamerkki päivitetty.</string>
+    <string name="delete_ok_msg">Kirjamerkki poistettu.</string>
+    <string name="error_auth_failed_msg">Error: Kirjautuminen epäonnistui</string>
+    <string name="error_not_found_msg">Error: Kirjamerkkiä ei löytynyt</string>
+    <string name="error_delete_failed_msg">Poisto epäonnistui!</string>
+    <string name="error_save_failed_msg">Tallentaminen epäonnistui!</string>
+
+    <string name="please_wait_msg">Odota hetki...</string>
+    <string name="logged_out_msg">Olet kirjautunut ulos.</string>
+    <string name="logging_in_msg">Kirjautuu...</string>
+    <string name="login_success_msg">Kirjautunut!</string>
+    <string name="login_failed_msg">Kirjautumisvika!</string>
+    <string name="login_failed_detail_msg">Kirjautuminen epäonnistui: %s</string>
+
+    <string name="pref_not_set_label">(unset)</string>
+        
+    <string name="btn_save">Tallenna</string>
+    <string name="btn_update">Päivitä</string>
+    <string name="btn_delete">Poista</string>
+    <string name="btn_first_sync">Suorita sync aloittaaksesi </string>
+
+		<!-- Menu items -->
+    <string name="menu_add">Lisää</string>
+    <string name="menu_add_long">Lisää Kirjamerkki</string>
+    <string name="menu_sync">Sync</string>
+    <string name="menu_sync_long">Suorita Sync</string>
+    <string name="menu_delete">Poista</string>
+    <string name="menu_delete_long">Poista valittu Kirjamerkki</string>
+    <string name="menu_search">Haku</string>
+    <string name="menu_search_long">Hae Kirjamerkki</string>
+    <string name="menu_go_to_label">Siirry Tunnisteelle</string>
+    <string name="menu_sort_title">Lajittele Tunnisteen mukaan</string>
+    <string name="menu_sort_title_long">Lajittele aakosjärjestykseen</string>
+    <string name="menu_sort_date">Lajittele päiväyksen mukaan</string>
+    <string name="menu_sort_date_long">Lajittele  päivämäärän mukaan</string>
+    <string name="menu_sort_label">Lajittele Tunnisteet</string>
+    <string name="menu_sort_label_long">Lajittele Tunnisteet aakkosjärjestykseen</string>
+    <string name="menu_sort_count">Lajittele määrän mukaan</string>
+    <string name="menu_sort_count_long">Lajittele Tunnisteitten määrän mukaan</string>
+    <string name="menu_settings">Asetukset</string>
+    <string name="menu_login">Kirjaudu</string>
+    <string name="menu_login_long">Kirjaudu Google Tilillesi</string>
+    <string name="menu_logout">Kirjaudu ulos</string>
+    <string name="menu_logout_long">Kirjaudu ulos Google tililtä</string>
+    
+
+		<!-- UI Labels -->
+    <string name="label_title">Nimi</string>
+    <string name="label_url">URL</string>
+    <string name="label_description">Selitys</string>
+    <string name="label_labels">Tunniste</string>
+
+    <string name="label_all_bookmarks">Kaikki Kirjamerkit</string>
+    <string name="label_sub_all_bookmarks">Päiväyksen lajittelu</string>
+    
+    <string name="label_webview_login">Kirjaudu Google tilillesi</string>
+		
+
+		<!-- Valikko -->
+		
+    <string name="pref_browser_sync">Salli Selaimen Sync</string>
+    <string name="pref_browser_sync_summary">Synkka selaimesi Kirjamerkit valitulle Tunnisteelle</string>
+    <string name="pref_sync_label">Valitse selaimen Synkki Tunniste</string>
+    <string name="pref_sync_interval">Synkkien ajastus</string>
+    <string name="pref_background_sync">Salli taustalla oleva sync</string>
+    <string name="pref_background_sync_summary">Suorita sync automaattisesti vaikka GMarks ei ole käynnissä</string>
+    
+    <!-- Valikko synkin kestolle-->
+    <string-array name="pref_duration_entries">
+      <item>5 minuuttia</item>
+      <item>20 minuuttia</item>
+      <item>1 tunti</item>
+      <item>4 tuntia</item>
+      <item>12 tuntia</item>
+      <item>1 päivä</item>
+    </string-array>
+
+    <!-- Preference values for sync duration -->
+    <!-- NOTE: Don't localize this.-->
+    <string-array name="pref_duration_values">
+      <item>5</item>
+      <item>20</item>
+      <item>60</item>
+      <item>240</item>
+      <item>720</item>
+      <item>1440</item>
+    </string-array>
+    
+</resources>

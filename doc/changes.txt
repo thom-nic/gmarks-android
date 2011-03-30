@@ -1,0 +1,112 @@
+Google Bookmarks for Android!
+
+* 100% Ad-free and open source!
+* Support for 30 languages
+* Supports Google two-factor auth
+* Secure: You never type your username or password into GMarks
+
+More Features:
+* Sync/ backup/ import bookmarks between the Android browser and Google Bookmarks
+* Live folder for any bookmark label
+* Background sync
+* Global search integration; Full text search
+* Quickly add a GMark from the browser's share menu
+* Add/update/delete bookmarks from your phone
+* Long-press to view/ edit a bookmark
+* Now fully supports Eclair/ 2.1
+
+Calling for translators!  If you want to help translate Google Bookmarks to your language, see the project page.
+
+If you encounter FC, please 'Report' it so I can fix the problem.  You can also submit feature requests on the project website.
+
+More Details:
+
+Automatically synchronize your Google Bookmarks to your phone!  Background sync means you're always up-to-date, but it only syncs what's changed.  Use GMarks for Firefox, the Google bookmarklet or the Google Toolbar to quickly send bookmarks to your phone.
+
+Choose any label to synchronize with your Android Browser bookmarks.  This means you can backup and export your browser bookmarks across multiple devices.  
+
+Live Folders give you quick access to any label.  Use it to create a reading list on your device!
+
+Global Search integration means you can quickly find a bookmark using your device's Search button or the Google Search widget.  (You can enable this in the system settings under "Search.")  Full-text search indexes bookmark titles, labels, URLs and descriptions.  
+
+Quickly create new Google Bookmarks from the browser's "Share" menu.
+
+Secure: Your username and password are sent straight to Google, and are never read or stored by the GMarks app.  All internet requests use HTTPS/ SSL to ensure complete privacy.  GMarks also supports Google two-factor authentication (Since version 0.6.4.)  You must have the Google Authenticator app installed.
+
+Keywords: Synchronize backup import export Google Bookmarks
+
+
+Recent Changes:
+
+0.6.6:
+* FAQ link in settings
+* Preliminary support for Honeycomb
+* Clear sync notification when tapped
+* Don't attempt background sync if no network connection is available
+* Clear 'wait' dialog if the two-factor recovery page is displayed during login 
+* Bulgarian translation - thanks p0inte
+* Fixed a database error during webview login
+
+* Choose labels to hide from list
+
+0.6.5:
+* Better beginning instructions for first-time users
+* "Send Feedback" action in settings
+* Logout action in settings
+* Swedish translation - thanks blorro
+* Fixed 2 FCs in login activity
+
+  (unfinished)
+  * Korean - thanks @bbmatic
+  * Catalan - thanks jordivf
+  * Slovak - thanks Lubos
+ 
+
+0.6.4: 
+* Support for two-factor auth/ login 
+* "Full sync" (in settings) to remove stale bookmarks and fix incomplete syncs
+
+New Translations:
+  * Italian - thanks Uttermarcus
+  * Russian - thanks smth
+  * Dutch - thanks nmx
+  * Hungarian - thanks Cenzi
+  * Croatian - thanks carlowise
+  * Hindi - thanks @abhisekprasad
+  * Arabic - thanks Adham El-Wakeel 
+  * Latvian - thanks kuceens007
+  * Slovenian - thanks Franci
+  * Finnish - thanks Blorro
+  * Czech - thanks honzika
+  * Norwegian - thanks Gøran
+  * Romanian - thanks tmahai20
+  * Japanese - thanks Koomo  
+
+0.6.3:
+* New translations: 
+  * Danish - thanks LayZee
+  * Polish - thanks Krygo
+  * Turkish - thanks Proym
+  * Traditional Chinese - thanks eizonuts
+  * German - thanks Berkley
+  * French - thanks loic furhoff
+  * Greek - thanks danzax
+  * Serbian - thanks @delicb
+  * Hebrew - thanks Adi
+  * Lithuanian - thanks LFSPovo
+* Fixed FC when editing a search result
+
+0.6.2:
+* Localization!
+  * Chinese - thanks kouketsu
+  * Spanish - thanks macsjr
+  * Portuguese - thanks macsjr
+* Fixed FC in "Choose Label" menu
+
+0.6.x:
+* Global search integration
+* search suggestions as-you-type
+* 'Sort by...' menu option for labels and bookmarks
+* 'Search' menu button
+* 'Go to label' menu button
+* Fixed encoding for non-Latin charsets

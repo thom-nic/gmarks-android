@@ -15,6 +15,7 @@
  */
 package org.thomnichols.android.gmarks;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,7 +27,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 /**
@@ -34,8 +34,8 @@ import android.util.Log;
  * that you have to parse manually, plus you don't get path/expiry/secure params.
  * @author tnichols
  */
-public class WebViewCookiesDB extends SQLiteOpenHelper {
-	static final String TAG = "WEBVIEW DB QUERY";
+public class WebViewCookiesDB {
+	static final String TAG = "GMARKS WEBVIEW DB";
 	static final int DB_VERSION = 10;
 	static final String DATABASE = "webview.db";
 	static final String TABLE_NAME = "cookies";
@@ -48,31 +48,19 @@ public class WebViewCookiesDB extends SQLiteOpenHelper {
 	static final int COL_EXPIRES = 5;
 	static final int COL_SECURE = 6;
 	
-	public WebViewCookiesDB( Context ctx ) {
-		// TODO version is probably different for different 
-		// android versions; on 2.2 it is 10
-		super(ctx, DATABASE, null, DB_VERSION );
-	}
+	Context ctx;
 	
-	@Override
-	public void onCreate(SQLiteDatabase db) {
-		// the table should already exist, created by the webview!
-	}
-
-	@Override
-	public void onUpgrade(SQLiteDatabase db, int from, int to) {
-		
+	public WebViewCookiesDB( Context ctx ) {
+		this.ctx = ctx;
 	}
 	
 	List<Cookie> getCookies() {
-		SQLiteDatabase db = this.getReadableDatabase();
-		while ( db.isDbLockedByOtherThreads() ) {
-			Log.w(TAG, "Waiting for other thread to flush DB");
-			try { Thread.sleep(500); } catch ( InterruptedException ex ) {} 
-		}
+		List<Cookie> cookies = new ArrayList<Cookie>();
+		SQLiteDatabase db = openDatabase(SQLiteDatabase.OPEN_READONLY); 
+		if ( db == null ) return cookies;
 		
 		try {
-			List<Cookie> cookies = new ArrayList<Cookie>();
+			db.execSQL("PRAGMA read_uncommitted = true;");
 			Cursor cursor = db.query(TABLE_NAME, COLUMNS, null, null, null, null, null );
 			
 			while ( cursor.moveToNext() ) {
@@ -82,7 +70,7 @@ public class WebViewCookiesDB extends SQLiteOpenHelper {
 				Long expiry = cursor.getLong(COL_EXPIRES);
 				if ( expiry != null ) c.setExpiryDate( new Date( expiry ) );
 				c.setSecure( cursor.getShort(COL_SECURE) == 1 );
-				Log.d(TAG, "Got cookie: " + c);
+				Log.d(TAG, "Got cookie: " + c.getName());
 				cookies.add(c);
 			}
 			cursor.close();
@@ -97,12 +85,8 @@ public class WebViewCookiesDB extends SQLiteOpenHelper {
 	}
 
 	public void deleteCookie(String key) {
-		SQLiteDatabase db = this.getReadableDatabase();
-		while ( db.isDbLockedByOtherThreads() ) {
-			Log.w(TAG, "Waiting for other thread to flush DB");
-			try { Thread.sleep(500); } catch ( InterruptedException ex ) {} 
-		}
-		
+		SQLiteDatabase db = openDatabase(SQLiteDatabase.OPEN_READWRITE); 
+		if ( db == null ) return;
 		try {
 			db.delete(TABLE_NAME, COLUMNS[COL_NAME] + "=?", new String[] {key});
 		}
@@ -110,5 +94,35 @@ public class WebViewCookiesDB extends SQLiteOpenHelper {
 			Log.w(TAG,"Error deleting cookie: " + key, ex);
 		}
 		finally { db.close(); }
+	}
+	
+	public void deleteAllCookies() {
+		SQLiteDatabase db = openDatabase(SQLiteDatabase.OPEN_READWRITE); 
+		if ( db == null ) return;
+		try {
+			db.delete(TABLE_NAME, null, null);
+		}
+		catch ( SQLiteException ex ) {
+			Log.w(TAG,"Error deleting cookies", ex);
+		}
+		finally { db.close(); }	
+	}
+	
+	protected SQLiteDatabase openDatabase(final int mode) {
+		File dbPath =  ctx.getDatabasePath(DATABASE);
+		if ( ! dbPath.exists() ) return null;
+		try {
+			SQLiteDatabase db = SQLiteDatabase.openDatabase( 
+					dbPath.getPath(), null, mode);
+			while ( db.isDbLockedByOtherThreads() ) {
+				Log.w(TAG, "Waiting for other thread to flush DB");
+				try { Thread.sleep(200); } catch ( InterruptedException ex ) {} 
+			}
+			return db;
+		}
+		catch ( SQLiteException ex ) {
+			Log.w(TAG, "Error opening database", ex);
+			return null;
+		}
 	}
 }

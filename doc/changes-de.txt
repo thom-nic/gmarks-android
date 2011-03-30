@@ -1,0 +1,64 @@
+Google Bookmarks for Android!
+
+* 100% werbefrei und quelloffen!
+* Sync/ backup/ importiere die Lesezeichen des Browser mit den Lesezeichen von Google
+* Ständig aktueller Ordner für alle Label eines Lesezeichens
+* Synchronisation im Hintergrund
+* Globale Integration der Suche; Vollständige Text Suche
+* Schnelles Hinzufügen eines GMarks direkt über den Browser
+* Hinzufügen/Aktualisieren/Löschen von Lesezeichen über das Telefon
+* Langes Drücken, um ein Lesezeichen zu sehen/bearbeiten
+* Eclair/2.1 wird jetzt vollständig unterstützt
+
+Calling for translators!  If you want to help translate Google Bookmarks to your language, see the project page.
+
+Berichte mir bitte, falls das Programm zum schließen gezwungen wird (Force Close, FC), damit ich das Problem beheben kann. Man kann übrigens auch auf der Projekt Seite Anfragen zu den Leistungsmerkmalen erfragen. 
+
+Genauere Angaben zum Programm:
+
+Synchronisiere die Lesezeichen von Google automatisch auf deinem Telefon! Die Synchronisierung im Hintergrund bedeutet, dass du immer auf dem aktuellen Stand bist, dabei wird nur synchronisiert, was sich auch geändert hat. Verwende GMarks, um über Firefox, über das Bookmarklet oder über die Toolbar von Google unkompliziert Lesezeichen an dein Telefon zu schicken. 
+
+Wähle ein beliebiges Label, um die Lesezeichen des Android Browsers zu synchronisieren. Das bedeutet, dass die Lesezeichen über verschiedene Geräte hinweg exportieren und sichern kannst. 
+
+Live Ordner geben dir einen schnellen Zugriff auf jedes Label. Benutze sie, um eine Liste zu erstellen, die du später auf deinem Telefon lesen kannst.
+
+Die Integration in die globale Suche bedeutet, dass du sehr schnell Lesezeichen über den Suchknopf deines Telefons oder über das Widget der Google Suche finden kannst. (Das kann man in den Einstellungen unter "Suche" aktivieren). Die Volltextsuche listet die Titel, die Labels, die URLs und die Beschreibungen eines Lesezeichens auf. 
+
+Erstelle sehr schnell neue Google Lesezeichen über das "Share"-Menü des Browsers. 
+
+Sicherheit: Dein Nutzername und dein Passwort werden direkt an Google gesendet. Diese Daten werden von GMarks weder gelesen noch gespeichert. Alle Anfragen über das Internet verwenden HTPS/SSL, um die Sicherheit zu vervollständigen. 
+
+Keywords: Synchronisieren backup import export Google Bookmarks Lesezeichen 
+
+
+Kürzliche Änderungen:
+
+0.6.3:
+* Neue Übersetzungen: 
+  * Dänisch - Danke an LayZee
+  * Polnisch - Danke an Krygo
+  * Türkisch - danke an Proym
+  * Traditionelles Chinesisch - danke an eizonuts
+  * Deutsche - danke an Berkley
+  * Französisch - danke an loic Fürhoff
+  * Griechisch - danke an danzax
+  * Serbisch - danke an @delicb
+  * Hebräisch - danke an Adi
+  * Schwedisch - danke an jokrsolutions
+  * Katalanisch - danke an jordivf
+  * Litauisch - danke an LFSPovo
+
+0.6.2:
+* Lokalisierung!
+  * Chinesisch - Danke an kouketsu
+  * Spanisch - Danke an macsjr
+  * Portugiesisch - Danke an macsjr
+* FC's im "Wähle Label" Menü repariert
+
+0.6.x:
+* Integration in die globale Suche
+* Suchvorschläge während dem tippen
+* Menü Option 'Sortiere nach...' für Label und Lesezeichen
+* Schaltfläche für 'Suche' Menü 
+* Schaltfläche für 'Gehe zu Label' Menü
+* Fixed encoding for non-Latin charsets

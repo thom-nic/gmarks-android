@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GMarks</string>
+    <string name="labels_activity">GMarks ملصقات</string>
+    <string name="choose_label">GMarks اختار ملصق</string>
+    <string name="bookmarks_activity">جميع العلامات GMarks</string>
+    <string name="choose_bookmark">اختار علامة</string>
+    <string name="edit_bookmark">تعديل علامة</string>
+    <string name="new_bookmark">علامة جديدة GMarks</string>
+    <string name="settings">GMarks اعدادات</string>
+    <string name="live_folder_activity">ملصق GMarks</string>
+    <string name="live_folder_title">اختار ملصق</string>
+    <string name="search_hint">Google ابحث علامات</string>
+    <string name="login_title">GMarks تسجيل الدخول</string>
+    <string name="coming_soon">قريبا !</string>
+
+    <string name="search_results_title">نتائج بحث Gmarks عن \'%s\'</string>
+    <string name="label_results_title">علامات الملصق \'%s\'</string>
+
+    <string name="sync_begin_msg">بداية المزامنة...</string>
+    <string name="sync_done_msg">تمت مزامنة GMarks</string>
+    <string name="sync_in_progress_msg">المزامنة جارية بالفعل...</string>
+    <string name="sync_notify_title">مزامنة Gmarks</string>
+    <string name="sync_notify_start">مزامنة GMarks جارية...</string>
+    <string name="sync_notify_auth_error">خطأ فى الدخول؛ برجاء الدخول</string>
+    <string name="sync_notify_error">خطاء غير معروف فى المزامنة</string>
+    <string name="sync_notify_count">تمت مزامنة %d ملصق</string>
+
+    <string name="deleting_bookmark_msg">جارى حزف العلامة...</string>
+    <string name="saving_bookmark_msg">جارى حفظ العلامة...</string>
+    <string name="save_ok_msg">تم انشاء العلامة.</string>
+    <string name="update_ok_msg">تم تحديث العلامة.</string>
+    <string name="delete_ok_msg">تم حذف العلامة.</string>
+    <string name="error_auth_failed_msg">خطأ: فشل التصديق</string>
+    <string name="error_not_found_msg">خطاء: العلامة غير موجودة</string>
+    <string name="error_delete_failed_msg">فشلت محاولة الحذف !</string>
+    <string name="error_save_failed_msg">فشلت محاولة الحفظ !</string>
+
+    <string name="please_wait_msg">برجاء الانتظار...</string>
+    <string name="logged_out_msg">تم تسجيل الخروج</string>
+    <string name="logging_in_msg">جارى محاولة الدخول...</string>
+    <string name="login_success_msg">تم تسجيل الدخول</string>
+    <string name="login_failed_msg">خطأ فى الدخول !</string>
+    <string name="login_failed_detail_msg">الدخول فشل : %s</string>
+
+    <string name="pref_not_set_label">(unset)</string>
+        
+    <string name="btn_save">حفظ</string>
+    <string name="btn_update">تحديث</string>
+    <string name="btn_delete">حذف</string>
+    <string name="btn_first_sync">برجاء المزامنة للبدء</string>
+
+		<!-- Menu items -->
+    <string name="menu_add">اضافة</string>
+    <string name="menu_add_long">اضافة علامة</string>
+    <string name="menu_sync">المزامنة</string>
+    <string name="menu_sync_long">المزامنة</string>
+    <string name="menu_delete">حذف</string>
+    <string name="menu_delete_long">حذف العلامة المختارة</string>
+    <string name="menu_search">بحث</string>
+    <string name="menu_search_long">بحث فى العلامات</string>
+    <string name="menu_go_to_label">الذهاب الى الملصق</string>
+    <string name="menu_sort_title">ترتيب باللقب</string>
+    <string name="menu_sort_title_long">ترتيب ابجدى</string>
+    <string name="menu_sort_date">ترتيب بالتاريخ</string>
+    <string name="menu_sort_date_long">ترتيب بتاريخ التعديل</string>
+    <string name="menu_sort_label">ترتيب بالملصق</string>
+    <string name="menu_sort_label_long">ترتيب الملصقات ابجديا</string>
+    <string name="menu_sort_count">ترتيب بالعدد</string>
+    <string name="menu_sort_count_long">ترتيب بعدد الملصقات</string>
+    <string name="menu_settings">إعدادات</string>
+    <string name="menu_login">تسجيل دخول</string>
+    <string name="menu_login_long">تسجيل دخول لحساب Google الخاص بك </string>
+    <string name="menu_logout">تسجيل خروج</string>
+    <string name="menu_logout_long">تسجيل خروج لحساب Google الخاص بك </string>
+    
+
+		<!-- UI Labels -->
+    <string name="label_title">اللقب</string>
+    <string name="label_url">عنوان الموقع</string>
+    <string name="label_description">الوصف</string>
+    <string name="label_labels">الملصقات</string>
+
+    <string name="label_all_bookmarks">جميع العلامات</string>
+    <string name="label_sub_all_bookmarks">مرتب بالتاريخ</string>
+    
+    <string name="label_webview_login">برجاء تسجيل الدخول احساب Google التابع لك</string>
+		
+
+		<!-- Preferences -->
+		
+    <string name="pref_browser_sync">تمكين المتصفح من المزامنة</string>
+    <string name="pref_browser_sync_summary">مزامنة علامات متصفحك مع ملصق مختار</string>
+    <string name="pref_sync_label">اختار ملصق لمزامنة متصفحك</string>
+    <string name="pref_sync_interval">فترة المزامنة</string>
+    <string name="pref_background_sync">السماح بالمزامنة فى الخلفية</string>
+    <string name="pref_background_sync_summary">مزامنة تلقائية حنى مع عدم تفعيل GMarks</string>
+    
+    <!-- Preference options for sync duration -->
+    <string-array name="pref_duration_entries">
+      <item>5 دقائق</item>
+      <item>20 دقائق</item>
+      <item>ساعة</item>
+      <item>4 ساعات</item>
+      <item>12 ساعة</item>
+      <item>يوميا</item>
+    </string-array>
+
+    <!-- Preference values for sync duration -->
+    <!-- NOTE: Don't localize this.-->
+    <string-array name="pref_duration_values">
+      <item>5</item>
+      <item>20</item>
+      <item>60</item>
+      <item>240</item>
+      <item>720</item>
+      <item>1440</item>
+    </string-array>
+    
+</resources>

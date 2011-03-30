@@ -36,6 +36,7 @@ public final class Prefs {
 	static final String KEY_LIST_SYNC_ENABLED = "lists_sync_enabled";
 	static final String KEY_LAST_LIST_SYNC = "last_lists_sync";
 	static final String KEY_LAST_LIST_SYNC_ATTEMPT = "last_lists_sync_attempt";
+	static final String PREF_HIDDEN_LABEL_IDS = "hidden_label_ids";
 
 	static final String DEFAULT_SYNC_INTERVAL = "60"; // 1 hour in minutes
 	static final boolean DEFAULT_SYNC_ENABLED = false;

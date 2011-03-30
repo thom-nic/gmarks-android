@@ -40,12 +40,27 @@
 	<LinearLayout android:id='@id/android:empty'
    	android:layout_width='fill_parent'
    	android:layout_height='fill_parent'
-   	android:layout_weight='1'
-   	android:layout_gravity="bottom|center_horizontal">
+   	android:orientation='vertical'>
    	
+   	<TextView android:id='@+id/welcome_msg'
+   		android:text='@string/welcome_msg'
+ 			android:layout_width='fill_parent'
+			android:layout_height='wrap_content'
+			android:linksClickable='true' 
+			android:paddingTop='10dip' />
+   		
+		<Button android:id="@+id/loginBtn"
+			android:text='@string/menu_login_long'
+			android:layout_width='fill_parent'
+			android:layout_height='wrap_content' />
 		<Button android:id="@+id/syncBtn"
 			android:text='@string/btn_first_sync'
 			android:layout_width='fill_parent'
 			android:layout_height='wrap_content' />
+		<TextView android:id='@+id/add_new_instructions'
+			android:text='@string/add_bookmark_msg'
+			android:layout_width='fill_parent'
+			android:layout_height='wrap_content'
+			android:paddingTop='10dip' />
 	</LinearLayout>
 </LinearLayout>

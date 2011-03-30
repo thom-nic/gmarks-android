@@ -1,0 +1,54 @@
+﻿Android用Googleブックマーク
+
+広告掲載なしのオープンソース
+ブラウザのブックマークをGoogleブックマークにインポート、同期、バックアップ
+どんなブックマークラベルにも対応
+ブラウザのメニューからGMarkに簡単に追加
+スマートフォンからブックマークを追加・更新・削除
+ボタン長押しでブックマークを閲覧・編集
+Eclair/2.1をサポート
+
+
+Googleブックマークを自動的にスマートフォンに同期！変更した箇所のみ自動で同期するので、いつでも最新の情報を掲載。GMarksを使って、Firefox、Google、Googleツールバーのブックマークをスマートフォンに簡単に送りましょう。また、複数のデバイスにブックマークをバックアップ・エクスポートすることができます。
+
+ライブフォルダでどんなラベルにもすぐにアクセスでき、自分のリーディングリストをデバイスに作成可能です。
+
+グローバル・サーチ・インテグレーションは、あなたのデバイスのサーチボタンかグローバル・サーチ・ウィジェットを使って簡単にブックマークを見つける機能です。この機能は「サーチ」メニューから有効にできます。ブラウザの「シェア」メニューから簡単にGoogleブックマークを作成することができます。
+
+セキュリティ：ユーザ名とパスワードはGoogleに直接送信され、GMarksのアプリケーション上には保存されません。インターネットリクエストはすべて HTTPS/ SSLで送信されるため、プライバシーは保護されています。またバージョン0.6.4.ではGoogleの二要素認証をサポートしています。
+
+Keywords: Synchronize backup import export Google Bookmarks
+Recent Changes:
+0.6.4: (Coming soon)
+* Two-factor auth support 
+Translations:
+  * Swedish - thanks jokrsolutions
+  * Catalan - thanks jordivf
+  * Slovak - thanks Lubos
+  * Japanese - thanks Koomo
+0.6.3:
+* New translations: 
+  * Danish - thanks LayZee
+  * Polish - thanks Krygo
+  * Turkish - thanks Proym
+  * Traditional Chinese - thanks eizonuts
+  * German - thanks Berkley
+  * French - thanks loic furhoff
+  * Greek - thanks danzax
+  * Serbian - thanks @delicb
+  * Hebrew - thanks Adi
+  * Lithuanian - thanks LFSPovo
+* Fixed FC when editing a search result
+0.6.2:
+* Localization!
+  * Chinese - thanks kouketsu
+  * Spanish - thanks macsjr
+  * Portuguese - thanks macsjr
+* Fixed FC in "Choose Label" menu
+0.6.x:
+* Global search integration
+* search suggestions as-you-type
+* 'Sort by...' menu option for labels and bookmarks
+* 'Search' menu button
+* 'Go to label' menu button
+* Fixed encoding for non-Latin charsets

@@ -47,9 +47,6 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 	static final String TAG = "GMARKS SYNC";
 	
 	static final String SHARED_PREFS_NAME = "sync_prefs";
-	static final String PREF_LAST_SYNC = "last_sync";
-	static final String PREF_LAST_SYNC_ATTEMPT = "last_sync_attempt";
-	static final String PREF_LAST_BROWSER_SYNC = "last_browser_sync";
 	
 	static final int NOTIFY_SYNC_ID = 1;
 	
@@ -69,6 +66,7 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 	long lastBrowserSyncTime = 0;
 	long thisSyncTime = 0;
 	boolean showToast = true;
+	boolean syncAll = false;
 	
 	RemoteSyncTask(Context ctx) {
 		this.ctx = ctx;
@@ -81,18 +79,28 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 		this.legacySyncPrefs = ctx.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE);
 	}
 	
+	RemoteSyncTask(Context ctx, boolean fullSync ) {
+		this(ctx);
+		this.syncAll = fullSync;
+	}
+	
 	@Override protected void onPreExecute() {
 		super.onPreExecute();
-		this.lastSyncTime = syncPrefs.getLong(PREF_LAST_SYNC, 0);
+		this.lastSyncTime = syncPrefs.getLong(Prefs.PREF_LAST_SYNC, 0);
 		if ( lastSyncTime == 0 ) 
-			lastSyncTime = legacySyncPrefs.getLong(PREF_LAST_SYNC, 0);
-		this.lastBrowserSyncTime = syncPrefs.getLong(PREF_LAST_BROWSER_SYNC, 0);
+			lastSyncTime = legacySyncPrefs.getLong(Prefs.PREF_LAST_SYNC, 0);
+		this.lastBrowserSyncTime = syncPrefs.getLong(Prefs.PREF_LAST_BROWSER_SYNC, 0);
 		if ( lastBrowserSyncTime == 0 ) 
-			lastBrowserSyncTime = legacySyncPrefs.getLong(PREF_LAST_BROWSER_SYNC, 0);
+			lastBrowserSyncTime = legacySyncPrefs.getLong(Prefs.PREF_LAST_BROWSER_SYNC, 0);
+		
+		if ( this.syncAll ) {
+			this.lastSyncTime = 0;
+			this.lastBrowserSyncTime = 0;
+		}
 		
 		Log.d(TAG,"Syncing bookmarks modified since: " + lastSyncTime);
 		this.thisSyncTime = System.currentTimeMillis();
-		syncPrefs.edit().putLong(PREF_LAST_SYNC_ATTEMPT, thisSyncTime).commit();
+		syncPrefs.edit().putLong(Prefs.PREF_LAST_SYNC_ATTEMPT, thisSyncTime).commit();
 		
 		// determine if we should sync browser bookmarks:
 		this.syncBrowserBookmarks = syncPrefs.getBoolean(
@@ -120,6 +128,14 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
     	}
     	
 		try {
+			if ( this.syncAll ) {
+				db.execSQL("delete from " + GmarksProvider.BOOKMARKS_TABLE_NAME + "_FTS");
+				db.execSQL("delete from " + GmarksProvider.BOOKMARK_LABELS_TABLE_NAME);
+				db.execSQL("delete from " + GmarksProvider.BOOKMARKS_TABLE_NAME);
+				db.execSQL("delete from " + GmarksProvider.LABELS_TABLE_NAME);
+				Log.d(TAG,"DELETED all rows from GMarks database");
+			}
+			
     		ContentValues vals = new ContentValues();
 			
     		// sync label list
@@ -317,9 +333,9 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 			}
 			// update shared 'last sync' state
 			Editor prefEditor = this.syncPrefs.edit();
-			prefEditor.putLong(PREF_LAST_SYNC, this.thisSyncTime);
+			prefEditor.putLong(Prefs.PREF_LAST_SYNC, this.thisSyncTime);
 			if ( this.syncBrowserBookmarks )
-				prefEditor.putLong(PREF_LAST_BROWSER_SYNC, this.thisSyncTime);
+				prefEditor.putLong(Prefs.PREF_LAST_BROWSER_SYNC, this.thisSyncTime);
 			prefEditor.commit();
 		}
 		else if ( result == RESULT_FAILURE_DB ) {
@@ -337,10 +353,22 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 						ctx.getText(R.string.sync_notify_title), 
 						ctx.getText(R.string.sync_notify_auth_error), 
 						PendingIntent.getActivity(this.ctx, 0, intent, 0) );
+				notification.flags ^= Notification.FLAG_ONGOING_EVENT;
+				notification.flags |= Notification.FLAG_AUTO_CANCEL;
 				this.notificationManager.notify(NOTIFY_SYNC_ID, notification);
 			}		
 		}
-		else if (showToast) Toast.makeText(this.ctx, R.string.sync_notify_error, Toast.LENGTH_LONG).show();
+		else { // most likely a connection-related error.
+			Intent intent = new Intent( this.ctx, LabelsListActivity.class );
+			notification.setLatestEventInfo( this.ctx, 
+					ctx.getText(R.string.sync_notify_title), 
+					ctx.getText(R.string.sync_notify_error), 
+					PendingIntent.getActivity(this.ctx, 0, intent, 0) );
+			notification.flags ^= Notification.FLAG_ONGOING_EVENT;
+			notification.flags |= Notification.FLAG_AUTO_CANCEL;
+			this.notificationManager.notify(NOTIFY_SYNC_ID, notification);
+			if (showToast) Toast.makeText(this.ctx, R.string.sync_notify_error, Toast.LENGTH_LONG).show();
+		}
 	}
 	
 	@Override protected void onCancelled() {
@@ -359,6 +387,12 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 				ctx.getText(R.string.sync_notify_title), 
 				ctx.getString(R.string.sync_notify_count, count), 
 				PendingIntent.getActivity(this.ctx, 0, intent, 0) );
+		if ( done ) { 
+			notification.flags ^= Notification.FLAG_ONGOING_EVENT;
+			notification.flags |= Notification.FLAG_AUTO_CANCEL;
+		}
+		else notification.flags |= Notification.FLAG_ONGOING_EVENT;
+
 		this.notificationManager.notify(NOTIFY_SYNC_ID, notification);
 	}
 }

@@ -1,0 +1,58 @@
+Google Bookmarks for Android!
+
+* 100% Advertentievrij en open source!
+* Sync/ backup/ import browser bookmarks in Google Bookmarks
+* Live folder voor elk bookmark label
+* Achtergrond sync
+* Globale zoekintegratie; Volledige tekst zoeken
+* Snel een GMark vanuit de browser toevoegen
+* Bookmarks toevoegen/bijwerken/verwijderen vanaf je telefoon
+* Long-press om een bookmark te bekijken of bewerken
+* Volledige ondersteuning voor Eclair/ 2.1
+
+Oproep voor vertalers! Als je wilt helpen met vertalen van Google Bookmarks, kijk dan op de project webpagina.
+
+Als je forcedclosed problemen ervaart waardeer ik het als je dit rapporteerd zodat ik het kan repareren. Je mag ook een verzoek voor iets nieuws indienen op de project webpagina.
+
+Meer details:
+
+Automatisch je Google Bookmarks synchroniseren met je telefoon! Door middel van achtergrond-synchronisatie ben je altijd up-to-date aangezien alle wijzigingen worden gesynchroniseerd.  
+Gebruik GMarks voor FireFox, de bookmarklet of de Google Toolbar om snel bookmarks op je telefoon toe te voegen.
+
+Kies een label om te synchroniseren met je Anroid Browser bookmarks. Dit betekend dat je je bookmarks naar diverse apparaten kan backuppen en exporteren.
+
+Live Folders geven je snelle toegang tot elke label. Gebruik het om een lijst op je apparaat aan te maken.
+
+De Globale zoek-integratie betekend dat je snel een  bookmark kan vinden met de zoek-knop op je apparaat of via de Google Search Widget. (Dit kan je inschakelen onder Systeem Instellingen onder "Search". Volledige tekst zoeken indexeert bookmark titels, labels, url's en omschrijvingen.
+
+Snel nieuwe Google Bookmarks toevoegen via het browser's "Share" menu.
+
+Veilig: Je gebruikersnaam en wachtwoord worden rechtstreeks naar Google verstuurd en worden nooit gelezen of opgeslagen door de GMarks App. Alle internet-toegang gebruikt HTTPS/SSL om volledige privacy te garanderen.
+
+Sleutelwoorden: Synchroniseer backup importeren Google Bookmarks 
+
+Recente Wijzigingen:
+
+0.6.3:
+* Nieuwe vertalingen:
+  * Nederlands - dank aan nmx 
+  * Deens  - dank aan LayZee
+  * Pools - dank aan Krygo
+  * Turks
+
+0.6.2:
+* Vertalingen!
+  * Chinees - dank aan kouketsu
+  * Spaans - dank aan macsjr
+  * Portugees - dank aan macsjr
+* "Kies Label" menu FC gerepareerd
+
+
+0.6.x:
+* Globale zoekfunctie integratie
+* zoeksuggesties terwijl-u-typt
+* 'Sorteer op...' menu optie voor labels en bookmarks
+* 'Zoek' menu knop
+* 'Ga naar label' menu knop
+* non-Latin karaktersets gerepareerd
+

@@ -1,0 +1,112 @@
+Google Bookmarks para Android!
+
+* 100% Livre de anúncios e de código livre!
+* Suporte para 30 línguas
+* Suporta autenticação em duas etapas do Google
+* Seguro: Você nunca digita seu username e password dentro do GMarks
+
+Mais funcionalidades:
+* Sincronizar/Backup com Google Bookmarks
+* Live folder para qualquer etiqueta de favoritos
+* Sincronização em segundo plano
+* Busca por texto
+* Adicionar rapidamente um Favorito a partir da opção Compartilhar no navegador
+* Adicionar/atualizar/eliminar favoritos partir do telefone
+* Pressione e segure para ver/editar bookmark
+* Agora suporta completamente 2.1/Eclair
+
+Chamada de Tradutores! Se você quer ajudar a traduzir o GMarks para seu idioma, veja a página do projeto.
+
+Se você encontrar FC, por favor 'Reporte' para que seja corrigido o problema. Você pode também enviar solicitações de funcionalidades na página do projeto.
+
+Mais detalhes:
+
+Sincronize automaticamente o Google Bookmarks com seu telefone! Efetua sincronizações em segundo plano, o que significa que você estará sempre atualizado, mas só sincroniza o que foi alterado. Use o GMarks para Firefox, Google bookmarklet ou a Barra de ferramentas do Google para enviar os bookmarks rapidamente para o seu telefone.
+
+Escolha qualquer etiqueta para sincronizar com os favoritos do Navegador do seu Android. Isto significa que você pode fazer backup e exportar seus favoritos através de vários dispositivos.
+
+Live Folder lhe dá rápido acesso a qualquer etiqueta. Use-o para criar uma lista de leitura no seu dispositivo!
+
+Possui integração com a Pesquisa Global, o que significa que você pode encontrar rapidamente um favorito usando o botão Pesquisar do telefone ou o widget Google Search. (Você pode ativar isto nas configurações de pesquisa na "Pesquisa") A pesquisa indexa os títulos, etiquetas, URLs e descrições.  
+
+Crie rapidamente um novo Favorito usando a opção Compartilhar no menu do Navegador.
+
+Seguro: Seu username e password não são enviados pelo aplicativo para o Google, e nunca são lidos ou armazenados no GMarks. Todas as conexões são estabelecidas utilizando HTTPS/SSL para assegurar sua completa privacidade. O GMarks também suporta a autenticação em duas etapas (Desde a versão 0.6.4.)  Você deve ter o Google Authenticator instalado.
+
+Palavras chave: Sincronizar backup importar exportar Google Bookmarks Favoritos
+
+Alterações Recentes:
+
+0.6.6:
+* Link para FAQs nas configurações
+* Suporte preliminar para o Honeycomb
+* Limpa a notificação de sincronização quando pressionada
+* Não tenta efetuar sincronização em segundo plano se não tiver disponível uma conexão com a internet
+* Limpa o diálogo 'Aguarde' caso o login em duas etapas seja exibido no login
+* Tradução Búlgara - obrigado p0inte
+* Corrigido erro no banco de dados durante o login com webview
+
+* Escolha as etiquetas para esconder na lista principal
+
+0.6.5:
+* Instruções detalhadas para os usuários principiantes
+* "Enviar comentário" nas configurações
+* Logout nas configurações
+* Tradução Suéca- obrigado blorro
+* Corrigido 2 FCs no login
+
+  (incompleto)
+  * Coreano - obrigado @bbmatic
+  * Catalão - obrigado jordivf
+  * Eslovaco - obrigado Lubos
+ 
+
+0.6.4: 
+* Suporte para autenticação em duas etapas
+* "Sincronização completa" (nas configurações) para remover os favoritos obsoletos e corrigir sincronizações incompletas
+
+Novas traduções:
+  * Italiano - obrigado Uttermarcus
+  * Russo - obrigado smth
+  * Holandês - obrigado nmx
+  * Húngaro - obrigado Cenzi
+  * Croata - obrigado carlowise
+  * Indiano - obrigado @abhisekprasad
+  * Árabe - obrigado Adham El-Wakeel 
+  * Letã - obrigado kuceens007
+  * Esloveno - obrigado Franci
+  * Finlandês - obrigado Blorro
+  * Tcheco - obrigado honzika
+  * Norueguês - obrigado Gøran
+  * Romeno - obrigado tmahai20
+  * Japonês - obrigado Koomo
+
+0.6.3:
+* Novas traduções:
+  * Dinamarca - obrigado LayZee
+  * Polonês - obrigado Krygo
+  * Turco - obrigado Proym
+  * Tradicional Chinesa - obrigado eizonuts
+  * Alemão - obrigado Berkley
+  * Francês - obrigado furhoff loic
+  * Frego - obrigado danzax
+  * Sérvio - obrigado @delicb
+  * Hebraico - obrigado Adi
+  * Sueco - obrigado jokrsolutions
+  * Catalão - obrigado jordivf
+  * Lituânia - obrigado LFSPovo
+  
+0.6.2:
+* Localização!
+  * Chinês - obrigado kouketsu
+  * Espanhol - obrigado macsjr
+  * Português - obrigado macsjr e franzbischoff
+* Consertado FC no menu "Escolha Etiqueta"
+ 
+0.6.x:
+* Integração com a busca global
+* Sugestões de busca enquanto digita
+* Opção 'Ordenar por...' para etiquetas e favoritos
+* Menu 'Busca'
+* Menu 'Ir a etiqueta'
+* Corrigido codificação para caracteres não-latinos

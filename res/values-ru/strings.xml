@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GMarks</string>
+    <string name="labels_activity">GMarks Метки</string>
+    <string name="choose_label">Выбрать GMarks Метку</string>
+    <string name="bookmarks_activity">GMarks Все Закладки</string>
+    <string name="choose_bookmark">Выбрать Закладку</string>
+    <string name="edit_bookmark">Изменить Закладку</string>
+    <string name="new_bookmark">GMarks Новая Закладка</string>
+    <string name="settings">GMarks Настройки</string>
+    <string name="live_folder_activity">GMarks Метка</string>
+    <string name="live_folder_title">Выберите Метку</string>
+    <string name="search_hint">Искать Google Закладки</string>
+    <string name="login_title">GMarks Вход</string>
+    <string name="coming_soon">Скоро!</string>
+
+    <string name="search_results_title">Результаты GMarks поиска по \'%s\'</string>
+    <string name="label_results_title">Закладки с метками \'%s\'</string>
+
+    <string name="sync_begin_msg">Начинаю синхронизацию...</string>
+    <string name="sync_done_msg">GMarks Синхронизация выполнена</string>
+    <string name="sync_in_progress_msg">Уже синхронизируется...</string>
+    <string name="sync_notify_title">Gmarks Синхронизация</string>
+    <string name="sync_notify_start">Gmarks идет синхронизация...</string>
+    <string name="sync_notify_auth_error">Ошибка входа; пожалуйста войдите.</string>
+    <string name="sync_notify_error">Неизвестная ошибка синхронизации</string>
+    <string name="sync_notify_count">Синхронизировано %d закладок</string>
+
+    <string name="deleting_bookmark_msg">Удаляю закладки...</string>
+    <string name="saving_bookmark_msg">Сохраняю закладки...</string>
+    <string name="save_ok_msg">Закладка создана.</string>
+    <string name="update_ok_msg">Закладка обновлена.</string>
+    <string name="delete_ok_msg">Закладка удалена.</string>
+    <string name="error_auth_failed_msg">Ошибка: Неудачная авторизация</string>
+    <string name="error_not_found_msg">Ошибка: Закладка не найдена</string>
+    <string name="error_delete_failed_msg">Не удалено!</string>
+    <string name="error_save_failed_msg">Не сохранено!</string>
+
+    <string name="please_wait_msg">Пожалуйста подождите...</string>
+    <string name="logged_out_msg">Вы вышли.</string>
+    <string name="logging_in_msg">Входим...</string>
+    <string name="login_success_msg">Вошли!</string>
+    <string name="login_failed_msg">Ошибка при входе!</string>
+    <string name="login_failed_detail_msg">Вход не удался: %s</string>
+
+    <string name="pref_not_set_label">(не установлено)</string>
+        
+    <string name="btn_save">Сохранить</string>
+    <string name="btn_update">Обновить</string>
+    <string name="btn_delete">Удалить</string>
+    <string name="btn_first_sync">Пожалуйста, в начале синхронизируйтесь</string>
+
+		<!-- Menu items -->
+    <string name="menu_add">Добавить</string>
+    <string name="menu_add_long">Добавить Закладку</string>
+    <string name="menu_sync">Синхронизация</string>
+    <string name="menu_sync_long">Синхронизировать</string>
+    <string name="menu_delete">Удалить</string>
+    <string name="menu_delete_long">Удалить отмеченные закладки</string>
+    <string name="menu_search">Поиск</string>
+    <string name="menu_search_long">Поиск Закладок</string>
+    <string name="menu_go_to_label">Перейти к Метке</string>
+    <string name="menu_sort_title">Сортировать по названию</string>
+    <string name="menu_sort_title_long">Сортировать по Алфавиту</string>
+    <string name="menu_sort_date">Сортировать по Дате</string>
+    <string name="menu_sort_date_long">Сортировать по Дате изменения</string>
+    <string name="menu_sort_label">Сортировать по Метке</string>
+    <string name="menu_sort_label_long">Сортировать Метки по Алфавиту</string>
+    <string name="menu_sort_count">Сортировать по Порядку</string>
+    <string name="menu_sort_count_long">Сортировать Метки по Порядку</string>
+    <string name="menu_settings">Настройки</string>
+    <string name="menu_login">Вход</string>
+    <string name="menu_login_long">Вход с помощью Google Аккаунта</string>
+    <string name="menu_logout">Выйти</string>
+    <string name="menu_logout_long">Выйти из Вашего Google Аккаунта</string>
+    
+
+		<!-- UI Labels -->
+    <string name="label_title">Название</string>
+    <string name="label_url">URL</string>
+    <string name="label_description">Описание</string>
+    <string name="label_labels">Метки</string>
+
+    <string name="label_all_bookmarks">Все Закладки</string>
+    <string name="label_sub_all_bookmarks">Отсортировано по дате</string>
+    
+    <string name="label_webview_login">Пожалуйста, войдите с помощью Вашего Google Аккаунта</string>
+		
+
+		<!-- Preferences -->
+		
+    <string name="pref_browser_sync">Включить Синхронизацию Браузера</string>
+    <string name="pref_browser_sync_summary">Синхронизировать закладки браузера с выбранной меткой</string>
+    <string name="pref_sync_label">Выберите метки синхронизации браузера</string>
+    <string name="pref_sync_interval">Интервал синхронизации</string>
+    <string name="pref_background_sync">Включить синхронизацию в фоне</string>
+    <string name="pref_background_sync_summary">Автоматически синхронизировать даже если GMarks не активен.</string>
+    
+    <!-- Preference options for sync duration -->
+    <string-array name="pref_duration_entries">
+      <item>5 минут</item>
+      <item>20 минут</item>
+      <item>1 час</item>
+      <item>4 часа</item>
+      <item>12 часов</item>
+      <item>1 день</item>
+    </string-array>
+
+    <!-- Preference values for sync duration -->
+    <!-- NOTE: Don't localize this.-->
+    <string-array name="pref_duration_values">
+      <item>5</item>
+      <item>20</item>
+      <item>60</item>
+      <item>240</item>
+      <item>720</item>
+      <item>1440</item>
+    </string-array>
+    
+</resources>

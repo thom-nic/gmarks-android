@@ -24,6 +24,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
@@ -86,8 +88,14 @@ public class BackgroundService extends Service implements OnSharedPreferenceChan
 		else if ( Intent.ACTION_SYNC.equals(action) ) {
 			// this is the intent called by AlarmManager
 			if ( backgroundSyncEnabled ) {
-				Log.d(TAG,"STARTING BACKGROUND SYNC!");
-				new BackgroundSyncTask(getApplicationContext()).execute();
+				ConnectivityManager netwkMan = 
+					(ConnectivityManager)getApplicationContext().getSystemService(
+							Context.CONNECTIVITY_SERVICE );
+				NetworkInfo netState = netwkMan.getActiveNetworkInfo();  
+				if ( netState != null && netState.isConnected() ) {
+					Log.d(TAG,"STARTING BACKGROUND SYNC!");
+					new BackgroundSyncTask(getApplicationContext()).execute();
+				}
 				return; // don't stop the service yet.
 			}
 			else {
@@ -131,7 +139,7 @@ public class BackgroundService extends Service implements OnSharedPreferenceChan
     	// sync doesn't need to happen while the phone is asleep.  Nor does it 
     	// need to occur any more frequently after it wakes up.  So set once
     	// and re-schedule the next occurrence when the operation completes.
-    	long lastSync = syncPrefs.getLong(RemoteSyncTask.PREF_LAST_SYNC_ATTEMPT, 0);
+    	long lastSync = syncPrefs.getLong(Prefs.PREF_LAST_SYNC_ATTEMPT, 0);
     	long wakeUp = lastSync + intervalInMS; 
     	am.set( AlarmManager.RTC, wakeUp, serviceLauncher );
     	Log.d(TAG,"Scheduled for " + wakeUp);

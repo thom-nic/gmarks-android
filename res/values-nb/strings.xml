@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GMarks</string>
+    <string name="labels_activity">GMarks Etiketter</string>
+    <string name="choose_label">Velg en GMarks Etikett</string>
+    <string name="bookmarks_activity">GMarks Alle bokmerker</string>
+    <string name="choose_bookmark">Velg et bokmerke</string>
+    <string name="edit_bookmark">Redigér bokmerke</string>
+    <string name="new_bookmark">GMarks Nytt bokmerke</string>
+    <string name="settings">GMarks Innstillinger</string>
+    <string name="live_folder_activity">GMarks Etikett</string>
+    <string name="live_folder_title">Velg en Etikett</string>
+    <string name="search_hint">Søk i Google Bokmerker</string>
+    <string name="login_title">GMarks pålogging</string>
+    <string name="coming_soon">Kommer snart!</string>
+
+    <string name="search_results_title">GMarks søkeresultater for \'%s\'</string>
+    <string name="label_results_title">Bokmerker for etikett \'%s\'</string>
+
+    <string name="sync_begin_msg">Starter synkronisering...</string>
+    <string name="sync_done_msg">GMarks Synkronisering fullført</string>
+    <string name="sync_in_progress_msg">Synkronisering pågår allerede...</string>
+    <string name="sync_notify_title">Gmarks Synkronisering</string>
+    <string name="sync_notify_start">Gmarks synkronisering pågår...</string>
+    <string name="sync_notify_auth_error">Påloggingsfeil; vennligst logg på.</string>
+    <string name="sync_notify_error">Ukjent synkroniseringsfeil</string>
+    <string name="sync_notify_count">Synkroniserte %d bokmerker</string>
+
+    <string name="deleting_bookmark_msg">Sletter bokmerke...</string>
+    <string name="saving_bookmark_msg">Lagrer bokmerke...</string>
+    <string name="save_ok_msg">Bokmerke laget.</string>
+    <string name="update_ok_msg">Bokmerke oppdatert.</string>
+    <string name="delete_ok_msg">Bokmerke slettet.</string>
+    <string name="error_auth_failed_msg">Feil: Godkjenningsfeil</string>
+    <string name="error_not_found_msg">Feil: Bokmerke ikke funnet</string>
+    <string name="error_delete_failed_msg">Sletting mislyktes!</string>
+    <string name="error_save_failed_msg">Lagring mislyktes!</string>
+
+    <string name="please_wait_msg">Vennligst vent...</string>
+    <string name="logged_out_msg">Du er nå avlogget.</string>
+    <string name="logging_in_msg">Logger på...</string>
+    <string name="login_success_msg">Pålogget!</string>
+    <string name="login_failed_msg">Påloggingsfeil!</string>
+    <string name="login_failed_detail_msg">Pålogging mislyktes: %s</string>
+
+    <string name="pref_not_set_label">(ikke valgt)</string>
+        
+    <string name="btn_save">Lagre</string>
+    <string name="btn_update">Oppdater</string>
+    <string name="btn_delete">Slett</string>
+    <string name="btn_first_sync">Vennligst Synkroniser for å begynne</string>
+
+		<!-- Menu items -->
+    <string name="menu_add">Tilføy</string>
+    <string name="menu_add_long">Tilføy Bokmerke</string>
+    <string name="menu_sync">Synk</string>
+    <string name="menu_sync_long">Synkroniser</string>
+    <string name="menu_delete">Slett</string>
+    <string name="menu_delete_long">Slett Valgt Bokmerke</string>
+    <string name="menu_search">Søk</string>
+    <string name="menu_search_long">Søk i Bokmerker</string>
+    <string name="menu_go_to_label">Gå til Etikett</string>
+    <string name="menu_sort_title">Sorter etter Tittel</string>
+    <string name="menu_sort_title_long">Sorter Tittel Alfabetisk</string>
+    <string name="menu_sort_date">Sorter etter Dato</string>
+    <string name="menu_sort_date_long">Sorter etter Endret Dato</string>
+    <string name="menu_sort_label">Sorter etter Etikett</string>
+    <string name="menu_sort_label_long">Sorter Etiketter Alfabetisk</string>
+    <string name="menu_sort_count">Sorter etter Antall</string>
+    <string name="menu_sort_count_long">Sorter etter Antall Etiketter</string>
+    <string name="menu_settings">Innstillinger</string>
+    <string name="menu_login">Logg på</string>
+    <string name="menu_login_long">Logg på din Googlekonto</string>
+    <string name="menu_logout">Logg av</string>
+    <string name="menu_logout_long">Avlogging fra din Googlekonto</string>
+    
+
+		<!-- UI Labels -->
+    <string name="label_title">Tittel</string>
+    <string name="label_url">URL</string>
+    <string name="label_description">Beskrivelse</string>
+    <string name="label_labels">Etiketter</string>
+
+    <string name="label_all_bookmarks">Alle Bokmerker</string>
+    <string name="label_sub_all_bookmarks">sortert etter dato</string>
+    
+    <string name="label_webview_login">Vennligst Logg på din Googlekonto</string>
+		
+
+		<!-- Preferences -->
+		
+    <string name="pref_browser_sync">Nettleser-synkronisering</string>
+    <string name="pref_browser_sync_summary">Synkroniser nettleserens bokmerker med en valgt etikett</string>
+    <string name="pref_sync_label">Velg Synkroniseringsetikett tl Nettleser</string>
+    <string name="pref_sync_interval">Synkroniseringsintervall</string>
+    <string name="pref_background_sync">Synkronisering i Bakgrunnen</string>
+    <string name="pref_background_sync_summary">Automatisk synkronisering selv om GMarks ikke er aktiv</string>
+    
+    <!-- Preference options for sync duration -->
+    <string-array name="pref_duration_entries">
+      <item>5 minutter</item>
+      <item>20 minutter</item>
+      <item>1 time</item>
+      <item>4 timer</item>
+      <item>12 timer</item>
+      <item>1 dag</item>
+    </string-array>
+
+    <!-- Preference values for sync duration -->
+    <!-- NOTE: Don't localize this.-->
+    <string-array name="pref_duration_values">
+      <item>5</item>
+      <item>20</item>
+      <item>60</item>
+      <item>240</item>
+      <item>720</item>
+      <item>1440</item>
+    </string-array>
+    
+</resources>

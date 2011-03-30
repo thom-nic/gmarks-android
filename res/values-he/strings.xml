@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GMarks</string>
+    <string name="labels_activity">GMarks תוויות</string>
+    <string name="choose_label">GMarks בחר בתווית של</string>
+    <string name="bookmarks_activity">את כל הסמניות GMarks</string>
+    <string name="choose_bookmark">בחר סמניה</string>
+    <string name="edit_bookmark">ערוך סימניה</string>
+    <string name="new_bookmark">סמניה חדשה GMarks</string>
+    <string name="settings">GMarks הגדרות</string>
+    <string name="live_folder_activity"> תויות GMarks</string>
+    <string name="live_folder_title">בחר תווית</string>
+    <string name="search_hint">Google Bookmarksחפש ב</string>
+    <string name="login_title">כניסה ל GMarks </string>
+    <string name="coming_soon"> מגיע בקרוב</string>
+
+    <string name="search_results_title">GMarks \'%s\' תוצאות החיפוש ב</string>
+    <string name="label_results_title"> \'%s\' סמניות של תויות</string>
+
+    <string name="sync_begin_msg">...החל סינכרון</string>
+    <string name="sync_done_msg">השלים את סינכרון GMarks</string>
+    <string name="sync_in_progress_msg">....סינכרון כבר הותחל</string>
+    <string name="sync_notify_title">Gmarks סינכרון</string>
+    <string name="sync_notify_start">....מבצע סינכרון Gmarks</string>
+    <string name="sync_notify_auth_error">שגיעה בהתחברות הכנס שם משתמש</string>
+    <string name="sync_notify_error">שגיעה לא ידועה בסינכרון</string>
+    <string name="sync_notify_count">סימניות %d סינכרון</string>
+
+    <string name="deleting_bookmark_msg">...מוחק סמניות</string>
+    <string name="saving_bookmark_msg">....שומר סימניות</string>
+    <string name="save_ok_msg">יצר סימניה</string>
+    <string name="update_ok_msg">סימניה עודכנה</string>
+    <string name="delete_ok_msg">סימניה נמחקה</string>
+    <string name="error_auth_failed_msg">שגיאה: הרשאה נכשלה</string>
+    <string name="error_not_found_msg">שגיאה: סימניה לא נמצאה</string>
+    <string name="error_delete_failed_msg">מחיקה נכשלה!</string>
+    <string name="error_save_failed_msg">שמירה נכשלה!</string>
+
+    <string name="please_wait_msg">אנא המתן...</string>
+    <string name="logged_out_msg">כעת אתה מתנתק.</string>
+    <string name="logging_in_msg">מתחבר...</string>
+    <string name="login_success_msg">מחובר</string>
+    <string name="login_failed_msg">שגיאה חיבור נכשל</string>
+    <string name="login_failed_detail_msg">%s חיבור נכשל</string>
+
+    <string name="pref_not_set_label">(unset)</string>
+        
+    <string name="btn_save">שמור</string>
+    <string name="btn_update">עדכן</string>
+    <string name="btn_delete">מחיקה</string>
+    <string name="btn_first_sync">להתחיל, אנא בצע סנכרון</string>
+
+		<!-- Menu items -->
+    <string name="menu_add">הוסף</string>
+    <string name="menu_add_long">הוסף סימניה</string>
+    <string name="menu_sync">סנכרון</string>
+    <string name="menu_sync_long">סנכרון</string>
+    <string name="menu_delete">מחיקה</string>
+    <string name="menu_delete_long">מחק סמניות בסומנות</string>
+    <string name="menu_search">חיפוש</string>
+    <string name="menu_search_long">חפש סימניות</string>
+    <string name="menu_go_to_label">לך לתוית</string>
+    <string name="menu_sort_title">מיון לפי כותרת</string>
+    <string name="menu_sort_title_long">מיין כותרות אלפבתי</string>
+    <string name="menu_sort_date">מיון לפי תאריך</string>
+    <string name="menu_sort_date_long">מיון לפי תאריך עריכה</string>
+    <string name="menu_sort_label">מיון לפי תוית</string>
+    <string name="menu_sort_label_long">מיין תויות אלפבתי</string>
+    <string name="menu_sort_count">מיון לפי ספירה</string>
+    <string name="menu_sort_count_long">מיין לפי ספירת תויות</string>
+    <string name="menu_settings">הגדרות</string>
+    <string name="menu_login">התחבר</string>
+    <string name="menu_login_long">התחברות לחשבון הגוגל שלך</string>
+    <string name="menu_logout">התנתק</string>
+    <string name="menu_logout_long">התנתק מחשבון הגוגל שלך</string>
+    
+
+		<!-- UI Labels -->
+    <string name="label_title">כותרת</string>
+    <string name="label_url">כתובת</string>
+    <string name="label_description">תיאור</string>
+    <string name="label_labels">תויות</string>
+
+    <string name="label_all_bookmarks">כל הסימניות</string>
+    <string name="label_sub_all_bookmarks">מוין לפי תאריך</string>
+    
+    <string name="label_webview_login"> בבקשה, התחבר לחשבון הגוגל שלך</string>
+		
+
+		<!-- Preferences -->
+		
+    <string name="pref_browser_sync">אפשר סינכרון לדפדפן</string>
+    <string name="pref_browser_sync_summary">סנכרן את הדפדפן את התויות הנבחרות</string>
+    <string name="pref_sync_label">בחר תויות לסנכון בדפדפן</string>
+    <string name="pref_sync_interval">תזמון הסנכרון</string>
+    <string name="pref_background_sync">אפשר סנכרון ברקע</string>
+    <string name="pref_background_sync_summary">סנכרן אוטומטי גם במקרה שאפליקציה סגורה</string>
+    
+    <!-- Preference options for sync duration -->
+    <string-array name="pref_duration_entries">
+      <item>5 דקות</item>
+      <item>20 דקות</item>
+      <item>שעה</item>
+      <item>4 שעות</item>
+      <item>12 שעות</item>
+      <item>פעם ביום</item>
+    </string-array>
+
+    <!-- Preference values for sync duration -->
+    <!-- NOTE: Don't localize this.-->
+    <string-array name="pref_duration_values">
+      <item>5</item>
+      <item>20</item>
+      <item>60</item>
+      <item>240</item>
+      <item>720</item>
+      <item>1440</item>
+    </string-array>
+    
+</resources>

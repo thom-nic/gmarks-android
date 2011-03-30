@@ -13,6 +13,17 @@
     <string name="search_hint">Search Google Bookmarks</string>
     <string name="login_title">GMarks Login</string>
     <string name="coming_soon">Coming soon!</string>
+    <string name="feedback_thanks_msg">Thanks for your feedback!</string>
+    <string name="welcome_msg"><![CDATA[
+    <b>Welcome to GMarks!</b>
+    <p>GMarks gives you access to your 
+    <a href="http://www.google.com/bookmarks/">Google Bookmarks</a> on your
+    Android device.  You can browse, view and edit bookmarks, and sync with 
+    your Android browser bookmarks.</p>
+    <p>First, you need to login and download your bookmarks from the server.</p>   
+    ]]></string>
+    <string name='add_bookmark_msg'>You can also create a new bookmark using the 
+    \'Add\' menu action, or from the \'Share\' menu action your device\'s browser.</string>
 
     <string name="search_results_title">GMarks search results for \'%s\'</string>
     <string name="label_results_title">Bookmarks for label \'%s\'</string>
@@ -23,7 +34,7 @@
     <string name="sync_notify_title">Gmarks Sync</string>
     <string name="sync_notify_start">Gmarks sync in progress...</string>
     <string name="sync_notify_auth_error">Login error; please log in.</string>
-    <string name="sync_notify_error">Unknown sync error</string>
+    <string name="sync_notify_error">Connection error</string>
     <string name="sync_notify_count">Synchronized %d bookmarks</string>
 
     <string name="deleting_bookmark_msg">Deleting bookmark...</string>
@@ -35,6 +46,19 @@
     <string name="error_not_found_msg">Error: Bookmark not found</string>
     <string name="error_delete_failed_msg">Delete failed!</string>
     <string name="error_save_failed_msg">Save failed!</string>
+    <string name="error_cant_send_email_msg">Sorry! Can\'t send email!</string>
+    
+    <string name="two_factor_auth_dlg_title">Two-Factor Authentication</string>
+    <string name="two_factor_auth_dlg_msg"><![CDATA[
+      GMarks will now open the Google Authenticator app.
+      Please <b>COPY</b> the verification code by long-pressing it.  
+      Then press the <b>BACK</b> hardware key to return to GMarks and paste the code here.
+      ]]></string>
+    <string name="two_factor_not_installed_dlg_msg"><![CDATA[
+      It looks like the Google Authenticator isn\'t installed!  Please 
+      <a href=\'https://market.android.com/details?id=com.google.android.apps.authenticator\'
+      >install it from the Android Market</a> then try again.
+      ]]></string>
 
     <string name="please_wait_msg">Please wait...</string>
     <string name="logged_out_msg">You are now logged out.</string>
@@ -49,6 +73,10 @@
     <string name="btn_update">Update</string>
     <string name="btn_delete">Delete</string>
     <string name="btn_first_sync">Please Sync to begin</string>
+    
+    <string name="btn_ok">Ok</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_download">Download</string>
 
 		<!-- Menu items -->
     <string name="menu_add">Add</string>
@@ -73,29 +101,42 @@
     <string name="menu_login_long">Login to your Google Account</string>
     <string name="menu_logout">Log Out</string>
     <string name="menu_logout_long">Logout from your Google Account</string>
-    
 
 		<!-- UI Labels -->
     <string name="label_title">Title</string>
     <string name="label_url">URL</string>
     <string name="label_description">Description</string>
-    <string name="label_labels">labels</string>
+    <string name="label_labels">Labels</string>
 
     <string name="label_all_bookmarks">All Bookmarks</string>
     <string name="label_sub_all_bookmarks">sorted by date</string>
     
     <string name="label_webview_login">Please Log in to your Google account</string>
 		
-
-		<!-- Preferences -->
-		
+    <!-- Preferences -->
+    <string name="pref_cat_sync_options">Sync Options</string>
+    <string name="pref_cat_misc_actions">Misc. Actions</string>
     <string name="pref_browser_sync">Enable Browser Sync</string>
     <string name="pref_browser_sync_summary">Sync your browser bookmarks with a chosen label</string>
     <string name="pref_sync_label">Choose Browser Sync Label</string>
     <string name="pref_sync_interval">Sync Interval</string>
     <string name="pref_background_sync">Enable Background Sync</string>
     <string name="pref_background_sync_summary">Automatically sync even if GMarks is not active</string>
+    <string name="pref_full_sync">Full Sync</string>
+    <string name="pref_full_sync_summary">Force a full sync from the server.\nThis 
+        will overwrite all locally-cached bookmarks and clear deleted bookmarks</string>
+    <string name="pref_send_feedback">Send Feedback</string>
+    <string name="pref_send_feedback_summary">Tell me how to make GMarks better!</string>
+    <string name="pref_faq">FAQ</string>
+    <string name="pref_faq_summary">Frequently asked questions</string>
     
+    <string name="hide_labels_title">Hide Labels</string>
+    <string name="menu_select_all">Select All</string>
+    <string name="menu_select_none">Select None</string>
+    <string name="pref_hide_labels">Hide Labels</string>
+    <string name="pref_hide_labels_summary">Select labels to hide from main list</string>
+    <string name="label_choose_hidden_labels">Selected labels will be hidden in main list</string>
+
     <!-- Preference options for sync duration -->
     <string-array name="pref_duration_entries">
       <item>5 minutes</item>

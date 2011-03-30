@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GMarks</string>
+    <string name="labels_activity">Ετικέτες GMarks</string>
+    <string name="choose_label">Επιλέξτε μια ετικέτα GMarks</string>
+    <string name="bookmarks_activity">Όλοι οι σελιδοδείκτες GMarks</string>
+    <string name="choose_bookmark">Επιλέξτε ένα σελιδοδείκτη</string>
+    <string name="edit_bookmark">Επεξεργασία σελιδοδείκτη</string>
+    <string name="new_bookmark">Νέος σελιδοδείκτης GMarks</string>
+    <string name="settings">Ρυθμίσεις GMarks</string>
+    <string name="live_folder_activity">Ετικέτα GMarks</string>
+    <string name="live_folder_title">Επιλέξτε μια ετικέτα</string>
+    <string name="search_hint">Αναζήτηση σελιδοδεικτών Google</string>
+    <string name="login_title">Σύνδεση GMarks</string>
+    <string name="coming_soon">Έρχεται σύντομα!</string>
+
+    <string name="search_results_title">GMarks αναζήτηση αποτελεσμάτων για \'%s\'</string>
+    <string name="label_results_title">Σελιδοδείκτες για ετικέτα \'%s\'</string>
+
+    <string name="sync_begin_msg">Έναρξη συγχρονισμού...</string>
+    <string name="sync_done_msg">GMarks ο συγχρονισμός ολοκληρώθηκε</string>
+    <string name="sync_in_progress_msg">Ο συγχρονισμός έχει ήδη ξεκινήσει...</string>
+    <string name="sync_notify_title">Συγχρονισμός Gmarks </string>
+    <string name="sync_notify_start">Gmarks συγχρονισμός σε εξέλιξη...</string>
+    <string name="sync_notify_auth_error">Σφάλμα σύνδεσης, παρακαλώ συνδεθείτε.</string>
+    <string name="sync_notify_error">Άγνωστο σφάλμα συγχρονισμού</string>
+    <string name="sync_notify_count">Συγχρονίστηκαν %d σελιδοδείκτες</string>
+
+    <string name="deleting_bookmark_msg">Διαγραφή σελιδοδείκτη...</string>
+    <string name="saving_bookmark_msg">Αποθήκευση σελιδοδείκτη...</string>
+    <string name="save_ok_msg">Ο σελιδοδείκτης δημιουργήθηκε.</string>
+    <string name="update_ok_msg">Ο σελιδοδείκτης ενημερώθηκε.</string>
+    <string name="delete_ok_msg">Ο σελιδοδείκτης διαγράφτηκε.</string>
+    <string name="error_auth_failed_msg">Σφάλμα: αποτυχία πιστοποίησης</string>
+    <string name="error_not_found_msg">Σφάλμα: ο σελιδοδείκτης δε βρέθηκε</string>
+    <string name="error_delete_failed_msg">Η διαγραφή απέτυχε!</string>
+    <string name="error_save_failed_msg">Η αποθήκευση απέτυχε!</string>
+
+    <string name="please_wait_msg">Παρακαλώ περιμένετε...</string>
+    <string name="logged_out_msg">Τώρα έχετε αποσυνδεθεί.</string>
+    <string name="logging_in_msg">Σύνδεση...</string>
+    <string name="login_success_msg">Συνδεθήκατε!</string>
+    <string name="login_failed_msg">Σφάλμα σύνδεσης!</string>
+    <string name="login_failed_detail_msg">Η σύνδεση απέτυχε: %s</string>
+
+    <string name="pref_not_set_label">(μη ρυθμισμένο)</string>
+        
+    <string name="btn_save">Αποθήκευση</string>
+    <string name="btn_update">Ενημέρωση</string>
+    <string name="btn_delete">Διαγραφή</string>
+    <string name="btn_first_sync">Επιλέξτε συγχρονισμό για να ξεκινήσετε</string>
+
+		<!-- Menu items -->
+    <string name="menu_add">Προσθήκη</string>
+    <string name="menu_add_long">Προσθήκη σελιδοδείκτη</string>
+    <string name="menu_sync">Συγχρονισμός</string>
+    <string name="menu_sync_long">Συγχρονισμός</string>
+    <string name="menu_delete">Διαγραφή</string>
+    <string name="menu_delete_long">Διαγραφή επιλεγμένου σελιδοδείκτη</string>
+    <string name="menu_search">Αναζήτηση</string>
+    <string name="menu_search_long">Αναζήτηση σελιδοδεικτών</string>
+    <string name="menu_go_to_label">Πήγαινε στην ετικέτα</string>
+    <string name="menu_sort_title">Ταξινόμηση κατά τίτλο</string>
+    <string name="menu_sort_title_long">Ταξινόμηση τίτλου αλφαβητικά</string>
+    <string name="menu_sort_date">Ταξινόμηση κατά ημερομηνία</string>
+    <string name="menu_sort_date_long">Ταξινόμηση κατά τροποποιημένη ημερομηνία</string>
+    <string name="menu_sort_label">Ταξινόμηση κατά ετικέτα</string>
+    <string name="menu_sort_label_long">Ταξινόμηση ετικετών αλφαβητικά</string>
+    <string name="menu_sort_count">Ταξινόμηση κατά αρίθμηση</string>
+    <string name="menu_sort_count_long">Ταξινόμηση σύμφωνα με αριθμό ετικέτας</string>
+    <string name="menu_settings">Ρυθμίσεις</string>
+    <string name="menu_login">Σύνδεση</string>
+    <string name="menu_login_long">Συνδεθείτε με το Google λογαριάσμό σας</string>
+    <string name="menu_logout">Αποσύνδεση</string>
+    <string name="menu_logout_long">Αποσυνδεθείτε απ\'τον Google λογαριασμό σας</string>
+    
+
+		<!-- UI Labels -->
+    <string name="label_title">Τίτλος</string>
+    <string name="label_url">URL</string>
+    <string name="label_description">Περιγραφή</string>
+    <string name="label_labels">ετικέτες</string>
+
+    <string name="label_all_bookmarks">Όλοι οι σελιδοδείκτες</string>
+    <string name="label_sub_all_bookmarks">ταξινομημένοι κατά ημερομηνία</string>
+    
+    <string name="label_webview_login">Παρακαλώ συνδεθείτε στον Google λογαριασμό σας</string>
+		
+
+		<!-- Preferences -->
+		
+    <string name="pref_browser_sync">Ενεργοποίηση συχρονισμού με πλοηγό</string>
+    <string name="pref_browser_sync_summary">Συγχρονίστε τους σελιδοδείκτες του πλοηγού σας  με την επιλεγμένη ετικέτα</string>
+    <string name="pref_sync_label">Επιλέξτε ετικέτα συγχρονισμού πλοηγού</string>
+    <string name="pref_sync_interval">Διάστημα συγχρονισμού</string>
+    <string name="pref_background_sync">Ενεργοποίηση συγχρονισμού στο παρασκήνιο</string>
+    <string name="pref_background_sync_summary">Αυτόματος συγχρονισμός ακόμη κι αν το GMarks δεν είναι ενεργό</string>
+    
+    <!-- Preference options for sync duration -->
+    <string-array name="pref_duration_entries">
+      <item>5 λεπτά</item>
+      <item>20 λεπτά</item>
+      <item>1 ώρα</item>
+      <item>4 ώρες</item>
+      <item>12 ώρες</item>
+      <item>1 μέρες</item>
+    </string-array>
+
+    <!-- Preference values for sync duration -->
+    <!-- NOTE: Don't localize this.-->
+    <string-array name="pref_duration_values">
+      <item>5</item>
+      <item>20</item>
+      <item>60</item>
+      <item>240</item>
+      <item>720</item>
+      <item>1440</item>
+    </string-array>
+    
+</resources>

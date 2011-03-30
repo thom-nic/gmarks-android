@@ -1,0 +1,58 @@
+Google Bookmarks dla Androida!
+
+* 100% open-source!
+* Całkowity brak reklam
+* Synchronizacja/backup zakładek przeglądarki do Google Bookmarks (www.google.com/bookmarks/?hl=pl)
+* Foldery wraz z aktualnymi etykietami
+* Automatyczna synchronizacja w tle
+* Integracja z wyszukiwarką w telefonie
+* Szybkie dodawanie zakładek przez udostępnianie w menu przeglądarki
+* Dodawanie/aktualizacja/kasowanie zakładek wprost z telefonu
+* Teraz obsługa Androida 2.1/eclair
+
+Jeżeli uświadczysz FC, wyślij raport bym mógł naprawić problem. Jeżli masz jakieś propozycje/sugestie/pytania zapraszam na stronę projektu.
+
+Więcej szczegółów:
+
+Automatyczna synchronizacja twoich zakładek z twoim telefonem. Dzięki aktualizacjom w tle, zawsze jesteś na bieżąco. Możesz użyć Firefoxa, skryptozakładki lub Google Toolbar by szybko wysyłać zakłdki do telefonu.
+
+Wybierz dowolną etykietę by w pełni zsynchronizować ją z przeglądarką twojego telefonu. To oznacza, że masz dostęp do swoich zakładek na wielu urzązeniach na raz, w dowolnym czasie.
+Żywe foldery umożliwiając szybki dostęp do zakładek z różmi etykietami.
+Integracja z wyszukiwarką w telefonie oznacza szybsze wyszukiwanie zakłdek przy użyciu przycisku wyszukiwania lub widgetu Google Search.
+Zakładki są wyszukiwane wedłg tytułów, etykiet, adresórl oraz opisów.
+
+Bezpieczeństwo: Twoja nazwa użtkownika (email) i hasło są wysyłne prosto do Googl'a bez pośrednictwa programu, a wszystkie połączenia HTTPS/ SSL w celu zachowania bezpieczeństwa.
+
+Słowa kluczowe: Synchronize backup import export Google Bookmark
+
+Recent Changes:
+
+0.6.3:
+* Kolejne tłumaczenia: 
+  * Duński - dzięki LayZee
+  * Polski - dzięki Krygo93
+  * Turecki - dzięki Proym
+  * Chiński - dzięki eizonuts
+  * Niemiecki - dzięki Berkley
+  * Francuski - dzięki loic furhoff
+  * Grecki - danzax dzięki
+  * Serbski - dzięki @delicb
+  * Hebrajski - dzięki Adi
+  * Szwedzki - dzięki jokrsolutions
+  * Kataloński - dzięki jordivf
+  * Litewski - dzięki LFSPovo
+  
+0.6.2:
+* Lokalizacja programu!
+  * Chiński - dzięki kouketsu
+  * Hiszpański - dzięki macsjr
+  * Portugalski - dzięki macsjr
+* Naprawa FC przy wybieraniu etykiety
+
+0.6.x:
+* Integracja z wyszukiwarką telefonu
+* Sugestie wyszukiwania
+* Możliwość sortowania
+* Przycisk wyszukiwania
+* Przechodzenie do zakładek
+* Naprawa kodowania
