@@ -115,6 +115,7 @@
 		
     <!-- Preferences -->
     <string name="pref_cat_sync_options">Sync Options</string>
+    <string name="pref_cat_ui_options">Interface Options</string>
     <string name="pref_cat_misc_actions">Misc. Actions</string>
     <string name="pref_browser_sync">Enable Browser Sync</string>
     <string name="pref_browser_sync_summary">Sync your browser bookmarks with a chosen label</string>
@@ -122,6 +123,8 @@
     <string name="pref_sync_interval">Sync Interval</string>
     <string name="pref_background_sync">Enable Background Sync</string>
     <string name="pref_background_sync_summary">Automatically sync even if GMarks is not active</string>
+    <string name="pref_sync_notifications">Sync Notifications</string>
+    <string name="pref_sync_notifications_summary">Show icon in notification bar when new bookmarks are sync\'d</string>
     <string name="pref_full_sync">Full Sync</string>
     <string name="pref_full_sync_summary">Force a full sync from the server.\nThis 
         will overwrite all locally-cached bookmarks and clear deleted bookmarks</string>

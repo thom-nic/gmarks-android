@@ -26,11 +26,21 @@
     		android:dependency='background_sync_enabled'
         android:persistent='true'
         android:defaultValue="60"/>
+    </PreferenceCategory>    
+    <PreferenceCategory android:title="@string/pref_cat_ui_options">    
+    <CheckBoxPreference
+        android:key="sync_notifications"
+        android:title="@string/pref_sync_notifications"
+        android:summary="@string/pref_sync_notifications_summary"
+        android:defaultValue='true'
+        android:persistent='true' />
     <Preference 
         android:key="dummy_hide_labels_action"
         android:title="@string/pref_hide_labels"
         android:summary="@string/pref_hide_labels_summary"
-        android:persistent='false' />
+        android:persistent='false' 
+        android:enabled='false'
+        android:visible='false' />
     </PreferenceCategory>
     
     <PreferenceCategory android:title="@string/pref_cat_misc_actions">    

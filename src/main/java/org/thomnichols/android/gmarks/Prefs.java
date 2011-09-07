@@ -25,6 +25,7 @@ public final class Prefs {
 	static final String KEY_BACKGROUND_SYNC_ENABLED = "background_sync_enabled";
 	static final String KEY_BROWSER_SYNC_ENABLED = "browser_sync_enabled";
 	static final String KEY_BROWSER_SYNC_LABEL = "browser_sync_label";
+	static final String KEY_SYNC_NOTIFICATION = "sync_notifications";
 
 	static final String KEY_LABELS_SORT_PREF = "labels_sort_by";
 	static final String KEY_BOOKMARKS_SORT_PREF = "bookmarks_sort_by";
