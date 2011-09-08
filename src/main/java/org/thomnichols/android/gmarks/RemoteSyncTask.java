@@ -324,6 +324,7 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 	}
 	
 	@Override protected void onPostExecute( Integer result ) {
+		boolean showNotification = this.syncPrefs.getBoolean(Prefs.KEY_SYNC_NOTIFICATION,true);
 		if ( result == RESULT_SUCCESS ) {
 			if (showToast) Toast.makeText(this.ctx, 
 					R.string.sync_done_msg, Toast.LENGTH_LONG).show();
@@ -339,34 +340,39 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 			prefEditor.commit();
 		}
 		else if ( result == RESULT_FAILURE_DB ) {
+			this.notificationManager.cancel(NOTIFY_SYNC_ID);
 			if (showToast) Toast.makeText(this.ctx, 
 					R.string.sync_in_progress_msg, Toast.LENGTH_LONG).show();
 		}
 		else if ( result == RESULT_FAILURE_AUTH ) {
-			if (this.ctx instanceof Activity)
+			if (this.ctx instanceof Activity) {
+				this.notificationManager.cancel(NOTIFY_SYNC_ID);
 				((Activity)this.ctx).startActivityForResult(
 						new Intent("org.thomnichols.gmarks.action.LOGIN"), 
 						Activity.RESULT_OK );
+			}
 			else if (this.ctx instanceof Service) {// show notification
 				Intent intent = new Intent( "org.thomnichols.gmarks.action.LOGIN" );
 				notification.setLatestEventInfo( this.ctx, 
 						ctx.getText(R.string.sync_notify_title), 
 						ctx.getText(R.string.sync_notify_auth_error), 
 						PendingIntent.getActivity(this.ctx, 0, intent, 0) );
-				notification.flags ^= Notification.FLAG_ONGOING_EVENT;
+				notification.flags &= ~Notification.FLAG_ONGOING_EVENT;
 				notification.flags |= Notification.FLAG_AUTO_CANCEL;
 				this.notificationManager.notify(NOTIFY_SYNC_ID, notification);
 			}		
 		}
 		else { // most likely a connection-related error.
-			Intent intent = new Intent( this.ctx, LabelsListActivity.class );
-			notification.setLatestEventInfo( this.ctx, 
-					ctx.getText(R.string.sync_notify_title), 
-					ctx.getText(R.string.sync_notify_error), 
-					PendingIntent.getActivity(this.ctx, 0, intent, 0) );
-			notification.flags ^= Notification.FLAG_ONGOING_EVENT;
-			notification.flags |= Notification.FLAG_AUTO_CANCEL;
-			this.notificationManager.notify(NOTIFY_SYNC_ID, notification);
+			if ( showNotification ) {
+				Intent intent = new Intent( this.ctx, LabelsListActivity.class );
+				notification.setLatestEventInfo( this.ctx, 
+						ctx.getText(R.string.sync_notify_title), 
+						ctx.getText(R.string.sync_notify_error), 
+						PendingIntent.getActivity(this.ctx, 0, intent, 0) );
+				notification.flags &= ~Notification.FLAG_ONGOING_EVENT;
+				notification.flags |= Notification.FLAG_AUTO_CANCEL;
+				this.notificationManager.notify(NOTIFY_SYNC_ID, notification);
+			}
 			if (showToast) Toast.makeText(this.ctx, R.string.sync_notify_error, Toast.LENGTH_LONG).show();
 		}
 	}
@@ -388,8 +394,14 @@ class RemoteSyncTask extends AsyncTask<Void, Integer, Integer> {
 				ctx.getString(R.string.sync_notify_count, count), 
 				PendingIntent.getActivity(this.ctx, 0, intent, 0) );
 		if ( done ) { 
-			notification.flags ^= Notification.FLAG_ONGOING_EVENT;
-			notification.flags |= Notification.FLAG_AUTO_CANCEL;
+			if ( this.syncPrefs.getBoolean(Prefs.KEY_SYNC_NOTIFICATION,true) ) {
+				notification.flags &= ~Notification.FLAG_ONGOING_EVENT;
+				notification.flags |= Notification.FLAG_AUTO_CANCEL;
+			}
+			else {
+				this.notificationManager.cancel(NOTIFY_SYNC_ID);
+				return;
+			}
 		}
 		else notification.flags |= Notification.FLAG_ONGOING_EVENT;
 

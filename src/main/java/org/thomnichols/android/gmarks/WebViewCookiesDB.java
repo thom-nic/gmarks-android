@@ -38,8 +38,10 @@ public class WebViewCookiesDB {
 	static final String TAG = "GMARKS WEBVIEW DB";
 	static final int DB_VERSION = 10;
 	static final String DATABASE = "webview.db";
+	static final String GINGER_DB = "webviewCookiesChromium.db";
 	static final String TABLE_NAME = "cookies";
 	
+	static final String[] GINGER_COLUMNS = { "creation_utc", "name", "value", "host_key", "path", "expires_utc", "secure" };
 	static final String[] COLUMNS = { "_id", "name", "value", "domain", "path", "expires", "secure" };
 	static final int COL_NAME = 1;
 	static final int COL_VALUE = 2;
@@ -49,6 +51,7 @@ public class WebViewCookiesDB {
 	static final int COL_SECURE = 6;
 	
 	Context ctx;
+	boolean usingGingerbread;
 	
 	public WebViewCookiesDB( Context ctx ) {
 		this.ctx = ctx;
@@ -61,7 +64,8 @@ public class WebViewCookiesDB {
 		
 		try {
 			db.execSQL("PRAGMA read_uncommitted = true;");
-			Cursor cursor = db.query(TABLE_NAME, COLUMNS, null, null, null, null, null );
+			String[] cols = this.usingGingerbread ? GINGER_COLUMNS : COLUMNS;
+			Cursor cursor = db.query(TABLE_NAME, cols, null, null, null, null, null );
 			
 			while ( cursor.moveToNext() ) {
 				BasicClientCookie c = new BasicClientCookie( cursor.getString(COL_NAME), cursor.getString(COL_VALUE) );
@@ -88,7 +92,8 @@ public class WebViewCookiesDB {
 		SQLiteDatabase db = openDatabase(SQLiteDatabase.OPEN_READWRITE); 
 		if ( db == null ) return;
 		try {
-			db.delete(TABLE_NAME, COLUMNS[COL_NAME] + "=?", new String[] {key});
+			String[] cols = this.usingGingerbread ? GINGER_COLUMNS : COLUMNS;
+			db.delete(TABLE_NAME, cols[COL_NAME] + "=?", new String[] {key});
 		}
 		catch ( SQLiteException ex ) {
 			Log.w(TAG,"Error deleting cookie: " + key, ex);
@@ -109,7 +114,9 @@ public class WebViewCookiesDB {
 	}
 	
 	protected SQLiteDatabase openDatabase(final int mode) {
-		File dbPath =  ctx.getDatabasePath(DATABASE);
+		File dbPath =  ctx.getDatabasePath(GINGER_DB);
+		if ( dbPath.exists() ) this.usingGingerbread = true;
+		else dbPath =  ctx.getDatabasePath(DATABASE);
 		if ( ! dbPath.exists() ) return null;
 		try {
 			SQLiteDatabase db = SQLiteDatabase.openDatabase( 

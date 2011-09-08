@@ -31,6 +31,7 @@ import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.database.sqlite.SQLiteException;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
@@ -72,6 +73,10 @@ public class WebViewLoginActivity extends Activity {
 		requiredCookies.add("LSID");
 		requiredCookies.add("HSID");
 		requiredCookies.add("SSID");
+		requiredCookies.add("GAUSR");
+//		requiredCookies.add("SMSV");
+		requiredCookies.add("GALX");
+//		requiredCookies.add("GAPS");
 	}
 	
     @Override
@@ -216,41 +221,7 @@ public class WebViewLoginActivity extends Activity {
 			}
 			
 			if ( url.startsWith(targetURL) ) {
-				// This prints out all of the cookies as one long string.  Big pain in my ass.
-	//    			Log.d(TAG,"Cookie: " + cookieManager.getCookie("https://www.google.com") );
-				WebViewCookiesDB cookieDB = new WebViewCookiesDB(WebViewLoginActivity.this);
-	
-				List<Cookie> cookies = null; 
-				boolean loggedIn = false; 
-				long timeout = System.currentTimeMillis() + 10000;
-				while ( ! loggedIn ) {
-					cookies = cookieDB.getCookies();
-					Log.d(TAG,"GOT cookies: " + cookies.size() );
-					Set<String> cookieNames = new HashSet<String>();
-					for ( Cookie c : cookies ) cookieNames.add(c.getName());
-	
-					if ( cookieNames.containsAll(requiredCookies) ) loggedIn = true;
-					else {
-						if ( System.currentTimeMillis() > timeout ) {
-							Log.w(TAG,"Timeout looking for SID cookie!");
-							break;
-						}
-						try { Thread.sleep(1000); } catch ( InterruptedException ex ) {}
-					}
-				}
-	
-				int loginMsg = R.string.login_failed_msg;
-				if ( loggedIn ) {
-					new GmarksProvider.DatabaseHelper(WebViewLoginActivity.this)
-							.persistCookies( cookies );
-					BookmarksQueryService.getInstance().setAuthCookies( cookies );	    				
-					Log.d(TAG,"Logged in!");
-					loginMsg = R.string.login_success_msg; 
-				}
-				
-				Toast.makeText(WebViewLoginActivity.this, loginMsg, Toast.LENGTH_LONG).show();
-				WebViewLoginActivity.this.finishActivity(RESULT_OK);
-				WebViewLoginActivity.this.finish();
+				new SaveCookiesTask().execute();
 			}
 			else if ( ! url.startsWith("https://www.google.com/") ) {
 				Log.w(TAG, "Somehow we got redirected to a different domain! " + url);
@@ -278,4 +249,48 @@ public class WebViewLoginActivity extends Activity {
 //    		view.loadUrl(targetURL);
 		}
 	};
+	
+	class SaveCookiesTask extends AsyncTask<Void, Void, Boolean> {
+		@Override protected Boolean doInBackground(Void... params) {
+			// This prints out all of the cookies as one long string.  Big pain in my ass.
+			//Log.d(TAG,"Cookie: " + cookieManager.getCookie("https://www.google.com") );
+			WebViewCookiesDB cookieDB = new WebViewCookiesDB(WebViewLoginActivity.this);
+			
+			List<Cookie> cookies = null; 
+			boolean loggedIn = false; 
+			long timeout = System.currentTimeMillis() + 20000;
+			while ( ! loggedIn ) {
+				cookies = cookieDB.getCookies();
+				Log.d(TAG,"GOT cookies: " + cookies.size() );
+				Set<String> cookieNames = new HashSet<String>();
+				for ( Cookie c : cookies ) cookieNames.add(c.getName());
+
+				if ( cookieNames.containsAll(requiredCookies) ) loggedIn = true;
+				else {
+					if ( System.currentTimeMillis() > timeout ) {
+						Log.w(TAG,"Timeout looking for all cookies!");
+						break;
+					}
+					try { Thread.sleep(1000); } catch ( InterruptedException ex ) {}
+				}
+			}
+
+			if ( loggedIn ) {
+				new GmarksProvider.DatabaseHelper(WebViewLoginActivity.this)
+						.persistCookies( cookies );
+				BookmarksQueryService.getInstance().setAuthCookies( cookies );
+			}
+			return loggedIn;
+		}
+		
+		@Override protected void onPostExecute(Boolean loggedIn) {
+			Log.d(TAG,"Logged in: "+ loggedIn);
+			int loginMsg = R.string.login_failed_msg;
+			if ( loggedIn ) loginMsg = R.string.login_success_msg; 
+			
+			Toast.makeText(WebViewLoginActivity.this, loginMsg, Toast.LENGTH_LONG).show();
+			WebViewLoginActivity.this.finishActivity(RESULT_OK);
+			WebViewLoginActivity.this.finish();
+		}
+	}
 }
