@@ -52,18 +52,22 @@ public class WebViewLoginActivity extends Activity {
 	static final Uri MARKET_WEB_URI = Uri.parse(
 			"http://market.android.com/details?id=" + AUTHENTICATOR_PACKAGE);
 		
-	static final String loginURL = "https://www.google.com/accounts/ServiceLogin";
-	static final String twoFactorAuthURL = "https://www.google.com/accounts/SmsAuth";
-	static final String twoFactorRecoveryURL = "https://www.google.com/accounts/AccountRecoveryOptionsPrompt";
+	static final String LOGIN_URL = "https://accounts.google.com/ServiceLogin";
+	static final String LOGIN_URL_PATH = "/ServiceLogin";
+	static final String TWOFACTOR_AUTH_URL_PATH = "/SmsAuth";
+	static final String TWOFACTOR_RECOVER_URL_PATH = "/AccountRecoveryOptionsPrompt";
+
+	static final String GOOGLE_DOMAIN_REGEX = "https?://[\\w\\d\\.]+\\.google\\.com.*";
+	
 //	static final String checkCookieURL = "https://www.google.com/accounts/CheckCookie";
 	static final String loginParams = "?service=bookmarks&passive=true"
 		+ "&continue=https://www.google.com/bookmarks/l"
 		+ "&followup=https://www.google.com/bookmarks/l";
-	static final String targetURL = "https://www.google.com/bookmarks/";
+	static final String TARGET_URL = "https://www.google.com/bookmarks/";
 	WebView webView = null;
 	boolean loggedIn = false;
 	boolean resumingTwoFactorAuth = false;
-	private String resumeAtURL = loginURL + loginParams; 
+	private String resumeAtURL = LOGIN_URL + loginParams; 
 	CookieSyncManager cookieSyncManager;
 	ProgressDialog waitDialog;
 //	CookieManager cookieManager;
@@ -102,7 +106,7 @@ public class WebViewLoginActivity extends Activity {
     	}
 		final String currentURL = webView.getUrl();
 		if ( resumingTwoFactorAuth && currentURL != null && 
-				currentURL.startsWith(twoFactorAuthURL) ) return;
+				currentURL.indexOf(TWOFACTOR_AUTH_URL_PATH) >=0  ) return;
 		this.webView.loadUrl( this.resumeAtURL );
     }
     
@@ -114,7 +118,7 @@ public class WebViewLoginActivity extends Activity {
     protected void onSaveInstanceState(Bundle outState) {
     	if ( this.webView != null ) {
     		final String currentURL = this.webView.getUrl(); 
-    		if ( currentURL != null && currentURL.startsWith(twoFactorAuthURL) ) {
+    		if ( currentURL != null && currentURL.indexOf(TWOFACTOR_AUTH_URL_PATH) >=0 ) {
     			outState.putBoolean(KEY_PAUSED_FOR_TWO_FACTOR_AUTH, true);
     			outState.putString(KEY_PAUSED_AT_URL, currentURL );
     		}
@@ -208,25 +212,23 @@ public class WebViewLoginActivity extends Activity {
 			Log.d(TAG, "PAGE LOADED ======= " + url );
 			cookieSyncManager.sync();
 			
-			if ( url.startsWith(loginURL) ) {
-				dismissWaitDialog();
+			if ( url.indexOf(LOGIN_URL_PATH) >=0 )
 				resumingTwoFactorAuth = false;
-			}
-			else if ( url.startsWith(twoFactorAuthURL) || 
-					url.startsWith(twoFactorRecoveryURL) ) dismissWaitDialog();
 			
-			if ( ! resumingTwoFactorAuth && url.startsWith(twoFactorAuthURL) ) {
+			if ( url.matches(GOOGLE_DOMAIN_REGEX) && 
+				! url.startsWith(TARGET_URL) ) dismissWaitDialog();
+			
+			if ( ! resumingTwoFactorAuth && url.indexOf(TWOFACTOR_AUTH_URL_PATH) >=0 ) {
 				resumingTwoFactorAuth = true;
 				showTwoFactorAuthDialog();
 			}
 			
-			if ( url.startsWith(targetURL) ) {
-				new SaveCookiesTask().execute();
-			}
-			else if ( ! url.startsWith("https://www.google.com/") ) {
+			if ( url.startsWith(TARGET_URL) ) new SaveCookiesTask().execute();
+
+			else if ( ! url.matches(GOOGLE_DOMAIN_REGEX) ) {
 				Log.w(TAG, "Somehow we got redirected to a different domain! " + url);
-				view.loadUrl(targetURL);
-			}
+				view.loadUrl(TARGET_URL);
+			}				
 		}
 		
 		public void onPageStarted(WebView view, String url, android.graphics.Bitmap favicon) {
