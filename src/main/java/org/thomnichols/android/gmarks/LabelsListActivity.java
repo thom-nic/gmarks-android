@@ -50,6 +50,7 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
     };
     
     static final int LOGIN_ACTIVITY_RESULT = 0x01;
+    static final int CREATE_SHORTCUT_ACTIVITY_RESULT = 0x02; 
     
     protected static final int COLUMN_INDEX_TITLE = 1;
     static final int SORT_ALPHA= 1;
@@ -146,6 +147,10 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
     	if ( requestCode == LOGIN_ACTIVITY_RESULT && resultCode == RESULT_OK ) {
     		// Login successful.
     		// nothing to do here since onResume should toggle the correct UI state.
+    	} 
+    	else if ( requestCode == CREATE_SHORTCUT_ACTIVITY_RESULT && resultCode == RESULT_OK ) {
+    		setResult(RESULT_OK,data);
+			finish();
     	}
     };
     
@@ -172,7 +177,14 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
         		.appendQueryParameter("label_id", ""+id)
         		.appendQueryParameter("label", labelText)
         		.build();
-        	startActivity(new Intent(Intent.ACTION_VIEW, queryUri));
+        	Intent intent = new Intent(Intent.ACTION_VIEW, queryUri);
+        	intent.putExtra("ACTION_CREATE_SHORTCUT", Intent.ACTION_CREATE_SHORTCUT.equals(action));
+        	if( Intent.ACTION_CREATE_SHORTCUT.equals(action) ) {
+        		startActivityForResult(intent, CREATE_SHORTCUT_ACTIVITY_RESULT);
+        	}
+        	else {
+            	startActivity(intent);
+        	}
         }
     }
     
@@ -292,7 +304,7 @@ public class LabelsListActivity extends ListActivity implements OnClickListener 
 				Log.d(TAG, "Setting result" + result);
 				setResult(RESULT_OK, result);
 				finish();
-	        }
+			}
 			else {
 				startActivity(new Intent(Intent.ACTION_VIEW).setType(Bookmark.CONTENT_TYPE));
 			}

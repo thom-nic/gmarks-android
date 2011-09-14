@@ -57,6 +57,7 @@ public class BookmarksListActivity extends ListActivity {
     };
 
     // the cursor index of the url column
+    private static final int COLUMN_INDEX_TITLE = 1;
     private static final int COLUMN_INDEX_URL = 2;
     
     @Override
@@ -190,20 +191,37 @@ public class BookmarksListActivity extends ListActivity {
     }
         
     @Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
-    	Uri uri = ContentUris.withAppendedId(getIntent().getData(), id);
-    	String action = getIntent().getAction();
-        if (Intent.ACTION_PICK.equals(action) || Intent.ACTION_GET_CONTENT.equals(action)) {
-            // The caller is waiting for us to return a note selected by
-            // the user.  The have clicked on one, so return it now.
-            setResult(RESULT_OK, new Intent().setData(uri));
-            finish();
-        } else {
-        	String bookmarkURL = ((CursorWrapper)l.getItemAtPosition(position))
-        		.getString(COLUMN_INDEX_URL);
-        	startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(bookmarkURL)));
-        }
-    }
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		Uri uri = ContentUris.withAppendedId(getIntent().getData(), id);
+		Intent intent = getIntent();
+		String action = intent.getAction();
+		if (Intent.ACTION_PICK.equals(action)
+				|| Intent.ACTION_GET_CONTENT.equals(action)) {
+			// The caller is waiting for us to return a bookmark selected by
+			// the user. The have clicked on one, so return it now.
+			setResult(RESULT_OK, new Intent().setData(uri));
+			finish();
+        } 
+		else if ( intent.getBooleanExtra("ACTION_CREATE_SHORTCUT", false) ) {
+			// create a home screen shortcut
+        	String bookmarkURL = ((CursorWrapper) l.getItemAtPosition(position)).getString(COLUMN_INDEX_URL);
+        	String bookmarkTitle = ((CursorWrapper) l.getItemAtPosition(position)).getString(COLUMN_INDEX_TITLE);
+            Intent shortcutIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(bookmarkURL));
+        	
+			Intent scIntent = new Intent();
+			scIntent.putExtra( Intent.EXTRA_SHORTCUT_INTENT,shortcutIntent );
+			scIntent.putExtra( Intent.EXTRA_SHORTCUT_NAME, bookmarkTitle );
+			scIntent.putExtra( Intent.EXTRA_SHORTCUT_ICON_RESOURCE, 
+					Intent.ShortcutIconResource.fromContext(this, R.drawable.icon) );			
+			setResult(RESULT_OK,scIntent);
+			finish();
+		}
+		else { // open the bookmark in the browser
+			String bookmarkURL = ((CursorWrapper) l.getItemAtPosition(position))
+					.getString(COLUMN_INDEX_URL);
+			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(bookmarkURL)));
+		}
+	}
     
     protected OnItemLongClickListener longClickListener = new OnItemLongClickListener() {
 		public boolean onItemLongClick(AdapterView<?> adapter, View v, int position, long id) {
