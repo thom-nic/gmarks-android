@@ -38,6 +38,15 @@ Keywords: Synchronize backup import export Google Bookmarks
 
 Recent Changes:
 
+0.6.8
+* Fix for 'flickering login' problem
+* Create a Home screen shortcut for any label or bookmark!  (Thanks Yusuf) 
+* Database locked FC fix
+
+0.6.7
+* Login fixes for Honeycomb
+* Option to disable sync notifications
+
 0.6.6:
 * FAQ link in settings
 * Preliminary support for Honeycomb
