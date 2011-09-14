@@ -338,6 +338,19 @@ public class GmarksProvider extends ContentProvider {
 			super(ctx, DB_NAME, null, DB_VERSION );
 		}
 		
+		@Override
+		public synchronized SQLiteDatabase getWritableDatabase() {
+			/* synchronize across instances to help avoid locked exceptions.
+			 * The same DatabaseHelper instance isn't used throughout the app
+			 * as would be the case if all access were done through a 
+			 * ContentProvider instance.   Note however that this solution 
+			 * probably won't work in the case where an app uses multiple 
+			 * processes */
+			synchronized(DatabaseHelper.class) { 
+				return super.getWritableDatabase();
+			}
+		}
+		
 		static final String[] cookieColumns = { 
 			"name", "value", "domain", "path", "expires", "secure"
 		};
@@ -770,7 +783,5 @@ public class GmarksProvider extends ContentProvider {
 			finally { db.close(); }
 		}
 		
-		
-
 	}
 }
