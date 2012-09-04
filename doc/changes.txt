@@ -98,7 +98,7 @@ New Translations:
   * Turkish - thanks Proym
   * Traditional Chinese - thanks eizonuts
   * German - thanks Berkley
-  * French - thanks loic furhoff
+  * French
   * Greek - thanks danzax
   * Serbian - thanks @delicb
   * Hebrew - thanks Adi

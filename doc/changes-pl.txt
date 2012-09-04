@@ -34,7 +34,7 @@ Recent Changes:
   * Turecki - dzięki Proym
   * Chiński - dzięki eizonuts
   * Niemiecki - dzięki Berkley
-  * Francuski - dzięki loic furhoff
+  * Francuski
   * Grecki - danzax dzięki
   * Serbski - dzięki @delicb
   * Hebrajski - dzięki Adi

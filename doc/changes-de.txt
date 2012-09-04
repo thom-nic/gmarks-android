@@ -40,7 +40,7 @@ Kürzliche Änderungen:
   * Türkisch - danke an Proym
   * Traditionelles Chinesisch - danke an eizonuts
   * Deutsche - danke an Berkley
-  * Französisch - danke an loic Fürhoff
+  * Französisch 
   * Griechisch - danke an danzax
   * Serbisch - danke an @delicb
   * Hebräisch - danke an Adi

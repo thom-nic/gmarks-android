@@ -40,7 +40,7 @@ Récents changements:
   * Turque - merci Proym
   * Traditionnelle Chinoise - merci eizonuts
   * Allemand - merci Berkley
-  * Française - merci Loic Furhoff
+  * Française 
   * Grec - merci danzax
   * Serbe - merci @delicb
   * Hébreu - merci Adi

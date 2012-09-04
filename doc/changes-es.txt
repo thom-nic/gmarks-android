@@ -23,7 +23,7 @@ Cambios recientes:
   * Turquía - gracias Proym
   * Tradicional China - gracias eizonuts
   * Alemán - gracias Berkley
-  * Francia - gracias furhoff loic
+  * Francia
   * Griego - gracias danzax
   * Serbia - gracias @delicb
   * Hebreo - gracias Adi

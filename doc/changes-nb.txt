@@ -54,7 +54,7 @@ Oversettelser:
   * Tyrkisk - takk til Proym
   * Tradisjonell Kinesisk - takk til eizonuts
   * Tysk - takk til Berkley
-  * Fransk - takk til loic furhoff
+  * Fransk 
   * Gresk - takk til danzax
   * Serbisk - takk til @delicb
   * Hebraisk - takk til Adi

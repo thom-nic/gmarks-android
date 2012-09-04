@@ -39,7 +39,7 @@ Yakýn zamandaki deðiþiklikler:
   * Türkçe - Proym saðolsun
    * Geleneksel Çince - eizonuts saðolsun
    * Almanca - Berkley saðolsun
-   * Fransızca - loic furhoff saðolsun
+   * Fransızca
    * Yunanca - danzax saðolsun
    * Sırbistan - @delicb saðolsun
    * İbranice - Adi saðolsun

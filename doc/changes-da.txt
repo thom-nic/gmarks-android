@@ -40,7 +40,7 @@ Nyeste ændringer:
   * Tyrkisk - tak til Proym
   * Traditionel kinesisk - tak til eizonuts
   * Tysk - tak til Berkley
-  * Fransk - tak til loic furhoff
+  * Fransk 
   * Græsk - tak vdanzax
   * serbiske - tak til @delicb
   * Hebraisk - tak til Adi
